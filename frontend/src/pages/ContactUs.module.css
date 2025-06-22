@@ -1,0 +1,144 @@
+/* ────────────────────────────────────────────
+   0.  Base fonts & global animations
+   ────────────────────────────────────────────*/
+@import url('https://fonts.googleapis.com/css2?family=Georgia:wght@700&display=swap');
+
+@keyframes fadeSlideUp{
+  0%{opacity:0;transform:translateY(18px);}
+  100%{opacity:1;transform:translateY(0);}
+}
+@keyframes zoomBounce{
+  0%,100%{transform:scale(1);}
+  40%{transform:scale(1.08);}
+  60%{transform:scale(0.97);}
+}
+@keyframes pulse{
+  0%{box-shadow:0 0 0 0 rgba(118,199,192,.4);}
+  70%{box-shadow:0 0 0 12px rgba(118,199,192,0);}
+  100%{box-shadow:0 0 0 0 rgba(118,199,192,0);}
+}
+
+/* ────────────────────────────────────────────
+   1.  Layout
+   ────────────────────────────────────────────*/
+.container {
+  padding: 20px;
+  min-height: 100vh;
+  background-color: #111827;
+  color: #D3D8E8;
+  font-family: 'Arial', sans-serif;
+  animation: fadeSlideUp 0.6s ease-out both;
+
+  /* ✅ Added subtle glowing box shadow */
+  box-shadow:
+    inset 0 0 15px rgba(0, 0, 0, 0.5),   /* subtle inner shadow */
+    0 0 25px rgba(45, 212, 191, 0.15),   /* teal glow outside */
+    0 10px 30px rgba(0, 0, 0, 0.3);      /* soft drop shadow */
+}
+
+.title{
+  margin:100px auto 40px;
+  max-width:90%;
+  font-size:2.5em;
+  color:#A3D8F4;
+  text-align:center;
+  font-family:'Georgia',serif;
+  text-transform:uppercase;
+  text-shadow:0 0 8px rgba(163,216,244,.4);
+  animation:zoomBounce .7s ease-out both;
+}
+
+.card{
+  background:#182334;
+  padding:20px;
+  border-radius:8px;
+  border:1px solid rgba(163,216,244,.2);
+  max-width:500px;
+  margin:0 auto;
+  box-shadow:0 4px 10px rgba(0,0,0,.2);
+  animation:fadeSlideUp .6s .15s ease-out both;
+  transition:transform .35s ease,box-shadow .35s ease;
+}
+.card:hover{
+  transform:translateY(-6px);
+  box-shadow:0 6px 18px rgba(0,0,0,.3);
+}
+
+/* Form */
+.form{display:flex;flex-direction:column;gap:15px;}
+.formGroup{display:flex;flex-direction:column;}
+.label{font-size:.9em;color:#B0C4DE;margin-bottom:5px;font-weight:500;}
+.input,.textarea{
+  padding:8px;background:#0D1B2A;border:1px solid rgba(169,188,208,.3);
+  border-radius:4px;color:#D3D8E8;font-size:.95em;transition:border-color .25s,box-shadow .25s;
+}
+.input:focus,.textarea:focus{
+  outline:none;border-color:#76C7C0;box-shadow:0 0 5px rgba(118,199,192,.5);
+}
+.textarea{height:120px;resize:vertical;}
+
+/* Button */
+.button{
+  padding:10px;background:#76C7C0;color:#0D1B2A;font-weight:600;border:none;
+  border-radius:4px;cursor:pointer;transition:background .3s;
+  animation:pulse 2.5s 1.2s ease-out 2; /* gentle attention pulse after load */
+}
+.button:hover{background:#5FAF9F;}
+.status{text-align:center;margin-top:10px;font-size:.95em;}
+
+/* ────────────────────────────────────────────
+   2.  Responsive breakpoints
+   ────────────────────────────────────────────*/
+
+/* ≤479 px — micro-phones */
+@media(max-width:479px){
+  .container{padding:14px;}
+  .title{font-size:1.75em;margin-top:80px;margin-bottom:28px;}
+  .card{padding:16px;max-width:100%;}
+  .input,.textarea{font-size:.85em;}
+  .button{padding:8px;}
+}
+
+/* 480-767 px — small phones */
+@media(min-width:480px) and (max-width:767px){
+  .title{font-size:2em;margin-top:90px;margin-bottom:32px;}
+  .card{max-width:90%;}
+}
+
+/* 768-991 px — tablets */
+@media(min-width:768px) and (max-width:991px){
+  .title{font-size:2.2em;margin-top:96px;}
+  .card{max-width:540px;}
+  .input,.textarea{font-size:.95em;}
+}
+
+/* 992-1199 px — small laptops */
+@media(min-width:992px) and (max-width:1199px){
+  .title{font-size:2.7em;margin-top:100px;}
+  .card{max-width:560px;}
+}
+
+/* 1200-1439 px — desktops */
+@media(min-width:1200px) and (max-width:1439px){
+  .title{font-size:2.9em;margin-top:104px;}
+  .card{max-width:580px;padding:22px;}
+  .input,.textarea{font-size:1em;}
+}
+
+/* ≥1440 px — large desktops / 4-K */
+@media(min-width:1440px){
+  .title{font-size:3.1em;margin-top:110px;}
+  .card{max-width:620px;padding:24px;}
+  .input,.textarea{font-size:1.05em;}
+}
+
+/* ────────────────────────────────────────────
+   3.  Reduced-motion accessibility
+   ────────────────────────────────────────────*/
+@media(prefers-reduced-motion:reduce){
+  *,*::before,*::after{
+    animation-duration:.01ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.01ms !important;
+  }
+}

@@ -1,0 +1,9 @@
+html,body{
+    margin: 0px;
+    padding: 0px;
+    height: 100vh;
+    width: 100vw;
+    background-color: transparent;
+    scroll-behavior: smooth;
+    scrollbar-width: none;
+}

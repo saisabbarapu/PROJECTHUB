@@ -1,0 +1,247 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body, html {
+  width: 100%;
+  height: 100%;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  overflow-x: hidden;
+  color: #E0F2FF;
+  scroll-behavior: smooth;
+}
+
+/* ===== Container with Background Image ===== */
+.container {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  background-image: url('/image/projectbg.png'); /* Use a relative path for web usage */
+  background-size: cover; /* Ensures the image covers the entire container */
+  background-repeat: no-repeat; /* Prevents image from repeating */
+  background-position: center center; /* Keeps the image centered */
+  color: #EAE1D2;
+  margin: 0;
+  padding: 0;
+  width: 100vw;
+  height: 100vh;
+  overflow-x: hidden;
+  scrollbar-width: none;
+}
+
+/* ===== Hero Section ===== */
+.hero {
+  height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(10, 15, 44, 0.35); /* Transparent, no blur */
+  text-align: center;
+  padding: 2rem;
+}
+
+.heroContent {
+  background: rgba(255, 255, 255, 0.07);
+  border-radius: 20px;
+  padding: 2.5rem 3rem;
+  max-width: 700px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.heroTitle {
+  font-size: 3rem;
+  color: #FFFFFF;
+  font-weight: bold;
+  margin-bottom: 1rem;
+}
+
+.heroSubtitle {
+  font-size: 1.2rem;
+  color: #B0C4DE;
+  line-height: 1.6;
+}
+
+.heroDescription {
+  font-size: 1rem;
+  color: #B0C4DE;
+  margin-top: 1rem;
+  line-height: 1.6;
+}
+
+/* ===== Intro Section ===== */
+.introSection {
+  padding: 5rem 10%;
+  background: rgba(15, 23, 42, 0.3); /* Transparent, no blur */
+  color: #DDEAFF;
+}
+
+.introHeading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #FFFFFF;
+  margin-bottom: 1rem;
+}
+
+.introParagraph {
+  font-size: 1rem;
+  color: #A0AEC0;
+  max-width: 700px;
+  line-height: 1.6;
+}
+
+/* ===== Projects Section ===== */
+.projectsSection {
+  padding: 4rem 10%;
+  background: rgba(16, 31, 76, 0.3); /* Transparent, no blur */
+}
+
+.projectsGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 2rem;
+}
+
+/* ===== Project Card ===== */
+.projectCard {
+  background: rgba(255, 255, 255, 0.02); /* Transparent */
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 16px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+  /* No backdrop-filter here */
+}
+
+.projectCard:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 255, 255, 0.2);
+}
+
+.projectImage {
+  height: 180px;
+  background-color: #334155;
+  background-size: cover;
+  background-position: center;
+  transition: transform 0.4s ease;
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.05);
+}
+
+.projectContent {
+  padding: 1rem;
+}
+
+.projectTitle {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #E0F2FF;
+}
+
+.projectDescription {
+  font-size: 0.95rem;
+  color: #94A3B8;
+  margin-top: 0.5rem;
+}
+
+/* ===== Individual project images via CSS classes ===== */
+.projectImage1 {
+  background-image: url('/images/project1.jpg');
+}
+
+.projectImage2 {
+  background-image: url('/images/project2.jpg');
+}
+
+.projectImage3 {
+  background-image: url('/images/project3.jpg');
+}
+
+.projectImage4 {
+  background-image: url('/images/project4.jpg');
+}
+
+.projectImage5 {
+  background-image: url('/images/project5.jpg');
+}
+
+.projectImage6 {
+  background-image: url('/images/project6.jpg');
+}
+
+/* ===== Call to Action Section ===== */
+.ctaSection {
+  background: rgba(15, 23, 42, 0.3); /* Transparent, no blur */
+  padding: 4rem 10%;
+  text-align: center;
+}
+
+.ctaText {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #E0F2FF;
+  margin-bottom: 1.5rem;
+}
+
+.ctaButton {
+  background: linear-gradient(145deg, #3B82F6, #06B6D4);
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 255, 255, 0.4);
+}
+
+/* ===== Animation ===== */
+.fadeIn {
+  opacity: 0;
+  transform: translateY(30px);
+  transition: all 0.8s ease;
+}
+
+.visible {
+  opacity: 1;
+  transform: translateY(0);
+  animation: fadeScaleIn 0.7s ease forwards;
+}
+
+@keyframes fadeScaleIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px) scale(0.98);
+  }
+  100% {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* ===== Media Queries ===== */
+@media (max-width: 768px) {
+  .heroTitle {
+    font-size: 2.2rem;
+  }
+
+  .heroSubtitle {
+    font-size: 1rem;
+  }
+
+  .heroContent {
+    padding: 2rem 1.5rem;
+  }
+
+  .introSection,
+  .projectsSection,
+  .ctaSection {
+    padding: 3rem 5%;
+  }
+}

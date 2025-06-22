@@ -1,0 +1,121 @@
+/* ======  Layout & Theme  ====== */
+.container {
+  padding: 20px;
+  background-color: #111827;          /* 🔹 NEW: dark slate blue-gray */
+  min-height: 100vh;
+  color: #D3D8E8;
+}
+
+.title {
+  font-size: 2.5em;
+  color: #A3D8F4;
+  text-align: center;
+  margin-top: 80px;
+  margin-bottom: 30px;
+  font-family: 'Georgia', serif;
+  text-transform: uppercase;
+  text-shadow: 0 0 8px rgba(163, 216, 244, 0.4);
+  animation: fadeDown 800ms ease-out both;   /* 🔹 NEW */
+}
+
+/* Card wrapper */
+.cards {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* Child card entrance animation */
+.cards > * {
+  opacity: 0;
+  transform: translateY(24px);
+  animation: slideUp 600ms ease-out both;
+}
+
+/* Stagger the children slightly for a smoother feel */
+.cards > *:nth-child(odd)   { animation-delay:  80ms; }
+.cards > *:nth-child(even)  { animation-delay: 160ms; }
+
+/* Hover lift / glow */
+.cards > *:hover {
+  transform: translateY(-4px) scale(1.02);
+  box-shadow: 0 10px 18px rgba(163, 216, 244, 0.12);
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+/* ======  States  ====== */
+.loading,
+.error,
+.noData {
+  text-align: center;
+  font-size: 1.2em;
+  font-family: 'Arial', sans-serif;
+}
+
+.loading { color: #76C7C0; }
+.error   { color: #E07A5F; }
+.noData  {
+  color: #D3D8E8;
+  font-family: 'Courier New', monospace;
+  font-style: italic;
+}
+
+/* ======  Animations  ====== */
+@keyframes fadeDown {
+  0%   { opacity: 0; transform: translateY(-20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes slideUp {
+  0%   { opacity: 0; transform: translateY(24px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+
+/* ======  Responsive Breakpoints  ====== */
+
+/* Small phones ≤480 px */
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.75em;
+    margin-top: 40px;
+    margin-bottom: 20px;
+  }
+
+  .cards {
+    gap: 15px;
+    max-width: 100%;
+    padding: 0 8px;
+  }
+}
+
+/* Wider phones / small tablets 481-768 px */
+@media (min-width: 481px) and (max-width: 768px) {
+  .title { font-size: 2em; }
+
+  .cards {
+    gap: 20px;
+    padding: 0 12px;
+  }
+}
+
+/* Tablets / small laptops 769-1023 px */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .cards {
+    max-width: 900px;
+    gap: 22px;
+  }
+}
+
+/* Desktops ≥1024 px (kept original) */
+@media (min-width: 1024px) {
+  .cards { max-width: 1300px; }
+}
+
+/* Very large screens ≥1440 px */
+@media (min-width: 1440px) {
+  .title { font-size: 3em; }
+
+  .cards { max-width: 1600px; }
+}

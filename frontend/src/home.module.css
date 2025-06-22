@@ -1,0 +1,156 @@
+@font-face {
+  font-display: block;
+  font-family: Mori;
+  font-style: normal;
+  font-weight: 600;
+  src: url(https://assets.codepen.io/16327/PPMori-Regular.woff) format("woff");
+}
+
+.maincont {
+  height: 100vh;
+  width: 100vw;
+  padding: 2rem 3rem;
+  box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  background: linear-gradient(135deg, #f0f4ff 0%, #e8f0fe 100%);
+  font-family: "Mori", Arial, sans-serif;
+  overflow-y: auto;
+  scroll-behavior: smooth;
+  animation: fadeIn 1.2s ease forwards;
+  scrollbar-width: none;
+}
+
+.title {
+  font-size: 4.8rem;
+  max-width: 90vw;
+  color: #2563eb;
+  margin-bottom: 2rem;
+  user-select: none;
+  opacity: 0;
+  animation: fadeIn 1.5s ease forwards;
+  animation-delay: 0.2s;
+  word-wrap: break-word;
+  font-weight: 700;
+  line-height: 1.1;
+  transition: color 0.3s ease, transform 0.3s ease;
+  cursor: default;
+  text-shadow: 2px 2px 6px rgba(37, 99, 235, 0.5);
+}
+
+.title:hover {
+  color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+.description {
+  width: 100%;
+  max-width: 100%;
+  box-sizing: border-box;
+  padding: 0 1rem;
+  font-size: 1.35rem;
+  color: #334155;
+  margin-bottom: 1.5rem;
+  line-height: 1.65;
+  text-align: left;
+  opacity: 0;
+  transform: translateY(20px);
+  animation: fadeUp 1s ease forwards;
+}
+
+.description:nth-of-type(2) {
+  animation-delay: 0.5s;
+}
+
+.description:nth-of-type(3) {
+  animation-delay: 0.7s;
+}
+
+.description:nth-of-type(4) {
+  animation-delay: 0.9s;
+}
+
+.description:nth-of-type(5) {
+  animation-delay: 1.1s;
+}
+
+.description:nth-of-type(6) {
+  animation-delay: 1.3s;
+}
+
+.exploreButton {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 700;
+  font-size: 1.35rem;
+  padding: 1.1rem 4.5rem;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  transition: background-color 0.3s ease, transform 0.15s ease;
+  align-self: center;
+  margin-top: auto;
+  opacity: 0;
+  animation: fadeIn 1s ease forwards;
+  animation-delay: 1.5s;
+}
+
+.exploreButton:hover {
+  background-color: #1d4ed8;
+  transform: scale(1.05);
+}
+
+@keyframes fadeIn {
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes fadeUp {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@media (max-width: 768px) {
+  .maincont {
+    padding: 2rem 2rem;
+  }
+
+  .title {
+    font-size: 3.8rem;
+    max-width: 95vw;
+  }
+
+  .description {
+    font-size: 1.15rem;
+    max-width: 100%;
+  }
+
+  .exploreButton {
+    font-size: 1.15rem;
+    padding: 1rem 3.5rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .maincont {
+    padding: 1.5rem 1.5rem;
+  }
+
+  .title {
+    font-size: 2.8rem;
+  }
+
+  .description {
+    font-size: 1rem;
+  }
+
+  .exploreButton {
+    font-size: 1rem;
+    padding: 0.9rem 3rem;
+  }
+}

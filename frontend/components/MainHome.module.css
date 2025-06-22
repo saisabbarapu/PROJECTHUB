@@ -1,0 +1,182 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap'); /* Added Poppins font */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.mainContainer {
+  padding: 20px;
+  animation: fadeIn 0.4s ease-in;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  min-height: 100vh;
+  background-color: #111827; /* Matches navbar, no background image */
+  overflow-y: auto;
+  position: relative;
+}
+
+.heading {
+  font-size: 2rem;
+  font-weight: 700;
+  margin-bottom: 1.5rem;
+  color: #ffffff;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 1.2px;
+  width: 100%;
+  margin-top: 70px;
+}
+
+.departmentIcons {
+  display: flex;
+  justify-content: center;
+  gap: 2rem;
+  margin-bottom: 2rem;
+  flex-wrap: wrap;
+}
+
+.departmentCard {
+  background: rgba(17, 24, 39, 0.3); /* Adjusted to match #111827 with 30% opacity */
+  backdrop-filter: blur(15px); /* Frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+  padding: 1rem;
+  border-radius: 12px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.departmentCard:hover {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px rgba(77, 182, 172, 0.3); /* Teal glow on hover */
+}
+
+.departmentIcon {
+  font-size: 2.5rem;
+  color: #ffffff;
+  margin-bottom: 0.5rem;
+  transition: color 0.3s ease;
+}
+
+.departmentCard:hover .departmentIcon {
+  color: #2dd4bf; /* Teal on hover */
+}
+
+.departmentName {
+  font-family: 'Poppins', sans-serif;
+  font-size: 1rem;
+  color: #ffffff;
+  margin: 0;
+  font-weight: 400;
+}
+
+.departmentCard.selected {
+  background-color: rgba(45, 212, 191, 0.3); /* Adjusted to match teal theme */
+  border-color: #2dd4bf; /* Teal border for selected */
+  transform: scale(1.1); /* Consistent with hover effect */
+  box-shadow: 0 0 15px rgba(77, 182, 172, 0.5); /* Stronger glow for selected */
+}
+
+.projectList {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 16px;
+  padding-bottom: 80px;
+}
+
+.addButton {
+  position: fixed;
+  right: 20px;
+  bottom: 20px;
+  background: linear-gradient(145deg, #5eead4, #2dd4bf);
+  color: white;
+  font-size: 32px;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+}
+
+.addButton:hover {
+  transform: scale(1.08) rotate(90deg);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  background: linear-gradient(145deg, #80cbc4, #4db6ac);
+}
+
+.addButton:active {
+  transform: scale(0.95);
+}
+
+/* Responsive styles */
+@media (max-width: 600px) {
+  .mainContainer {
+    padding: 10px;
+  }
+
+  .heading {
+    font-size: 1.5rem;
+    margin-bottom: 1rem;
+    margin-top: 50px;
+  }
+
+  .departmentIcons {
+    gap: 1.5rem;
+    margin-bottom: 1.5rem;
+  }
+
+  .departmentCard {
+    padding: 0.75rem;
+  }
+
+  .departmentIcon {
+    font-size: 2rem;
+    margin-bottom: 0.3rem;
+  }
+
+  .departmentName {
+    font-size: 0.9rem;
+  }
+
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    gap: 12px;
+    padding-bottom: 65px;
+  }
+
+  .addButton {
+    font-size: 24px;
+    width: 50px;
+    height: 50px;
+    right: 15px;
+    bottom: 15px;
+  }
+}
+
+@media (min-width: 1024px) {
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    gap: 20px;
+  }
+}
+
+/* Accessibility: Reduce motion for users who prefer it */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

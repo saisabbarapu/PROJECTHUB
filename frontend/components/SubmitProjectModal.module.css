@@ -1,0 +1,197 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.modalOverlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.6);
+  display: flex;
+  justify-content: center;
+  align-items: center; /* Ensure vertical centering */
+  z-index: 1000;
+}
+
+.modal {
+  background: rgba(0, 0, 0, 0.3); /* Glassmorphism background */
+  backdrop-filter: blur(15px); /* Frosted glass effect */
+  border: 1px solid rgba(255, 255, 255, 0.2); /* Subtle white border */
+  padding: 1.2rem 1.8rem; /* Slightly increased padding for taller modal */
+  border-radius: 12px;
+  width: 600px;
+  max-height: 85vh; /* Increased height from 70vh to 85vh */
+  overflow-y: auto;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  display: flex;
+  flex-direction: column;
+  gap: 1rem; /* Slightly increased gap for better spacing */
+  animation: fadeIn 0.4s ease-in;
+  font-family: 'Poppins', sans-serif;
+  color: #ffffff;
+  scrollbar-width: none; /* Hide scrollbar for Firefox */
+  -ms-overflow-style: none; /* Hide scrollbar for older Edge */
+  margin-top: 90px;
+}
+
+.modal::-webkit-scrollbar {
+  display: none; /* Hide scrollbar for Chrome, Safari, and Webkit browsers */
+}
+
+.title {
+  margin: 0 0 18px 0; /* Slightly increased margin for better spacing */
+  font-size: 1.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.inputGroup {
+  position: relative;
+  margin-bottom: 10px; /* Slightly increased margin for better spacing */
+}
+
+.input {
+  width: 100%;
+  padding: 10px 40px 10px 40px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
+}
+
+.input::placeholder {
+  color: #d1d5db;
+}
+
+.input:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #4db6ac;
+  box-shadow: 0 0 4px rgba(77, 182, 172, 0.2);
+}
+
+.input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #2dd4bf;
+  box-shadow: 0 0 8px rgba(77, 182, 172, 0.4);
+}
+
+.input[type="file"] {
+  padding: 10px 40px 10px 40px; /* Ensure consistent padding */
+}
+
+textarea.input {
+  resize: vertical;
+  min-height: 60px;
+}
+
+.inputIcon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d1d5db;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.input:hover + .inputIcon,
+.input:focus + .inputIcon {
+  color: #4db6ac; /* Teal on hover/focus */
+}
+
+.actions {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 1rem; /* Slightly increased margin for better spacing */
+}
+
+.submitBtn, .cancelBtn {
+  padding: 10px 18px;
+  font-size: 16px;
+  cursor: pointer;
+  border-radius: 12px;
+  border: none;
+  font-family: 'Poppins', sans-serif;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background 0.3s ease;
+}
+
+.submitBtn {
+  background: linear-gradient(145deg, #5eead4, #2dd4bf);
+  color: #0B0D17;
+  box-shadow: 0px 4px 32px 0 rgba(77, 182, 172, 0.7);
+}
+
+.submitBtn:hover {
+  background: linear-gradient(145deg, #80cbc4, #4db6ac);
+  transform: scale(1.02);
+  box-shadow: 0px 6px 40px 0 rgba(77, 182, 172, 0.9);
+}
+
+.cancelBtn {
+  background: linear-gradient(145deg, #f43f5e, #be123c);
+  color: #ffffff;
+  box-shadow: 0px 4px 32px 0 rgba(244, 63, 94, 0.7);
+}
+
+.cancelBtn:hover {
+  background: linear-gradient(145deg, #fb7185, #e11d48);
+  transform: scale(1.02);
+  box-shadow: 0px 6px 40px 0 rgba(244, 63, 94, 0.9);
+}
+
+.buttonIcon {
+  font-size: 16px;
+}
+
+@media (max-width: 600px) {
+  .modal {
+    width: 90%;
+    padding: 1rem; /* Slightly increased padding for mobile */
+    max-height: 90vh; /* Increased height from 80vh to 90vh for mobile */
+  }
+
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .input {
+    padding: 8px 35px 8px 35px;
+    font-size: 0.9rem;
+  }
+
+  .inputIcon {
+    font-size: 16px;
+  }
+
+  .submitBtn, .cancelBtn {
+    padding: 8px 14px;
+    font-size: 0.95rem;
+  }
+
+  .buttonIcon {
+    font-size: 14px;
+  }
+}

@@ -1,0 +1,477 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+/* Animation for Fade-In Effect */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+/* Basic Reset & Body Styling */
+.body {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  background: url('/image/projectbg.png');
+  background-size: cover;
+  background-position: center;
+  padding: 0;
+  margin: 0;
+  font-family: 'Poppins', sans-serif;
+  box-sizing: border-box;
+  overflow-y: auto;
+  color: white;
+}
+
+/* Main Container for the Form */
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  max-width: 600px;
+  width: 100%;
+  min-height: 80vh;
+  max-height: 90vh;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  border-radius: 25px;
+  overflow: hidden;
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  margin: 110px 0;
+  animation: fadeIn 1s ease-in-out;
+}
+
+/* Form Section Styling */
+.formSection {
+  padding: 15px 25px;
+  width: 90%;
+  max-width: 450px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  background: transparent;
+  border-radius: 15px;
+}
+
+.formSection h2 {
+  color: #ffffff;
+  margin: 0 0 20px 0;
+  font-size: 1.9rem;
+  font-weight: 600;
+  text-align: center;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+/* Toast Message at the Top Right */
+.toast {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(34, 197, 94, 0.2); /* Green for success */
+  color: #22c55e; /* Green text */
+  border: 1px solid #16a34a; /* Darker green border */
+  font-size: 14px;
+  font-weight: 400;
+  padding: 10px 16px;
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+  position: absolute;
+  top: 20%; /* 20% from top */
+  right: 20px; /* Right-aligned */
+  transform: none; /* Remove translateX(-50%) */
+  animation: fadeIn 0.3s ease-in-out;
+  max-width: 300px; /* Limit width */
+  text-align: left;
+  z-index: 10;
+  box-sizing: border-box;
+}
+
+/* Error Toast (for validation errors) */
+.toast.error {
+  background: rgba(255, 76, 76, 0.15); /* Red background */
+  color: #ff4444; /* Red text */
+  border: 1px solid #dc2626; /* Darker red border */
+}
+
+.toast.success {
+  background: rgba(34, 197, 94, 0.2); /* Green background */
+  color: #22c55e; /* Green text */
+  border: 1px solid #16a34a; /* Darker green border */
+}
+
+.warningIcon {
+  color: #22c55e; /* Green checkmark for success */
+  font-size: 0.9rem;
+}
+
+.warningIcon.error {
+  color: #ff4444; /* Red warning for errors */
+}
+
+.warningIcon.success {
+  color: #22c55e; /* Green checkmark for success */
+}
+
+/* Input Group Container */
+.inputGroup {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+/* Wrapper for Input and Icon */
+.inputWrapper {
+  position: relative;
+  width: 100%;
+  display: flex;
+  align-items: center;
+}
+
+/* Input Field Styling */
+.inputGroup input {
+  width: 100%;
+  padding: 12px 40px 12px 40px; /* Adjusted for left icon and right toggle */
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  color: white;
+  font-size: 14px;
+  font-weight: 400;
+  outline: none;
+  transition: all 0.3s ease;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.inputGroup input::placeholder {
+  color: #d1d5db;
+}
+
+.inputGroup input:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #5eead4;
+  box-shadow: 0 0 4px rgba(45, 212, 191, 0.2);
+}
+
+.inputGroup input:focus {
+  background: rgba(255, 255, 255, 0.2);
+  border-color: #2dd4bf;
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+}
+
+/* Icon Styling (for PersonIcon, EmailIcon, LockIcon) */
+.inputIcon {
+  position: absolute;
+  left: 12px; /* Left-aligned for non-toggle icons */
+  top: 50%;
+  transform: translateY(-50%);
+  width: 18px;
+  height: 18px;
+  fill: #d1d5db;
+  transition: fill 0.3s ease;
+}
+
+.inputGroup input:hover + .inputIcon,
+.inputGroup input:focus + .inputIcon {
+  fill: #2dd4bf;
+}
+
+/* Toggle Button Styling (for EyeIcon) */
+.toggleButton {
+  position: absolute;
+  right: 12px; /* Moved back to the right */
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, color 0.3s ease;
+  z-index: 1; /* Ensure toggle is above other icons */
+}
+
+.toggleButton:hover {
+  transform: scale(1.1);
+}
+
+.toggleButton:focus {
+  outline: none;
+}
+
+.toggleButton:hover .inputIcon,
+.toggleButton:focus .inputIcon {
+  fill: #2dd4bf;
+}
+
+/* Styles for the Tooltip Error */
+.tooltipError {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #f43f5e;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
+  animation: fadeIn 0.2s ease-out;
+}
+
+.tooltipIcon {
+  color: #f43f5e;
+  font-weight: bold;
+  font-size: 0.8rem;
+}
+
+/* Remove the tooltip arrow since the login form doesn't have it */
+.tooltipError::before {
+  display: none;
+}
+
+/* Signup Button */
+.signupBtn {
+  cursor: pointer;
+  background: linear-gradient(to bottom, #3b82f6, #1d4ed8);
+  box-shadow: 0px 4px 32px 0 rgba(59, 130, 246, 0.7);
+  padding: 12px 0;
+  border-radius: 12px;
+  border: 1px solid #475569;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  transition: transform 0.3s ease;
+  margin-top: 15px;
+  width: 100%;
+}
+
+.signupBtn:hover {
+  transform: scale(1.02);
+}
+
+/* Login Link */
+.loginLink {
+  margin-top: 15px;
+  text-align: center;
+}
+
+.loginLink p {
+  color: #9ca3af;
+  font-size: 14px;
+}
+
+.loginLink a {
+  color: #60a5fa;
+  text-decoration: none;
+  font-size: 14px;
+  font-weight: 400;
+  transition: color 0.3s ease;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}
+
+/* --- Responsive Adjustments --- */
+
+/* For screens smaller than 768px (e.g., tablets, larger phones) */
+@media (max-width: 768px) {
+  .container {
+    max-width: 540px;
+    min-height: 70vh;
+    margin: 90px 0;
+  }
+
+  .formSection {
+    padding: 10px 20px;
+    width: 90%;
+    max-width: 400px;
+  }
+
+  .formSection h2 {
+    font-size: 1.6rem;
+    margin-bottom: 15px;
+  }
+
+  .inputGroup {
+    margin-bottom: 18px;
+  }
+
+  .inputGroup input {
+    padding: 10px 35px 10px 35px; /* Adjusted for left icon and right toggle */
+    font-size: 0.9rem;
+  }
+
+  .inputIcon {
+    width: 16px;
+    height: 16px;
+    left: 10px;
+  }
+
+  .toggleButton {
+    right: 10px;
+    width: 18px;
+    height: 18px;
+  }
+
+  .toggleButton .inputIcon {
+    width: 16px;
+    height: 16px;
+  }
+
+  .tooltipError {
+    font-size: 0.7rem;
+    padding: 5px 7px;
+  }
+  .tooltipIcon {
+    font-size: 0.75rem;
+  }
+
+  .signupBtn {
+    padding: 10px;
+    font-size: 0.95rem;
+  }
+
+  .loginLink p, .loginLink a {
+    font-size: 0.8rem;
+  }
+
+  .toast {
+    font-size: 0.75rem;
+    padding: 6px 12px; /* Adjusted padding for smaller screens */
+    max-width: 250px; /* Reduced width for smaller screens */
+  }
+}
+
+/* For screens smaller than 480px (e.g., most mobile phones) */
+@media (max-width: 480px) {
+  .body {
+    padding: 0;
+  }
+
+  .container {
+    max-width: 90%;
+    min-height: 60vh;
+    border-radius: 15px;
+    margin: 120px 0;
+  }
+
+  .formSection {
+    padding: 8px 15px;
+    width: 90%;
+    max-width: 340px;
+  }
+
+  .formSection h2 {
+    font-size: 1.4rem;
+    margin-bottom: 12px;
+  }
+
+  .inputGroup {
+    margin-bottom: 15px;
+  }
+
+  .inputGroup input {
+    padding: 8px 30px 8px 30px; /* Adjusted for left icon and right toggle */
+    font-size: 0.85rem;
+  }
+
+  .inputIcon {
+    width: 14px;
+    height: 14px;
+    left: 8px;
+  }
+
+  .toggleButton {
+    right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+
+  .toggleButton .inputIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .tooltipError {
+    font-size: 0.65rem;
+    padding: 4px 6px;
+  }
+  .tooltipIcon {
+    font-size: 0.7rem;
+  }
+
+  .signupBtn {
+    padding: 8px;
+    font-size: 0.9rem;
+    border-radius: 8px;
+    margin-top: 10px;
+  }
+
+  .loginLink p, .loginLink a {
+    font-size: 0.75rem;
+  }
+
+  .toast {
+    font-size: 0.7rem;
+    padding: 5px 10px; /* Adjusted padding for smaller screens */
+    max-width: 200px; /* Reduced width for smaller screens */
+  }
+}
+
+/* For very small screens (e.g., iPhone 5/SE) */
+@media (max-width: 320px) {
+  .formSection {
+    padding: 6px 12px;
+    width: 92%;
+    max-width: 300px;
+  }
+  .inputGroup {
+    margin-bottom: 12px;
+  }
+  .inputGroup input {
+    font-size: 0.8rem;
+    padding: 8px 25px 8px 25px; /* Adjusted for left icon and right toggle */
+  }
+  .inputIcon {
+    width: 12px;
+    height: 12px;
+    left: 6px;
+  }
+
+  .toggleButton {
+    right: 6px;
+    width: 14px;
+    height: 14px;
+  }
+
+  .toggleButton .inputIcon {
+    width: 12px;
+    height: 12px;
+  }
+
+  .tooltipError {
+    font-size: 0.6rem;
+    padding: 3px 5px;
+  }
+  .tooltipIcon {
+    font-size: 0.7rem;
+  }
+
+  .toast {
+    font-size: 0.65rem;
+    padding: 4px 8px; /* Adjusted padding for very small screens */
+    max-width: 180px; /* Reduced width for very small screens */
+  }
+}

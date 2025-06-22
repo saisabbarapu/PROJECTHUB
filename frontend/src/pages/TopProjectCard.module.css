@@ -1,0 +1,156 @@
+/* ===== Core Card ===== */
+.card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+
+  padding: 20px 24px;
+  max-width: 720px;
+  margin: 0 auto;
+
+  background: rgba(24, 35, 52, 0.9);
+  border: 1px solid rgba(163, 216, 244, 0.2);
+  border-radius: 10px;
+
+  transition: transform 200ms ease, box-shadow 200ms ease;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(163, 216, 244, 0.25);
+}
+
+/* ===== Rank Badge ===== */
+.rankBadge {
+  position: absolute;
+  top: 14px;
+  left: 14px;
+
+  background: #76C7C0;
+  color: #0D1B2A;
+
+  width: 34px;
+  height: 34px;
+  border-radius: 50%;
+  font: 700 0.95em/34px 'Verdana', sans-serif;
+  text-align: center;
+
+  box-shadow: 0 0 0 3px rgba(118, 199, 192, 0.3);
+}
+
+/* ===== Header ===== */
+.header {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 10px;
+}
+
+.title {
+  flex: 1 1 auto;
+  font: 600 1.5em 'Georgia', serif;
+  color: #A3D8F4;
+  margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+}
+
+.department {
+  font: 700 0.95em 'Verdana', sans-serif;
+  color: #76C7C0;
+  background: rgba(118, 199, 192, 0.12);
+  padding: 4px 10px;
+  border-radius: 4px;
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+
+/* ===== Body ===== */
+.body {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.description {
+  font: 1em/1.5 'Arial', sans-serif;
+  color: #B0C4DE;
+  margin: 0;
+}
+
+.meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px 12px;
+  font: 0.9em 'Arial', sans-serif;
+  color: #A9BCD0;
+}
+
+.author {
+  font-weight: 500;
+}
+
+.email {
+  opacity: 0.85;
+}
+
+/* ===== Footer / Tools ===== */
+.footer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.toolChip {
+  background: rgba(163, 216, 244, 0.12);
+  color: #A3D8F4;
+  font: 0.8em 'Arial', sans-serif;
+  padding: 4px 10px;
+  border-radius: 9999px;
+  white-space: nowrap;
+}
+
+/* ===== Responsive Breakpoints ===== */
+
+/* Phones ≤600px */
+@media (max-width: 600px) {
+  .card {
+    padding: 16px 18px;
+  }
+
+  .rankBadge {
+    width: 28px;
+    height: 28px;
+    font-size: 0.8em;
+    line-height: 28px;
+  }
+
+  .title {
+    font-size: 1.25em;
+  }
+
+  .description {
+    font-size: 0.95em;
+  }
+
+  .meta {
+    font-size: 0.8em;
+  }
+}
+
+/* Very large screens ≥1024px */
+@media (min-width: 1024px) {
+  .card {
+    max-width: 900px;
+    padding: 24px 28px;
+  }
+
+  .title {
+    font-size: 1.7em;
+  }
+
+  .description {
+    font-size: 1.1em;
+  }
+}

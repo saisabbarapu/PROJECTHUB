@@ -1,0 +1,301 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap');
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.95);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+body, html {
+  margin: 0;
+  padding: 0;
+  font-family: 'Poppins', sans-serif;
+  background-color: #111827;
+  color: white;
+}
+
+.container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 30px;
+  background: url('/image/projectbg.png'), #111827;
+  background-size: cover;
+  background-position: center;
+}
+
+.loginBox {
+  display: flex;
+  width: 100%;
+  max-width: 1000px;
+  border-radius: 20px;
+  background: rgba(0, 0, 0, 0.3);
+  backdrop-filter: blur(15px);
+  box-shadow: 0 0 25px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+  animation: fadeIn 1s ease-in-out;
+  flex-direction: row;
+}
+
+.leftSection {
+  flex: 1;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 20px;
+  background: transparent;
+}
+
+.title {
+  font-size: 28px;
+  font-weight: 600;
+  margin-bottom: 10px;
+}
+
+.inputGroup {
+  position: relative;
+}
+
+.inputGroup input {
+  width: 100%;
+  padding: 12px 40px 12px 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+  font-size: 14px;
+  outline: none;
+  transition: all 0.3s ease;
+}
+
+.inputGroup input::placeholder {
+  color: #d1d5db;
+}
+
+.inputGroup input:hover {
+  background: rgba(255, 255, 255, 0.1);
+  border-color: #5eead4;
+  box-shadow: 0 0 4px rgba(45, 212, 191, 0.2);
+}
+
+.inputGroup input:focus {
+  border-color: #2dd4bf;
+  box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+}
+
+.icon {
+  position: absolute;
+  left: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #d1d5db;
+  font-size: 16px;
+}
+
+.toggleButton {
+  position: absolute;
+  right: 12px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 0;
+  width: 20px;
+  height: 20px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform 0.3s ease, color 0.3s ease;
+}
+
+.toggleButton:hover {
+  transform: scale(1.1);
+}
+
+.toggleButton:focus {
+  outline: none;
+}
+
+.inputIcon {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  fill: #d1d5db;
+  transition: fill 0.3s ease;
+}
+
+.toggleButton:hover .inputIcon,
+.toggleButton:focus .inputIcon {
+  fill: #2dd4bf;
+}
+
+.tooltipError {
+  margin-top: 4px;
+  font-size: 12px;
+  color: #f43f5e;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.tooltipIcon {
+  font-weight: bold;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 13px;
+  margin-top: 10px;
+}
+
+.checkboxWrapper label {
+  margin-left: 6px;
+}
+
+.forgot {
+  color: #60a5fa;
+  text-decoration: none;
+  transition: color 0.3s ease;
+}
+
+.forgot:hover {
+  color: #93c5fd;
+  text-decoration: underline;
+}
+
+/* 🔵 Animated Login Button */
+.loginBtn {
+  cursor: pointer;
+  background: linear-gradient(to bottom, #3b82f6, #1d4ed8);
+  box-shadow: 0px 4px 32px 0 rgba(59, 130, 246, 0.7);
+  padding: 12px 0;
+  border-radius: 12px;
+  border: 1px solid #475569;
+  color: white;
+  font-size: 16px;
+  font-weight: 500;
+  overflow: hidden;
+  position: relative;
+  transition: transform 0.3s ease;
+  width: 100%;
+}
+
+.loginBtn:hover {
+  transform: scale(1.02);
+}
+
+.loginBtnInner {
+  position: relative;
+  overflow: hidden;
+  display: flex;
+  justify-content: center;
+}
+
+.loginBtnInner p {
+  transition: transform 1.125s cubic-bezier(0.19, 1, 0.22, 1);
+}
+
+.loginBtnInner p:first-child {
+  transform: translateY(0);
+}
+
+.loginBtn:hover .loginBtnInner p:first-child {
+  transform: translateY(-28px);
+}
+
+.loginBtnInner p:last-child {
+  position: absolute;
+  top: 28px;
+  left: 0;
+  transform: translateY(0);
+}
+
+.loginBtn:hover .loginBtnInner p:last-child {
+  top: 0;
+}
+
+/* Toast Notifications */
+.toast {
+  padding: 10px 16px;
+  border-radius: 10px;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+
+.toastError {
+  background-color: rgba(244, 63, 94, 0.2);
+  color: #f43f5e;
+  border: 1px solid #e11d48;
+}
+
+.toastSuccess {
+  background-color: rgba(34, 197, 94, 0.2);
+  color: #4ade80;
+  border: 1px solid #22c55e;
+}
+
+/* Right Panel */
+.rightSection {
+  flex: 1;
+  background-color: rgba(255, 255, 255, 0.02);
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 15px;
+  text-align: center;
+}
+
+.rightSection h2 {
+  font-size: 26px;
+  font-weight: 600;
+}
+
+.rightSection p {
+  font-size: 14px;
+  color: #9ca3af;
+}
+
+/* Signup Link */
+.signupText {
+  font-size: 14px;
+  text-align: center;
+}
+
+.signupText a {
+  color: #60a5fa;
+  text-decoration: none;
+}
+
+.signupText a:hover {
+  text-decoration: underline;
+}
+
+/* Responsive */
+@media screen and (max-width: 768px) {
+  .loginBox {
+    flex-direction: column;
+  }
+
+  .leftSection,
+  .rightSection {
+    padding: 30px 20px;
+  }
+
+  .rightSection {
+    text-align: center;
+  }
+}
