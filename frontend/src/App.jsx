@@ -5,7 +5,7 @@ import './App.css'
 import LoginPage from "./pages/loginpage";
 import Signup from "./pages/sign";
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
-import Footer from "./pages/footer";
+import Footer from "./pages/Footer";
 import HomePage from './pages/HomePage';
 import TopLikedPage from "./pages/TopLikedPage";
 import ContactUs from "./pages/ContactUs";

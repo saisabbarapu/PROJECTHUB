@@ -54,6 +54,11 @@ const ProjectCard = ({ project }) => {
     e.stopPropagation(); // Prevent the card click event from opening the popup
   };
 
+  // Handler to prevent popup opening when "View Project" link is clicked
+  const handleLinkClick = (e) => {
+    e.stopPropagation(); // Prevent the card's onClick from triggering the popup
+  };
+
   return (
     <>
       {error && <div className={styles.errorToast}>{error}</div>}
@@ -73,6 +78,17 @@ const ProjectCard = ({ project }) => {
             <p className={styles.tools}>Tools Used: {project.toolsUsed.join(', ')}</p>
           ) : (
             <p className={styles.tools}>No tools specified</p>
+          )}
+          {project.projectUrl && (
+            <a
+              href={project.projectUrl}
+              target="_blank"
+              rel="noreferrer"
+              className={styles.link}
+              onClick={handleLinkClick} // Prevent popup trigger
+            >
+              View Project
+            </a>
           )}
         </div>
         <div className={styles.interaction}>
@@ -127,6 +143,11 @@ const ProjectCard = ({ project }) => {
                 <a href={project.pdfUrl} target="_blank" rel="noreferrer" className={styles.link}>View PDF</a>
               ) : (
                 <span className={styles.pdfUnavailable}>PDF not available</span>
+              )}
+              {project.projectUrl ? (
+                <a href={project.projectUrl} target="_blank" rel="noreferrer" className={styles.link}>Project URL</a>
+              ) : (
+                <span className={styles.pdfUnavailable}>Project URL not provided</span>
               )}
             </div>
             <p className={styles.popupMeta}><strong>By:</strong> <span>{project.name} ({project.rollno})</span></p>

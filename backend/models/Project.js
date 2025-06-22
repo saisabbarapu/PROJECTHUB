@@ -8,6 +8,7 @@ const projectSchema = new mongoose.Schema({
   title: String,
   description: String,
   github: String,
+  projectUrl: String, // New optional field
   pdfUrl: String,
   imageUrl: String,
   toolsUsed: [String],

@@ -113,44 +113,197 @@
 
 /* ===== Responsive Breakpoints ===== */
 
-/* Phones ≤600px */
-@media (max-width: 600px) {
+/* Extra small devices (phones) ≤480px */
+@media (max-width: 480px) {
+  .card {
+    padding: 12px 16px;
+    gap: 10px;
+  }
+  .rankBadge {
+    width: 24px;
+    height: 24px;
+    font-size: 0.7em;
+    line-height: 24px;
+    top: 10px;
+    left: 10px;
+  }
+  .title {
+    font-size: 1.1em;
+  }
+  .description {
+    font-size: 0.9em;
+  }
+  .meta {
+    font-size: 0.75em;
+    gap: 4px 10px;
+  }
+  .toolChip {
+    font-size: 0.7em;
+    padding: 3px 8px;
+  }
+}
+
+/* Small devices (phones) 481-600px */
+@media (min-width: 481px) and (max-width: 600px) {
   .card {
     padding: 16px 18px;
+    gap: 12px;
   }
-
   .rankBadge {
     width: 28px;
     height: 28px;
     font-size: 0.8em;
     line-height: 28px;
   }
-
   .title {
     font-size: 1.25em;
   }
-
   .description {
     font-size: 0.95em;
   }
-
   .meta {
     font-size: 0.8em;
   }
+  .toolChip {
+    font-size: 0.75em;
+    padding: 4px 9px;
+  }
 }
 
-/* Very large screens ≥1024px */
-@media (min-width: 1024px) {
+/* Small tablets 601-768px */
+@media (min-width: 601px) and (max-width: 768px) {
+  .card {
+    padding: 18px 22px;
+    gap: 12px;
+  }
+  .rankBadge {
+    width: 30px;
+    height: 30px;
+    font-size: 0.85em;
+    line-height: 30px;
+  }
+  .title {
+    font-size: 1.4em;
+  }
+  .description {
+    font-size: 0.98em;
+  }
+  .meta {
+    font-size: 0.85em;
+  }
+  .toolChip {
+    font-size: 0.78em;
+    padding: 4px 10px;
+  }
+}
+
+/* Tablets / small laptops 769-1023px */
+@media (min-width: 769px) and (max-width: 1023px) {
+  .card {
+    padding: 20px 24px;
+    gap: 14px;
+  }
+  .rankBadge {
+    width: 32px;
+    height: 32px;
+    font-size: 0.9em;
+    line-height: 32px;
+  }
+  .title {
+    font-size: 1.45em;
+  }
+  .description {
+    font-size: 1.05em;
+  }
+  .meta {
+    font-size: 0.88em;
+  }
+  .toolChip {
+    font-size: 0.79em;
+    padding: 4px 10px;
+  }
+}
+
+/* Desktops 1024-1199px */
+@media (min-width: 1024px) and (max-width: 1199px) {
+  .card {
+    max-width: 800px;
+    padding: 22px 26px;
+    gap: 14px;
+  }
+  .rankBadge {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95em;
+    line-height: 34px;
+  }
+  .title {
+    font-size: 1.6em;
+  }
+  .description {
+    font-size: 1.08em;
+  }
+  .meta {
+    font-size: 0.9em;
+  }
+  .toolChip {
+    font-size: 0.8em;
+    padding: 4px 10px;
+  }
+}
+
+/* Large desktops 1200-1439px */
+@media (min-width: 1200px) and (max-width: 1439px) {
+  .card {
+    max-width: 850px;
+    padding: 24px 28px;
+    gap: 14px;
+  }
+  .rankBadge {
+    width: 34px;
+    height: 34px;
+    font-size: 0.95em;
+    line-height: 34px;
+  }
+  .title {
+    font-size: 1.65em;
+  }
+  .description {
+    font-size: 1.09em;
+  }
+  .meta {
+    font-size: 0.9em;
+  }
+  .toolChip {
+    font-size: 0.8em;
+    padding: 4px 10px;
+  }
+}
+
+/* Very large screens ≥1440px */
+@media (min-width: 1440px) {
   .card {
     max-width: 900px;
     padding: 24px 28px;
+    gap: 14px;
   }
-
+  .rankBadge {
+    width: 36px;
+    height: 36px;
+    font-size: 1em;
+    line-height: 36px;
+  }
   .title {
     font-size: 1.7em;
   }
-
   .description {
     font-size: 1.1em;
+  }
+  .meta {
+    font-size: 0.92em;
+  }
+  .toolChip {
+    font-size: 0.82em;
+    padding: 4px 10px;
   }
 }

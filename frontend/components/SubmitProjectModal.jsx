@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import api from './api';
 import styles from './SubmitProjectModal.module.css';
-import { FaUser, FaEnvelope, FaIdBadge, FaBuilding, FaProjectDiagram, FaFileAlt, FaGithub, FaFilePdf, FaImage, FaCheck, FaTimes } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaIdBadge, FaBuilding, FaProjectDiagram, FaFileAlt, FaGithub, FaFilePdf, FaImage, FaCheck, FaTimes, FaLink } from 'react-icons/fa';
 
 const SubmitProjectModal = ({ onClose, onSubmit }) => {
   const [form, setForm] = useState({
@@ -12,6 +12,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
     title: '',
     description: '',
     github: '',
+    projectUrl: '', // New optional field
     pdf: null,
     image: null,
     toolsUsed: '', // Comma-separated string
@@ -40,7 +41,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
     e.preventDefault();
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      if (value !== null || key === 'toolsUsed') { // Include toolsUsed even if null
+      if (value !== null || key === 'toolsUsed' || key === 'projectUrl') { // Include projectUrl even if empty
         formData.append(key, value || ''); // Append empty string if null
       }
     });
@@ -148,6 +149,17 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
             className={styles.input}
           />
           <FaGithub className={styles.inputIcon} />
+        </div>
+        <div className={styles.inputGroup}>
+          <input
+            name="projectUrl"
+            type="url"
+            value={form.projectUrl}
+            onChange={handleChange}
+            placeholder="Project URL (Optional)"
+            className={styles.input}
+          />
+          <FaLink className={styles.inputIcon} />
         </div>
         <div className={styles.inputGroup}>
           <input

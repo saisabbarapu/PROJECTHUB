@@ -11,6 +11,21 @@
   }
 }
 
+/* Placeholder Navbar (adjust height based on your design) */
+.navbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 60px; /* Adjust to match your navbar height */
+  background-color: #1E2A44;
+  z-index: 1000; /* Ensure it stays above content */
+  display: flex;
+  align-items: center;
+  padding: 0 20px;
+}
+
+/* Main container styles */
 .mainContainer {
   padding: 20px;
   animation: fadeIn 0.4s ease-in;
@@ -19,8 +34,10 @@
   background-color: #111827; /* Matches navbar, no background image */
   overflow-y: auto;
   position: relative;
+  padding-top: 80px; /* Increased to clear navbar on larger screens */
 }
 
+/* Base styles for heading */
 .heading {
   font-size: 2rem;
   font-weight: 700;
@@ -31,9 +48,10 @@
   text-transform: uppercase;
   letter-spacing: 1.2px;
   width: 100%;
-  margin-top: 70px;
+  margin-top: 20px; /* Reduced base margin-top, adjusted in media queries */
 }
 
+/* Base styles for department icons */
 .departmentIcons {
   display: flex;
   justify-content: center;
@@ -42,6 +60,7 @@
   flex-wrap: wrap;
 }
 
+/* Base styles for department card */
 .departmentCard {
   background: rgba(17, 24, 39, 0.3); /* Adjusted to match #111827 with 30% opacity */
   backdrop-filter: blur(15px); /* Frosted glass effect */
@@ -57,6 +76,7 @@
   box-shadow: 0 0 15px rgba(77, 182, 172, 0.3); /* Teal glow on hover */
 }
 
+/* Base styles for department icon */
 .departmentIcon {
   font-size: 2.5rem;
   color: #ffffff;
@@ -68,6 +88,7 @@
   color: #2dd4bf; /* Teal on hover */
 }
 
+/* Base styles for department name */
 .departmentName {
   font-family: 'Poppins', sans-serif;
   font-size: 1rem;
@@ -83,13 +104,15 @@
   box-shadow: 0 0 15px rgba(77, 182, 172, 0.5); /* Stronger glow for selected */
 }
 
+/* Base styles for project list */
 .projectList {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
   gap: 16px;
-  padding-bottom: 80px;
+  padding-bottom: 120px; /* Increased to account for button and footer height */
 }
 
+/* Base styles for add button */
 .addButton {
   position: fixed;
   right: 20px;
@@ -106,6 +129,7 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.25s ease, box-shadow 0.25s ease, background 0.25s ease;
+  z-index: 1100; /* Above navbar (1000) and footer (default or lower) */
 }
 
 .addButton:hover {
@@ -118,16 +142,62 @@
   transform: scale(0.95);
 }
 
-/* Responsive styles */
-@media (max-width: 600px) {
+/* Responsive styles for all screen sizes */
+@media (max-width: 480px) { /* Extra small devices (phones) */
   .mainContainer {
     padding: 10px;
+    padding-top: 70px; /* Adjusted to clear navbar */
+  }
+
+  .heading {
+    font-size: 1.2rem;
+    margin-top: 10px; /* Minimal margin to clear navbar */
+    margin-bottom: 1rem;
+  }
+
+  .departmentIcons {
+    gap: 1rem;
+    margin-bottom: 1rem;
+  }
+
+  .departmentCard {
+    padding: 0.5rem;
+  }
+
+  .departmentIcon {
+    font-size: 1.8rem;
+    margin-bottom: 0.2rem;
+  }
+
+  .departmentName {
+    font-size: 0.8rem;
+  }
+
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+    gap: 10px;
+    padding-bottom: 90px; /* Adjusted for smaller screens */
+  }
+
+  .addButton {
+    font-size: 20px;
+    width: 40px;
+    height: 40px;
+    right: 10px;
+    bottom: 10px;
+  }
+}
+
+@media (min-width: 481px) and (max-width: 600px) { /* Small devices (small phones) */
+  .mainContainer {
+    padding: 12px;
+    padding-top: 70px; /* Adjusted to clear navbar */
   }
 
   .heading {
     font-size: 1.5rem;
-    margin-bottom: 1rem;
-    margin-top: 50px;
+    margin-top: 15px; /* Adjusted to clear navbar */
+    margin-bottom: 1.2rem;
   }
 
   .departmentIcons {
@@ -149,9 +219,9 @@
   }
 
   .projectList {
-    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+    grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 12px;
-    padding-bottom: 65px;
+    padding-bottom: 100px; /* Adjusted for smaller screens */
   }
 
   .addButton {
@@ -163,10 +233,228 @@
   }
 }
 
-@media (min-width: 1024px) {
+@media (min-width: 601px) and (max-width: 768px) { /* Medium devices (tablets) */
+  .mainContainer {
+    padding: 15px;
+    padding-top: 75px; /* Adjusted to clear navbar */
+  }
+
+  .heading {
+    font-size: 1.8rem;
+    margin-top: 20px; /* Adjusted to clear navbar */
+    margin-bottom: 1.3rem;
+  }
+
+  .departmentIcons {
+    gap: 1.8rem;
+    margin-bottom: 1.8rem;
+  }
+
+  .departmentCard {
+    padding: 0.9rem;
+  }
+
+  .departmentIcon {
+    font-size: 2.2rem;
+    margin-bottom: 0.4rem;
+  }
+
+  .departmentName {
+    font-size: 0.95rem;
+  }
+
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+    gap: 14px;
+    padding-bottom: 110px; /* Adjusted for tablets */
+  }
+
+  .addButton {
+    font-size: 28px;
+    width: 55px;
+    height: 55px;
+    right: 18px;
+    bottom: 18px;
+  }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { /* Large tablets/laptops */
+  .mainContainer {
+    padding: 18px;
+    padding-top: 80px; /* Adjusted to clear navbar */
+  }
+
+  .heading {
+    font-size: 2.2rem;
+    margin-top: 25px; /* Adjusted to clear navbar */
+    margin-bottom: 1.4rem;
+  }
+
+  .departmentIcons {
+    gap: 2rem;
+    margin-bottom: 2rem;
+  }
+
+  .departmentCard {
+    padding: 1rem;
+  }
+
+  .departmentIcon {
+    font-size: 2.4rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .departmentName {
+    font-size: 1rem;
+  }
+
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 16px;
+    padding-bottom: 120px; /* Matches base padding-bottom */
+  }
+
+  .addButton {
+    font-size: 30px;
+    width: 58px;
+    height: 58px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (min-width: 1025px) and (max-width: 1200px) { /* Desktops */
+  .mainContainer {
+    padding: 20px;
+    padding-top: 80px; /* Matches base padding-top */
+  }
+
+  .heading {
+    font-size: 2.4rem;
+    margin-top: 30px; /* Adjusted to clear navbar */
+    margin-bottom: 1.5rem;
+  }
+
+  .departmentIcons {
+    gap: 2.2rem;
+    margin-bottom: 2.2rem;
+  }
+
+  .departmentCard {
+    padding: 1.1rem;
+  }
+
+  .departmentIcon {
+    font-size: 2.6rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .departmentName {
+    font-size: 1.1rem;
+  }
+
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    gap: 18px;
+    padding-bottom: 120px; /* Matches base padding-bottom */
+  }
+
+  .addButton {
+    font-size: 32px;
+    width: 60px;
+    height: 60px;
+    right: 20px;
+    bottom: 20px;
+  }
+}
+
+@media (min-width: 1201px) and (max-width: 1440px) { /* Large desktops */
+  .mainContainer {
+    padding: 22px;
+    padding-top: 80px; /* Matches base padding-top */
+  }
+
+  .heading {
+    font-size: 2.6rem;
+    margin-top: 40px; /* Adjusted to clear navbar */
+    margin-bottom: 1.6rem;
+  }
+
+  .departmentIcons {
+    gap: 2.5rem;
+    margin-bottom: 2.5rem;
+  }
+
+  .departmentCard {
+    padding: 1.2rem;
+  }
+
+  .departmentIcon {
+    font-size: 2.7rem;
+    margin-bottom: 0.6rem;
+  }
+
+  .departmentName {
+    font-size: 1.2rem;
+  }
+
   .projectList {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     gap: 20px;
+    padding-bottom: 120px; /* Matches base padding-bottom */
+  }
+
+  .addButton {
+    font-size: 34px;
+    width: 62px;
+    height: 62px;
+    right: 22px;
+    bottom: 22px;
+  }
+}
+
+@media (min-width: 1441px) { /* Extra large desktops */
+  .mainContainer {
+    padding: 25px;
+    padding-top: 80px; /* Matches base padding-top */
+  }
+
+  .heading {
+    font-size: 2.8rem;
+    margin-top: 50px; /* Adjusted to clear navbar */
+    margin-bottom: 1.7rem;
+  }
+
+  .departmentIcons {
+    gap: 2.8rem;
+    margin-bottom: 2.8rem;
+  }
+
+  .departmentCard {
+    padding: 1.3rem;
+  }
+
+  .departmentIcon {
+    font-size: 2.8rem;
+    margin-bottom: 0.7rem;
+  }
+
+  .departmentName {
+    font-size: 1.3rem;
+  }
+
+  .projectList {
+    grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+    gap: 22px;
+    padding-bottom: 120px; /* Matches base padding-bottom */
+  }
+
+  .addButton {
+    font-size: 36px;
+    width: 65px;
+    height: 65px;
+    right: 25px;
+    bottom: 25px;
   }
 }
 

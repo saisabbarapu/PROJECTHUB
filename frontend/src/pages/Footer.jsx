@@ -6,7 +6,7 @@ const Footer = () => {
     <footer className={styles.footer}>
       <div className={styles.container}>
         <div className={styles.section}>
-          <h3 className={styles.logo}>Dept Showcase</h3>
+          <h3 className={styles.logo}>ProjectHub</h3>
           <p>Showcasing student innovation and departmental achievements.</p>
         </div>
 

@@ -83,10 +83,9 @@
   padding: 10px 16px;
   border-radius: 10px;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-  position: absolute;
-  top: 20%; /* 20% from top */
-  right: 20px; /* Right-aligned */
-  transform: none; /* Remove translateX(-50%) */
+  position: fixed; /* Fixed to the viewport */
+  top: 0; /* Pinned to the top */
+  right: 0; /* Pinned to the right */
   animation: fadeIn 0.3s ease-in-out;
   max-width: 300px; /* Limit width */
   text-align: left;

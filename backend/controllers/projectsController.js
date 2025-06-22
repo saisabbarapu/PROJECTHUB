@@ -27,7 +27,7 @@ export const createProject = async (req, res) => {
     console.log('Request body:', req.body);
     console.log('Files:', req.files);
 
-    const { name, email, rollno, title, description, github, department, toolsUsed } = req.body;
+    const { name, email, rollno, title, description, github, department, toolsUsed, projectUrl } = req.body;
 
     if (!req.files || !req.files.pdf || !req.files.image) {
       return res.status(400).json({ error: 'PDF and image files are required' });
@@ -53,6 +53,7 @@ export const createProject = async (req, res) => {
       title,
       description,
       github,
+      projectUrl: projectUrl || '', // Handle optional field
       department,
       toolsUsed: toolsUsed ? toolsUsed.split(',').map(tool => tool.trim()) : [],
       pdfUrl,

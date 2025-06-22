@@ -10,243 +10,6 @@
   60% { background-position: 300% 0; }
   100% { background-position: 300% 0; }
 }
-
-/* ---------- Glossy / Glassy Card ---------- */
-.card {
-  position: relative;
-  background: rgba(17, 24, 39, 0.3); /* Adjusted to match #111827 with 30% opacity */
-  border: 1px solid rgba(45, 212, 191, 0.4); /* Teal border with transparency */
-  backdrop-filter: blur(25px) saturate(180%);
-  -webkit-backdrop-filter: blur(25px) saturate(180%);
-  border-radius: 16px;
-  padding: 24px;
-  box-shadow: 0 6px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.2);
-  overflow: hidden;
-  transition: transform 0.5s cubic-bezier(0.16, 0.8, 0.35, 1), box-shadow 0.5s ease;
-  animation: fadeIn 0.5s ease-in;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
-}
-.card:hover {
-  transform: translateY(-10px) scale(1.04) rotateX(5deg) rotateY(-5deg);
-  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.6), inset 0 0 0 1px rgba(255, 255, 255, 0.3);
-}
-
-/* ----- Floating Shine Effect ----- */
-.card::after {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: -200%;
-  width: 60%;
-  height: 100%;
-  pointer-events: none;
-  background: linear-gradient(
-    75deg,
-    rgba(255, 255, 255, 0) 0%,
-    rgba(255, 255, 255, 0.5) 50%,
-    rgba(255, 255, 255, 0) 100%
-  );
-  transform: skewX(-25deg);
-}
-.card:hover::after {
-  animation: shineSweep 1s forwards;
-}
-
-/* ---------- Content Layout ---------- */
-.content {
-  padding: 12px 0;
-}
-
-/* ---------- Media ---------- */
-.image {
-  width: 100%;
-  height: 200px;
-  object-fit: cover;
-  border-radius: 10px;
-  background: #1a1a1a;
-  box-shadow: inset 0 0 10px rgba(0, 0, 0, 0.3);
-}
-
-/* ---------- Text ---------- */
-.title {
-  margin: 16px 0 10px;
-  font-size: 1.4rem;
-  font-weight: 600;
-  color: #f5e8c7; /* Adjusted to a warm off-white for contrast */
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-.description {
-  font-size: 1rem;
-  color: #b0b0b0; /* Adjusted to a lighter gray for readability */
-  margin-bottom: 14px;
-  line-height: 1.6;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Tools ---------- */
-.tools {
-  font-size: 0.95rem;
-  color: #b0b0b0; /* Consistent with description */
-  margin-bottom: 12px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Links ---------- */
-.links {
-  margin: 10px 0;
-}
-.link {
-  display: inline-block;
-  margin-right: 14px;
-  font-size: 0.95rem;
-  color: #2dd4bf; /* Teal from mainContainer scheme */
-  font-weight: 500;
-  text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
-  background: rgba(45, 212, 191, 0.1); /* Matching teal transparency */
-  transition: color 0.3s ease, background 0.3s ease;
-}
-.link:hover {
-  color: #5eead4; /* Lighter teal for hover */
-  background: rgba(45, 212, 191, 0.2);
-}
-
-/* ---------- PDF unavailable ---------- */
-.pdfUnavailable {
-  font-size: 0.9rem;
-  color: #b0b0b0; /* Consistent with other text */
-  font-style: italic;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Meta ---------- */
-.meta {
-  font-size: 0.85rem;
-  color: #b0b0b0; /* Consistent with other text */
-  margin-top: 8px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Interaction ---------- */
-.interaction {
-  display: flex;
-  gap: 12px;
-  margin-top: 16px;
-  align-items: center;
-}
-
-.likeBtn {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.1); /* Adjusted for dark theme */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #f5e8c7; /* Matches title color */
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.likeBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ff6b6b; /* Red for like hover */
-  transform: scale(1.05);
-}
-
-.feedbackForm {
-  display: flex;
-  flex: 1;
-  gap: 8px;
-}
-
-.feedbackInput {
-  flex: 1;
-  padding: 8px;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #f5e8c7; /* Matches title color */
-  font-size: 0.9rem;
-  transition: border-color 0.3s ease, background 0.3s ease;
-}
-.feedbackInput:focus {
-  border-color: #2dd4bf; /* Teal focus ring */
-  background: rgba(255, 255, 255, 0.1);
-  outline: none;
-}
-
-.feedbackBtn {
-  padding: 8px 14px;
-  background: rgba(255, 255, 255, 0.1); /* Adjusted for dark theme */
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 8px;
-  color: #f5e8c7; /* Matches title color */
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.feedbackBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #5eead4; /* Lighter teal for hover */
-  transform: scale(1.05);
-}
-
-/* ---------- Feedback Section ---------- */
-.feedbackSection {
-  margin-top: 18px;
-}
-
-.feedbackTitle {
-  font-size: 1.1rem;
-  color: #f5e8c7; /* Matches title color */
-  margin-bottom: 8px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.feedbackList {
-  list-style: none;
-  padding: 0;
-}
-
-.feedbackItem {
-  font-size: 0.9rem;
-  color: #b0b0b0; /* Consistent with description */
-  margin-bottom: 6px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-.feedbackTime {
-  font-size: 0.75rem;
-  color: #9f9f9f; /* Slightly darker gray */
-  margin-left: 8px;
-}
-
-.feedbackEmail {
-  font-size: 0.75rem;
-  color: #b0b0b0; /* Consistent with feedbackItem */
-  margin-left: 8px;
-  font-style: italic;
-}
-
-/* ---------- Breakpoints ---------- */
-@media (max-width: 600px) {
-  .card { padding: 16px; }
-  .image { height: 150px; }
-  .title { font-size: 1.2rem; }
-  .description, .tools, .link, .pdfUnavailable, .meta, .feedbackItem { font-size: 0.85rem; }
-  .interaction { flex-direction: column; }
-  .likeBtn, .feedbackInput, .feedbackBtn { width: 100%; }
-  .feedbackTitle { font-size: 1rem; }
-}
-
-/* ---------- Reduced-motion ---------- */
-@media (prefers-reduced-motion: reduce) {
-  *, *::before, *::after {
-    animation-duration: 0.01ms !important;
-    animation-iteration-count: 1 !important;
-    transition-duration: 0.01ms !important;
-  }
-}
 @keyframes toastSlide {
   from {
     opacity: 0;
@@ -257,32 +20,243 @@
     transform: translate(-50%, 0);
   }
 }
+@keyframes scaleIn {
+  from { transform: scale(0.7); opacity: 0; }
+  to { transform: scale(1); opacity: 1; }
+}
 
+/* ---------- Glossy / Glassy Card ---------- */
+.card {
+  position: relative;
+  background: rgba(17, 24, 39, 0.3);
+  border: 1px solid rgba(45, 212, 191, 0.4);
+  backdrop-filter: blur(20px) saturate(180%);
+  -webkit-backdrop-filter: blur(20px) saturate(180%);
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+  overflow: hidden;
+  transition: transform 0.4s cubic-bezier(0.16, 0.8, 0.35, 1), box-shadow 0.4s ease;
+  animation: fadeIn 0.5s ease-in;
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+}
+.card:hover {
+  transform: translateY(-8px) scale(1.03);
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+}
+.card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -200%;
+  width: 50%;
+  height: 100%;
+  pointer-events: none;
+  background: linear-gradient(75deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
+  transform: skewX(-20deg);
+}
+.card:hover::after {
+  animation: shineSweep 0.8s forwards;
+}
+
+/* ---------- Content Layout ---------- */
+.content {
+  padding: 10px 0;
+}
+
+/* ---------- Media ---------- */
+.image {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-radius: 8px;
+  background: #1a1a1a;
+  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
+}
+
+/* ---------- Text ---------- */
+.title {
+  margin: 12px 0 8px;
+  font-size: 1.3rem;
+  font-weight: 600;
+  color: #f5e8c7;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+.description {
+  font-size: 0.95rem;
+  color: #b0b0b0;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Tools ---------- */
+.tools {
+  font-size: 0.9rem;
+  color: #b0b0b0;
+  margin-bottom: 10px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Links ---------- */
+.links {
+  margin: 8px 0;
+}
+.link {
+  display: inline-block;
+  margin-right: 12px;
+  font-size: 0.9rem;
+  color: #2dd4bf;
+  font-weight: 500;
+  text-decoration: none;
+  padding: 5px 10px;
+  border-radius: 5px;
+  background: rgba(45, 212, 191, 0.1);
+  transition: color 0.3s ease, background 0.3s ease;
+}
+.link:hover {
+  color: #5eead4;
+  background: rgba(45, 212, 191, 0.2);
+}
+
+/* ---------- PDF unavailable ---------- */
+.pdfUnavailable {
+  font-size: 0.85rem;
+  color: #b0b0b0;
+  font-style: italic;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Meta ---------- */
+.meta {
+  font-size: 0.8rem;
+  color: #b0b0b0;
+  margin-top: 6px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+/* ---------- Interaction ---------- */
+.interaction {
+  display: flex;
+  gap: 10px;
+  margin-top: 14px;
+  align-items: center;
+}
+
+.likeBtn {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #f5e8c7;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.likeBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #ff6b6b;
+  transform: scale(1.04);
+}
+
+.feedbackForm {
+  display: flex;
+  flex: 1;
+  gap: 6px;
+}
+
+.feedbackInput {
+  flex: 1;
+  padding: 6px;
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.05);
+  color: #f5e8c7;
+  font-size: 0.85rem;
+  transition: border-color 0.3s ease, background 0.3s ease;
+}
+.feedbackInput:focus {
+  border-color: #2dd4bf;
+  background: rgba(255, 255, 255, 0.1);
+  outline: none;
+}
+
+.feedbackBtn {
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 6px;
+  color: #f5e8c7;
+  cursor: pointer;
+  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+}
+.feedbackBtn:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #5eead4;
+  transform: scale(1.04);
+}
+
+/* ---------- Feedback Section ---------- */
+.feedbackSection {
+  margin-top: 15px;
+}
+
+.feedbackTitle {
+  font-size: 1rem;
+  color: #f5e8c7;
+  margin-bottom: 6px;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
+}
+
+.feedbackList {
+  list-style: none;
+  padding: 0;
+}
+
+.feedbackItem {
+  font-size: 0.85rem;
+  color: #b0b0b0;
+  margin-bottom: 5px;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+}
+
+.feedbackTime {
+  font-size: 0.7rem;
+  color: #9f9f9f;
+  margin-left: 6px;
+}
+
+.feedbackEmail {
+  font-size: 0.7rem;
+  color: #b0b0b0;
+  margin-left: 6px;
+  font-style: italic;
+}
+
+/* ---------- Toast ---------- */
 .toastBase {
   position: fixed;
-  top: 20px;
+  top: 15px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 9999;
-  padding: 10px 20px;
-  border-radius: 6px;
+  padding: 8px 16px;
+  border-radius: 5px;
   font-weight: 500;
-  font-size: 0.95rem;
-  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.35);
+  font-size: 0.9rem;
+  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
   animation: toastSlide 0.3s ease-out forwards;
   pointer-events: none;
-  backdrop-filter: blur(8px);
+  backdrop-filter: blur(6px);
 }
-
-/* Success toast */
 .successToast {
   composes: toastBase;
   background: rgba(40, 167, 69, 0.2);
   color: #28a745;
   border: 1px solid #28a745;
 }
-
-/* Error toast */
 .errorToast {
   composes: toastBase;
   background: rgba(255, 76, 76, 0.15);
@@ -290,159 +264,295 @@
   border: 1px solid #ff4c4c;
 }
 
-/* Existing styles remain unchanged */
-
-/* Popup Styles */
+/* ---------- Popup Styles ---------- */
 .popupOverlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.7);
+  background: rgba(0, 0, 0, 0.6);
   display: flex;
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  animation: fadeIn 0.4s ease-out;
+  animation: fadeIn 0.3s ease-out;
 }
-
 .popupContent {
   background: linear-gradient(135deg, #1A1F2B, #0B0D17);
-  padding: 25px;
-  border-radius: 15px;
+  padding: 20px;
+  border-radius: 12px;
   width: 90%;
-  max-width: 450px;
+  max-width: 400px;
   position: relative;
   color: #E5E5E5;
-  box-shadow: 15px 15px 30px rgba(0, 0, 0, 0.5),
-              -15px -15px 30px rgba(255, 255, 255, 0.05),
-              inset 0 0 20px rgba(94, 234, 212, 0.15);
-  border: 2px solid rgba(45, 212, 191, 0.3);
-  animation: scaleIn 0.4s ease-out;
+  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.05), inset 0 0 15px rgba(94, 234, 212, 0.1);
+  border: 2px solid rgba(45, 212, 191, 0.2);
+  animation: scaleIn 0.3s ease-out;
   overflow-y: auto;
-  max-height: 85vh;
-  margin-top: 50px;
-  scrollbar-width: none; /* Firefox */
-  -ms-overflow-style: none; /* Edge/IE */
+  max-height: 80vh;
+  margin-top: 40px;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 }
 .popupContent::-webkit-scrollbar {
-  display: none; /* Chrome, Safari, Opera */
+  display: none;
 }
-
 .closeButton {
   position: absolute;
-  top: 15px;
-  right: 15px;
+  top: 12px;
+  right: 12px;
   background: none;
   border: none;
-  font-size: 28px;
+  font-size: 24px;
   color: #E5E5E5;
   cursor: pointer;
   transition: transform 0.3s ease, color 0.3s ease;
 }
-
 .closeButton:hover {
-  transform: scale(1.2);
+  transform: scale(1.15);
   color: #5eead4;
 }
-
 .popupImage {
   width: 100%;
-  height: 250px;
+  height: 200px;
   object-fit: cover;
-  border-radius: 10px;
-  margin-bottom: 15px;
-  box-shadow: 8px 8px 16px rgba(0, 0, 0, 0.4), -8px -8px 16px rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+  margin-bottom: 12px;
+  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3), -6px -6px 12px rgba(255, 255, 255, 0.1);
 }
-
 .popupTitle {
-  font-size: 28px;
+  font-size: 24px;
   color: #5eead4;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-align: left;
-  font-family: 'Times New Roman', serif; /* New font for title */
+  font-family: 'Times New Roman', serif;
   font-weight: 700;
   letter-spacing: 0.5px;
 }
-
 .popupDescription {
-  font-size: 15px;
+  font-size: 14px;
   color: #E5E5E5;
-  margin-bottom: 15px;
-  line-height: 1.6;
-  padding: 0 0 0 10px;
+  margin-bottom: 12px;
+  line-height: 1.5;
+  padding: 0 0 0 8px;
   text-align: left;
-  font-family: 'Helvetica', sans-serif; /* New font for description */
+  font-family: 'Helvetica', sans-serif;
   font-weight: normal;
 }
-
 .popupTools {
-  font-size: 14px;
+  font-size: 13px;
   color: #2dd4bf;
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   font-style: italic;
   text-align: left;
-  padding-left: 10px;
-  font-family: 'Courier New', monospace; /* New font for tools */
+  padding-left: 8px;
+  font-family: 'Courier New', monospace;
   font-weight: 500;
 }
-
 .popupLinks {
-  margin-bottom: 15px;
+  margin-bottom: 12px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 8px;
 }
-
 .popupLinks a {
-  margin: 0 15px 0 0;
+  margin: 0 12px 0 0;
   color: #5eead4;
   text-decoration: none;
-  padding: 6px 12px;
-  border-radius: 6px;
+  padding: 5px 10px;
+  border-radius: 5px;
   background: rgba(94, 234, 212, 0.1);
   transition: transform 0.3s ease, background-color 0.3s ease;
 }
-
 .popupLinks a:hover {
-  background: rgba(94, 234, 212, 0.3);
-  transform: translateY(-3px);
+  background: rgba(94, 234, 212, 0.25);
+  transform: translateY(-2px);
 }
-
 .pdfUnavailable {
   color: #E5E5E5;
   font-style: italic;
   opacity: 0.8;
   text-align: left;
-  padding-left: 10px;
-  font-family: 'Helvetica', sans-serif; /* New font for unavailable text */
+  padding-left: 8px;
+  font-family: 'Helvetica', sans-serif;
   font-weight: normal;
 }
-
 .popupMeta {
-  font-size: 14px;
-  margin-bottom: 8px;
+  font-size: 13px;
+  margin-bottom: 6px;
   text-align: left;
-  padding-left: 10px;
+  padding-left: 8px;
 }
-
 .popupMeta strong {
   color: #5eead4;
 }
-
 .popupMeta span {
   color: #E5E5E5;
-  font-family: 'Courier New', monospace; /* New font for meta values */
+  font-family: 'Courier New', monospace;
   font-weight: normal;
 }
 
-/* New Animations */
-@keyframes fadeIn {
-  from { opacity: 0; }
-  to { opacity: 1; }
+/* ---------- Breakpoints ---------- */
+@media (max-width: 480px) { /* Extra small devices (phones) */
+  .card { padding: 10px; }
+  .image { height: 100px; }
+  .title { font-size: 1rem; margin: 8px 0 6px; }
+  .description { font-size: 0.8rem; margin-bottom: 8px; }
+  .tools { font-size: 0.75rem; margin-bottom: 6px; }
+  .links { margin: 6px 0; }
+  .link { font-size: 0.75rem; margin-right: 8px; padding: 3px 6px; }
+  .pdfUnavailable { font-size: 0.7rem; }
+  .meta { font-size: 0.65rem; margin-top: 4px; }
+  .interaction { gap: 6px; margin-top: 10px; }
+  .likeBtn { padding: 4px 8px; font-size: 0.8rem; }
+  .feedbackForm { flex-direction: column; gap: 4px; }
+  .feedbackInput { padding: 4px; font-size: 0.8rem; }
+  .feedbackBtn { padding: 4px 8px; font-size: 0.8rem; }
+  .feedbackSection { margin-top: 10px; }
+  .feedbackTitle { font-size: 0.85rem; margin-bottom: 4px; }
+  .feedbackItem { font-size: 0.75rem; margin-bottom: 3px; }
+  .feedbackTime, .feedbackEmail { font-size: 0.6rem; margin-left: 4px; }
+  .toastBase { font-size: 0.8rem; padding: 6px 12px; top: 10px; }
+  .popupContent { padding: 12px; max-width: 280px; margin-top: 20px; }
+  .closeButton { font-size: 20px; top: 8px; right: 8px; }
+  .popupImage { height: 120px; margin-bottom: 8px; }
+  .popupTitle { font-size: 18px; margin-bottom: 8px; }
+  .popupDescription { font-size: 11px; margin-bottom: 8px; }
+  .popupTools { font-size: 11px; margin-bottom: 8px; }
+  .popupLinks a { font-size: 11px; padding: 3px 6px; margin-right: 8px; }
+  .pdfUnavailable { font-size: 11px; }
+  .popupMeta { font-size: 11px; margin-bottom: 4px; }
 }
 
-@keyframes scaleIn {
-  from { transform: scale(0.7); opacity: 0; }
-  to { transform: scale(1); opacity: 1; }
+@media (min-width: 481px) and (max-width: 600px) { /* Small devices (small phones) */
+  .card { padding: 12px; }
+  .image { height: 120px; }
+  .title { font-size: 1.1rem; margin: 10px 0 7px; }
+  .description { font-size: 0.85rem; margin-bottom: 9px; }
+  .tools { font-size: 0.8rem; margin-bottom: 7px; }
+  .links { margin: 7px 0; }
+  .link { font-size: 0.8rem; margin-right: 10px; padding: 4px 8px; }
+  .pdfUnavailable { font-size: 0.75rem; }
+  .meta { font-size: 0.7rem; margin-top: 5px; }
+  .interaction { gap: 8px; margin-top: 12px; }
+  .likeBtn { padding: 5px 10px; font-size: 0.85rem; }
+  .feedbackForm { gap: 5px; }
+  .feedbackInput { padding: 5px; font-size: 0.85rem; }
+  .feedbackBtn { padding: 5px 10px; font-size: 0.85rem; }
+  .feedbackSection { margin-top: 12px; }
+  .feedbackTitle { font-size: 0.9rem; margin-bottom: 5px; }
+  .feedbackItem { font-size: 0.8rem; margin-bottom: 4px; }
+  .feedbackTime, .feedbackEmail { font-size: 0.65rem; margin-left: 5px; }
+  .toastBase { font-size: 0.85rem; padding: 7px 14px; top: 12px; }
+  .popupContent { padding: 15px; max-width: 320px; margin-top: 25px; }
+  .closeButton { font-size: 22px; }
+  .popupImage { height: 150px; margin-bottom: 10px; }
+  .popupTitle { font-size: 20px; margin-bottom: 10px; }
+  .popupDescription { font-size: 12px; margin-bottom: 10px; }
+  .popupTools { font-size: 12px; margin-bottom: 10px; }
+  .popupLinks a { font-size: 12px; padding: 4px 8px; margin-right: 10px; }
+  .pdfUnavailable { font-size: 12px; }
+  .popupMeta { font-size: 12px; margin-bottom: 5px; }
+}
+
+@media (min-width: 601px) and (max-width: 768px) { /* Medium devices (tablets) */
+  .card { padding: 16px; }
+  .image { height: 140px; }
+  .title { font-size: 1.2rem; margin: 12px 0 8px; }
+  .description { font-size: 0.9rem; margin-bottom: 10px; }
+  .tools { font-size: 0.85rem; margin-bottom: 8px; }
+  .links { margin: 8px 0; }
+  .link { font-size: 0.85rem; margin-right: 12px; padding: 5px 10px; }
+  .pdfUnavailable { font-size: 0.8rem; }
+  .meta { font-size: 0.75rem; margin-top: 6px; }
+  .interaction { gap: 10px; margin-top: 14px; }
+  .likeBtn { padding: 6px 12px; font-size: 0.9rem; }
+  .feedbackForm { gap: 6px; }
+  .feedbackInput { padding: 6px; font-size: 0.9rem; }
+  .feedbackBtn { padding: 6px 12px; font-size: 0.9rem; }
+  .feedbackSection { margin-top: 14px; }
+  .feedbackTitle { font-size: 0.95rem; margin-bottom: 6px; }
+  .feedbackItem { font-size: 0.85rem; margin-bottom: 5px; }
+  .feedbackTime, .feedbackEmail { font-size: 0.7rem; margin-left: 6px; }
+  .toastBase { font-size: 0.9rem; padding: 8px 16px; top: 15px; }
+  .popupContent { padding: 18px; max-width: 350px; margin-top: 30px; }
+  .closeButton { font-size: 24px; }
+  .popupImage { height: 170px; margin-bottom: 11px; }
+  .popupTitle { font-size: 22px; margin-bottom: 11px; }
+  .popupDescription { font-size: 13px; margin-bottom: 11px; }
+  .popupTools { font-size: 13px; margin-bottom: 11px; }
+  .popupLinks a { font-size: 13px; padding: 5px 10px; margin-right: 12px; }
+  .pdfUnavailable { font-size: 13px; }
+  .popupMeta { font-size: 13px; margin-bottom: 6px; }
+}
+
+@media (min-width: 769px) and (max-width: 1024px) { /* Large tablets/laptops */
+  .card { padding: 18px; }
+  .image { height: 160px; }
+  .title { font-size: 1.25rem; margin: 12px 0 8px; }
+  .description { font-size: 0.92rem; margin-bottom: 10px; }
+  .tools { font-size: 0.87rem; margin-bottom: 8px; }
+  .links { margin: 8px 0; }
+  .link { font-size: 0.87rem; margin-right: 12px; padding: 5px 10px; }
+  .pdfUnavailable { font-size: 0.82rem; }
+  .meta { font-size: 0.77rem; margin-top: 6px; }
+  .interaction { gap: 10px; margin-top: 14px; }
+  .likeBtn { padding: 6px 12px; font-size: 0.92rem; }
+  .feedbackForm { gap: 6px; }
+  .feedbackInput { padding: 6px; font-size: 0.92rem; }
+  .feedbackBtn { padding: 6px 12px; font-size: 0.92rem; }
+  .feedbackSection { margin-top: 15px; }
+  .feedbackTitle { font-size: 1rem; margin-bottom: 6px; }
+  .feedbackItem { font-size: 0.87rem; margin-bottom: 5px; }
+  .feedbackTime, .feedbackEmail { font-size: 0.72rem; margin-left: 6px; }
+  .toastBase { font-size: 0.92rem; padding: 8px 16px; top: 15px; }
+  .popupContent { padding: 20px; max-width: 380px; margin-top: 35px; }
+  .closeButton { font-size: 26px; }
+  .popupImage { height: 190px; margin-bottom: 12px; }
+  .popupTitle { font-size: 24px; margin-bottom: 12px; }
+  .popupDescription { font-size: 14px; margin-bottom: 12px; }
+  .popupTools { font-size: 14px; margin-bottom: 12px; }
+  .popupLinks a { font-size: 14px; padding: 5px 10px; margin-right: 12px; }
+  .pdfUnavailable { font-size: 14px; }
+  .popupMeta { font-size: 14px; margin-bottom: 6px; }
+}
+
+@media (min-width: 1025px) { /* Desktops and larger */
+  .card { padding: 20px; }
+  .image { height: 180px; }
+  .title { font-size: 1.3rem; margin: 12px 0 8px; }
+  .description { font-size: 0.95rem; margin-bottom: 12px; }
+  .tools { font-size: 0.9rem; margin-bottom: 10px; }
+  .links { margin: 8px 0; }
+  .link { font-size: 0.9rem; margin-right: 12px; padding: 5px 10px; }
+  .pdfUnavailable { font-size: 0.85rem; }
+  .meta { font-size: 0.8rem; margin-top: 6px; }
+  .interaction { gap: 10px; margin-top: 14px; }
+  .likeBtn { padding: 6px 12px; font-size: 0.95rem; }
+  .feedbackForm { gap: 6px; }
+  .feedbackInput { padding: 6px; font-size: 0.95rem; }
+  .feedbackBtn { padding: 6px 12px; font-size: 0.95rem; }
+  .feedbackSection { margin-top: 15px; }
+  .feedbackTitle { font-size: 1.05rem; margin-bottom: 6px; }
+  .feedbackItem { font-size: 0.85rem; margin-bottom: 5px; }
+  .feedbackTime, .feedbackEmail { font-size: 0.7rem; margin-left: 6px; }
+  .toastBase { font-size: 0.95rem; padding: 8px 16px; top: 15px; }
+  .popupContent { padding: 20px; max-width: 400px; margin-top: 40px; }
+  .closeButton { font-size: 24px; }
+  .popupImage { height: 200px; margin-bottom: 12px; }
+  .popupTitle { font-size: 24px; margin-bottom: 12px; }
+  .popupDescription { font-size: 14px; margin-bottom: 12px; }
+  .popupTools { font-size: 13px; margin-bottom: 12px; }
+  .popupLinks a { font-size: 13px; padding: 5px 10px; margin-right: 12px; }
+  .pdfUnavailable { font-size: 13px; }
+  .popupMeta { font-size: 13px; margin-bottom: 6px; }
+}
+
+/* ---------- Reduced-motion ---------- */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
 }
