@@ -23,8 +23,7 @@ const mongoDB_url =
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
-// Ensure upload folders exist - Vercel has a read-only filesystem, so this will only work locally.
-// For production, you'll need a different solution for file uploads like a cloud storage service.
+// Ensure upload folders exist
 const pdfDir = path.join(__dirname, 'uploads/pdfs');
 const imageDir = path.join(__dirname, 'uploads/images');
 if (!fs.existsSync(pdfDir)) fs.mkdirSync(pdfDir, { recursive: true });
@@ -39,11 +38,16 @@ const transporter = nodemailer.createTransport({
   },
 });
 
-// Allow all origins for Vercel deployment
-app.use(cors());
+app.use(
+  cors({
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+    allowedHeaders: ['Content-Type'],
+  })
+);
 app.use(express.json());
 
-// Serve static files (Note: This might not work as expected in a serverless environment for uploads)
+// Serve static files
 app.use('/uploads/images', express.static(imageDir));
 app.use('/uploads/pdfs', express.static(pdfDir));
 
@@ -70,22 +74,32 @@ app.get('/test-db', async (req, res) => {
   }
 });
 
-// Connect to MongoDB
-mongoose.connect(mongoDB_url, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true,
-}).then(() => {
-    console.log("MongoDB connected successfully");
-}).catch((err) => {
-    console.error("MongoDB connection error:", err);
+// Connect to MongoDB with retry logic
+const connectWithRetry = () => {
+  console.log('Attempting to connect to MongoDB at:', new Date().toISOString());
+  mongoose
+    .connect(mongoDB_url, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+      serverSelectionTimeoutMS: 5000,
+      connectTimeoutMS: 10000,
+      maxPoolSize: 10,
+    })
+    .then(() => {
+      console.log('MongoDB connected at:', new Date().toISOString());
+    })
+    .catch((err) => {
+      console.error('MongoDB connection error:', err.message);
+      console.error('Stack trace:', err.stack);
+      console.log('Retrying connection in 5 seconds...');
+      setTimeout(connectWithRetry, 5000);
+    });
+};
+
+// Start the server
+app.listen(PORT, () => {
+  console.log(`Server running on port ${PORT} at ${new Date().toISOString()}`);
+  connectWithRetry();
 });
 
-// Start the server only if not in a serverless environment
-if (process.env.NODE_ENV !== 'production') {
-  app.listen(PORT, () => {
-    console.log(`Server running on port ${PORT}`);
-  });
-}
-
-export default app;
 export { transporter };
