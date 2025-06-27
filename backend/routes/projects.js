@@ -2,20 +2,35 @@ import express from 'express';
 import multer from 'multer';
 import mongoose from 'mongoose'; // ✅ Added to fix the error
 import Project from '../models/Project.js';
-import { getAllProjects, createProject, addLike } from '../controllers/projectsController.js';
+import { getAllProjects, createProject, addLike, deleteProject } from '../controllers/projectsController.js';
 import { transporter } from '../server.js'; // For nodemailer
+import path from 'path';
+import { fileURLToPath } from 'url';
+import fs from 'fs';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Always resolve upload directories from the project root
+const projectRoot = path.resolve(__dirname, '../');
+const pdfDir = path.join(projectRoot, 'uploads/pdfs');
+const imageDir = path.join(projectRoot, 'uploads/images');
+if (!fs.existsSync(pdfDir)) fs.mkdirSync(pdfDir, { recursive: true });
+if (!fs.existsSync(imageDir)) fs.mkdirSync(imageDir, { recursive: true });
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    let uploadPath;
     if (file.mimetype === 'application/pdf') {
-      cb(null, 'uploads/pdfs');
+      uploadPath = pdfDir;
     } else if (file.mimetype.startsWith('image/')) {
-      cb(null, 'uploads/images');
+      uploadPath = imageDir;
     } else {
-      cb(new Error('Invalid file type'), null);
+      return cb(new Error('Invalid file type'), null);
     }
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_'));
@@ -52,6 +67,8 @@ router.post(
 );
 
 router.post('/:id/like', addLike);
+
+router.delete('/:id', deleteProject);
 
 // 🔥 Top Liked Projects Endpoint
 router.get('/top-liked', async (req, res) => {

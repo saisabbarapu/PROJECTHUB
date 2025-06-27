@@ -1,33 +1,11 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 import axios from 'axios';
 import styles from './sign.module.css';
-
-// SVG Icon Components
-const PersonIcon = () => (
-  <svg className={styles.inputIcon} viewBox="0 0 24 24">
-    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
-  </svg>
-);
-
-const EmailIcon = () => (
-  <svg className={styles.inputIcon} viewBox="0 0 24 24">
-    <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/>
-  </svg>
-);
-
-const LockIcon = () => (
-  <svg className={styles.inputIcon} viewBox="0 0 24 24">
-    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm0-7c-1.66 0-3-1.34-3-3V6c0-1.66 1.34-3 3-3s3 1.34 3 3v1c0 1.66-1.34 3-3 3z"/>
-  </svg>
-);
-
-const EyeIcon = () => (
-  <svg className={styles.inputIcon} viewBox="0 0 24 24">
-    <path d="M12 6c3.79 0 7.17 2.13 8.82 5.5C19.17 14.87 15.79 17 12 17s-7.17-2.13-8.82-5.5C4.83 8.13 8.21 6 12 6m0-2C7 4 2.73 7.11 1 11.5 2.73 15.89 7 19 12 19s9.27-3.11 11-7.5C21.27 7.11 17 4 12 4zm0 5c1.38 0 2.5 1.12 2.5 2.5S13.38 14 12 14s-2.5-1.12-2.5-2.5S10.62 9 12 9m0-2c-2.48 0-4.5 2.02-4.5 4.5S9.52 16 12 16s4.5-2.02 4.5-4.5S14.48 7 12 7z"/>
-  </svg>
-);
+import { ToasterContext } from '../components/ToasterContext';
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 
 const Signup = () => {
+  const { addToast } = useContext(ToasterContext);
   const [formData, setFormData] = useState({
     firstName: '',
     lastName: '',
@@ -35,8 +13,6 @@ const Signup = () => {
     password: '',
     confirmPassword: '',
   });
-  const [toastMessage, setToastMessage] = useState('');
-  const [showToast, setShowToast] = useState(false);
   const [errors, setErrors] = useState({});
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -91,16 +67,13 @@ const Signup = () => {
     }
 
     if (Object.keys(newErrors).length === requiredFields.length) {
-      setToastMessage('Please fill all fields');
-      setShowToast(true);
+      addToast('Please fill all fields', 'error', 4000);
     } else if (Object.keys(newErrors).length > 0 && someFieldsFilled) {
-      setToastMessage('Please resolve the issues and fill remaining fields.');
-      setShowToast(true);
+      addToast('Please resolve the issues and fill remaining fields.', 'error', 4000);
     } else {
       try {
         const response = await axios.post('http://localhost:4000/api/users/signup', formData);
-        setToastMessage('Signup successful!');
-        setShowToast(true);
+        addToast('Signup successful!', 'success', 3000);
         setFormData({
           firstName: '',
           lastName: '',
@@ -110,46 +83,29 @@ const Signup = () => {
         });
         setErrors({});
       } catch (err) {
-        setToastMessage(err.response?.data?.error || 'Signup failed');
-        setShowToast(true);
+        addToast(err.response?.data?.error || 'Signup failed', 'error', 4000);
       }
     }
 
     setErrors(newErrors);
   };
 
-  useEffect(() => {
-    if (showToast) {
-      const timer = setTimeout(() => {
-        setShowToast(false);
-      }, 3000);
-      return () => clearTimeout(timer);
-    }
-  }, [showToast]);
-
   return (
     <div className={styles.body}>
       <div className={styles.container}>
         <div className={styles.formSection}>
           <h2>Create Account</h2>
-          {showToast && (
-            <div className={styles.toast}>
-              <span className={styles.warningIcon}>✔</span>
-              <span>{toastMessage}</span>
-            </div>
-          )}
           <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <input
-                type="text"
-                name="firstName"
-                placeholder="First Name"
-                value={formData.firstName}
-                onChange={handleChange}
-                required
-              />
-              <PersonIcon />
-            </div>
+            <input
+              type="text"
+              name="firstName"
+              placeholder="First Name"
+              value={formData.firstName}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+            <FaUser className={styles.inputIcon} />
             {errors.firstName && (
               <div className={styles.tooltipError}>
                 <span className={styles.tooltipIcon}>!</span>
@@ -158,17 +114,16 @@ const Signup = () => {
             )}
           </div>
           <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <input
-                type="text"
-                name="lastName"
-                placeholder="Last Name"
-                value={formData.lastName}
-                onChange={handleChange}
-                required
-              />
-              <PersonIcon />
-            </div>
+            <input
+              type="text"
+              name="lastName"
+              placeholder="Last Name"
+              value={formData.lastName}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+            <FaUser className={styles.inputIcon} />
             {errors.lastName && (
               <div className={styles.tooltipError}>
                 <span className={styles.tooltipIcon}>!</span>
@@ -177,17 +132,16 @@ const Signup = () => {
             )}
           </div>
           <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                required
-              />
-              <EmailIcon />
-            </div>
+            <input
+              type="email"
+              name="email"
+              placeholder="Email Address"
+              value={formData.email}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+            <FaEnvelope className={styles.inputIcon} />
             {errors.email && (
               <div className={styles.tooltipError}>
                 <span className={styles.tooltipIcon}>!</span>
@@ -196,24 +150,23 @@ const Signup = () => {
             )}
           </div>
           <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <input
-                type={showPassword ? 'text' : 'password'}
-                name="password"
-                placeholder="Create Password"
-                value={formData.password}
-                onChange={handleChange}
-                required
-              />
-              <LockIcon />
-              <button
-                type="button"
-                className={styles.toggleButton}
-                onClick={() => setShowPassword(!showPassword)}
-              >
-                <EyeIcon />
-              </button>
-            </div>
+            <input
+              type={showPassword ? 'text' : 'password'}
+              name="password"
+              placeholder="Create Password"
+              value={formData.password}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+            <FaLock className={styles.inputIcon} />
+            <button
+              type="button"
+              className={styles.toggleButton}
+              onClick={() => setShowPassword(!showPassword)}
+            >
+              {showPassword ? <FaEyeSlash className={styles.toggleIcon} /> : <FaEye className={styles.toggleIcon} />}
+            </button>
             {errors.password && (
               <div className={styles.tooltipError}>
                 <span className={styles.tooltipIcon}>!</span>
@@ -222,24 +175,23 @@ const Signup = () => {
             )}
           </div>
           <div className={styles.inputGroup}>
-            <div className={styles.inputWrapper}>
-              <input
-                type={showConfirmPassword ? 'text' : 'password'}
-                name="confirmPassword"
-                placeholder="Confirm Password"
-                value={formData.confirmPassword}
-                onChange={handleChange}
-                required
-              />
-              <LockIcon />
-              <button
-                type="button"
-                className={styles.toggleButton}
-                onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-              >
-                <EyeIcon />
-              </button>
-            </div>
+            <input
+              type={showConfirmPassword ? 'text' : 'password'}
+              name="confirmPassword"
+              placeholder="Confirm Password"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              required
+              className={styles.input}
+            />
+            <FaLock className={styles.inputIcon} />
+            <button
+              type="button"
+              className={styles.toggleButton}
+              onClick={() => setShowConfirmPassword(!showConfirmPassword)}
+            >
+              {showConfirmPassword ? <FaEyeSlash className={styles.toggleIcon} /> : <FaEye className={styles.toggleIcon} />}
+            </button>
             {errors.confirmPassword && (
               <div className={styles.tooltipError}>
                 <span className={styles.tooltipIcon}>!</span>

@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import axios from 'axios';
 import TopProjectCard from './TopProjectCard';
 import styles from './TopLikedPage.module.css';
+import { FaTrophy } from 'react-icons/fa';
 
 const TopLikedPage = () => {
   const [topProjects, setTopProjects] = useState([]);
@@ -27,8 +28,12 @@ const TopLikedPage = () => {
 
   return (
     <div className={styles.container}>
-      <h1 className={styles.title}>Top Three Most Liked Projects</h1>
-      <div className={styles.cards}>
+      <section className={styles.heroSection}>
+        <FaTrophy className={styles.trophyIcon} />
+        <h1 className={styles.title}>Top Three Most Liked Projects</h1>
+        <p className={styles.subtitle}>Celebrating the most inspiring and impactful student innovations!</p>
+      </section>
+      <div className={styles.cardsAnimated}>
         {topProjects.length > 0 ? (
           topProjects.map((project, index) => (
             <TopProjectCard key={project._id} project={project} rank={index + 1} />

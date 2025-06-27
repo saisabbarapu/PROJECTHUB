@@ -125,67 +125,59 @@
   position: relative;
 }
 
-/* Wrapper for Input and Icon */
-.inputWrapper {
-  position: relative;
-  width: 100%;
-  display: flex;
-  align-items: center;
-}
-
 /* Input Field Styling */
-.inputGroup input {
+.input {
   width: 100%;
-  padding: 12px 40px 12px 40px; /* Adjusted for left icon and right toggle */
+  padding: 10px 40px 10px 40px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
   border-radius: 12px;
-  color: white;
+  color: #ffffff;
   font-size: 14px;
   font-weight: 400;
   outline: none;
   transition: all 0.3s ease;
   box-sizing: border-box;
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
 }
 
-.inputGroup input::placeholder {
+.input::placeholder {
   color: #d1d5db;
 }
 
-.inputGroup input:hover {
+.input:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #5eead4;
-  box-shadow: 0 0 4px rgba(45, 212, 191, 0.2);
+  border-color: #4db6ac;
+  box-shadow: 0 0 4px rgba(77, 182, 172, 0.2);
 }
 
-.inputGroup input:focus {
+.input:focus {
   background: rgba(255, 255, 255, 0.2);
   border-color: #2dd4bf;
-  box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+  box-shadow: 0 0 8px rgba(77, 182, 172, 0.4);
 }
 
-/* Icon Styling (for PersonIcon, EmailIcon, LockIcon) */
+/* Icon Styling */
 .inputIcon {
   position: absolute;
-  left: 12px; /* Left-aligned for non-toggle icons */
+  left: 12px;
   top: 50%;
   transform: translateY(-50%);
-  width: 18px;
-  height: 18px;
-  fill: #d1d5db;
-  transition: fill 0.3s ease;
+  color: #d1d5db;
+  font-size: 18px;
+  transition: color 0.3s ease;
 }
 
-.inputGroup input:hover + .inputIcon,
-.inputGroup input:focus + .inputIcon {
-  fill: #2dd4bf;
+.input:hover + .inputIcon,
+.input:focus + .inputIcon {
+  color: #4db6ac;
 }
 
-/* Toggle Button Styling (for EyeIcon) */
+/* Toggle Button Styling */
 .toggleButton {
   position: absolute;
-  right: 12px; /* Moved back to the right */
+  right: 12px;
   top: 50%;
   transform: translateY(-50%);
   background: none;
@@ -198,20 +190,26 @@
   align-items: center;
   justify-content: center;
   transition: transform 0.3s ease, color 0.3s ease;
-  z-index: 1; /* Ensure toggle is above other icons */
 }
 
 .toggleButton:hover {
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .toggleButton:focus {
   outline: none;
 }
 
-.toggleButton:hover .inputIcon,
-.toggleButton:focus .inputIcon {
-  fill: #2dd4bf;
+.toggleIcon {
+  width: 18px;
+  height: 18px;
+  color: #d1d5db;
+  transition: color 0.3s ease;
+}
+
+.toggleButton:hover .toggleIcon,
+.toggleButton:focus .toggleIcon {
+  color: #4db6ac;
 }
 
 /* Styles for the Tooltip Error */
@@ -307,7 +305,7 @@
     margin-bottom: 18px;
   }
 
-  .inputGroup input {
+  .input {
     padding: 10px 35px 10px 35px; /* Adjusted for left icon and right toggle */
     font-size: 0.9rem;
   }
@@ -324,7 +322,7 @@
     height: 18px;
   }
 
-  .toggleButton .inputIcon {
+  .toggleButton .toggleIcon {
     width: 16px;
     height: 16px;
   }
@@ -381,7 +379,7 @@
     margin-bottom: 15px;
   }
 
-  .inputGroup input {
+  .input {
     padding: 8px 30px 8px 30px; /* Adjusted for left icon and right toggle */
     font-size: 0.85rem;
   }
@@ -398,7 +396,7 @@
     height: 16px;
   }
 
-  .toggleButton .inputIcon {
+  .toggleButton .toggleIcon {
     width: 14px;
     height: 14px;
   }
@@ -439,7 +437,7 @@
   .inputGroup {
     margin-bottom: 12px;
   }
-  .inputGroup input {
+  .input {
     font-size: 0.8rem;
     padding: 8px 25px 8px 25px; /* Adjusted for left icon and right toggle */
   }
@@ -455,7 +453,7 @@
     height: 14px;
   }
 
-  .toggleButton .inputIcon {
+  .toggleButton .toggleIcon {
     width: 12px;
     height: 12px;
   }

@@ -61,42 +61,54 @@ body, html {
 
 .inputGroup {
   position: relative;
+  margin-bottom: 10px;
 }
 
-.inputGroup input {
+.input {
   width: 100%;
-  padding: 12px 40px 12px 40px;
-  border-radius: 12px;
+  padding: 10px 40px 10px 40px;
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid rgba(255, 255, 255, 0.2);
-  color: white;
+  border-radius: 12px;
+  color: #ffffff;
   font-size: 14px;
+  font-weight: 400;
   outline: none;
   transition: all 0.3s ease;
+  box-sizing: border-box;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+  font-family: 'Poppins', sans-serif;
 }
 
-.inputGroup input::placeholder {
+.input::placeholder {
   color: #d1d5db;
 }
 
-.inputGroup input:hover {
+.input:hover {
   background: rgba(255, 255, 255, 0.1);
-  border-color: #5eead4;
-  box-shadow: 0 0 4px rgba(45, 212, 191, 0.2);
+  border-color: #4db6ac;
+  box-shadow: 0 0 4px rgba(77, 182, 172, 0.2);
 }
 
-.inputGroup input:focus {
+.input:focus {
+  background: rgba(255, 255, 255, 0.2);
   border-color: #2dd4bf;
-  box-shadow: 0 0 8px rgba(45, 212, 191, 0.4);
+  box-shadow: 0 0 8px rgba(77, 182, 172, 0.4);
 }
 
-.icon {
+.inputIcon {
   position: absolute;
   left: 12px;
   top: 50%;
   transform: translateY(-50%);
   color: #d1d5db;
-  font-size: 16px;
+  font-size: 18px;
+  transition: color 0.3s ease;
+}
+
+.input:hover + .inputIcon,
+.input:focus + .inputIcon {
+  color: #4db6ac;
 }
 
 .toggleButton {
@@ -117,24 +129,23 @@ body, html {
 }
 
 .toggleButton:hover {
-  transform: scale(1.1);
+  transform: translateY(-50%) scale(1.1);
 }
 
 .toggleButton:focus {
   outline: none;
 }
 
-.inputIcon {
-  position: absolute;
+.toggleIcon {
   width: 18px;
   height: 18px;
-  fill: #d1d5db;
-  transition: fill 0.3s ease;
+  color: #d1d5db;
+  transition: color 0.3s ease;
 }
 
-.toggleButton:hover .inputIcon,
-.toggleButton:focus .inputIcon {
-  fill: #2dd4bf;
+.toggleButton:hover .toggleIcon,
+.toggleButton:focus .toggleIcon {
+  color: #4db6ac;
 }
 
 .tooltipError {

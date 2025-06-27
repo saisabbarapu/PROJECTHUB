@@ -1,3 +1,4 @@
+/* ===== Reset & Base Styling ===== */
 * {
   margin: 0;
   padding: 0;
@@ -76,6 +77,10 @@ body, html {
   color: #DDEAFF;
 }
 
+.introTextBox {
+  max-width: 700px;
+}
+
 .introHeading {
   font-size: 2rem;
   font-weight: 700;
@@ -104,13 +109,14 @@ body, html {
 
 /* ===== Project Card ===== */
 .projectCard {
-  background: rgba(255, 255, 255, 0.02); /* Transparent */
+  background: rgba(255, 255, 255, 0.02); /* Matches the transparent look in the image */
   border: 1px solid rgba(255, 255, 255, 0.1);
   border-radius: 16px;
   overflow: hidden;
   transition: all 0.3s ease;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
-  /* No backdrop-filter here */
+  display: flex;
+  flex-direction: column; /* Ensures vertical stacking of image and content */
 }
 
 .projectCard:hover {
@@ -118,57 +124,100 @@ body, html {
   box-shadow: 0 12px 24px rgba(0, 255, 255, 0.2);
 }
 
+/* ===== Project Image Section ===== */
 .projectImage {
-  height: 180px;
-  background-color: #334155;
-  background-size: cover;
-  background-position: center;
+  width: 100%;
+  height: 180px; /* Fixed height as per your original design */
+  overflow: hidden; /* Ensures the image doesn't overflow */
+}
+
+.projectImageTag {
+  width: 100%;
+  height: 100%;
+  object-fit: cover; /* Ensures the image fills the space while maintaining aspect ratio */
   transition: transform 0.4s ease;
 }
 
-.projectCard:hover .projectImage {
-  transform: scale(1.05);
+.projectCard:hover .projectImageTag {
+  transform: scale(1.05); /* Adjusted to apply the hover effect to the img tag */
 }
 
+/* ===== Project Content (Title + Description) ===== */
 .projectContent {
   padding: 1rem;
+  flex-grow: 1; /* Ensures the content takes up remaining space */
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem; /* Adds spacing between title and description */
 }
 
+/* ===== Project Title Section ===== */
 .projectTitle {
   font-size: 1.2rem;
   font-weight: bold;
-  color: #E0F2FF;
+  color: #E0F2FF; /* Matches the white color in the image */
+  margin: 0; /* Removes default margin for consistency */
 }
 
+/* ===== Project Description Section ===== */
 .projectDescription {
   font-size: 0.95rem;
-  color: #94A3B8;
-  margin-top: 0.5rem;
+  color: #94A3B8; /* Matches the lighter gray in the image */
+  margin: 0; /* Removes default margin for consistency */
+  line-height: 1.4; /* Improves readability */
 }
 
-/* ===== Individual project images via CSS classes ===== */
-.projectImage1 {
-  background-image: url('/images/project1.jpg');
+/* ===== Project Department Badge ===== */
+.projectDepartment {
+  font-size: 0.8rem;
+  color: #6366f1;
+  font-weight: 600;
+  margin-top: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  background: rgba(45, 212, 191, 0.1);
+  border-radius: 6px;
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  align-self: flex-start;
 }
 
-.projectImage2 {
-  background-image: url('/images/project2.jpg');
+/* ===== Loading and No Projects States ===== */
+.loadingMessage, .noProjectsMessage {
+  grid-column: 1 / -1;
+  text-align: center;
+  padding: 3rem;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
-.projectImage3 {
-  background-image: url('/images/project3.jpg');
+.loadingMessage p {
+  font-size: 1.1rem;
+  color: #B0C4DE;
+  margin-bottom: 1rem;
 }
 
-.projectImage4 {
-  background-image: url('/images/project4.jpg');
+.noProjectsMessage p {
+  font-size: 1.1rem;
+  color: #B0C4DE;
+  margin-bottom: 2rem;
 }
 
-.projectImage5 {
-  background-image: url('/images/project5.jpg');
+.noProjectsMessage .ctaButton {
+  background: linear-gradient(145deg, #3B82F6, #06B6D4);
+  color: #FFFFFF;
+  font-size: 1rem;
+  padding: 0.75rem 2rem;
+  border: none;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
 
-.projectImage6 {
-  background-image: url('/images/project6.jpg');
+.noProjectsMessage .ctaButton:hover {
+  transform: scale(1.05);
+  box-shadow: 0 8px 18px rgba(0, 255, 255, 0.4);
 }
 
 /* ===== Call to Action Section ===== */

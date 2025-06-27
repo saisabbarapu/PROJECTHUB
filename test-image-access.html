@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ProjectHub Image Access Test</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+        }
+        .test-section {
+            background: white;
+            padding: 20px;
+            margin: 20px 0;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .status {
+            padding: 10px;
+            border-radius: 4px;
+            margin: 10px 0;
+        }
+        .success { background-color: #d4edda; color: #155724; }
+        .error { background-color: #f8d7da; color: #721c24; }
+        .info { background-color: #d1ecf1; color: #0c5460; }
+        button {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            margin: 5px;
+        }
+        button:hover { background-color: #0056b3; }
+        .url-display {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 4px;
+            font-family: monospace;
+            word-break: break-all;
+        }
+    </style>
+</head>
+<body>
+    <h1>🌐 ProjectHub Cross-Device Access Test</h1>
+    
+    <div class="test-section">
+        <h2>📱 Access URLs</h2>
+        <p>Use these URLs to access your app from any device on your network:</p>
+        
+        <h3>Frontend (Main App):</h3>
+        <div class="url-display">http://192.168.187.84:3000</div>
+        
+        <h3>Backend (API & Images):</h3>
+        <div class="url-display">http://192.168.187.84:4000</div>
+        
+        <h3>Health Check:</h3>
+        <div class="url-display">http://192.168.187.84:4000/health</div>
+    </div>
+
+    <div class="test-section">
+        <h2>🔍 Connection Tests</h2>
+        <button onclick="testBackend()">Test Backend Connection</button>
+        <button onclick="testFrontend()">Test Frontend Connection</button>
+        <button onclick="testImageAccess()">Test Image Access</button>
+        
+        <div id="test-results"></div>
+    </div>
+
+    <div class="test-section">
+        <h2>📋 Instructions for Friends</h2>
+        <ol>
+            <li><strong>Make sure they're on the same WiFi network</strong></li>
+            <li><strong>Open their browser</strong> (Chrome, Safari, Firefox, etc.)</li>
+            <li><strong>Go to:</strong> <code>http://192.168.187.84:3000</code></li>
+            <li><strong>That's it!</strong> They should see your ProjectHub app</li>
+        </ol>
+        
+        <div class="status info">
+            <strong>Note:</strong> If they can't access it, make sure:
+            <ul>
+                <li>Both devices are on the same WiFi network</li>
+                <li>Your computer is running the servers</li>
+                <li>Windows Firewall isn't blocking the connection</li>
+            </ul>
+        </div>
+    </div>
+
+    <div class="test-section">
+        <h2>🖼️ Image Sharing Test</h2>
+        <p>To test if images work across devices:</p>
+        <ol>
+            <li>Upload a project with an image from your device</li>
+            <li>Ask your friend to open <code>http://192.168.187.84:3000</code></li>
+            <li>They should see your project and image immediately</li>
+        </ol>
+    </div>
+
+    <script>
+        async function testBackend() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="status info">Testing backend connection...</div>';
+            
+            try {
+                const response = await fetch('http://192.168.187.84:4000/health');
+                const data = await response.json();
+                
+                if (response.ok) {
+                    results.innerHTML = `
+                        <div class="status success">
+                            ✅ Backend is working!<br>
+                            Status: ${data.status}<br>
+                            Database: ${data.database}<br>
+                            Timestamp: ${data.timestamp}
+                        </div>
+                    `;
+                } else {
+                    results.innerHTML = `<div class="status error">❌ Backend error: ${response.status}</div>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="status error">❌ Backend connection failed: ${error.message}</div>`;
+            }
+        }
+
+        async function testFrontend() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="status info">Testing frontend connection...</div>';
+            
+            try {
+                const response = await fetch('http://192.168.187.84:3000');
+                
+                if (response.ok) {
+                    results.innerHTML = '<div class="status success">✅ Frontend is working!</div>';
+                } else {
+                    results.innerHTML = `<div class="status error">❌ Frontend error: ${response.status}</div>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="status error">❌ Frontend connection failed: ${error.message}</div>`;
+            }
+        }
+
+        async function testImageAccess() {
+            const results = document.getElementById('test-results');
+            results.innerHTML = '<div class="status info">Testing image access...</div>';
+            
+            try {
+                const response = await fetch('http://192.168.187.84:4000/uploads/images/');
+                
+                if (response.ok) {
+                    results.innerHTML = '<div class="status success">✅ Image directory is accessible!</div>';
+                } else {
+                    results.innerHTML = `<div class="status error">❌ Image directory error: ${response.status}</div>`;
+                }
+            } catch (error) {
+                results.innerHTML = `<div class="status error">❌ Image access failed: ${error.message}</div>`;
+            }
+        }
+    </script>
+</body>
+</html> 
