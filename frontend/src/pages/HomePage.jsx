@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react';
-import styles from './homepage.module.css';
+import styles from './HomePage.module.css';
 import { useNavigate, Outlet } from 'react-router-dom';
 import api from '../components/api.js';
 
