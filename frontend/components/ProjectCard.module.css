@@ -1,558 +1,514 @@
-@import url('https://fonts.googleapis.com/css2?family=Helvetica+Neue:wght@400;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
 
 /* ---------- Animations ---------- */
 @keyframes fadeIn {
-  from { opacity: 0; transform: translateY(10px); }
+  from { opacity: 0; transform: translateY(20px); }
   to { opacity: 1; transform: translateY(0); }
 }
+
 @keyframes shineSweep {
-  0% { background-position: -200% 0; }
-  60% { background-position: 300% 0; }
-  100% { background-position: 300% 0; }
+  0% { transform: translateX(-100%) skewX(-15deg); }
+  100% { transform: translateX(200%) skewX(-15deg); }
 }
-@keyframes toastSlide {
-  from {
-    opacity: 0;
-    transform: translate(-50%, -10px);
-  }
-  to {
-    opacity: 1;
-    transform: translate(-50%, 0);
-  }
+
+@keyframes pulse {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.05); }
 }
+
 @keyframes scaleIn {
-  from { transform: scale(0.7); opacity: 0; }
+  from { transform: scale(0.9); opacity: 0; }
   to { transform: scale(1); opacity: 1; }
 }
 
-/* ---------- Glossy / Glassy Card ---------- */
-.card {
-  position: relative;
-  background: rgba(17, 24, 39, 0.3);
-  border: 1px solid rgba(45, 212, 191, 0.4);
-  backdrop-filter: blur(20px) saturate(180%);
-  -webkit-backdrop-filter: blur(20px) saturate(180%);
-  border-radius: 12px;
-  padding: 20px;
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.4), inset 0 0 0 1px rgba(255, 255, 255, 0.15);
+/* ---------- Enhanced Card Styles ---------- */
+.projectCard {
+  background: linear-gradient(135deg, rgba(255, 255, 255, 0.1), rgba(255, 255, 255, 0.05));
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  border-radius: 16px;
+  padding: 0;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  cursor: pointer;
   overflow: hidden;
-  transition: transform 0.4s cubic-bezier(0.16, 0.8, 0.35, 1), box-shadow 0.4s ease;
-  animation: fadeIn 0.5s ease-in;
-  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  position: relative;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+  height: 400px;
+  display: flex;
+  flex-direction: column;
+  animation: fadeIn 0.6s ease-out;
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+  will-change: transform;
 }
-.card:hover {
-  transform: translateY(-8px) scale(1.03);
-  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.5), inset 0 0 0 1px rgba(255, 255, 255, 0.25);
+
+.projectCard:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 40px rgba(0, 0, 0, 0.15);
 }
-.card::after {
+
+.projectCard::before {
   content: '';
   position: absolute;
   top: 0;
-  left: -200%;
-  width: 50%;
-  height: 100%;
-  pointer-events: none;
-  background: linear-gradient(75deg, rgba(255, 255, 255, 0) 0%, rgba(255, 255, 255, 0.4) 50%, rgba(255, 255, 255, 0) 100%);
-  transform: skewX(-20deg);
-}
-.card:hover::after {
-  animation: shineSweep 0.8s forwards;
-}
-
-/* ---------- Content Layout ---------- */
-.content {
-  padding: 10px 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(45, 212, 191, 0.5) 50%, 
+    transparent 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
 }
 
-/* ---------- Media ---------- */
-.image {
+.projectCard:hover::before {
+  opacity: 1;
+}
+
+.projectCard::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
   width: 100%;
-  height: 180px;
+  height: 100%;
+  background: linear-gradient(90deg, 
+    transparent 0%, 
+    rgba(255, 255, 255, 0.15) 50%, 
+    transparent 100%);
+  transition: left 0.6s ease;
+  pointer-events: none;
+}
+
+.projectCard:hover::after {
+  animation: shineSweep 0.8s ease-out;
+}
+
+.projectContent {
+  padding: 16px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  position: relative;
+  z-index: 1;
+  margin-bottom: 16px;
+}
+
+.projectImage {
+  width: 100%;
+  height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  background: #1a1a1a;
-  box-shadow: inset 0 0 8px rgba(0, 0, 0, 0.25);
+  border-radius: 12px 12px 0 0;
+  transition: transform 0.2s ease;
+  will-change: transform;
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  box-shadow: 
+    0 4px 6px -1px rgba(0, 0, 0, 0.1),
+    0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  position: relative;
+  overflow: hidden;
 }
 
-/* ---------- Text ---------- */
-.title {
-  margin: 12px 0 8px;
-  font-size: 1.3rem;
+.projectImage::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: linear-gradient(180deg, 
+    transparent 0%, 
+    rgba(0, 0, 0, 0.1) 100%);
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.projectCard:hover .projectImage {
+  transform: scale(1.02);
+}
+
+.projectTitle {
+  font-size: 1.1rem;
   font-weight: 600;
-  color: #f5e8c7;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-.description {
-  font-size: 0.95rem;
-  color: #b0b0b0;
-  margin-bottom: 12px;
-  line-height: 1.5;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Tools ---------- */
-.tools {
-  font-size: 0.9rem;
-  color: #b0b0b0;
-  margin-bottom: 10px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  background: linear-gradient(135deg, #667eea, #764ba2, #f093fb);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  margin: 0;
+  line-height: 1.3;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-shadow: none;
 }
 
-/* ---------- Links ---------- */
-.links {
-  margin: 8px 0;
-}
-.link {
-  display: inline-block;
-  margin-right: 12px;
-  font-size: 0.9rem;
-  color: #2dd4bf;
-  font-weight: 500;
-  text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background: rgba(45, 212, 191, 0.1);
-  transition: color 0.3s ease, background 0.3s ease;
-}
-.link:hover {
-  color: #5eead4;
-  background: rgba(45, 212, 191, 0.2);
-}
-
-/* ---------- PDF unavailable ---------- */
-.pdfUnavailable {
+.projectTools {
   font-size: 0.85rem;
-  color: #b0b0b0;
-  font-style: italic;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
+  color: #6b7280;
+  margin: 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  line-height: 1.3;
 }
 
-/* ---------- Meta ---------- */
-.meta {
+.projectDepartment {
   font-size: 0.8rem;
-  color: #b0b0b0;
-  margin-top: 6px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-/* ---------- Interaction ---------- */
-.interaction {
-  display: flex;
-  gap: 10px;
-  margin-top: 14px;
-  align-items: center;
-}
-
-.likeBtn {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: #6366f1;
+  font-weight: 600;
+  margin-top: auto;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  padding: 4px 8px;
+  background: rgba(45, 212, 191, 0.1);
   border-radius: 6px;
-  color: #f5e8c7;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
+  border: 1px solid rgba(45, 212, 191, 0.2);
+  align-self: flex-start;
 }
-.likeBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #ff6b6b;
-  transform: scale(1.04);
+
+.interactionBar {
+  padding: 12px 16px;
+  background: rgba(255, 255, 255, 0.1);
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 60px;
+}
+
+.likeButton {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 20px;
+  padding: 8px 12px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  min-width: 60px;
+  justify-content: center;
+  will-change: transform;
+}
+
+.likeButton.liked {
+  background: #dc2626;
+  animation: none;
+}
+
+.likeButton:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.likeButton svg {
+  font-size: 1rem;
+  transition: transform 0.2s ease;
+}
+
+.likeButton:hover svg {
+  transform: scale(1.05);
+}
+
+.likeCount {
+  font-weight: 600;
+  min-width: 16px;
+  text-align: center;
+}
+
+.commentButton {
+  background: #10b981;
+  color: white;
+  border: none;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+  will-change: transform;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.commentButton:hover {
+  transform: scale(1.05);
+  background: #34d399;
+}
+
+.commentButton:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.commentButton svg {
+  font-size: 0.9rem;
+  transition: transform 0.2s ease;
+}
+
+.commentButton:hover:not(:disabled) svg {
+  transform: scale(1.05);
 }
 
 .feedbackForm {
   display: flex;
+  align-items: center;
+  gap: 8px;
   flex: 1;
-  gap: 6px;
+  margin-left: 8px;
 }
 
 .feedbackInput {
   flex: 1;
-  padding: 6px;
+  padding: 8px 12px;
   border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  background: rgba(255, 255, 255, 0.05);
-  color: #f5e8c7;
+  border-radius: 20px;
+  background: rgba(255, 255, 255, 0.1);
+  color: #333;
   font-size: 0.85rem;
-  transition: border-color 0.3s ease, background 0.3s ease;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
 }
+
+.feedbackInput::placeholder {
+  color: #999;
+}
+
 .feedbackInput:focus {
-  border-color: #2dd4bf;
-  background: rgba(255, 255, 255, 0.1);
   outline: none;
+  border-color: #6366f1;
+  background: rgba(255, 255, 255, 0.15);
 }
 
-.feedbackBtn {
-  padding: 6px 12px;
-  background: rgba(255, 255, 255, 0.1);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  border-radius: 6px;
-  color: #f5e8c7;
-  cursor: pointer;
-  transition: background 0.3s ease, color 0.3s ease, transform 0.3s ease;
-}
-.feedbackBtn:hover {
-  background: rgba(255, 255, 255, 0.2);
-  color: #5eead4;
-  transform: scale(1.04);
+.feedbackInput:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
 }
 
-/* ---------- Feedback Section ---------- */
-.feedbackSection {
-  margin-top: 15px;
-}
-
-.feedbackTitle {
-  font-size: 1rem;
-  color: #f5e8c7;
-  margin-bottom: 6px;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.2);
-}
-
-.feedbackList {
-  list-style: none;
-  padding: 0;
-}
-
-.feedbackItem {
-  font-size: 0.85rem;
-  color: #b0b0b0;
-  margin-bottom: 5px;
-  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.1);
-}
-
-.feedbackTime {
-  font-size: 0.7rem;
-  color: #9f9f9f;
-  margin-left: 6px;
-}
-
-.feedbackEmail {
-  font-size: 0.7rem;
-  color: #b0b0b0;
-  margin-left: 6px;
-  font-style: italic;
-}
-
-/* ---------- Toast ---------- */
-.toastBase {
-  position: fixed;
-  top: 15px;
-  left: 50%;
-  transform: translateX(-50%);
-  z-index: 9999;
-  padding: 8px 16px;
-  border-radius: 5px;
-  font-weight: 500;
-  font-size: 0.9rem;
-  box-shadow: 0 3px 12px rgba(0, 0, 0, 0.3);
-  animation: toastSlide 0.3s ease-out forwards;
-  pointer-events: none;
-  backdrop-filter: blur(6px);
-}
-.successToast {
-  composes: toastBase;
-  background: rgba(40, 167, 69, 0.2);
-  color: #28a745;
-  border: 1px solid #28a745;
-}
-.errorToast {
-  composes: toastBase;
-  background: rgba(255, 76, 76, 0.15);
-  color: #ff4c4c;
-  border: 1px solid #ff4c4c;
-}
-
-/* ---------- Popup Styles ---------- */
+/* ---------- Popup Modal ---------- */
 .popupOverlay {
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: rgba(0, 0, 0, 0.6);
+  background: rgba(0, 0, 0, 0.7);
   display: flex;
-  justify-content: center;
   align-items: center;
+  justify-content: center;
   z-index: 1000;
-  animation: fadeIn 0.3s ease-out;
+  backdrop-filter: blur(5px);
 }
+
 .popupContent {
-  background: linear-gradient(135deg, #1A1F2B, #0B0D17);
-  padding: 20px;
-  border-radius: 12px;
+  background: #101b2d;
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 500px;
   width: 90%;
-  max-width: 400px;
-  position: relative;
-  color: #E5E5E5;
-  box-shadow: 10px 10px 20px rgba(0, 0, 0, 0.4), -10px -10px 20px rgba(255, 255, 255, 0.05), inset 0 0 15px rgba(94, 234, 212, 0.1);
-  border: 2px solid rgba(45, 212, 191, 0.2);
-  animation: scaleIn 0.3s ease-out;
-  overflow-y: auto;
   max-height: 80vh;
-  margin-top: 40px;
-  scrollbar-width: none;
-  -ms-overflow-style: none;
+  overflow-y: auto;
+  position: relative;
+  box-shadow: 0 20px 60px rgba(10, 22, 39, 0.7);
+  color: #f7fafc;
+  border: 1.5px solid #22304a;
 }
-.popupContent::-webkit-scrollbar {
-  display: none;
-}
+
 .closeButton {
   position: absolute;
-  top: 12px;
-  right: 12px;
+  top: 16px;
+  right: 16px;
   background: none;
   border: none;
   font-size: 24px;
-  color: #E5E5E5;
   cursor: pointer;
-  transition: transform 0.3s ease, color 0.3s ease;
+  color: #7dd3fc;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
 }
+
 .closeButton:hover {
-  transform: scale(1.15);
-  color: #5eead4;
+  background: #22304a;
+  color: #ffe066;
 }
+
 .popupImage {
   width: 100%;
   height: 200px;
   object-fit: cover;
-  border-radius: 8px;
-  margin-bottom: 12px;
-  box-shadow: 6px 6px 12px rgba(0, 0, 0, 0.3), -6px -6px 12px rgba(255, 255, 255, 0.1);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  border: 1.5px solid #22304a;
+  background: #1a2332;
 }
+
 .popupTitle {
-  font-size: 24px;
-  color: #5eead4;
-  margin-bottom: 12px;
-  text-align: left;
-  font-family: 'Times New Roman', serif;
+  font-size: 1.5rem;
   font-weight: 700;
-  letter-spacing: 0.5px;
+  color: #ffe9b0;
+  margin: 0 0 12px 0;
+  letter-spacing: 0.01em;
 }
+
 .popupDescription {
-  font-size: 14px;
-  color: #E5E5E5;
-  margin-bottom: 12px;
-  line-height: 1.5;
-  padding: 0 0 0 8px;
-  text-align: left;
-  font-family: 'Helvetica', sans-serif;
-  font-weight: normal;
+  color: #b6c2e2;
+  line-height: 1.6;
+  margin: 0 0 16px 0;
 }
+
 .popupTools {
-  font-size: 13px;
-  color: #2dd4bf;
-  margin-bottom: 12px;
-  font-style: italic;
-  text-align: left;
-  padding-left: 8px;
-  font-family: 'Courier New', monospace;
+  color: #7dd3fc;
   font-weight: 500;
+  margin: 0 0 16px 0;
 }
+
 .popupLinks {
-  margin-bottom: 12px;
-  text-align: left;
-  padding-left: 8px;
+  display: flex;
+  gap: 12px;
+  margin-bottom: 16px;
+  flex-wrap: wrap;
 }
-.popupLinks a {
-  margin: 0 12px 0 0;
-  color: #5eead4;
+
+.link {
+  display: inline-block;
+  padding: 8px 16px;
+  background: #22304a;
+  color: #7dd3fc;
   text-decoration: none;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background: rgba(94, 234, 212, 0.1);
-  transition: transform 0.3s ease, background-color 0.3s ease;
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: all 0.2s ease;
 }
-.popupLinks a:hover {
-  background: rgba(94, 234, 212, 0.25);
-  transform: translateY(-2px);
+
+.link:hover {
+  transform: translateY(-1px);
+  background: #7dd3fc;
+  color: #101b2d;
 }
+
 .pdfUnavailable {
-  color: #E5E5E5;
+  color: #b6c2e2;
   font-style: italic;
-  opacity: 0.8;
-  text-align: left;
-  padding-left: 8px;
-  font-family: 'Helvetica', sans-serif;
-  font-weight: normal;
+  font-size: 0.9rem;
 }
+
 .popupMeta {
-  font-size: 13px;
-  margin-bottom: 6px;
-  text-align: left;
-  padding-left: 8px;
+  color: #b6c2e2;
+  margin: 8px 0;
+  font-size: 0.95rem;
 }
+
 .popupMeta strong {
-  color: #5eead4;
-}
-.popupMeta span {
-  color: #E5E5E5;
-  font-family: 'Courier New', monospace;
-  font-weight: normal;
+  color: #ffe066;
 }
 
-/* ---------- Breakpoints ---------- */
-@media (max-width: 480px) { /* Extra small devices (phones) */
-  .card { padding: 10px; }
-  .image { height: 100px; }
-  .title { font-size: 1rem; margin: 8px 0 6px; }
-  .description { font-size: 0.8rem; margin-bottom: 8px; }
-  .tools { font-size: 0.75rem; margin-bottom: 6px; }
-  .links { margin: 6px 0; }
-  .link { font-size: 0.75rem; margin-right: 8px; padding: 3px 6px; }
-  .pdfUnavailable { font-size: 0.7rem; }
-  .meta { font-size: 0.65rem; margin-top: 4px; }
-  .interaction { gap: 6px; margin-top: 10px; }
-  .likeBtn { padding: 4px 8px; font-size: 0.8rem; }
-  .feedbackForm { flex-direction: column; gap: 4px; }
-  .feedbackInput { padding: 4px; font-size: 0.8rem; }
-  .feedbackBtn { padding: 4px 8px; font-size: 0.8rem; }
-  .feedbackSection { margin-top: 10px; }
-  .feedbackTitle { font-size: 0.85rem; margin-bottom: 4px; }
-  .feedbackItem { font-size: 0.75rem; margin-bottom: 3px; }
-  .feedbackTime, .feedbackEmail { font-size: 0.6rem; margin-left: 4px; }
-  .toastBase { font-size: 0.8rem; padding: 6px 12px; top: 10px; }
-  .popupContent { padding: 12px; max-width: 280px; margin-top: 20px; }
-  .closeButton { font-size: 20px; top: 8px; right: 8px; }
-  .popupImage { height: 120px; margin-bottom: 8px; }
-  .popupTitle { font-size: 18px; margin-bottom: 8px; }
-  .popupDescription { font-size: 11px; margin-bottom: 8px; }
-  .popupTools { font-size: 11px; margin-bottom: 8px; }
-  .popupLinks a { font-size: 11px; padding: 3px 6px; margin-right: 8px; }
-  .pdfUnavailable { font-size: 11px; }
-  .popupMeta { font-size: 11px; margin-bottom: 4px; }
+/* Simple Toast Notifications */
+.errorToast, .successToast {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  padding: 12px 20px;
+  border-radius: 8px;
+  color: white;
+  font-weight: 500;
+  z-index: 1000;
+  animation: slideIn 0.3s ease;
+  max-width: 300px;
+  word-wrap: break-word;
 }
 
-@media (min-width: 481px) and (max-width: 600px) { /* Small devices (small phones) */
-  .card { padding: 12px; }
-  .image { height: 120px; }
-  .title { font-size: 1.1rem; margin: 10px 0 7px; }
-  .description { font-size: 0.85rem; margin-bottom: 9px; }
-  .tools { font-size: 0.8rem; margin-bottom: 7px; }
-  .links { margin: 7px 0; }
-  .link { font-size: 0.8rem; margin-right: 10px; padding: 4px 8px; }
-  .pdfUnavailable { font-size: 0.75rem; }
-  .meta { font-size: 0.7rem; margin-top: 5px; }
-  .interaction { gap: 8px; margin-top: 12px; }
-  .likeBtn { padding: 5px 10px; font-size: 0.85rem; }
-  .feedbackForm { gap: 5px; }
-  .feedbackInput { padding: 5px; font-size: 0.85rem; }
-  .feedbackBtn { padding: 5px 10px; font-size: 0.85rem; }
-  .feedbackSection { margin-top: 12px; }
-  .feedbackTitle { font-size: 0.9rem; margin-bottom: 5px; }
-  .feedbackItem { font-size: 0.8rem; margin-bottom: 4px; }
-  .feedbackTime, .feedbackEmail { font-size: 0.65rem; margin-left: 5px; }
-  .toastBase { font-size: 0.85rem; padding: 7px 14px; top: 12px; }
-  .popupContent { padding: 15px; max-width: 320px; margin-top: 25px; }
-  .closeButton { font-size: 22px; }
-  .popupImage { height: 150px; margin-bottom: 10px; }
-  .popupTitle { font-size: 20px; margin-bottom: 10px; }
-  .popupDescription { font-size: 12px; margin-bottom: 10px; }
-  .popupTools { font-size: 12px; margin-bottom: 10px; }
-  .popupLinks a { font-size: 12px; padding: 4px 8px; margin-right: 10px; }
-  .pdfUnavailable { font-size: 12px; }
-  .popupMeta { font-size: 12px; margin-bottom: 5px; }
+.errorToast {
+  background: #ef4444;
 }
 
-@media (min-width: 601px) and (max-width: 768px) { /* Medium devices (tablets) */
-  .card { padding: 16px; }
-  .image { height: 140px; }
-  .title { font-size: 1.2rem; margin: 12px 0 8px; }
-  .description { font-size: 0.9rem; margin-bottom: 10px; }
-  .tools { font-size: 0.85rem; margin-bottom: 8px; }
-  .links { margin: 8px 0; }
-  .link { font-size: 0.85rem; margin-right: 12px; padding: 5px 10px; }
-  .pdfUnavailable { font-size: 0.8rem; }
-  .meta { font-size: 0.75rem; margin-top: 6px; }
-  .interaction { gap: 10px; margin-top: 14px; }
-  .likeBtn { padding: 6px 12px; font-size: 0.9rem; }
-  .feedbackForm { gap: 6px; }
-  .feedbackInput { padding: 6px; font-size: 0.9rem; }
-  .feedbackBtn { padding: 6px 12px; font-size: 0.9rem; }
-  .feedbackSection { margin-top: 14px; }
-  .feedbackTitle { font-size: 0.95rem; margin-bottom: 6px; }
-  .feedbackItem { font-size: 0.85rem; margin-bottom: 5px; }
-  .feedbackTime, .feedbackEmail { font-size: 0.7rem; margin-left: 6px; }
-  .toastBase { font-size: 0.9rem; padding: 8px 16px; top: 15px; }
-  .popupContent { padding: 18px; max-width: 350px; margin-top: 30px; }
-  .closeButton { font-size: 24px; }
-  .popupImage { height: 170px; margin-bottom: 11px; }
-  .popupTitle { font-size: 22px; margin-bottom: 11px; }
-  .popupDescription { font-size: 13px; margin-bottom: 11px; }
-  .popupTools { font-size: 13px; margin-bottom: 11px; }
-  .popupLinks a { font-size: 13px; padding: 5px 10px; margin-right: 12px; }
-  .pdfUnavailable { font-size: 13px; }
-  .popupMeta { font-size: 13px; margin-bottom: 6px; }
+.successToast {
+  background: #10b981;
 }
 
-@media (min-width: 769px) and (max-width: 1024px) { /* Large tablets/laptops */
-  .card { padding: 18px; }
-  .image { height: 160px; }
-  .title { font-size: 1.25rem; margin: 12px 0 8px; }
-  .description { font-size: 0.92rem; margin-bottom: 10px; }
-  .tools { font-size: 0.87rem; margin-bottom: 8px; }
-  .links { margin: 8px 0; }
-  .link { font-size: 0.87rem; margin-right: 12px; padding: 5px 10px; }
-  .pdfUnavailable { font-size: 0.82rem; }
-  .meta { font-size: 0.77rem; margin-top: 6px; }
-  .interaction { gap: 10px; margin-top: 14px; }
-  .likeBtn { padding: 6px 12px; font-size: 0.92rem; }
-  .feedbackForm { gap: 6px; }
-  .feedbackInput { padding: 6px; font-size: 0.92rem; }
-  .feedbackBtn { padding: 6px 12px; font-size: 0.92rem; }
-  .feedbackSection { margin-top: 15px; }
-  .feedbackTitle { font-size: 1rem; margin-bottom: 6px; }
-  .feedbackItem { font-size: 0.87rem; margin-bottom: 5px; }
-  .feedbackTime, .feedbackEmail { font-size: 0.72rem; margin-left: 6px; }
-  .toastBase { font-size: 0.92rem; padding: 8px 16px; top: 15px; }
-  .popupContent { padding: 20px; max-width: 380px; margin-top: 35px; }
-  .closeButton { font-size: 26px; }
-  .popupImage { height: 190px; margin-bottom: 12px; }
-  .popupTitle { font-size: 24px; margin-bottom: 12px; }
-  .popupDescription { font-size: 14px; margin-bottom: 12px; }
-  .popupTools { font-size: 14px; margin-bottom: 12px; }
-  .popupLinks a { font-size: 14px; padding: 5px 10px; margin-right: 12px; }
-  .pdfUnavailable { font-size: 14px; }
-  .popupMeta { font-size: 14px; margin-bottom: 6px; }
+@keyframes slideIn {
+  from {
+    transform: translateX(100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateX(0);
+    opacity: 1;
+  }
 }
 
-@media (min-width: 1025px) { /* Desktops and larger */
-  .card { padding: 20px; }
-  .image { height: 180px; }
-  .title { font-size: 1.3rem; margin: 12px 0 8px; }
-  .description { font-size: 0.95rem; margin-bottom: 12px; }
-  .tools { font-size: 0.9rem; margin-bottom: 10px; }
-  .links { margin: 8px 0; }
-  .link { font-size: 0.9rem; margin-right: 12px; padding: 5px 10px; }
-  .pdfUnavailable { font-size: 0.85rem; }
-  .meta { font-size: 0.8rem; margin-top: 6px; }
-  .interaction { gap: 10px; margin-top: 14px; }
-  .likeBtn { padding: 6px 12px; font-size: 0.95rem; }
-  .feedbackForm { gap: 6px; }
-  .feedbackInput { padding: 6px; font-size: 0.95rem; }
-  .feedbackBtn { padding: 6px 12px; font-size: 0.95rem; }
-  .feedbackSection { margin-top: 15px; }
-  .feedbackTitle { font-size: 1.05rem; margin-bottom: 6px; }
-  .feedbackItem { font-size: 0.85rem; margin-bottom: 5px; }
-  .feedbackTime, .feedbackEmail { font-size: 0.7rem; margin-left: 6px; }
-  .toastBase { font-size: 0.95rem; padding: 8px 16px; top: 15px; }
-  .popupContent { padding: 20px; max-width: 400px; margin-top: 40px; }
-  .closeButton { font-size: 24px; }
-  .popupImage { height: 200px; margin-bottom: 12px; }
-  .popupTitle { font-size: 24px; margin-bottom: 12px; }
-  .popupDescription { font-size: 14px; margin-bottom: 12px; }
-  .popupTools { font-size: 13px; margin-bottom: 12px; }
-  .popupLinks a { font-size: 13px; padding: 5px 10px; margin-right: 12px; }
-  .pdfUnavailable { font-size: 13px; }
-  .popupMeta { font-size: 13px; margin-bottom: 6px; }
+/* ---------- Responsive Design ---------- */
+@media (max-width: 768px) {
+  .projectCard {
+    height: 380px;
+  }
+  
+  .interactionBar {
+    padding: 10px 12px;
+    height: 55px;
+    gap: 8px;
+  }
+  
+  .likeButton {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+    min-width: 50px;
+  }
+  
+  .likeButton svg {
+    font-size: 0.9rem;
+  }
+  
+  .feedbackInput {
+    padding: 6px 10px;
+    font-size: 0.8rem;
+  }
+  
+  .commentButton {
+    width: 32px;
+    height: 32px;
+  }
+  
+  .commentButton svg {
+    font-size: 0.8rem;
+  }
+  
+  .popupContent {
+    padding: 20px;
+    margin: 20px;
+  }
+  
+  .popupTitle {
+    font-size: 1.3rem;
+  }
 }
 
-/* ---------- Reduced-motion ---------- */
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
   }
+}
+
+.projectCard.liked {
+  border: 2.5px solid #ff6bcb;
+  box-shadow: 0 0 24px 4px rgba(255, 107, 203, 0.25), 0 8px 32px rgba(0,0,0,0.12);
+  background: linear-gradient(135deg, rgba(255, 107, 203, 0.08), rgba(255, 255, 255, 0.12));
+  transform: scale(1.025);
+  transition: border 0.2s, box-shadow 0.2s, background 0.2s, transform 0.2s;
+  z-index: 2;
 }

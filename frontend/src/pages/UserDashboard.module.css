@@ -1,0 +1,236 @@
+.dashboardContainer {
+  min-height: 100vh;
+  width: 100vw;
+  margin: 0;
+  padding: 40px 0 40px 0;
+  background: #101b2d;
+  border-radius: 0;
+  box-shadow: none;
+  color: #f7fafc;
+  border: none;
+  display: flex;
+  flex-direction: column;
+}
+.userInfoSection {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  margin-bottom: 32px;
+  margin-top: 64px;
+  background: #19233a;
+  border-radius: 12px;
+  padding: 18px 24px;
+  box-shadow: 0 2px 12px rgba(10,22,39,0.12);
+  color: #f7fafc;
+  border: 1.5px solid #22304a;
+}
+.userAvatar {
+  width: 64px;
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  background: #22304a;
+  border-radius: 50%;
+  border: 2px solid #7dd3fc;
+  color: #ffe066;
+}
+.topLikedBadge {
+  display: inline-flex;
+  align-items: center;
+  background: linear-gradient(90deg, #ffe066 0%, #ffd700 100%);
+  color: #b8860b;
+  font-weight: bold;
+  border-radius: 8px;
+  padding: 4px 12px;
+  margin-left: 10px;
+  font-size: 1rem;
+  box-shadow: 0 2px 8px rgba(255,215,0,0.12);
+}
+.logoutBtn {
+  margin-left: auto;
+  background: #22304a;
+  color: #7dd3fc;
+  border: none;
+  border-radius: 8px;
+  padding: 8px 18px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, color 0.2s;
+  border: 1.5px solid #22304a;
+}
+.logoutBtn:hover {
+  background: #7dd3fc;
+  color: #101b2d;
+}
+.projectsList {
+  margin-top: 18px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 24px;
+  width: 100%;
+  padding: 0 40px;
+  margin-left: 0;
+  margin-right: 0;
+  flex: 1;
+}
+
+@media (max-width: 1024px) {
+  .projectsList {
+    grid-template-columns: repeat(2, 1fr);
+    padding: 0 16px;
+  }
+}
+@media (max-width: 600px) {
+  .projectsList {
+    grid-template-columns: 1fr;
+    padding: 0 4px;
+  }
+}
+
+.projectCardWrapper {
+  position: relative;
+  background: #19233a;
+  border-radius: 12px;
+  box-shadow: 0 2px 12px rgba(10,22,39,0.12);
+  padding: 18px 18px 12px 18px;
+  border: 1.5px solid #22304a;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  align-items: stretch;
+}
+
+.projectDetails {
+  color: #b6c2e2;
+  font-size: 0.98rem;
+  margin-bottom: 8px;
+  line-height: 1.5;
+  word-break: break-word;
+}
+
+.projectDetails strong {
+  color: #ffe066;
+  font-weight: 600;
+  margin-right: 6px;
+}
+
+.projectActions {
+  display: flex;
+  gap: 12px;
+  margin-top: 10px;
+}
+.editBtn, .deleteBtn {
+  background: #22304a;
+  border: none;
+  border-radius: 6px;
+  padding: 6px 14px;
+  font-size: 1rem;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: background 0.2s, color 0.2s;
+  color: #7dd3fc;
+  border: 1.5px solid #22304a;
+}
+.editBtn:hover {
+  background: #ffe066;
+  color: #101b2d;
+}
+.deleteBtn {
+  background: #22304a;
+  color: #f87171;
+}
+.deleteBtn:hover {
+  background: #f87171;
+  color: #101b2d;
+}
+.loading, .error, .noProjects {
+  text-align: center;
+  margin: 32px 0;
+  color: #7dd3fc;
+  font-size: 1.1rem;
+}
+
+.dashboardProjectCard {
+  display: flex;
+  flex-direction: column;
+  background: #101b2d;
+  border-radius: 16px;
+  box-shadow: 0 20px 60px rgba(10, 22, 39, 0.7);
+  border: 1.5px solid #22304a;
+  overflow: hidden;
+  margin-bottom: 0;
+  padding: 0;
+  color: #f7fafc;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+.dashboardProjectCard:hover {
+  box-shadow: 0 24px 80px rgba(10,22,39,0.85);
+  transform: translateY(-2px) scale(1.01);
+}
+.dashboardProjectImage {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  background: #1a2332;
+  border-bottom: 1.5px solid #22304a;
+  border-radius: 16px 16px 0 0;
+}
+.dashboardProjectContent {
+  padding: 24px 24px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.dashboardProjectTitle {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #ffe9b0;
+  margin: 0 0 6px 0;
+  letter-spacing: 0.01em;
+}
+.dashboardProjectDescription {
+  color: #b6c2e2;
+  font-size: 1.08rem;
+  margin: 0 0 8px 0;
+  line-height: 1.5;
+}
+.dashboardProjectMeta {
+  color: #7dd3fc;
+  font-size: 0.98rem;
+  margin-bottom: 2px;
+}
+.dashboardProjectLinks {
+  display: flex;
+  gap: 12px;
+  margin: 8px 0 0 0;
+  flex-wrap: wrap;
+}
+.dashboardProjectLink {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  background: #22304a;
+  color: #7dd3fc;
+  text-decoration: none;
+  border-radius: 20px;
+  padding: 6px 14px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+}
+.dashboardProjectLink:hover {
+  background: #7dd3fc;
+  color: #101b2d;
+}
+.dashboardProjectActions {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+} 

@@ -2,20 +2,27 @@ import express from 'express';
 import multer from 'multer';
 import mongoose from 'mongoose'; // ✅ Added to fix the error
 import Project from '../models/Project.js';
-import { getAllProjects, createProject, addLike } from '../controllers/projectsController.js';
+import { getAllProjects, createProject, addLike, deleteProject } from '../controllers/projectsController.js';
 import { transporter } from '../server.js'; // For nodemailer
+import path from 'path';
+import { fileURLToPath } from 'url';
+
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 
 const router = express.Router();
 
 const storage = multer.diskStorage({
   destination: (req, file, cb) => {
+    let uploadPath;
     if (file.mimetype === 'application/pdf') {
-      cb(null, 'uploads/pdfs');
+      uploadPath = path.join(__dirname, '../uploads/pdfs');
     } else if (file.mimetype.startsWith('image/')) {
-      cb(null, 'uploads/images');
+      uploadPath = path.join(__dirname, '../uploads/images');
     } else {
-      cb(new Error('Invalid file type'), null);
+      return cb(new Error('Invalid file type'), null);
     }
+    cb(null, uploadPath);
   },
   filename: (req, file, cb) => {
     cb(null, Date.now() + '-' + file.originalname.replace(/\s+/g, '_'));
@@ -53,6 +60,8 @@ router.post(
 
 router.post('/:id/like', addLike);
 
+router.delete('/:id', deleteProject);
+
 // 🔥 Top Liked Projects Endpoint
 router.get('/top-liked', async (req, res) => {
   try {
@@ -60,7 +69,7 @@ router.get('/top-liked', async (req, res) => {
       return res.status(503).json({ error: 'Service unavailable: Database not connected' });
     }
 
-    const topProjects = await Project.find().sort({ likes: -1 }).limit(3);
+    const topProjects = await Project.find().sort({ likes: -1 }).limit(3).select('+toolsUsed +likes +imageData +pdfData +imageMimeType');
     res.json(topProjects.map(p => ({
       ...p.toObject(),
       toolsUsed: p.toolsUsed || [],
@@ -102,6 +111,61 @@ router.post('/:id/feedback', async (req, res) => {
     console.error('Error in feedback submission:', err.message);
     console.error('Stack trace:', err.stack);
     res.status(500).json({ error: 'Failed to submit feedback', details: err.message });
+  }
+});
+
+// Route to get image data from database
+router.get('/:id/image', async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    
+    if (!project.imageData) {
+      return res.status(404).json({ error: 'Image not found' });
+    }
+    
+    // Convert base64 back to buffer
+    const imageBuffer = Buffer.from(project.imageData, 'base64');
+    
+    // Set appropriate headers
+    res.setHeader('Content-Type', project.imageMimeType || 'image/jpeg');
+    res.setHeader('Content-Length', imageBuffer.length);
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+    
+    res.send(imageBuffer);
+  } catch (err) {
+    console.error('Error serving image:', err.message);
+    res.status(500).json({ error: 'Failed to serve image' });
+  }
+});
+
+// Route to get PDF data from database
+router.get('/:id/pdf', async (req, res) => {
+  try {
+    const project = await Project.findById(req.params.id);
+    if (!project) {
+      return res.status(404).json({ error: 'Project not found' });
+    }
+    
+    if (!project.pdfData) {
+      return res.status(404).json({ error: 'PDF not found' });
+    }
+    
+    // Convert base64 back to buffer
+    const pdfBuffer = Buffer.from(project.pdfData, 'base64');
+    
+    // Set appropriate headers
+    res.setHeader('Content-Type', 'application/pdf');
+    res.setHeader('Content-Length', pdfBuffer.length);
+    res.setHeader('Content-Disposition', `inline; filename="${project.title}.pdf"`);
+    res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
+    
+    res.send(pdfBuffer);
+  } catch (err) {
+    console.error('Error serving PDF:', err.message);
+    res.status(500).json({ error: 'Failed to serve PDF' });
   }
 });
 

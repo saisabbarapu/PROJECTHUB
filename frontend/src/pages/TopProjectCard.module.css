@@ -4,16 +4,17 @@
   display: flex;
   flex-direction: column;
   gap: 14px;
-
   padding: 20px 24px;
-  max-width: 720px;
+  width: 380px;
+  min-height: 520px;
+  max-width: 380px;
   margin: 0 auto;
-
   background: rgba(24, 35, 52, 0.9);
   border: 1px solid rgba(163, 216, 244, 0.2);
   border-radius: 10px;
-
   transition: transform 200ms ease, box-shadow 200ms ease;
+  justify-content: flex-start;
+  align-items: center;
 }
 
 .card:hover {
@@ -50,10 +51,13 @@
 .title {
   flex: 1 1 auto;
   font: 600 1.5em 'Georgia', serif;
-  color: #A3D8F4;
+  background: none;
+  color: #FFD700;
+  text-shadow: 0 2px 8px #ffd70044;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 0.4px;
+  transition: color 0.3s;
 }
 
 .department {
@@ -98,8 +102,9 @@
 /* ===== Footer / Tools ===== */
 .footer {
   display: flex;
-  flex-wrap: wrap;
+  flex-direction: column;
   gap: 8px;
+  width: 100%;
 }
 
 .toolChip {
@@ -109,6 +114,41 @@
   padding: 4px 10px;
   border-radius: 9999px;
   white-space: nowrap;
+}
+
+.toolsSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.linksSection {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 0;
+  justify-content: flex-start;
+}
+
+.link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(163, 216, 244, 0.13);
+  color: #A3D8F4;
+  border-radius: 50%;
+  width: 36px;
+  height: 36px;
+  font-size: 1.2em;
+  transition: background 0.2s, color 0.2s, transform 0.2s;
+  text-decoration: none;
+}
+
+.link:hover {
+  background: #A3D8F4;
+  color: #1e293b;
+  transform: scale(1.12);
 }
 
 /* ===== Responsive Breakpoints ===== */
@@ -306,4 +346,92 @@
     font-size: 0.82em;
     padding: 4px 10px;
   }
+}
+
+@media (max-width: 1200px) {
+  .card {
+    width: 320px;
+    min-height: 480px;
+    max-width: 320px;
+    padding: 16px 12px;
+  }
+}
+
+@media (max-width: 900px) {
+  .card {
+    width: 90vw;
+    min-width: 0;
+    max-width: 98vw;
+    min-height: 400px;
+    padding: 12px 6px;
+  }
+}
+
+@media (max-width: 600px) {
+  .card {
+    width: 98vw;
+    min-width: 0;
+    max-width: 100vw;
+    min-height: 320px;
+    padding: 8px 2px;
+  }
+  .footer {
+    gap: 4px;
+    padding-top: 6px;
+  }
+  .toolsSection {
+    gap: 4px;
+    margin-bottom: 4px;
+  }
+  .linksSection {
+    gap: 8px;
+    justify-content: flex-start;
+    margin-top: 0;
+  }
+  .projectImage {
+    min-height: 120px;
+    max-height: 160px;
+  }
+}
+
+@media (max-width: 400px) {
+  .card {
+    width: 100vw;
+    min-width: 0;
+    max-width: 100vw;
+    min-height: 220px;
+    padding: 4px 0;
+  }
+  .footer {
+    gap: 2px;
+    padding-top: 2px;
+  }
+  .toolsSection {
+    gap: 2px;
+    margin-bottom: 2px;
+  }
+  .linksSection {
+    gap: 4px;
+  }
+  .projectImage {
+    min-height: 80px;
+    max-height: 120px;
+  }
+}
+
+.imageWrapper {
+  width: 100%;
+  height: 180px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.projectImage {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 8px;
+  box-shadow: 0 2px 12px rgba(163, 216, 244, 0.08);
 }
