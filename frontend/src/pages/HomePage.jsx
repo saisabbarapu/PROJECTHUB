@@ -16,7 +16,6 @@ import {
   FaFire,
   FaCompass,
   FaTimes,
-  FaExternalLinkAlt,
 } from 'react-icons/fa';
 
 const HomePage = () => {
