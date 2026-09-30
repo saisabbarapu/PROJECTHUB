@@ -1,15 +1,5 @@
 import React, { useMemo } from 'react';
-import {
-  FaGithub,
-  FaLink,
-  FaFilePdf,
-  FaHeart,
-  FaCrown,
-  FaMedal,
-  FaAward,
-  FaGraduationCap,
-  FaExternalLinkAlt,
-} from 'react-icons/fa';
+import { FaGithub, FaLink, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
 
 const TopProjectCard = ({ project, rank }) => {
   const imageUrl = useMemo(() => {
@@ -26,174 +16,136 @@ const TopProjectCard = ({ project, rank }) => {
     return project.pdfUrl || '';
   }, [project.pdfData, project.pdfUrl]);
 
-  // Rank-specific themed styles and halos
-  const rankThemes = {
+  const rankColors = {
     1: {
-      title: '#1 Champion',
-      icon: <FaCrown className="text-sm" />,
-      badge:
-        'bg-gradient-to-r from-amber-400 via-yellow-300 to-amber-500 text-slate-950 font-black shadow-lg shadow-amber-500/30',
-      border: 'border-amber-400/40 hover:border-amber-300',
-      glow: 'shadow-2xl shadow-amber-500/15',
-      ambientBacklight: 'from-amber-500/20 via-yellow-500/10 to-transparent',
-      accentColor: 'text-amber-400',
+      badge: 'bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black',
+      border: 'border-amber-500/50 shadow-amber-500/10',
+      glow: 'shadow-lg shadow-amber-500/10',
     },
     2: {
-      title: '#2 Runner-Up',
-      icon: <FaMedal className="text-sm" />,
-      badge:
-        'bg-gradient-to-r from-slate-100 via-slate-200 to-slate-400 text-slate-950 font-black shadow-lg shadow-slate-300/25',
-      border: 'border-slate-400/40 hover:border-slate-200',
-      glow: 'shadow-2xl shadow-slate-400/10',
-      ambientBacklight: 'from-slate-400/15 via-slate-300/10 to-transparent',
-      accentColor: 'text-slate-300',
+      badge: 'bg-gradient-to-r from-slate-300 to-slate-400 text-slate-950 font-black',
+      border: 'border-slate-500/40 shadow-slate-500/10',
+      glow: 'shadow-lg shadow-slate-500/10',
     },
     3: {
-      title: '#3 Bronze Merit',
-      icon: <FaAward className="text-sm" />,
-      badge:
-        'bg-gradient-to-r from-amber-600 via-orange-500 to-amber-700 text-white font-black shadow-lg shadow-amber-600/30',
-      border: 'border-amber-700/40 hover:border-amber-500',
-      glow: 'shadow-2xl shadow-amber-600/15',
-      ambientBacklight: 'from-amber-700/20 via-orange-600/10 to-transparent',
-      accentColor: 'text-amber-500',
+      badge: 'bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black',
+      border: 'border-amber-700/40 shadow-amber-700/10',
+      glow: 'shadow-lg shadow-amber-700/10',
     },
   };
 
-  const theme = rankThemes[rank] || {
-    title: `#${rank} Featured`,
-    icon: <FaAward className="text-xs" />,
+  const style = rankColors[rank] || {
     badge: 'bg-indigo-600 text-white font-bold',
-    border: 'border-slate-800 hover:border-indigo-500/40',
-    glow: 'shadow-xl shadow-indigo-500/10',
-    ambientBacklight: 'from-indigo-600/15 to-transparent',
-    accentColor: 'text-indigo-400',
+    border: 'border-slate-800',
+    glow: 'shadow-md',
   };
 
   return (
     <article
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border bg-slate-900/60 backdrop-blur-xl transition-all duration-500 hover:-translate-y-2 hover:shadow-2xl ${theme.border} ${theme.glow}`}
+      className={`group relative flex flex-col overflow-hidden rounded-3xl border bg-slate-900/80 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] ${style.border} ${style.glow}`}
     >
-      {/* Ambient Top Backlight Glow */}
-      <div
-        className={`pointer-events-none absolute -top-12 left-1/2 -z-10 h-44 w-3/4 -translate-x-1/2 rounded-full bg-gradient-to-b ${theme.ambientBacklight} opacity-75 blur-2xl`}
-      />
+      {/* Rank Badge */}
+      <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs shadow-md">
+        <span
+          className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs ${style.badge}`}
+        >
+          {rank === 1 && <FaCrown className="text-xs" />} #{rank}
+        </span>
+      </div>
 
-      {/* Project Thumbnail with Zoom */}
-      <div className="relative h-56 w-full overflow-hidden bg-slate-800">
+      {/* Project Image */}
+      <div className="relative h-52 w-full overflow-hidden bg-slate-800">
         <img
           src={imageUrl}
           alt={project.title}
           onError={(e) => {
             e.target.src = '/image/projectbg.png';
           }}
-          className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+          className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <div className="absolute inset-0 bg-gradient-to-t from-slate-950 via-slate-950/20 to-transparent" />
-
-        {/* Rank Podium Badge */}
-        <div className="absolute left-4 top-4 z-10">
-          <span
-            className={`inline-flex items-center gap-1.5 rounded-full px-3.5 py-1.5 text-xs tracking-wide backdrop-blur-md ${theme.badge}`}
-          >
-            {theme.icon}
-            <span>{theme.title}</span>
-          </span>
-        </div>
-
-        {/* Department Badge */}
-        <div className="absolute right-4 top-4 z-10">
-          <span className="rounded-full border border-slate-700 bg-slate-950/80 px-3 py-1 text-[11px] font-bold uppercase tracking-wider text-indigo-300 backdrop-blur-md">
-            {project.department || 'Academic'}
-          </span>
-        </div>
-
-        {/* Author Floating Overlay */}
-        <div className="absolute bottom-3 left-4 right-4 flex items-center justify-between text-xs">
-          <div className="flex items-center gap-2">
-            <div className="flex h-7 w-7 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-500 to-purple-600 text-[11px] font-bold text-white shadow-md">
-              {(project.name || 'S').charAt(0).toUpperCase()}
-            </div>
-            <div>
-              <p className="font-semibold text-white drop-shadow-sm">{project.name}</p>
-              <p className="font-mono text-[10px] text-slate-300 drop-shadow-sm">
-                {project.rollno}
-              </p>
-            </div>
-          </div>
-
-          {/* Likes Pill */}
-          <div className="flex items-center gap-1.5 rounded-full border border-pink-500/40 bg-pink-500/20 px-3 py-1 text-xs font-bold text-pink-300 shadow-sm backdrop-blur-md">
-            <FaHeart className="animate-pulse text-xs text-pink-400" />
-            <span>{project.likes || 0}</span>
-          </div>
-        </div>
+        <span className="absolute right-4 top-4 rounded-full border border-slate-700 bg-slate-950/80 px-3 py-1 text-[11px] font-semibold uppercase text-indigo-300 backdrop-blur-md">
+          {project.department}
+        </span>
       </div>
 
       {/* Body Content */}
-      <div className="flex flex-grow flex-col justify-between p-6">
-        <div className="space-y-3">
-          <h2 className="text-xl font-bold tracking-tight text-white transition-colors duration-300 group-hover:text-indigo-400">
+      <div className="flex flex-grow flex-col space-y-4 p-6">
+        <div>
+          <h2 className="text-xl font-bold text-white transition-colors group-hover:text-indigo-400">
             {project.title}
           </h2>
-          <p className="line-clamp-3 text-xs leading-relaxed text-slate-300">
+          <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-slate-400">
             {project.description}
           </p>
+        </div>
 
-          {/* Tech Stack Chips */}
-          <div className="flex flex-wrap gap-1.5 pt-2">
-            {(project.toolsUsed?.length ? project.toolsUsed : ['General Research']).map((tool) => (
-              <span
-                key={tool}
-                className="rounded-lg border border-slate-700/60 bg-slate-800/80 px-2.5 py-1 text-[10px] font-medium text-slate-300 shadow-sm transition-colors hover:border-indigo-500/50 hover:text-white"
-              >
-                {tool}
-              </span>
-            ))}
+        {/* Metadata */}
+        <div className="space-y-1.5 rounded-xl border border-slate-800 bg-slate-950/50 p-3 text-xs text-slate-300">
+          <div className="flex justify-between">
+            <span className="text-slate-400">Author:</span>
+            <span className="font-medium text-white">
+              {project.name} ({project.rollno})
+            </span>
+          </div>
+          <div className="flex justify-between">
+            <span className="text-slate-400">Email:</span>
+            <span className="max-w-[180px] truncate font-mono text-slate-300">{project.email}</span>
+          </div>
+          <div className="flex items-center justify-between border-t border-slate-800/80 pt-1">
+            <span className="text-slate-400">Total Likes:</span>
+            <span className="inline-flex items-center gap-1 font-bold text-pink-400">
+              <FaHeart className="text-xs" /> {project.likes || 0}
+            </span>
           </div>
         </div>
 
-        {/* Footer Actions / Links */}
-        <div className="mt-6 flex items-center justify-between border-t border-slate-800/80 pt-4">
-          <span className="max-w-[140px] truncate font-mono text-[11px] text-slate-400">
-            {project.email}
-          </span>
+        {/* Tools Chips */}
+        <div className="flex flex-wrap gap-1.5">
+          {(project.toolsUsed?.length ? project.toolsUsed : ['General']).map((tool) => (
+            <span
+              key={tool}
+              className="rounded-md border border-indigo-500/20 bg-indigo-950/60 px-2 py-0.5 text-[10px] font-medium text-indigo-300"
+            >
+              {tool}
+            </span>
+          ))}
+        </div>
 
-          <div className="flex items-center gap-1.5">
-            {project.github && (
-              <a
-                href={project.github}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl border border-slate-700 bg-slate-800/80 p-2.5 text-slate-300 shadow-sm transition-all hover:scale-105 hover:border-slate-500 hover:bg-slate-700 hover:text-white"
-                title="View GitHub Repository"
-              >
-                <FaGithub className="text-sm" />
-              </a>
-            )}
-            {project.projectUrl && (
-              <a
-                href={project.projectUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl border border-indigo-500/30 bg-indigo-950/60 p-2.5 text-indigo-300 shadow-sm transition-all hover:scale-105 hover:border-indigo-400 hover:bg-indigo-600 hover:text-white"
-                title="Open Live Project URL"
-              >
-                <FaExternalLinkAlt className="text-xs" />
-              </a>
-            )}
-            {pdfUrl && (
-              <a
-                href={pdfUrl}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="rounded-xl border border-rose-500/30 bg-rose-950/60 p-2.5 text-rose-300 shadow-sm transition-all hover:scale-105 hover:border-rose-400 hover:bg-rose-600 hover:text-white"
-                title="Download Project Documentation PDF"
-              >
-                <FaFilePdf className="text-sm" />
-              </a>
-            )}
-          </div>
+        {/* Footer Actions / Links */}
+        <div className="flex items-center justify-end gap-2 border-t border-slate-800/80 pt-2">
+          {project.github && (
+            <a
+              href={project.github}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
+              title="GitHub Repository"
+            >
+              <FaGithub className="text-base" />
+            </a>
+          )}
+          {project.projectUrl && (
+            <a
+              href={project.projectUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-indigo-400"
+              title="Live Demo"
+            >
+              <FaLink className="text-base" />
+            </a>
+          )}
+          {pdfUrl && (
+            <a
+              href={pdfUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-rose-400"
+              title="Project PDF Report"
+            >
+              <FaFilePdf className="text-base" />
+            </a>
+          )}
         </div>
       </div>
     </article>
