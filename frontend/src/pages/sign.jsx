@@ -48,9 +48,9 @@ const Signup = () => {
       }
     });
 
-    const emailRegex = /@(?:adityauniversity\.in|aec\.in)$/;
-    if (formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = 'Email must end with @adityauniversity.in or @aec.in';
+    const emailRegex = /@(?:adityauniversity\.in|acet\.in|aec\.in)$/i;
+    if (formData.email && !emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Email must end with @adityauniversity.in, @acet.in, or @aec.in';
       someFieldsFilled = true;
     }
 
@@ -84,7 +84,10 @@ const Signup = () => {
 
     setIsLoading(true);
     try {
-      await api.post('/users/signup', formData);
+      await api.post('/users/signup', {
+        ...formData,
+        email: formData.email.trim().toLowerCase(),
+      });
       addToast('Signup successful! Please sign in.', 'success', 3000);
       setFormData({
         firstName: '',

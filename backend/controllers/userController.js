@@ -11,13 +11,14 @@ export const signup = async (req, res) => {
     }
 
     const { firstName, lastName, email, password } = req.body;
+    const cleanEmail = email ? email.trim().toLowerCase() : '';
 
-    // Validate email
-    const emailRegex = /@(?:adityauniversity\.in|acet\.in)$/;
-    if (!emailRegex.test(email)) {
+    // Validate email (case-insensitive domain regex)
+    const emailRegex = /@(?:adityauniversity\.in|acet\.in|aec\.in)$/i;
+    if (!emailRegex.test(cleanEmail)) {
       return res
         .status(400)
-        .json({ error: 'Email must end with @adityauniversity.in or @acet.in' });
+        .json({ error: 'Email must end with @adityauniversity.in, @acet.in, or @aec.in' });
     }
 
     // Validate password
@@ -31,8 +32,13 @@ export const signup = async (req, res) => {
         });
     }
 
-    // Check if user already exists
-    const existingUser = await User.findOne({ email });
+    // Check if user already exists (case-insensitive search)
+    const existingUser = await User.findOne({
+      $or: [
+        { email: cleanEmail },
+        { email: { $regex: new RegExp(`^${cleanEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } },
+      ],
+    });
     if (existingUser) {
       return res.status(400).json({ error: 'User already exists' });
     }
@@ -44,7 +50,7 @@ export const signup = async (req, res) => {
     const newUser = new User({
       firstName,
       lastName,
-      email,
+      email: cleanEmail,
       password: hashedPassword,
     });
 
@@ -64,8 +70,15 @@ export const login = async (req, res) => {
     }
 
     const { email, password } = req.body;
+    const cleanEmail = email ? email.trim().toLowerCase() : '';
 
-    const user = await User.findOne({ email });
+    // Case-insensitive user lookup
+    const user = await User.findOne({
+      $or: [
+        { email: cleanEmail },
+        { email: { $regex: new RegExp(`^${cleanEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } },
+      ],
+    });
     if (!user) {
       return res.status(404).json({ error: 'User not found' });
     }
@@ -89,7 +102,13 @@ export const login = async (req, res) => {
 export const forgotPassword = async (req, res) => {
   try {
     const { email } = req.body;
-    const user = await User.findOne({ email });
+    const cleanEmail = email ? email.trim().toLowerCase() : '';
+    const user = await User.findOne({
+      $or: [
+        { email: cleanEmail },
+        { email: { $regex: new RegExp(`^${cleanEmail.replace(/[.*+?^${}()|[\]\\]/g, '\\$&')}$`, 'i') } },
+      ],
+    });
     if (!user) {
       return res.status(404).json({ error: 'No account with that email found.' });
     }
