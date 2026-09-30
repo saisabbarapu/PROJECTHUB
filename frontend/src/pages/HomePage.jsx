@@ -128,7 +128,8 @@ const HomePage = () => {
 
   const filteredProjects = useMemo(() => {
     return projectData.filter((project) => {
-      const matchesCategory = selectedCategory === 'All' || project.category === selectedCategory;
+      const matchesCategory =
+        selectedCategory === 'All' || project.category === selectedCategory;
       const matchesSearch =
         searchQuery.trim() === '' ||
         project.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
@@ -151,7 +152,7 @@ const HomePage = () => {
         <div className="mx-auto max-w-5xl text-center">
           {/* Glowing Badge */}
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-950/60 px-4 py-1.5 text-xs font-semibold text-indigo-300 shadow-sm backdrop-blur-md transition-all hover:border-indigo-500/50">
-            <span className="flex h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
+            <span className="flex h-2 w-2 rounded-full bg-emerald-400 animate-pulse"></span>
             <FaRocket className="text-indigo-400" />
             <span>Official University Project Showcase Platform</span>
           </div>
@@ -184,14 +185,14 @@ const HomePage = () => {
               onClick={() => navigate('/loginpage')}
               className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur-md transition-all hover:border-indigo-500/50 hover:bg-slate-800 hover:text-white"
             >
-              <FaCode className="text-sm text-indigo-400" />
+              <FaCode className="text-indigo-400 text-sm" />
               Submit Your Project
             </button>
             <button
               onClick={() => navigate('/top-liked')}
               className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-5 py-3.5 text-sm font-semibold text-amber-300 backdrop-blur-md transition-all hover:border-amber-500/40 hover:bg-amber-500/20"
             >
-              <FaAward className="text-sm text-amber-400" />
+              <FaAward className="text-amber-400 text-sm" />
               Top Leaderboard
             </button>
           </div>
@@ -236,16 +237,16 @@ const HomePage = () => {
                 low-cost screening assistant for rural healthcare centers.
               </p>
               <div className="flex flex-wrap items-center gap-2 pt-2">
-                <span className="rounded-md border border-indigo-500/30 bg-indigo-500/20 px-2.5 py-1 text-xs font-semibold text-indigo-300">
+                <span className="rounded-md bg-indigo-500/20 px-2.5 py-1 text-xs font-semibold text-indigo-300 border border-indigo-500/30">
                   PyTorch
                 </span>
-                <span className="rounded-md border border-purple-500/30 bg-purple-500/20 px-2.5 py-1 text-xs font-semibold text-purple-300">
+                <span className="rounded-md bg-purple-500/20 px-2.5 py-1 text-xs font-semibold text-purple-300 border border-purple-500/30">
                   FastAPI
                 </span>
-                <span className="rounded-md border border-pink-500/30 bg-pink-500/20 px-2.5 py-1 text-xs font-semibold text-pink-300">
+                <span className="rounded-md bg-pink-500/20 px-2.5 py-1 text-xs font-semibold text-pink-300 border border-pink-500/30">
                   Computer Vision
                 </span>
-                <span className="rounded-md border border-emerald-500/30 bg-emerald-500/20 px-2.5 py-1 text-xs font-semibold text-emerald-300">
+                <span className="rounded-md bg-emerald-500/20 px-2.5 py-1 text-xs font-semibold text-emerald-300 border border-emerald-500/30">
                   Clinical Trial
                 </span>
               </div>
@@ -576,7 +577,7 @@ const HomePage = () => {
       {/* Call to Action Banner */}
       <section className="relative mx-4 my-16 overflow-hidden rounded-3xl border border-indigo-500/30 bg-gradient-to-r from-indigo-950/70 via-purple-950/50 to-slate-950 p-8 text-center sm:mx-8 sm:p-14">
         <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl"></div>
-        <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl"></div>
+        <div className="pointer-events-none absolute -top-24 -left-24 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl"></div>
 
         <div className="relative mx-auto max-w-2xl space-y-4">
           <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300">
@@ -589,7 +590,7 @@ const HomePage = () => {
             Join hundreds of engineering students and faculty mentors publishing their achievements
             on ProjectHub today.
           </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+          <div className="pt-4 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => navigate('/loginpage')}
               className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-indigo-500/30 transition-all hover:scale-105 hover:from-indigo-600 hover:to-purple-700 active:scale-95"
@@ -610,3 +611,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+
