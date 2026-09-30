@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
-import api, { SOCKET_URL } from './api';
+import api from './api';
 import styles from './MainHome.module.css';
 import ProjectCard from './ProjectCard';
 import SubmitProjectModal from './SubmitProjectModal';
@@ -30,7 +30,7 @@ const MainHome = () => {
 
   // Setup Socket.IO client for real-time updates
   useEffect(() => {
-    const socket = io(SOCKET_URL);
+    const socket = io('http://localhost:4000');
     socket.on('newProject', (project) => {
       console.log('New project received via socket:', project);
       setProjects(prev => {

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import api from '../components/api';
+import axios from 'axios';
 import TopProjectCard from './TopProjectCard';
 import styles from './TopLikedPage.module.css';
 import { FaTrophy } from 'react-icons/fa';
@@ -12,7 +12,7 @@ const TopLikedPage = () => {
   useEffect(() => {
     const fetchTopLiked = async () => {
       try {
-        const response = await api.get('/projects/top-liked');
+        const response = await axios.get('http://localhost:4000/api/projects/top-liked');
         setTopProjects(response.data);
       } catch (err) {
         setError('Failed to load top liked projects: ' + (err.response?.data?.details || err.message));

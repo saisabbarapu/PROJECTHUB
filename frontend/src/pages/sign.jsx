@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import api from '../components/api';
+import axios from 'axios';
 import styles from './sign.module.css';
 import { ToasterContext } from '../components/ToasterContext';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
@@ -72,7 +72,7 @@ const Signup = () => {
       addToast('Please resolve the issues and fill remaining fields.', 'error', 4000);
     } else {
       try {
-        const response = await api.post('/users/signup', formData);
+        const response = await axios.post('http://localhost:4000/api/users/signup', formData);
         addToast('Signup successful!', 'success', 3000);
         setFormData({
           firstName: '',
