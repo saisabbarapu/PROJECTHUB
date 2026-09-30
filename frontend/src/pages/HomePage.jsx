@@ -140,9 +140,12 @@ const HomePage = () => {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <main className="min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
+    <main className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
+      {/* Top Ambient Aurora Glow behind Floating Navbar */}
+      <div className="pointer-events-none absolute -top-20 left-1/2 -z-10 h-80 w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,rgba(99,102,241,0.35),rgba(168,85,247,0.18),transparent_75%)] blur-3xl"></div>
+
       {/* Hero Section */}
-      <section className="relative overflow-hidden px-4 pb-20 pt-16 sm:px-6 sm:pb-28 sm:pt-24 lg:px-8">
+      <section className="relative overflow-hidden px-4 pb-20 pt-10 sm:px-6 sm:pb-28 sm:pt-14 lg:px-8">
         {/* Ambient Gradient Background & Tech Grid */}
         <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(99,102,241,0.25),rgba(2,6,23,0))]"></div>
         <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0f_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0f_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
