@@ -74,12 +74,12 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-3 z-50 mx-auto w-[94%] max-w-7xl transition-all duration-300 sm:top-4 ${
+      className={`sticky top-3 sm:top-4 z-50 mx-auto w-[94%] max-w-7xl transition-all duration-300 ${
         scrolled ? 'scale-[0.995]' : ''
       }`}
     >
       <nav
-        className={`relative backdrop-blur-xl transition-all duration-300 ${
+        className={`relative transition-all duration-300 backdrop-blur-xl ${
           scrolled
             ? 'border border-indigo-500/30 bg-slate-950/90 shadow-2xl shadow-indigo-950/30 ring-1 ring-indigo-500/20'
             : 'border border-slate-800/80 bg-slate-950/80 shadow-xl shadow-black/40 ring-1 ring-white/5'
@@ -128,7 +128,7 @@ const Navbar = () => {
                 <span>Departments</span>
                 <FaChevronDown className="text-[10px] transition-transform duration-200 group-hover:rotate-180" />
               </button>
-              <div className="absolute left-1/2 z-50 mt-2 hidden w-44 -translate-x-1/2 rounded-2xl border border-slate-800 bg-slate-950/95 p-2 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl group-hover:block">
+              <div className="absolute left-1/2 -translate-x-1/2 mt-2 hidden w-44 rounded-2xl border border-slate-800 bg-slate-950/95 p-2 shadow-2xl backdrop-blur-2xl ring-1 ring-white/10 group-hover:block z-50">
                 {departments.map((dept) => (
                   <button
                     key={dept}
@@ -326,3 +326,4 @@ const Navbar = () => {
 };
 
 export default Navbar;
+
