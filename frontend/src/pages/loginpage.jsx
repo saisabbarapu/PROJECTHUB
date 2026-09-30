@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useContext } from 'react';
-import axios from 'axios';
+import api from '../components/api';
 import styles from './loginPage.module.css';
 import { FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
@@ -39,7 +39,7 @@ const LoginPage = () => {
     }
 
     try {
-      const response = await axios.post('http://localhost:4000/api/users/login', formData);
+      const response = await api.post('/users/login', formData);
       // Store user in localStorage for Navbar/profile
       if (response.data && response.data.user) {
         localStorage.setItem('user', JSON.stringify(response.data.user));

@@ -37,7 +37,7 @@ const HomePage = () => {
       id: 2,
       title: 'Smart Irrigation System',
       description: 'Automated water usage optimization for sustainable agriculture.',
-      image: 'C:\Users\LEELA SAI\OneDrive\Desktop\projecthub\frontend\public\image\smartirrigation.jpeg.jpg',
+      image: '/image/smartirrigation.jpeg.jpg',
     },
     {
       id: 3,
@@ -55,7 +55,7 @@ const HomePage = () => {
       id: 5,
       title: 'Virtual Lab for Chemistry',
       description: 'A simulated environment allowing students to safely conduct experiments online.',
-      image: 'C:\Users\LEELA SAI\OneDrive\Desktop\projecthub\frontend\public\image\virtuallab.webp.jpg',
+      image: '/image/virtuallab.webp.jpg',
     },
     {
       id: 6,

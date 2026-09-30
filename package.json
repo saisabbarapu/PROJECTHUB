@@ -1,0 +1,25 @@
+{
+  "name": "projecthub",
+  "version": "1.0.0",
+  "description": "ProjectHub - Full-Stack Student Project Showcase Platform",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix backend && npm install --prefix frontend",
+    "install:backend": "npm install --prefix backend",
+    "install:frontend": "npm install --prefix frontend",
+    "start:backend": "npm start --prefix backend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "build:frontend": "npm run build --prefix frontend"
+  },
+  "keywords": [
+    "react",
+    "nodejs",
+    "express",
+    "mongodb",
+    "socketio",
+    "vite",
+    "project-showcase"
+  ],
+  "author": "Sai Sabbarapu",
+  "license": "MIT"
+}

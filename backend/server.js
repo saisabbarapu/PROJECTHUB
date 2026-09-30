@@ -9,6 +9,9 @@ import userRoutes from './routes/userRoutes.js'; // New user routes
 import nodemailer from 'nodemailer';
 import { createServer } from 'http';
 import { Server } from 'socket.io';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 // Suppress punycode deprecation warning
 process.emitWarning = (warning, type, code, ctor) => {
@@ -21,8 +24,7 @@ const httpServer = createServer(app);
 const PORT = process.env.PORT || 4000;
 
 // MongoDB connection configuration with fallback
-const mongoDB_url = process.env.MONGODB_URL || 
-  'mongodb+srv://24m11mc150:Sabbarapu%40123@cluster0.zmuwm5s.mongodb.net/project-showcase?retryWrites=true&w=majority';
+const mongoDB_url = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/project-showcase';
 
 // Fallback to local MongoDB if Atlas fails
 const localMongoDB_url = 'mongodb://localhost:27017/project-showcase';
@@ -42,8 +44,8 @@ if (!fs.existsSync(imageDir)) fs.mkdirSync(imageDir, { recursive: true });
 const transporter = nodemailer.createTransport({
   service: 'gmail',
   auth: {
-    user: process.env.EMAIL_USER || 'projecthubs983@gmail.com',
-    pass: process.env.EMAIL_PASS || 'lcby vvej cmzf rgbe',
+    user: process.env.EMAIL_USER || '',
+    pass: process.env.EMAIL_PASS || '',
   },
 });
 
@@ -51,9 +53,33 @@ const transporter = nodemailer.createTransport({
 app.use(express.json({ limit: '10mb' }));
 app.use(express.urlencoded({ extended: true, limit: '10mb' }));
 
-// CORS configuration
+// CORS configuration supporting local and production frontend domains
+const allowedOrigins = [
+  'http://localhost:3000',
+  'http://127.0.0.1:3000',
+  'http://localhost:5173',
+  'http://127.0.0.1:5173',
+  'http://192.168.187.84:3000',
+  process.env.FRONTEND_URL,
+  ...(process.env.CORS_ORIGIN ? process.env.CORS_ORIGIN.split(',').map(s => s.trim()) : [])
+].filter(Boolean);
+
 app.use(cors({
-  origin: ['http://localhost:3000', 'http://192.168.187.84:3000'],
+  origin: (origin, callback) => {
+    if (!origin) return callback(null, true);
+    if (
+      allowedOrigins.includes('*') ||
+      allowedOrigins.includes(origin) ||
+      process.env.NODE_ENV !== 'production' ||
+      origin.endsWith('.vercel.app') ||
+      origin.endsWith('.netlify.app') ||
+      origin.endsWith('.onrender.com') ||
+      origin.endsWith('.railway.app')
+    ) {
+      return callback(null, true);
+    }
+    return callback(null, true);
+  },
   credentials: true,
   methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
@@ -65,6 +91,9 @@ app.use((req, res, next) => {
   res.setTimeout(30000); // 30 seconds
   next();
 });
+
+// Serve static uploads
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')));
 
 // API routes
 app.use('/api/projects', projectRoutes);
@@ -106,14 +135,7 @@ app.use('*', (req, res) => {
 // Create Socket.IO server
 const io = new Server(httpServer, {
   cors: {
-    origin: [
-      'http://localhost:3000', 
-      'http://127.0.0.1:3000',
-      'http://192.168.187.84:3000',
-      /^http:\/\/192\.168\.\d+\.\d+:3000$/, // Allow any 192.168.x.x:3000
-      /^http:\/\/10\.\d+\.\d+\.\d+:3000$/,  // Allow any 10.x.x.x:3000
-      /^http:\/\/172\.(1[6-9]|2[0-9]|3[0-1])\.\d+\.\d+:3000$/ // Allow 172.16-31.x.x:3000
-    ],
+    origin: (origin, callback) => callback(null, true),
     methods: ['GET', 'POST'],
     credentials: true,
   }
