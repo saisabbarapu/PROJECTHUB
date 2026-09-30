@@ -8,11 +8,15 @@ export const getAllProjects = async (req, res) => {
     if (mongoose.connection.readyState !== 1) {
       return res.status(503).json({ error: 'Service unavailable: Database not connected' });
     }
-    const projects = await Project.find().sort({ createdAt: -1 }).select('+toolsUsed +likes +imageData +pdfData +imageMimeType');
-    res.json(projects.map(p => ({
-      ...p.toObject(),
-      toolsUsed: p.toolsUsed || [],
-    })));
+    const projects = await Project.find()
+      .sort({ createdAt: -1 })
+      .select('+toolsUsed +likes +imageData +pdfData +imageMimeType');
+    res.json(
+      projects.map((p) => ({
+        ...p.toObject(),
+        toolsUsed: p.toolsUsed || [],
+      }))
+    );
   } catch (err) {
     console.error('Error in getAllProjects:', err.message);
     console.error('Stack trace:', err.stack);
@@ -29,7 +33,8 @@ export const createProject = async (req, res) => {
     console.log('Request body:', req.body);
     console.log('Files:', req.files);
 
-    const { name, email, rollno, title, description, github, department, toolsUsed, projectUrl } = req.body;
+    const { name, email, rollno, title, description, github, department, toolsUsed, projectUrl } =
+      req.body;
 
     // Validate required fields
     if (!name || !email || !rollno || !title || !description || !github || !department) {
@@ -85,7 +90,7 @@ export const createProject = async (req, res) => {
     // Convert files to base64
     const pdfBuffer = fs.readFileSync(pdfFile.path);
     const imageBuffer = fs.readFileSync(imageFile.path);
-    
+
     const pdfBase64 = pdfBuffer.toString('base64');
     const imageBase64 = imageBuffer.toString('base64');
 
@@ -104,7 +109,12 @@ export const createProject = async (req, res) => {
       github: github.trim(),
       projectUrl: projectUrl ? projectUrl.trim() : '',
       department: department.trim(),
-      toolsUsed: toolsUsed ? toolsUsed.split(',').map(tool => tool.trim()).filter(tool => tool.length > 0) : [],
+      toolsUsed: toolsUsed
+        ? toolsUsed
+            .split(',')
+            .map((tool) => tool.trim())
+            .filter((tool) => tool.length > 0)
+        : [],
       // Store files directly in database
       pdfData: pdfBase64,
       imageData: imageBase64,
@@ -116,7 +126,7 @@ export const createProject = async (req, res) => {
 
     const savedProject = await newProject.save();
     console.log('Saved project with toolsUsed:', savedProject.toolsUsed);
-    
+
     // Emit real-time event to all clients
     const io = req.app.get('io');
     if (io) {
@@ -125,12 +135,12 @@ export const createProject = async (req, res) => {
     // Return success response with the saved project
     res.status(201).json({
       message: 'Project created successfully',
-      project: savedProject
+      project: savedProject,
     });
   } catch (err) {
     console.error('Error in createProject:', err.message);
     console.error('Stack trace:', err.stack);
-    
+
     // Clean up uploaded files if they exist and error occurred
     if (req.files) {
       if (req.files.pdf && req.files.pdf[0]) {
@@ -148,7 +158,7 @@ export const createProject = async (req, res) => {
         }
       }
     }
-    
+
     res.status(500).json({ error: 'Failed to create project', details: err.message });
   }
 };
@@ -170,7 +180,7 @@ export const addLike = async (req, res) => {
     const alreadyLiked = project.likedBy.includes(userEmail);
     if (alreadyLiked) {
       // Unlike
-      project.likedBy = project.likedBy.filter(email => email !== userEmail);
+      project.likedBy = project.likedBy.filter((email) => email !== userEmail);
       project.likes = Math.max((project.likes || 1) - 1, 0);
     } else {
       // Like
@@ -178,7 +188,11 @@ export const addLike = async (req, res) => {
       project.likes = (project.likes || 0) + 1;
     }
     const updatedProject = await project.save();
-    res.json({ likes: updatedProject.likes, likedBy: updatedProject.likedBy, _id: updatedProject._id });
+    res.json({
+      likes: updatedProject.likes,
+      likedBy: updatedProject.likedBy,
+      _id: updatedProject._id,
+    });
   } catch (err) {
     res.status(500).json({ error: 'Failed to add/remove like', details: err.message });
   }
@@ -192,7 +206,7 @@ export const deleteProject = async (req, res) => {
       return res.status(404).json({ error: 'Project not found' });
     }
 
-    // Since files are now stored in the database as base64, 
+    // Since files are now stored in the database as base64,
     // we don't need to delete files from disk anymore
     // The database deletion above already removes the file data
 

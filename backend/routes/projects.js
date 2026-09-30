@@ -2,7 +2,12 @@ import express from 'express';
 import multer from 'multer';
 import mongoose from 'mongoose'; // ✅ Added to fix the error
 import Project from '../models/Project.js';
-import { getAllProjects, createProject, addLike, deleteProject } from '../controllers/projectsController.js';
+import {
+  getAllProjects,
+  createProject,
+  addLike,
+  deleteProject,
+} from '../controllers/projectsController.js';
 import { transporter } from '../server.js'; // For nodemailer
 import path from 'path';
 import { fileURLToPath } from 'url';
@@ -69,11 +74,16 @@ router.get('/top-liked', async (req, res) => {
       return res.status(503).json({ error: 'Service unavailable: Database not connected' });
     }
 
-    const topProjects = await Project.find().sort({ likes: -1 }).limit(3).select('+toolsUsed +likes +imageData +pdfData +imageMimeType');
-    res.json(topProjects.map(p => ({
-      ...p.toObject(),
-      toolsUsed: p.toolsUsed || [],
-    })));
+    const topProjects = await Project.find()
+      .sort({ likes: -1 })
+      .limit(3)
+      .select('+toolsUsed +likes +imageData +pdfData +imageMimeType');
+    res.json(
+      topProjects.map((p) => ({
+        ...p.toObject(),
+        toolsUsed: p.toolsUsed || [],
+      }))
+    );
   } catch (err) {
     console.error('Error in getTopLikedProjects:', err.message);
     console.error('Stack trace:', err.stack);
@@ -121,19 +131,19 @@ router.get('/:id/image', async (req, res) => {
     if (!project) {
       return res.status(404).json({ error: 'Project not found' });
     }
-    
+
     if (!project.imageData) {
       return res.status(404).json({ error: 'Image not found' });
     }
-    
+
     // Convert base64 back to buffer
     const imageBuffer = Buffer.from(project.imageData, 'base64');
-    
+
     // Set appropriate headers
     res.setHeader('Content-Type', project.imageMimeType || 'image/jpeg');
     res.setHeader('Content-Length', imageBuffer.length);
     res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
-    
+
     res.send(imageBuffer);
   } catch (err) {
     console.error('Error serving image:', err.message);
@@ -148,20 +158,20 @@ router.get('/:id/pdf', async (req, res) => {
     if (!project) {
       return res.status(404).json({ error: 'Project not found' });
     }
-    
+
     if (!project.pdfData) {
       return res.status(404).json({ error: 'PDF not found' });
     }
-    
+
     // Convert base64 back to buffer
     const pdfBuffer = Buffer.from(project.pdfData, 'base64');
-    
+
     // Set appropriate headers
     res.setHeader('Content-Type', 'application/pdf');
     res.setHeader('Content-Length', pdfBuffer.length);
     res.setHeader('Content-Disposition', `inline; filename="${project.title}.pdf"`);
     res.setHeader('Cache-Control', 'public, max-age=86400'); // Cache for 1 day
-    
+
     res.send(pdfBuffer);
   } catch (err) {
     console.error('Error serving PDF:', err.message);

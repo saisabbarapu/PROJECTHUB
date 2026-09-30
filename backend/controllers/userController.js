@@ -15,13 +15,20 @@ export const signup = async (req, res) => {
     // Validate email
     const emailRegex = /@(?:adityauniversity\.in|acet\.in)$/;
     if (!emailRegex.test(email)) {
-      return res.status(400).json({ error: 'Email must end with @adityauniversity.in or @acet.in' });
+      return res
+        .status(400)
+        .json({ error: 'Email must end with @adityauniversity.in or @acet.in' });
     }
 
     // Validate password
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(password)) {
-      return res.status(400).json({ error: 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character (@$!%*?&)' });
+      return res
+        .status(400)
+        .json({
+          error:
+            'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character (@$!%*?&)',
+        });
     }
 
     // Check if user already exists
@@ -68,7 +75,10 @@ export const login = async (req, res) => {
       return res.status(401).json({ error: 'Invalid password' });
     }
 
-    res.json({ message: 'Login successful', user: { id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName } });
+    res.json({
+      message: 'Login successful',
+      user: { id: user._id, email: user.email, firstName: user.firstName, lastName: user.lastName },
+    });
   } catch (err) {
     console.error('Error in login:', err.message);
     console.error('Stack trace:', err.stack);
@@ -95,7 +105,7 @@ export const forgotPassword = async (req, res) => {
       to: user.email,
       from: process.env.EMAIL_USER || 'projecthubs983@gmail.com',
       subject: 'Password Reset Request',
-      html: `<p>You requested a password reset.</p><p>Click <a href="${resetUrl}">here</a> to reset your password. This link is valid for 1 hour.</p>`
+      html: `<p>You requested a password reset.</p><p>Click <a href="${resetUrl}">here</a> to reset your password. This link is valid for 1 hour.</p>`,
     };
     await transporter.sendMail(mailOptions);
     res.json({ message: 'Password reset email sent.' });
@@ -110,7 +120,7 @@ export const resetPassword = async (req, res) => {
     const { token, newPassword } = req.body;
     const user = await User.findOne({
       resetPasswordToken: token,
-      resetPasswordExpires: { $gt: Date.now() }
+      resetPasswordExpires: { $gt: Date.now() },
     });
     if (!user) {
       return res.status(400).json({ error: 'Password reset token is invalid or has expired.' });
@@ -118,7 +128,12 @@ export const resetPassword = async (req, res) => {
     // Validate new password
     const passwordRegex = /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/;
     if (!passwordRegex.test(newPassword)) {
-      return res.status(400).json({ error: 'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character (@$!%*?&)' });
+      return res
+        .status(400)
+        .json({
+          error:
+            'Password must be at least 8 characters long and include uppercase, lowercase, number, and special character (@$!%*?&)',
+        });
     }
     // Hash new password
     const salt = await bcrypt.genSalt(10);

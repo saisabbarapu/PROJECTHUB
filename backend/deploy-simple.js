@@ -26,13 +26,13 @@ console.log('🚀 Deploying to Railway...');
 try {
   execSync('railway up', { stdio: 'inherit' });
   console.log('✅ Deployment successful!');
-  
+
   // Get the URL
   try {
     const url = execSync('railway domain', { encoding: 'utf8' }).trim();
     console.log(`🌐 Your app is live at: ${url}`);
     console.log(`🔗 API endpoint: ${url}/api`);
-    
+
     console.log('\n📋 Next steps:');
     console.log('1. Set environment variables in Railway dashboard:');
     console.log('   - MONGODB_URL: Your MongoDB connection string');
@@ -45,9 +45,8 @@ try {
   } catch (urlError) {
     console.log('⚠️  Could not get domain. Check Railway dashboard for your URL.');
   }
-  
 } catch (error) {
   console.log('❌ Deployment failed:', error.message);
   console.log('\n💡 Make sure you have set up environment variables in Railway dashboard.');
   process.exit(1);
-} 
+}

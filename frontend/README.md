@@ -54,5 +54,6 @@ Open your browser and go to the URL shown in the terminal (usually `http://local
 ---
 
 ### Notes
+
 - Do **not** share your real `.env` file. Each developer should create their own.
 - If you need to serve images or files from the backend, ensure the backend server is accessible from the device running the frontend.

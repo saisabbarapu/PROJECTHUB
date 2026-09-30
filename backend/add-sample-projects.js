@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 import Project from './models/Project.js';
 
 // MongoDB connection configuration
-const mongoDB_url = process.env.MONGODB_URL || 
+const mongoDB_url =
+  process.env.MONGODB_URL ||
   'mongodb+srv://24m11mc150:Sabbarapu%40123@cluster0.zmuwm5s.mongodb.net/project-showcase?retryWrites=true&w=majority';
 
 const sampleProjects = [
@@ -15,7 +16,7 @@ const sampleProjects = [
     github: 'https://github.com/johndoe/smart-home',
     department: 'CSE',
     toolsUsed: ['Arduino', 'IoT', 'Mobile App', 'C++'],
-    projectUrl: 'https://smart-home-demo.com'
+    projectUrl: 'https://smart-home-demo.com',
   },
   {
     name: 'Jane Smith',
@@ -26,7 +27,7 @@ const sampleProjects = [
     github: 'https://github.com/janesmith/ai-chatbot',
     department: 'AI&ML',
     toolsUsed: ['Python', 'TensorFlow', 'NLP', 'Flask'],
-    projectUrl: 'https://ai-chatbot-demo.com'
+    projectUrl: 'https://ai-chatbot-demo.com',
   },
   {
     name: 'Mike Johnson',
@@ -37,7 +38,7 @@ const sampleProjects = [
     github: 'https://github.com/mikejohnson/ecommerce',
     department: 'IT',
     toolsUsed: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-    projectUrl: 'https://ecommerce-demo.com'
+    projectUrl: 'https://ecommerce-demo.com',
   },
   {
     name: 'Sarah Wilson',
@@ -48,7 +49,7 @@ const sampleProjects = [
     github: 'https://github.com/sarahwilson/solar-monitor',
     department: 'ECE',
     toolsUsed: ['Arduino', 'Sensors', 'Data Analytics', 'Web Dashboard'],
-    projectUrl: 'https://solar-monitor-demo.com'
+    projectUrl: 'https://solar-monitor-demo.com',
   },
   {
     name: 'David Brown',
@@ -59,7 +60,7 @@ const sampleProjects = [
     github: 'https://github.com/davidbrown/irrigation',
     department: 'MECH',
     toolsUsed: ['Arduino', 'Sensors', 'Automation', 'IoT'],
-    projectUrl: 'https://irrigation-demo.com'
+    projectUrl: 'https://irrigation-demo.com',
   },
   {
     name: 'Lisa Davis',
@@ -70,7 +71,7 @@ const sampleProjects = [
     github: 'https://github.com/lisadavis/chemical-opt',
     department: 'CHEMICAL',
     toolsUsed: ['Python', 'Machine Learning', 'Process Control', 'Data Analysis'],
-    projectUrl: 'https://chemical-opt-demo.com'
+    projectUrl: 'https://chemical-opt-demo.com',
   },
   {
     name: 'Tom Miller',
@@ -81,7 +82,7 @@ const sampleProjects = [
     github: 'https://github.com/tommiller/analytics',
     department: 'MBA',
     toolsUsed: ['Tableau', 'SQL', 'Python', 'Power BI'],
-    projectUrl: 'https://analytics-demo.com'
+    projectUrl: 'https://analytics-demo.com',
   },
   {
     name: 'Emma Wilson',
@@ -92,8 +93,8 @@ const sampleProjects = [
     github: 'https://github.com/emmawilson/bridge-monitor',
     department: 'CIVIL',
     toolsUsed: ['Sensors', 'IoT', 'Data Analysis', 'Structural Engineering'],
-    projectUrl: 'https://bridge-monitor-demo.com'
-  }
+    projectUrl: 'https://bridge-monitor-demo.com',
+  },
 ];
 
 async function addSampleProjects() {
@@ -107,37 +108,40 @@ async function addSampleProjects() {
 
     // Check if sample projects already exist
     const existingProjects = await Project.find({
-      title: { $in: sampleProjects.map(p => p.title) }
+      title: { $in: sampleProjects.map((p) => p.title) },
     });
 
     if (existingProjects.length > 0) {
       console.log('⚠️ Some sample projects already exist. Skipping...');
-      console.log('Existing projects:', existingProjects.map(p => p.title));
+      console.log(
+        'Existing projects:',
+        existingProjects.map((p) => p.title)
+      );
       return;
     }
 
     // Add sample projects
     console.log('📝 Adding sample projects...');
-    
+
     for (const projectData of sampleProjects) {
       const project = new Project({
         ...projectData,
         pdfUrl: 'https://example.com/sample.pdf',
         imageUrl: 'https://example.com/sample.jpg',
         likes: Math.floor(Math.random() * 10), // Random likes for testing
-        createdAt: new Date()
+        createdAt: new Date(),
       });
-      
+
       await project.save();
       console.log(`✅ Added: ${projectData.title} (${projectData.department})`);
     }
 
     console.log('\n🎉 All sample projects added successfully!');
-    
+
     // Show updated project count by department
     const allProjects = await Project.find();
     const departmentStats = {};
-    allProjects.forEach(project => {
+    allProjects.forEach((project) => {
       const dept = project.department || 'No Department';
       if (!departmentStats[dept]) {
         departmentStats[dept] = 0;
@@ -150,7 +154,6 @@ async function addSampleProjects() {
     Object.entries(departmentStats).forEach(([dept, count]) => {
       console.log(`${dept}: ${count} projects`);
     });
-
   } catch (error) {
     console.error('❌ Error:', error.message);
   } finally {
@@ -159,4 +162,4 @@ async function addSampleProjects() {
   }
 }
 
-addSampleProjects(); 
+addSampleProjects();

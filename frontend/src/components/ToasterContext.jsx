@@ -22,4 +22,4 @@ export const ToasterProvider = ({ children }) => {
       {children}
     </ToasterContext.Provider>
   );
-}; 
+};

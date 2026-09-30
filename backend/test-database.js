@@ -2,7 +2,8 @@ import mongoose from 'mongoose';
 import Project from './models/Project.js';
 
 // MongoDB connection configuration
-const mongoDB_url = process.env.MONGODB_URL || 
+const mongoDB_url =
+  process.env.MONGODB_URL ||
   'mongodb+srv://24m11mc150:Sabbarapu%40123@cluster0.zmuwm5s.mongodb.net/project-showcase?retryWrites=true&w=majority';
 
 async function testDatabase() {
@@ -16,9 +17,9 @@ async function testDatabase() {
 
     // Get all projects
     const projects = await Project.find().sort({ createdAt: -1 });
-    
+
     console.log(`\n📊 Total projects in database: ${projects.length}`);
-    
+
     if (projects.length === 0) {
       console.log('❌ No projects found in database');
       return;
@@ -26,7 +27,7 @@ async function testDatabase() {
 
     // Group projects by department
     const departmentStats = {};
-    projects.forEach(project => {
+    projects.forEach((project) => {
       const dept = project.department || 'No Department';
       if (!departmentStats[dept]) {
         departmentStats[dept] = [];
@@ -36,7 +37,7 @@ async function testDatabase() {
 
     console.log('\n🏢 Projects by Department:');
     console.log('========================');
-    
+
     Object.entries(departmentStats).forEach(([dept, projectList]) => {
       console.log(`\n${dept} (${projectList.length} projects):`);
       projectList.forEach((project, index) => {
@@ -47,7 +48,7 @@ async function testDatabase() {
     // Show all project details
     console.log('\n📋 All Project Details:');
     console.log('=====================');
-    
+
     projects.forEach((project, index) => {
       console.log(`\n${index + 1}. Project Details:`);
       console.log(`   Title: ${project.title}`);
@@ -60,7 +61,6 @@ async function testDatabase() {
       console.log(`   Likes: ${project.likes || 0}`);
       console.log(`   Created: ${project.createdAt}`);
     });
-
   } catch (error) {
     console.error('❌ Error:', error.message);
   } finally {
@@ -69,4 +69,4 @@ async function testDatabase() {
   }
 }
 
-testDatabase(); 
+testDatabase();

@@ -12,13 +12,12 @@ const DirectDatabaseImage = ({ projectId, fallbackSrc = '/placeholder-image.jpg'
         // Connect directly to MongoDB Atlas
         const client = new MongoClient(import.meta.env.VITE_MONGODB_URL);
         await client.connect();
-        
+
         const db = client.db('project-showcase');
-        const project = await db.collection('projects').findOne(
-          { _id: projectId },
-          { projection: { imageData: 1, imageMimeType: 1 } }
-        );
-        
+        const project = await db
+          .collection('projects')
+          .findOne({ _id: projectId }, { projection: { imageData: 1, imageMimeType: 1 } });
+
         if (project && project.imageData) {
           // Convert base64 to data URL
           const dataUrl = `data:${project.imageMimeType};base64,${project.imageData}`;
@@ -26,7 +25,7 @@ const DirectDatabaseImage = ({ projectId, fallbackSrc = '/placeholder-image.jpg'
         } else {
           setError(true);
         }
-        
+
         await client.close();
       } catch (err) {
         console.error('Error fetching image from database:', err);
@@ -50,4 +49,4 @@ const DirectDatabaseImage = ({ projectId, fallbackSrc = '/placeholder-image.jpg'
   return <img src={imageSrc} alt="Project" />;
 };
 
-export default DirectDatabaseImage; 
+export default DirectDatabaseImage;

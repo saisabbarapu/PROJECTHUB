@@ -70,12 +70,12 @@
 └─────────────────────────────────┘
 ```
 
-| Layer | Technologies |
-| :--- | :--- |
-| **Frontend** | React 18, Vite 5, React Router DOM 6, Axios, Socket.IO Client, React Icons, CSS Modules |
-| **Backend** | Node.js (ES Modules), Express 4, Mongoose 7, Multer, Socket.IO 4, Nodemailer, BcryptJS |
-| **Database** | MongoDB (Local MongoDB Server or MongoDB Atlas Cloud) |
-| **Deployment** | Vercel / Netlify (Frontend), Render / Railway (Backend), MongoDB Atlas (Database) |
+| Layer          | Technologies                                                                            |
+| :------------- | :-------------------------------------------------------------------------------------- |
+| **Frontend**   | React 18, Vite 5, React Router DOM 6, Axios, Socket.IO Client, React Icons, CSS Modules |
+| **Backend**    | Node.js (ES Modules), Express 4, Mongoose 7, Multer, Socket.IO 4, Nodemailer, BcryptJS  |
+| **Database**   | MongoDB (Local MongoDB Server or MongoDB Atlas Cloud)                                   |
+| **Deployment** | Vercel / Netlify (Frontend), Render / Railway (Backend), MongoDB Atlas (Database)       |
 
 ---
 
@@ -129,6 +129,7 @@ PROJECTHUB/
 ## ⚙️ Prerequisites
 
 Before getting started, make sure you have the following installed on your machine:
+
 - **Node.js** (v18.0.0 or higher recommended)
 - **npm** (v9.0.0 or higher)
 - **MongoDB** (Local MongoDB Community Server running on port 27017 **OR** a free [MongoDB Atlas](https://www.mongodb.com/atlas) cluster)
@@ -139,25 +140,32 @@ Before getting started, make sure you have the following installed on your machi
 ## 🚀 Quick Start (Local Development)
 
 ### 1. Clone the Repository
+
 ```bash
 git clone https://github.com/saisabbarapu/PROJECTHUB.git
 cd PROJECTHUB
 ```
 
 ### 2. Install Dependencies
+
 You can install dependencies for both frontend and backend using the root helper script:
+
 ```bash
 npm run install:all
 ```
-*(Alternatively: run `npm install` inside both `backend` and `frontend` folders).*
+
+_(Alternatively: run `npm install` inside both `backend` and `frontend` folders)._
 
 ### 3. Configure Environment Variables
 
 **Backend (`backend/.env`):**
+
 ```bash
 cp backend/.env.example backend/.env
 ```
+
 Default local configuration:
+
 ```env
 PORT=4000
 MONGODB_URL=mongodb://127.0.0.1:27017/project-showcase
@@ -168,10 +176,13 @@ EMAIL_PASS=your_gmail_app_password
 ```
 
 **Frontend (`frontend/.env`):**
+
 ```bash
 cp frontend/.env.example frontend/.env
 ```
+
 Default local configuration:
+
 ```env
 VITE_API_URL=http://localhost:4000/api
 ```
@@ -179,18 +190,22 @@ VITE_API_URL=http://localhost:4000/api
 ### 4. Start the Application
 
 **Terminal 1 — Start the Backend Server:**
+
 ```bash
 cd backend
 npm start
 ```
-*Backend runs at `http://localhost:4000` (Health check at `http://localhost:4000/health`).*
+
+_Backend runs at `http://localhost:4000` (Health check at `http://localhost:4000/health`)._
 
 **Terminal 2 — Start the Frontend Development Server:**
+
 ```bash
 cd frontend
 npm run dev
 ```
-*Frontend runs at `http://localhost:3000`.*
+
+_Frontend runs at `http://localhost:3000`._
 
 Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 
@@ -200,49 +215,52 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 
 ### Frontend Variables (`frontend/.env`)
 
-| Variable | Description | Default (Local) | Production Example |
-| :--- | :--- | :--- | :--- |
-| `VITE_API_URL` | Base URL for backend REST API | `http://localhost:4000/api` | `https://projecthub-api.onrender.com/api` |
-| `VITE_SOCKET_URL` | *(Optional)* Socket.IO server base URL | Auto-derived from `VITE_API_URL` | `https://projecthub-api.onrender.com` |
+| Variable          | Description                            | Default (Local)                  | Production Example                        |
+| :---------------- | :------------------------------------- | :------------------------------- | :---------------------------------------- |
+| `VITE_API_URL`    | Base URL for backend REST API          | `http://localhost:4000/api`      | `https://projecthub-api.onrender.com/api` |
+| `VITE_SOCKET_URL` | _(Optional)_ Socket.IO server base URL | Auto-derived from `VITE_API_URL` | `https://projecthub-api.onrender.com`     |
 
 ### Backend Variables (`backend/.env`)
 
-| Variable | Description | Default (Local) | Production Example |
-| :--- | :--- | :--- | :--- |
-| `PORT` | Port for Express server | `4000` | Assigned automatically by host |
-| `MONGODB_URL` | MongoDB connection URI | `mongodb://127.0.0.1:27017/project-showcase` | `mongodb+srv://user:pass@cluster.mongodb.net/project-showcase` |
-| `FRONTEND_URL` | Production frontend domain for CORS | `http://localhost:3000` | `https://projecthub.vercel.app` |
-| `CORS_ORIGIN` | Allowed CORS origins (comma-separated) | `http://localhost:3000,http://127.0.0.1:3000` | `https://projecthub.vercel.app,https://projecthub.netlify.app` |
-| `EMAIL_USER` | Gmail address for password reset emails | *(Optional)* | `your-app@gmail.com` |
-| `EMAIL_PASS` | Gmail App Password (16-char code) | *(Optional)* | `abcd efgh ijkl mnop` |
+| Variable       | Description                             | Default (Local)                               | Production Example                                             |
+| :------------- | :-------------------------------------- | :-------------------------------------------- | :------------------------------------------------------------- |
+| `PORT`         | Port for Express server                 | `4000`                                        | Assigned automatically by host                                 |
+| `MONGODB_URL`  | MongoDB connection URI                  | `mongodb://127.0.0.1:27017/project-showcase`  | `mongodb+srv://user:pass@cluster.mongodb.net/project-showcase` |
+| `FRONTEND_URL` | Production frontend domain for CORS     | `http://localhost:3000`                       | `https://projecthub.vercel.app`                                |
+| `CORS_ORIGIN`  | Allowed CORS origins (comma-separated)  | `http://localhost:3000,http://127.0.0.1:3000` | `https://projecthub.vercel.app,https://projecthub.netlify.app` |
+| `EMAIL_USER`   | Gmail address for password reset emails | _(Optional)_                                  | `your-app@gmail.com`                                           |
+| `EMAIL_PASS`   | Gmail App Password (16-char code)       | _(Optional)_                                  | `abcd efgh ijkl mnop`                                          |
 
 ---
 
 ## 📡 API Documentation
 
 ### System Endpoints
-| Method | Endpoint | Description |
-| :--- | :--- | :--- |
-| `GET` | `/health` | Server status and MongoDB connection state |
-| `GET` | `/test-db` | Database ping check |
+
+| Method | Endpoint   | Description                                |
+| :----- | :--------- | :----------------------------------------- |
+| `GET`  | `/health`  | Server status and MongoDB connection state |
+| `GET`  | `/test-db` | Database ping check                        |
 
 ### Authentication Routes (`/api/users`)
-| Method | Endpoint | Description | Payload |
-| :--- | :--- | :--- | :--- |
-| `POST` | `/api/users/signup` | Register new user | `{ firstName, lastName, email, password }` |
-| `POST` | `/api/users/login` | Authenticate user | `{ email, password }` |
-| `POST` | `/api/users/forgot-password` | Request password reset email | `{ email }` |
-| `POST` | `/api/users/reset-password` | Reset password using token | `{ token, newPassword }` |
+
+| Method | Endpoint                     | Description                  | Payload                                    |
+| :----- | :--------------------------- | :--------------------------- | :----------------------------------------- |
+| `POST` | `/api/users/signup`          | Register new user            | `{ firstName, lastName, email, password }` |
+| `POST` | `/api/users/login`           | Authenticate user            | `{ email, password }`                      |
+| `POST` | `/api/users/forgot-password` | Request password reset email | `{ email }`                                |
+| `POST` | `/api/users/reset-password`  | Reset password using token   | `{ token, newPassword }`                   |
 
 ### Project Routes (`/api/projects`)
-| Method | Endpoint | Description | Payload |
-| :--- | :--- | :--- | :--- |
-| `GET` | `/api/projects` | Fetch all submitted projects | None |
-| `POST` | `/api/projects` | Upload new project (multipart/form-data) | Form fields + `image` and `pdf` files |
-| `GET` | `/api/projects/top-liked` | Fetch top 3 highest-liked projects | None |
-| `POST` | `/api/projects/:id/like` | Toggle or add like to project | `{ userEmail }` |
-| `POST` | `/api/projects/:id/feedback` | Post feedback comment on project | `{ feedback }` |
-| `DELETE`| `/api/projects/:id` | Delete a project by ID | None |
+
+| Method   | Endpoint                     | Description                              | Payload                               |
+| :------- | :--------------------------- | :--------------------------------------- | :------------------------------------ |
+| `GET`    | `/api/projects`              | Fetch all submitted projects             | None                                  |
+| `POST`   | `/api/projects`              | Upload new project (multipart/form-data) | Form fields + `image` and `pdf` files |
+| `GET`    | `/api/projects/top-liked`    | Fetch top 3 highest-liked projects       | None                                  |
+| `POST`   | `/api/projects/:id/like`     | Toggle or add like to project            | `{ userEmail }`                       |
+| `POST`   | `/api/projects/:id/feedback` | Post feedback comment on project         | `{ feedback }`                        |
+| `DELETE` | `/api/projects/:id`          | Delete a project by ID                   | None                                  |
 
 ---
 
@@ -265,6 +283,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 ### 2. Backend Deployment (Render / Railway)
 
 #### Option A: Deploy on [Render](https://render.com)
+
 1. Sign up/Log in to Render and link your GitHub account.
 2. Click **New +** > **Web Service**.
 3. Select your `PROJECTHUB` repository.
@@ -276,13 +295,14 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
    - **Start Command**: `npm start`
 5. Under **Environment Variables**, add:
    - `NODE_ENV`: `production`
-   - `MONGODB_URL`: *your MongoDB Atlas connection string*
-   - `FRONTEND_URL`: *your deployed frontend URL (or `*` during initial setup)*
-   - `EMAIL_USER`: *your Gmail address (optional)*
-   - `EMAIL_PASS`: *your Gmail App Password (optional)*
+   - `MONGODB_URL`: _your MongoDB Atlas connection string_
+   - `FRONTEND_URL`: _your deployed frontend URL (or `*` during initial setup)_
+   - `EMAIL_USER`: _your Gmail address (optional)_
+   - `EMAIL_PASS`: _your Gmail App Password (optional)_
 6. Click **Create Web Service**. Once deployed, copy your backend URL (e.g., `https://projecthub-backend.onrender.com`).
 
 #### Option B: Deploy on [Railway](https://railway.app)
+
 1. Create a new project on Railway from GitHub repo `PROJECTHUB`.
 2. Set the Root Directory to `/backend`.
 3. Add the environment variables (`MONGODB_URL`, `NODE_ENV=production`).
@@ -293,6 +313,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 ### 3. Frontend Deployment (Vercel / Netlify)
 
 #### Option A: Deploy on [Vercel](https://vercel.com) (Recommended)
+
 1. Log in to Vercel and click **Add New** > **Project**.
 2. Import the `PROJECTHUB` repository.
 3. Configure project settings:
@@ -305,6 +326,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 5. Click **Deploy**. Vercel will build and deploy your site with SPA routing preconfigured via `vercel.json`.
 
 #### Option B: Deploy on [Netlify](https://netlify.com)
+
 1. Log in to Netlify and click **Add new site** > **Import an existing project**.
 2. Select GitHub and choose `PROJECTHUB`.
 3. Configure build settings:
@@ -324,6 +346,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 
 - Ensure `VITE_API_URL` in your frontend environment matches your backend URL exactly, including `https://` and `/api`.
 - Ensure your backend `FRONTEND_URL` or `CORS_ORIGIN` environment variable includes your frontend domain (e.g., `https://your-project.vercel.app`).
+
 </details>
 
 <details>
@@ -332,6 +355,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 - If using Atlas, verify network access is open to `0.0.0.0/0` in the Atlas console.
 - Check that your Atlas cluster is active and not paused.
 - For local development, make sure MongoDB is running locally (`Get-Service MongoDB` on Windows or `systemctl status mongod` on Linux).
+
 </details>
 
 <details>
@@ -339,6 +363,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 
 - This occurs when client-side routing routes are requested directly from the host.
 - Both `frontend/vercel.json` and `frontend/public/_redirects` are already included in this repository to automatically rewrite all requests back to `/index.html`.
+
 </details>
 
 <details>
@@ -347,6 +372,7 @@ Open **[http://localhost:3000](http://localhost:3000)** in your browser! 🎉
 - Gmail requires an **App Password** when 2-Factor Authentication is enabled.
 - Generate one under Google Account > Security > 2-Step Verification > App passwords.
 - Paste the 16-character code into `EMAIL_PASS` in your backend `.env`.
+
 </details>
 
 ---

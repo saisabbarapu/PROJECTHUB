@@ -1,7 +1,20 @@
 import React, { useState } from 'react';
 import api from './api';
-import styles from './SubmitProjectModal.module.css';
-import { FaUser, FaEnvelope, FaIdBadge, FaBuilding, FaProjectDiagram, FaFileAlt, FaGithub, FaFilePdf, FaImage, FaCheck, FaTimes, FaLink, FaSpinner } from 'react-icons/fa';
+import {
+  FaUser,
+  FaEnvelope,
+  FaIdBadge,
+  FaBuilding,
+  FaProjectDiagram,
+  FaFileAlt,
+  FaGithub,
+  FaFilePdf,
+  FaImage,
+  FaCheck,
+  FaTimes,
+  FaLink,
+  FaSpinner,
+} from 'react-icons/fa';
 
 const SubmitProjectModal = ({ onClose, onSubmit }) => {
   const [form, setForm] = useState({
@@ -12,12 +25,12 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
     title: '',
     description: '',
     github: '',
-    projectUrl: '', // New optional field
+    projectUrl: '',
     pdf: null,
     image: null,
-    toolsUsed: '', // Comma-separated string
+    toolsUsed: '',
   });
-  
+
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitMessage, setSubmitMessage] = useState('');
 
@@ -42,17 +55,17 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
     if (files && files.length) {
       const file = files[0];
       if (name === 'pdf' && file.type !== 'application/pdf') {
-        setSubmitMessage('Please upload a PDF file.');
+        setSubmitMessage('Please upload a valid PDF file.');
         setTimeout(() => setSubmitMessage(''), 3000);
         return;
       }
       if (name === 'image' && !file.type.startsWith('image/')) {
-        setSubmitMessage('Please upload an image file.');
+        setSubmitMessage('Please upload a valid image file.');
         setTimeout(() => setSubmitMessage(''), 3000);
         return;
       }
       if (file.size > 5 * 1024 * 1024) {
-        setSubmitMessage('File must be less than 5MB.');
+        setSubmitMessage('File size must be under 5MB.');
         setTimeout(() => setSubmitMessage(''), 3000);
         return;
       }
@@ -65,50 +78,40 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setIsSubmitting(true);
-    setSubmitMessage('Uploading project...');
-    
+    setSubmitMessage('Uploading project files...');
+
     const formData = new FormData();
     Object.entries(form).forEach(([key, value]) => {
-      if (value !== null || key === 'toolsUsed' || key === 'projectUrl') { // Include projectUrl even if empty
-        formData.append(key, value || ''); // Append empty string if null
+      if (value !== null || key === 'toolsUsed' || key === 'projectUrl') {
+        formData.append(key, value || '');
       }
     });
-
-    console.log('Submitting form data entries:');
-    for (let [key, value] of formData.entries()) {
-      console.log(`${key}: ${value}`);
-    } // Detailed debug log
 
     try {
       const response = await api.post('/projects', formData, {
         headers: { 'Content-Type': 'multipart/form-data' },
       });
-      console.log('Submission successful, response:', response.data);
       setSubmitMessage('Project uploaded successfully!');
-      
-      // Reset form and close modal after a brief delay
+
       setTimeout(() => {
         resetForm();
         setIsSubmitting(false);
         setSubmitMessage('');
-        // Pass the new project up for optimistic UI update
         if (response.data && response.data.project) {
           onSubmit(response.data.project);
         } else {
           onSubmit();
         }
         onClose();
-      }, 1500);
-      
+      }, 1200);
     } catch (err) {
-      console.error('Submission error:', err.message);
-      console.error('Error response:', err.response?.data);
-      console.error('Error status:', err.response?.status);
-      const errorMessage = err.response?.data?.details || err.response?.data?.message || err.message || 'Unknown error';
+      const errorMessage =
+        err.response?.data?.details ||
+        err.response?.data?.message ||
+        err.message ||
+        'Unknown error';
       setSubmitMessage(`Upload failed: ${errorMessage}`);
       setIsSubmitting(false);
-      
-      // Clear error message after 5 seconds
       setTimeout(() => setSubmitMessage(''), 5000);
     }
   };
@@ -121,169 +124,275 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
   };
 
   return (
-    <div className={styles.modalOverlay}>
-      <form className={styles.modal} onSubmit={handleSubmit}>
-        <h2 className={styles.title}>Submit Project</h2>
-        
+    <div
+      onClick={handleClose}
+      className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/80 p-4 backdrop-blur-md"
+    >
+      <div
+        onClick={(e) => e.stopPropagation()}
+        className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl sm:p-8"
+      >
+        {/* Header */}
+        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+          <div>
+            <h2 className="text-xl font-extrabold text-white">Submit New Project</h2>
+            <p className="text-xs text-slate-400">
+              Share your innovation with the university showcase
+            </p>
+          </div>
+          <button
+            onClick={handleClose}
+            disabled={isSubmitting}
+            className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
+          >
+            <FaTimes />
+          </button>
+        </div>
+
+        {/* Status Message */}
         {submitMessage && (
-          <div className={`${styles.message} ${submitMessage.includes('successfully') ? styles.successMessage : styles.errorMessage}`}>
+          <div
+            className={`rounded-xl p-3 text-xs font-medium ${
+              submitMessage.includes('successfully')
+                ? 'border border-emerald-500/40 bg-emerald-950/60 text-emerald-300'
+                : 'border border-rose-500/40 bg-rose-950/60 text-rose-300'
+            }`}
+          >
             {submitMessage}
           </div>
         )}
-        
-        <div className={styles.inputGroup}>
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            required
-            placeholder="Name"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaUser className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="email"
-            type="email"
-            value={form.email}
-            onChange={handleChange}
-            required
-            placeholder="Email"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaEnvelope className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="rollno"
-            value={form.rollno}
-            onChange={handleChange}
-            required
-            placeholder="Roll No"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaIdBadge className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="department"
-            value={form.department}
-            onChange={handleChange}
-            required
-            placeholder="Department"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaBuilding className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="title"
-            value={form.title}
-            onChange={handleChange}
-            required
-            placeholder="Project Title"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaProjectDiagram className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <textarea
-            name="description"
-            value={form.description}
-            onChange={handleChange}
-            required
-            placeholder="Description"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaFileAlt className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="github"
-            type="url"
-            value={form.github}
-            onChange={handleChange}
-            required
-            placeholder="GitHub URL"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaGithub className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="projectUrl"
-            type="url"
-            value={form.projectUrl}
-            onChange={handleChange}
-            placeholder="Project URL (Optional)"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaLink className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="toolsUsed"
-            value={form.toolsUsed}
-            onChange={handleChange}
-            placeholder="Tools Used (e.g., Python, React, comma-separated)"
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaProjectDiagram className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="pdf"
-            type="file"
-            accept="application/pdf"
-            onChange={handleChange}
-            required
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaFilePdf className={styles.inputIcon} />
-        </div>
-        <div className={styles.inputGroup}>
-          <input
-            name="image"
-            type="file"
-            accept="image/*"
-            onChange={handleChange}
-            required
-            className={styles.input}
-            disabled={isSubmitting}
-          />
-          <FaImage className={styles.inputIcon} />
-        </div>
-        <div className={styles.actions}>
-          <button type="submit" className={styles.submitBtn} disabled={isSubmitting}>
-            {isSubmitting ? (
-              <>
-                <FaSpinner className={`${styles.buttonIcon} ${styles.spinning}`} />
-                Uploading...
-              </>
-            ) : (
-              <>
-                <FaCheck className={styles.buttonIcon} />
-                Submit
-              </>
-            )}
-          </button>
-          <button type="button" onClick={handleClose} className={styles.cancelBtn} disabled={isSubmitting}>
-            <FaTimes className={styles.buttonIcon} />
-            Cancel
-          </button>
-        </div>
-      </form>
+
+        <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+          {/* Author Details Row */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">Author Name</label>
+              <div className="relative">
+                <input
+                  name="name"
+                  value={form.name}
+                  onChange={handleChange}
+                  required
+                  placeholder="Full name"
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                />
+                <FaUser className="absolute left-3 top-3 text-xs text-slate-400" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">Email Address</label>
+              <div className="relative">
+                <input
+                  name="email"
+                  type="email"
+                  value={form.email}
+                  onChange={handleChange}
+                  required
+                  placeholder="rollno@adityauniversity.in"
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                />
+                <FaEnvelope className="absolute left-3 top-3 text-xs text-slate-400" />
+              </div>
+            </div>
+          </div>
+
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">Roll Number</label>
+              <div className="relative">
+                <input
+                  name="rollno"
+                  value={form.rollno}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g. 24M11MC150"
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                />
+                <FaIdBadge className="absolute left-3 top-3 text-xs text-slate-400" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">Department</label>
+              <div className="relative">
+                <input
+                  name="department"
+                  value={form.department}
+                  onChange={handleChange}
+                  required
+                  placeholder="e.g. CSE, EEE, AI&ML"
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                />
+                <FaBuilding className="absolute left-3 top-3 text-xs text-slate-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* Project Title */}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-slate-300">Project Title</label>
+            <div className="relative">
+              <input
+                name="title"
+                value={form.title}
+                onChange={handleChange}
+                required
+                placeholder="Name of your project"
+                disabled={isSubmitting}
+                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+              />
+              <FaProjectDiagram className="absolute left-3 top-3 text-xs text-slate-400" />
+            </div>
+          </div>
+
+          {/* Description */}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-slate-300">Description</label>
+            <div className="relative">
+              <textarea
+                name="description"
+                rows={3}
+                value={form.description}
+                onChange={handleChange}
+                required
+                placeholder="Explain the problem, method, and outcome..."
+                disabled={isSubmitting}
+                className="w-full resize-none rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+              />
+              <FaFileAlt className="absolute left-3 top-3 text-xs text-slate-400" />
+            </div>
+          </div>
+
+          {/* URLs */}
+          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">
+                GitHub Repo URL
+              </label>
+              <div className="relative">
+                <input
+                  name="github"
+                  type="url"
+                  value={form.github}
+                  onChange={handleChange}
+                  required
+                  placeholder="https://github.com/..."
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                />
+                <FaGithub className="absolute left-3 top-3 text-xs text-slate-400" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">
+                Live Demo URL (Optional)
+              </label>
+              <div className="relative">
+                <input
+                  name="projectUrl"
+                  type="url"
+                  value={form.projectUrl}
+                  onChange={handleChange}
+                  placeholder="https://myproject.com"
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                />
+                <FaLink className="absolute left-3 top-3 text-xs text-slate-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* Tools Used */}
+          <div>
+            <label className="mb-1 block text-xs font-medium text-slate-300">
+              Tools & Technologies (Comma-separated)
+            </label>
+            <div className="relative">
+              <input
+                name="toolsUsed"
+                value={form.toolsUsed}
+                onChange={handleChange}
+                placeholder="React, Node.js, Python, Arduino"
+                disabled={isSubmitting}
+                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+              />
+              <FaProjectDiagram className="absolute left-3 top-3 text-xs text-slate-400" />
+            </div>
+          </div>
+
+          {/* File Uploads Row */}
+          <div className="grid grid-cols-1 gap-4 pt-1 sm:grid-cols-2">
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">
+                Documentation PDF (Max 5MB)
+              </label>
+              <div className="relative">
+                <input
+                  name="pdf"
+                  type="file"
+                  accept="application/pdf"
+                  onChange={handleChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-1.5 pl-9 pr-2 text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-indigo-700"
+                />
+                <FaFilePdf className="absolute left-3 top-2.5 text-xs text-slate-400" />
+              </div>
+            </div>
+
+            <div>
+              <label className="mb-1 block text-xs font-medium text-slate-300">
+                Project Image / Poster (Max 5MB)
+              </label>
+              <div className="relative">
+                <input
+                  name="image"
+                  type="file"
+                  accept="image/*"
+                  onChange={handleChange}
+                  required
+                  disabled={isSubmitting}
+                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-1.5 pl-9 pr-2 text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-indigo-700"
+                />
+                <FaImage className="absolute left-3 top-2.5 text-xs text-slate-400" />
+              </div>
+            </div>
+          </div>
+
+          {/* Form Actions */}
+          <div className="flex items-center justify-end gap-3 border-t border-slate-800 pt-4">
+            <button
+              type="button"
+              onClick={handleClose}
+              disabled={isSubmitting}
+              className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2.5 text-xs font-semibold text-slate-300 transition-colors hover:bg-slate-700 hover:text-white"
+            >
+              Cancel
+            </button>
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-2.5 text-xs font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:from-indigo-600 hover:to-purple-700 disabled:opacity-50"
+            >
+              {isSubmitting ? (
+                <>
+                  <FaSpinner className="animate-spin text-xs" /> Uploading...
+                </>
+              ) : (
+                <>
+                  <FaCheck className="text-xs" /> Submit Project
+                </>
+              )}
+            </button>
+          </div>
+        </form>
+      </div>
     </div>
   );
 };
