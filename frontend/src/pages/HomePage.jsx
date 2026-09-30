@@ -1,6 +1,7 @@
 import React from 'react';
 import { useNavigate, Outlet } from 'react-router-dom';
 import { FaRocket, FaLightbulb, FaUsers, FaArrowRight } from 'react-icons/fa';
+import ParticleText from './ParticleText';
 
 const HomePage = () => {
   const navigate = useNavigate();
@@ -61,12 +62,27 @@ const HomePage = () => {
           <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-4 py-1.5 text-xs font-semibold text-indigo-400 shadow-sm">
             <FaRocket className="text-xs" /> Official Academic Project Showcase
           </div>
-          <h1 className="text-4xl font-extrabold tracking-tight sm:text-6xl lg:text-7xl">
-            <span className="block text-white">Inspire, Build & Share</span>
-            <span className="mt-2 block bg-gradient-to-r from-indigo-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
-              Student Innovations
-            </span>
-          </h1>
+          <h1 className="sr-only">Inspire, Build & Share Student Innovations</h1>
+          <div className="relative mx-auto my-2 h-[240px] w-full max-w-4xl sm:h-[280px] md:h-[320px]">
+            <ParticleText
+              text={'Inspire, Build & Share\nStudent Innovations'}
+              particleSize={2.2}
+              density={4}
+              color="#f8fafc"
+              highlightColor="#8b5cf6"
+              scatter={190}
+              gatherDuration={1600}
+              stagger={420}
+              pointerRepel={42}
+              repelRadius={120}
+              idleDrift={0.8}
+              trigger="mount"
+              fontSize="clamp(2.4rem, 6vw, 4.8rem)"
+              fontWeight={800}
+              fontFamily="inherit"
+              glow
+            />
+          </div>
           <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
             At ProjectHub, we celebrate creativity and technical excellence. Explore cutting-edge
             student projects across AI, robotics, clean energy, and software engineering.
