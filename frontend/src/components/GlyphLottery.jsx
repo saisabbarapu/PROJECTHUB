@@ -34,7 +34,6 @@ function GlyphLottery({
   loopDelay = 2500,
 }) {
   const [chars, setChars] = useState(() => text.split('').map(() => ''));
-  const [running, setRunning] = useState(false);
   const wrapperRef = useRef(null);
   const timersRef = useRef([]);
 
@@ -50,7 +49,6 @@ function GlyphLottery({
     clearAllTimers();
     // Reset all chars to blank
     setChars(text.split('').map(() => ''));
-    setRunning(true);
 
     const letters = text.split('');
 
@@ -91,11 +89,6 @@ function GlyphLottery({
             next[i] = targetChar;
             return next;
           });
-
-          // After last char locks, signal done
-          if (i === letters.length - 1 || letters.slice(i + 1).every((c) => c === ' ')) {
-            setRunning(false);
-          }
         }, spinDuration);
         timersRef.current.push(lockT);
       }, startDelay);
