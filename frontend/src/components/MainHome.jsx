@@ -345,10 +345,11 @@ const MainHome = () => {
       {/* Floating Action Button on Bottom Right */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-cyan-400/50 bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-white shadow-2xl shadow-cyan-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/60 active:scale-95 focus:outline-none"
+        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-cyan-400/50 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 px-5 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-cyan-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/60 active:scale-95 focus:outline-none"
         title="Submit New Project"
       >
-        <FaPlus className="text-sm text-cyan-100" />
+        <FaPlus className="text-xs text-white" />
+        <span className="tracking-wide">Submit Project</span>
       </button>
 
       {/* Submit Project Modal */}
