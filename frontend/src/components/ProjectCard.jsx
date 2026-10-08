@@ -151,10 +151,10 @@ const ProjectCard = React.memo(({ project }) => {
       {/* Editorial Glass Project Card */}
       <div
         onClick={() => setIsPopupOpen(true)}
-        className="glass-card glass-card-hover group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl"
+        className="glass-card glass-card-hover group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-cyan-500/15 hover:border-cyan-400/50 transition-all duration-300"
       >
         {/* Project Thumbnail */}
-        <div className="relative h-48 w-full overflow-hidden bg-slate-900">
+        <div className="relative h-48 w-full overflow-hidden bg-slate-950">
           <img
             src={imageUrl}
             alt={project.title}
@@ -162,10 +162,10 @@ const ProjectCard = React.memo(({ project }) => {
               e.target.src = fallbackImage;
             }}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
-          <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/85 via-transparent to-transparent"></div>
-          <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-cyan-300 backdrop-blur-md">
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/90 via-transparent to-transparent"></div>
+          <span className="absolute right-3 top-3 rounded-full border border-cyan-400/30 bg-[#030712]/85 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.2)] backdrop-blur-md">
             {project.department || 'General'}
           </span>
         </div>
@@ -176,7 +176,7 @@ const ProjectCard = React.memo(({ project }) => {
             <h3 className="line-clamp-1 font-sora text-base font-bold text-white transition-colors group-hover:text-cyan-300">
               {project.title}
             </h3>
-            <p className="mt-1 line-clamp-2 font-sans text-xs leading-relaxed text-slate-400">
+            <p className="mt-1 line-clamp-2 font-sans text-xs leading-relaxed text-slate-300">
               {project.description}
             </p>
           </div>
@@ -188,7 +188,7 @@ const ProjectCard = React.memo(({ project }) => {
               .map((tool) => (
                 <span
                   key={tool}
-                  className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 font-mono text-[10px] text-slate-400"
+                  className="rounded-md border border-cyan-500/20 bg-cyan-950/20 px-2 py-0.5 font-mono text-[10px] text-cyan-200/90"
                 >
                   {tool}
                 </span>
@@ -198,14 +198,14 @@ const ProjectCard = React.memo(({ project }) => {
           {/* Interaction Bar */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="mt-auto flex items-center justify-between gap-2.5 border-t border-white/[0.06] pt-3.5"
+            className="mt-auto flex items-center justify-between gap-2.5 border-t border-cyan-500/10 pt-3.5"
           >
             {/* Like Button */}
             <button
               onClick={handleLike}
               className={`flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-xs transition-all ${
                 isLiked
-                  ? 'border border-pink-500/40 bg-pink-500/20 text-pink-300'
+                  ? 'border border-pink-500/50 bg-pink-500/20 text-pink-300 shadow-[0_0_10px_rgba(236,72,153,0.3)]'
                   : 'border border-white/10 bg-white/[0.03] text-slate-400 hover:border-pink-500/30 hover:text-pink-400'
               }`}
               title={isLiked ? 'Unlike' : 'Like'}
@@ -230,7 +230,7 @@ const ProjectCard = React.memo(({ project }) => {
               <button
                 type="submit"
                 disabled={!feedbackText.trim()}
-                className="rounded-full border border-cyan-500/30 bg-cyan-500/20 p-1.5 text-cyan-300 transition-all hover:bg-cyan-500/30 hover:text-white disabled:opacity-20"
+                className="rounded-full border border-cyan-500/40 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 p-1.5 text-cyan-300 transition-all hover:bg-cyan-500/30 hover:text-white disabled:opacity-20"
                 title="Send Feedback"
               >
                 <FaPaperPlane className="text-[10px]" />
