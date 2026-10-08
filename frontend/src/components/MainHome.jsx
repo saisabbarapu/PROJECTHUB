@@ -1,6 +1,7 @@
 import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import api, { SOCKET_URL } from './api';
 import ProjectCard from './ProjectCard';
+import ProjectCardSkeleton from './ProjectCardSkeleton';
 import SubmitProjectModal from './SubmitProjectModal';
 import Loader from './Loader';
 import {
@@ -295,10 +296,12 @@ const MainHome = () => {
           </div>
         </div>
 
-        {/* Loading State */}
+        {/* Loading State - Skeleton Shimmer Grid */}
         {isLoading && (
-          <div className="flex flex-col items-center justify-center py-28">
-            <Loader />
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3, 4, 5, 6].map((idx) => (
+              <ProjectCardSkeleton key={idx} shimmerDuration={1.4} />
+            ))}
           </div>
         )}
 
@@ -315,9 +318,9 @@ const MainHome = () => {
           </div>
         )}
 
-        {/* Projects Grid */}
+        {/* Projects Grid with Wipe Reveal Transition */}
         {!isLoading && !error && (
-          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 animate-wipe-reveal">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((p) => <ProjectCard key={p._id} project={p} />)
             ) : (

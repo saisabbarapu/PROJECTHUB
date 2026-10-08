@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
 import Loader from '../components/Loader';
+import ProjectCardSkeleton from '../components/ProjectCardSkeleton';
 import { getFallbackProjectImage } from '../components/ProjectCard';
 import {
   FaCrown,
@@ -104,8 +105,20 @@ const UserDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-transparent">
-        <Loader />
+      <div className="relative min-h-screen bg-transparent px-4 py-10 text-slate-100 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl space-y-8">
+          <div className="glass-panel h-24 w-full rounded-2xl sm:rounded-3xl p-5 shimmer-bone" />
+          <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3 sm:gap-4">
+            {[1, 2, 3].map((i) => (
+              <div key={i} className="glass-card h-28 rounded-2xl shimmer-bone" />
+            ))}
+          </div>
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            {[1, 2, 3].map((i) => (
+              <ProjectCardSkeleton key={i} shimmerDuration={1.4} />
+            ))}
+          </div>
+        </div>
       </div>
     );
   }
@@ -230,7 +243,7 @@ const UserDashboard = () => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 animate-wipe-reveal">
                 {projects.map((project) => (
                   <div
                     key={project._id}
