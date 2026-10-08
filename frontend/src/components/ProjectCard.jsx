@@ -1,4 +1,5 @@
-import React, { useState, useMemo, useCallback, useContext } from 'react';
+import React, { useState, useMemo, useCallback, useContext, useEffect } from 'react';
+import { createPortal } from 'react-dom';
 import { motion, AnimatePresence } from 'framer-motion';
 import api from './api';
 import {
@@ -75,6 +76,20 @@ const ProjectCard = React.memo(({ project }) => {
   const [feedbackText, setFeedbackText] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { addToast } = useContext(ToasterContext);
+
+  useEffect(() => {
+    if (isPopupOpen) {
+      document.body.style.overflow = 'hidden';
+      const handleKeyDown = (e) => {
+        if (e.key === 'Escape') setIsPopupOpen(false);
+      };
+      window.addEventListener('keydown', handleKeyDown);
+      return () => {
+        document.body.style.overflow = '';
+        window.removeEventListener('keydown', handleKeyDown);
+      };
+    }
+  }, [isPopupOpen]);
 
   const fallbackImage = useMemo(() => getFallbackProjectImage(project), [project]);
 
@@ -244,115 +259,124 @@ const ProjectCard = React.memo(({ project }) => {
         </div>
       </motion.div>
 
-      {/* Cinematic Detail Modal with Motion */}
-      <AnimatePresence>
-        {isPopupOpen && (
-          <motion.div
-            onClick={() => setIsPopupOpen(false)}
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-4 backdrop-blur-md"
-          >
-            <motion.div
-              onClick={(e) => e.stopPropagation()}
-              initial={{ opacity: 0, scale: 0.92, y: 25 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.92, y: 25 }}
-              transition={{ type: 'spring', stiffness: 300, damping: 26 }}
-              className="glass-panel relative max-h-[92vh] w-full max-w-2xl space-y-4 sm:space-y-6 overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl"
-            >
-            {/* Close Button */}
-            <button
-              onClick={() => setIsPopupOpen(false)}
-              className="absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/10 text-slate-400 transition-colors hover:bg-white/20 hover:text-white"
-            >
-              <FaTimes className="text-xs" />
-            </button>
-
-            {/* Modal Image Area */}
-            <div className="relative h-44 sm:h-64 w-full overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-slate-900">
-              <img
-                src={imageUrl}
-                alt={project.title}
-                onError={(e) => {
-                  e.target.src = fallbackImage;
-                }}
-                className="h-full w-full object-cover"
-              />
-              <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-              <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-black/40 px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[10px] sm:text-xs font-semibold uppercase text-violet-300 backdrop-blur-md">
-                {project.department}
-              </span>
-            </div>
-
-            {/* Modal Header */}
-            <div>
-              <h2 className="font-sora text-xl sm:text-2xl md:text-3xl font-bold text-white pr-6">{project.title}</h2>
-              <p className="mt-2 sm:mt-3 whitespace-pre-line font-sans text-xs sm:text-sm leading-relaxed text-slate-300">
-                {project.description}
-              </p>
-            </div>
-
-            {/* Author & Department Meta Grid */}
-            <div className="grid grid-cols-1 gap-2.5 sm:gap-3 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/[0.02] p-3 sm:p-4 text-xs sm:grid-cols-2">
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 shrink-0">Author:</span>
-                <span className="font-medium text-white truncate">
-                  {project.name} {project.rollno ? `(${project.rollno})` : ''}
-                </span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 shrink-0">Email:</span>
-                <span className="font-mono text-violet-300 break-all">{project.email}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 shrink-0">Department:</span>
-                <span className="font-medium text-slate-200">{project.department}</span>
-              </div>
-              <div className="flex items-center gap-2">
-                <span className="text-slate-400 shrink-0">Tools:</span>
-                <span className="font-mono text-slate-300 truncate">{toolsDisplay}</span>
-              </div>
-            </div>
-
-            {/* Links Section */}
-            <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 pt-1">
-              {project.github && (
-                <a
-                  href={project.github}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2 font-sans text-xs font-semibold text-slate-200 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+      {/* Cinematic Detail Modal with Motion via Portal to document.body */}
+      {typeof document !== 'undefined' &&
+        createPortal(
+          <AnimatePresence>
+            {isPopupOpen && (
+              <motion.div
+                onClick={() => setIsPopupOpen(false)}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                exit={{ opacity: 0 }}
+                transition={{ duration: 0.2 }}
+                className="fixed inset-0 z-[9999] flex items-center justify-center bg-black/80 p-3 sm:p-5 backdrop-blur-xl"
+              >
+                <motion.div
+                  onClick={(e) => e.stopPropagation()}
+                  initial={{ opacity: 0, scale: 0.93, y: 20 }}
+                  animate={{ opacity: 1, scale: 1, y: 0 }}
+                  exit={{ opacity: 0, scale: 0.93, y: 20 }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 26 }}
+                  className="relative max-h-[90vh] w-full max-w-2xl space-y-4 sm:space-y-6 overflow-y-auto rounded-2xl sm:rounded-3xl border border-violet-500/35 bg-[#0b0816]/95 p-5 sm:p-7 md:p-8 shadow-[0_25px_60px_-15px_rgba(0,0,0,0.95),0_0_40px_rgba(168,85,247,0.25)] backdrop-blur-2xl"
                 >
-                  <FaGithub className="text-sm" /> View GitHub Repository
-                </a>
-              )}
-              {pdfUrl && (
-                <a
-                  href={pdfUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/15 px-4 py-2 font-sans text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-500/25 hover:text-white"
-                >
-                  <FaFilePdf className="text-sm" /> Read PDF Documentation
-                </a>
-              )}
-              {project.projectUrl && (
-                <a
-                  href={project.projectUrl}
-                  target="_blank"
-                  rel="noreferrer"
-                  className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-violet-500/30 bg-violet-500/15 px-4 py-2 font-sans text-xs font-semibold text-violet-300 transition-colors hover:bg-violet-500/25 hover:text-white"
-                >
-                  <FaExternalLinkAlt className="text-xs" /> Launch Live Demo
-                </a>
-              )}
-            </div>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
+                  {/* Close Button */}
+                  <motion.button
+                    whileHover={{ scale: 1.1 }}
+                    whileTap={{ scale: 0.9 }}
+                    onClick={() => setIsPopupOpen(false)}
+                    className="absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-20 flex h-9 w-9 items-center justify-center rounded-full border border-violet-500/30 bg-violet-950/60 text-slate-300 transition-colors hover:bg-violet-900/60 hover:text-white"
+                  >
+                    <FaTimes className="text-xs" />
+                  </motion.button>
+
+                  {/* Modal Image Area */}
+                  <div className="relative h-48 sm:h-64 w-full overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-slate-900 shadow-inner">
+                    <img
+                      src={imageUrl}
+                      alt={project.title}
+                      onError={(e) => {
+                        e.target.src = fallbackImage;
+                      }}
+                      className="h-full w-full object-cover"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#0b0816] via-transparent to-transparent"></div>
+                    <span className="absolute left-3 top-3 rounded-full border border-violet-400/40 bg-black/60 px-3 py-1 font-mono text-[10px] sm:text-xs font-semibold uppercase text-violet-300 backdrop-blur-md shadow-md">
+                      {project.department || 'General'}
+                    </span>
+                  </div>
+
+                  {/* Modal Header */}
+                  <div>
+                    <h2 className="font-sora text-xl sm:text-2xl md:text-3xl font-bold text-white pr-8">
+                      {project.title}
+                    </h2>
+                    <p className="mt-2.5 sm:mt-3 whitespace-pre-line font-sans text-xs sm:text-sm leading-relaxed text-slate-300">
+                      {project.description}
+                    </p>
+                  </div>
+
+                  {/* Author & Department Meta Grid */}
+                  <div className="grid grid-cols-1 gap-2.5 sm:gap-3 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/[0.03] p-3.5 sm:p-4 text-xs sm:grid-cols-2">
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 shrink-0">Author:</span>
+                      <span className="font-medium text-white truncate">
+                        {project.name} {project.rollno ? `(${project.rollno})` : ''}
+                      </span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 shrink-0">Email:</span>
+                      <span className="font-mono text-violet-300 break-all">{project.email}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 shrink-0">Department:</span>
+                      <span className="font-medium text-slate-200">{project.department}</span>
+                    </div>
+                    <div className="flex items-center gap-2">
+                      <span className="text-slate-400 shrink-0">Tools:</span>
+                      <span className="font-mono text-slate-300 truncate">{toolsDisplay}</span>
+                    </div>
+                  </div>
+
+                  {/* Links Section */}
+                  <div className="flex flex-col sm:flex-row flex-wrap gap-2.5 sm:gap-3 pt-1">
+                    {project.github && (
+                      <a
+                        href={project.github}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-white/10 bg-white/[0.04] px-4 py-2.5 font-sans text-xs font-semibold text-slate-200 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+                      >
+                        <FaGithub className="text-sm" /> View GitHub Repository
+                      </a>
+                    )}
+                    {pdfUrl && (
+                      <a
+                        href={pdfUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-rose-500/30 bg-rose-500/15 px-4 py-2.5 font-sans text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-500/25 hover:text-white"
+                      >
+                        <FaFilePdf className="text-sm" /> Read PDF Documentation
+                      </a>
+                    )}
+                    {project.projectUrl && (
+                      <a
+                        href={project.projectUrl}
+                        target="_blank"
+                        rel="noreferrer"
+                        className="flex-1 sm:flex-none inline-flex items-center justify-center gap-2 rounded-xl border border-violet-500/30 bg-violet-500/15 px-4 py-2.5 font-sans text-xs font-semibold text-violet-300 transition-colors hover:bg-violet-500/25 hover:text-white"
+                      >
+                        <FaExternalLinkAlt className="text-xs" /> Launch Live Demo
+                      </a>
+                    )}
+                  </div>
+                </motion.div>
+              </motion.div>
+            )}
+          </AnimatePresence>,
+          document.body
+        )}
   </>
   );
 });

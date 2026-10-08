@@ -179,9 +179,12 @@
     opacity: 0;
     clip-path: inset(0 100% 0 0 round 1rem);
   }
+  99% {
+    clip-path: inset(0 0 0 0 round 1rem);
+  }
   100% {
     opacity: 1;
-    clip-path: inset(0 0 0 0 round 1rem);
+    clip-path: none;
   }
 }
 
