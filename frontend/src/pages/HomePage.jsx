@@ -1,4 +1,5 @@
-﻿import React, { useState, useMemo } from 'react';
+import React, { useState, useMemo } from 'react';
+import GlyphLottery from '../components/GlyphLottery';
 import { useNavigate } from 'react-router-dom';
 import {
   FaArrowRight,
@@ -148,12 +149,40 @@ const HomePage = () => {
             <span>NEXT-GEN STUDENT INNOVATION ENGINE</span>
           </div>
 
-          {/* Large Hero Editorial Headline */}
-          <h1 className="font-sora text-5xl font-black tracking-tight text-white sm:text-7xl lg:text-8xl">
-            BUILD.
-            <span className="block text-slate-300">SHARE.</span>
+          {/* Large Hero Editorial Headline — Glyph Lottery Slot-Reel Animation */}
+          <h1 className="font-sora text-5xl font-black tracking-tight sm:text-7xl lg:text-8xl">
+            {/* "BUILD." — starts immediately */}
+            <GlyphLottery
+              text="BUILD."
+              trigger="mount"
+              delay={0}
+              staggerMs={55}
+              spinDuration={620}
+              fps={22}
+              className="text-white"
+            />
+            {/* "SHARE." — starts after BUILD. finishes (~6*55+620 = 950ms) */}
+            <span className="block">
+              <GlyphLottery
+                text="SHARE."
+                trigger="mount"
+                delay={960}
+                staggerMs={55}
+                spinDuration={620}
+                fps={22}
+                className="text-slate-300"
+              />
+            </span>
+            {/* "DISCOVER." — starts after SHARE. finishes (~1960ms) */}
             <span className="block bg-gradient-to-r from-violet-400 via-fuchsia-300 to-indigo-400 bg-clip-text text-transparent drop-shadow-[0_0_35px_rgba(168,85,247,0.4)]">
-              DISCOVER.
+              <GlyphLottery
+                text="DISCOVER."
+                trigger="mount"
+                delay={1980}
+                staggerMs={50}
+                spinDuration={700}
+                fps={22}
+              />
             </span>
           </h1>
 
