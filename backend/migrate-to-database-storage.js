@@ -1,8 +1,11 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
 import fs from 'fs';
 import path from 'path';
 import { fileURLToPath } from 'url';
 import Project from './models/Project.js';
+
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -10,7 +13,7 @@ const __dirname = path.dirname(__filename);
 // MongoDB connection configuration
 const mongoDB_url =
   process.env.MONGODB_URL ||
-  'mongodb+srv://24m11mc150:Sabbarapu%40123@cluster0.zmuwm5s.mongodb.net/project-showcase?retryWrites=true&w=majority';
+  'mongodb+srv://admin:EduTrack123@cluster0.gz2pqrs.mongodb.net/projecthub?retryWrites=true&w=majority';
 
 async function migrateProjects() {
   try {

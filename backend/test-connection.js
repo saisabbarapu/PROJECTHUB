@@ -1,7 +1,11 @@
 import mongoose from 'mongoose';
+import dotenv from 'dotenv';
+
+dotenv.config();
 
 const mongoDB_url =
-  'mongodb+srv://24m11mc150:Sabbarapu%40123@cluster0.zmuwm5s.mongodb.net/project-showcase?retryWrites=true&w=majority';
+  process.env.MONGODB_URL ||
+  'mongodb+srv://admin:EduTrack123@cluster0.gz2pqrs.mongodb.net/projecthub?retryWrites=true&w=majority';
 
 console.log('🔍 Testing MongoDB connection...');
 console.log('Connection URL:', mongoDB_url.replace(/\/\/[^:]+:[^@]+@/, '//***:***@'));
