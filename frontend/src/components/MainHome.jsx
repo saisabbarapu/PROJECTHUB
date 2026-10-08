@@ -196,10 +196,7 @@ const MainHome = () => {
   );
 
   return (
-    <div className="relative min-h-screen bg-[#030712] px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
-      {/* Ambient background light */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-96 w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.1),transparent_70%)] blur-3xl"></div>
-
+    <div className="relative min-h-screen bg-transparent px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header Title Section */}
         <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">

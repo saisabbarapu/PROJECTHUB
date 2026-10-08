@@ -26,11 +26,7 @@ const ResetPassword = () => {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-[#030712] px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
-      {/* Background Ambience */}
-      <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-cyan-600/10 blur-[120px]" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
-
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
       <div className="glass-panel relative w-full max-w-md rounded-3xl p-8 shadow-2xl sm:p-10">
         <div className="mb-6">
           <Link

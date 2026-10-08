@@ -97,17 +97,14 @@ const UserDashboard = () => {
 
   if (loading) {
     return (
-      <div className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-[#030712]">
+      <div className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-transparent">
         <Loader />
       </div>
     );
   }
 
   return (
-    <div className="relative min-h-screen bg-[#030712] px-4 py-10 text-slate-100 sm:px-6 lg:px-8">
-      {/* Background Ambience */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-80 w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.08),transparent_70%)] blur-3xl"></div>
-
+    <div className="relative min-h-screen bg-transparent px-4 py-10 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl space-y-8">
         {/* User Profile Editorial Banner */}
         <div className="glass-panel flex flex-col items-center justify-between gap-6 rounded-3xl p-6 shadow-xl sm:flex-row sm:p-8">

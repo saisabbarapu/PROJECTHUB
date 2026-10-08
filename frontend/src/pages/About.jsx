@@ -33,10 +33,7 @@ const About = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-[#030712] px-4 py-16 text-slate-200 sm:px-6 lg:px-8">
-      {/* Background Ambience */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-96 w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.1),transparent_70%)] blur-3xl"></div>
-
+    <div className="relative min-h-screen bg-transparent px-4 py-16 text-slate-200 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-5xl space-y-12">
         {/* Header */}
         <div className="space-y-4 text-center">

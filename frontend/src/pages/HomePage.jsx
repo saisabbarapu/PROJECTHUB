@@ -136,12 +136,8 @@ const HomePage = () => {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <main className="relative min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-200">
-      {/* Background Ambience & Lighting */}
-      <div className="pointer-events-none fixed inset-0 -z-10">
-        <div className="absolute left-1/2 top-0 h-[650px] w-full max-w-7xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),rgba(56,189,248,0.05)_40%,transparent_70%)] blur-3xl"></div>
-        <div className="cinematic-grid absolute inset-0 opacity-40"></div>
-      </div>
+    <main className="relative min-h-screen bg-transparent text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-200">
+
 
       {/* Cinematic Hero Section */}
       <section className="relative px-4 pb-20 pt-12 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8">

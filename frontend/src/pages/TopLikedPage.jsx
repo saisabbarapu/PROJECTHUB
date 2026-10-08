@@ -26,10 +26,7 @@ const TopLikedPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-[#030712] px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
-      {/* Ambient background light */}
-      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),transparent_70%)] blur-3xl"></div>
-
+    <div className="relative min-h-screen bg-transparent px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         {/* Header Hero Section */}
         <section className="mb-14 text-center">
