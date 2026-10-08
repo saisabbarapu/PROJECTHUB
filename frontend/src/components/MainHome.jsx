@@ -194,28 +194,17 @@ const MainHome = () => {
   return (
     <div className="relative min-h-screen bg-transparent px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
-        {/* Header Title Section with Submit Button */}
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-end">
-          <div>
-            <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
-              DISCOVERY PLATFORM
-            </div>
-            <h1 className="mt-1 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              EXPLORE PROJECTS
-            </h1>
-            <p className="mt-1 font-sans text-xs text-slate-400 sm:text-sm">
-              Discover, review, and evaluate student capstones across all university departments.
-            </p>
+        {/* Header Title Section */}
+        <div className="mb-8">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+            DISCOVERY PLATFORM
           </div>
-
-          <button
-            onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-2 self-start sm:self-auto rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 px-5 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/25 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/40 active:scale-95"
-            title="Submit a new project"
-          >
-            <FaPlus className="text-xs text-white" />
-            <span>Submit Project</span>
-          </button>
+          <h1 className="mt-1 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            EXPLORE PROJECTS
+          </h1>
+          <p className="mt-1 font-sans text-xs text-slate-400 sm:text-sm">
+            Discover, review, and evaluate student capstones across all university departments.
+          </p>
         </div>
 
         {/* Discovery Filter & Search Bar */}
@@ -356,10 +345,11 @@ const MainHome = () => {
       {/* Floating Action Button on Bottom Right */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-cyan-400/50 bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-white shadow-2xl shadow-cyan-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/60 active:scale-95 focus:outline-none"
+        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-cyan-400/50 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 px-5 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-cyan-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/60 active:scale-95 focus:outline-none"
         title="Submit New Project"
       >
-        <FaPlus className="text-sm text-cyan-100" />
+        <FaPlus className="text-xs text-white" />
+        <span className="tracking-wide">Submit Project</span>
       </button>
 
       {/* Submit Project Modal */}
