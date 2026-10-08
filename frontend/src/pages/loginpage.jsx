@@ -21,7 +21,6 @@ const DEMO_ACCOUNTS = [
     email: 'demostudent@adityauniversity.in',
     password: 'DemoUser@123',
     icon: FaUserGraduate,
-    accent: 'border-cyan-500/50 bg-cyan-500/10 text-cyan-300',
   },
   {
     title: 'Demo Faculty',
@@ -29,7 +28,6 @@ const DEMO_ACCOUNTS = [
     email: 'demo.faculty@adityauniversity.in',
     password: 'DemoUser@123',
     icon: FaChalkboardTeacher,
-    accent: 'border-purple-500/50 bg-purple-500/10 text-purple-300',
   },
 ];
 
@@ -108,32 +106,32 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-[#070b14] px-4 py-8">
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-[#030712] px-4 py-8 text-slate-100">
       {/* Subtle Background Glows */}
-      <div className="pointer-events-none absolute -left-32 -top-32 h-72 w-72 rounded-full bg-indigo-600/15 blur-[100px]" />
-      <div className="pointer-events-none absolute -bottom-32 -right-32 h-72 w-72 rounded-full bg-purple-600/15 blur-[100px]" />
+      <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-cyan-600/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
 
-      {/* Centered Compact Card */}
-      <div className="relative w-full max-w-md rounded-3xl border border-slate-800/90 bg-slate-900/85 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
-        {/* Card Header */}
-        <div className="mb-5 text-center">
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-indigo-500/30 bg-indigo-500/10 px-3 py-0.5 text-[11px] font-semibold text-indigo-300">
-            <FaBolt className="text-amber-400" />
-            <span>ProjectHub Portal</span>
+      {/* Centered Glass Card */}
+      <div className="glass-panel relative w-full max-w-md rounded-3xl p-6 shadow-2xl sm:p-8">
+        {/* Header */}
+        <div className="mb-6 text-center">
+          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-cyan-300">
+            <FaBolt className="text-cyan-400" />
+            <span>PROJECTHUB AUTHENTICATION</span>
           </div>
-          <h1 className="text-2xl font-black tracking-tight text-white sm:text-3xl">
-            Welcome <span className="bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">Back</span>
+          <h1 className="font-sora text-2xl font-black tracking-tight text-white sm:text-3xl">
+            Welcome Back
           </h1>
-          <p className="mt-1 text-xs text-slate-400">
+          <p className="mt-1 font-sans text-xs text-slate-400">
             Sign in with university credentials or 1-click demo
           </p>
         </div>
 
         {/* Quick Demo Pill Selector */}
-        <div className="mb-4 rounded-2xl border border-slate-800 bg-slate-950/60 p-2.5">
-          <div className="mb-1.5 flex items-center justify-between px-1 text-[10px] font-medium text-slate-400">
+        <div className="mb-5 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-2.5">
+          <div className="mb-2 flex items-center justify-between px-1 font-mono text-[10px] text-slate-400">
             <span>⚡ QUICK AUTO-FILL</span>
-            <span className="text-indigo-400">1-CLICK</span>
+            <span className="text-cyan-400">1-CLICK</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {DEMO_ACCOUNTS.map((acc) => {
@@ -144,17 +142,17 @@ const LoginPage = () => {
                   key={acc.title}
                   type="button"
                   onClick={() => handleFillDemo(acc, false)}
-                  className={`flex items-center justify-between rounded-xl border px-2.5 py-1.5 text-left transition-all ${
+                  className={`flex items-center justify-between rounded-xl border px-3 py-2 text-left transition-all ${
                     isSelected
-                      ? 'border-indigo-500/60 bg-indigo-600/20 text-white shadow-sm'
-                      : 'border-slate-800/80 bg-slate-900/60 text-slate-300 hover:border-slate-700 hover:bg-slate-800/60'
+                      ? 'border-cyan-500/60 bg-cyan-500/20 text-white shadow-sm'
+                      : 'border-white/5 bg-white/[0.02] text-slate-300 hover:border-white/20 hover:bg-white/[0.04]'
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <Icon className="text-xs text-indigo-400" />
-                    <span className="text-xs font-semibold">{acc.role}</span>
+                    <Icon className="text-xs text-cyan-400" />
+                    <span className="font-sans text-xs font-semibold">{acc.role}</span>
                   </div>
-                  {isSelected && <FaCheckCircle className="text-xs text-emerald-400" />}
+                  {isSelected && <FaCheckCircle className="text-xs text-cyan-400" />}
                 </button>
               );
             })}
@@ -162,10 +160,10 @@ const LoginPage = () => {
         </div>
 
         {/* Login Form */}
-        <form onSubmit={handleLogin} className="space-y-3.5">
+        <form onSubmit={handleLogin} className="space-y-4">
           {/* Email */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
               University Email
             </label>
             <div className="relative">
@@ -176,9 +174,9 @@ const LoginPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-slate-700/80 bg-slate-950/70 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:bg-slate-900 focus:outline-none focus:ring-1 focus:ring-indigo-500/30"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaEnvelope className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
             {errors.email && (
               <p className="mt-1 text-[11px] font-medium text-rose-400">⚠️ {errors.email}</p>
@@ -188,10 +186,10 @@ const LoginPage = () => {
           {/* Password */}
           <div>
             <div className="mb-1 flex items-center justify-between">
-              <label className="text-xs font-medium text-slate-300">Password</label>
+              <label className="font-sans text-xs font-medium text-slate-300">Password</label>
               <Link
                 to="/forgot-password"
-                className="text-[11px] text-indigo-400 transition-colors hover:text-indigo-300"
+                className="font-sans text-[11px] text-cyan-400 transition-colors hover:text-cyan-300"
               >
                 Forgot?
               </Link>
@@ -204,13 +202,13 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-slate-700/80 bg-slate-950/70 py-2 pl-9 pr-9 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:bg-slate-900 focus:outline-none focus:ring-1 focus:ring-indigo-500/30"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaLock className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-200"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -220,24 +218,12 @@ const LoginPage = () => {
             )}
           </div>
 
-          {/* Remember Me */}
-          <div className="flex items-center text-xs">
-            <label className="flex cursor-pointer items-center gap-2 text-slate-400 hover:text-slate-300">
-              <input
-                type="checkbox"
-                id="remember"
-                className="h-3.5 w-3.5 rounded border-slate-700 bg-slate-800 text-indigo-600 focus:ring-indigo-500"
-              />
-              Remember me
-            </label>
-          </div>
-
           {/* Buttons */}
-          <div className="space-y-2 pt-1">
+          <div className="space-y-2 pt-2">
             <button
               type="submit"
               disabled={isLoading}
-              className="group flex w-full items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 py-2.5 text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-indigo-500/25 transition-all hover:opacity-95 hover:shadow-indigo-500/35 active:scale-[0.99] disabled:opacity-50"
+              className="group flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
@@ -256,19 +242,19 @@ const LoginPage = () => {
               type="button"
               disabled={isLoading}
               onClick={() => handleFillDemo(DEMO_ACCOUNTS[0], true)}
-              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-indigo-500/30 bg-indigo-500/10 py-2 text-xs font-semibold text-indigo-300 transition-all hover:border-indigo-400/50 hover:bg-indigo-500/20 hover:text-white"
+              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 py-2 font-sans text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-500/20 hover:text-white"
             >
-              <FaBolt className="text-[11px] text-amber-400" />
+              <FaBolt className="text-[11px] text-cyan-400" />
               <span>1-Click Instant Demo Login</span>
             </button>
           </div>
 
           {/* Footer */}
-          <p className="pt-2 text-center text-xs text-slate-400">
+          <p className="pt-2 text-center font-sans text-xs text-slate-400">
             Don't have an account?{' '}
             <Link
               to="/signup"
-              className="font-semibold text-indigo-400 underline hover:text-indigo-300"
+              className="font-semibold text-cyan-400 underline hover:text-cyan-300"
             >
               Sign Up
             </Link>

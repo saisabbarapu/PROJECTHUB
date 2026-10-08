@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import api, { SOCKET_URL } from './api';
 import ProjectCard from './ProjectCard';
 import SubmitProjectModal from './SubmitProjectModal';
@@ -14,6 +14,9 @@ import {
   FaBuilding,
   FaPlus,
   FaSync,
+  FaSearch,
+  FaTimes,
+  FaFilter,
 } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { io } from 'socket.io-client';
@@ -22,6 +25,8 @@ const MainHome = () => {
   const [projects, setProjects] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [selectedDepartment, setSelectedDepartment] = useState(null);
+  const [searchFilter, setSearchFilter] = useState('');
+  const [sortBy, setSortBy] = useState('latest');
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
   const location = useLocation();
@@ -152,72 +157,155 @@ const MainHome = () => {
         (project) => project.email && project.email.toLowerCase() === searchEmail.toLowerCase()
       );
     }
+    if (searchFilter.trim()) {
+      const q = searchFilter.toLowerCase();
+      filtered = filtered.filter((p) => {
+        return (
+          p.title?.toLowerCase().includes(q) ||
+          p.description?.toLowerCase().includes(q) ||
+          p.department?.toLowerCase().includes(q) ||
+          (Array.isArray(p.toolsUsed) && p.toolsUsed.some((t) => t.toLowerCase().includes(q)))
+        );
+      });
+    }
+
+    if (sortBy === 'likes') {
+      return [...filtered].sort((a, b) => (b.likes || 0) - (a.likes || 0));
+    }
+    if (sortBy === 'title') {
+      return [...filtered].sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+    }
+
     return filtered;
-  }, [projects, selectedDepartment, normalizeDepartmentName, searchEmail]);
+  }, [projects, selectedDepartment, normalizeDepartmentName, searchEmail, searchFilter, sortBy]);
 
   const departmentData = useMemo(
     () => [
       { id: 'CSE', name: 'CSE', icon: FaLaptopCode },
+      { id: 'AI&ML', name: 'AI&ML', icon: FaBrain },
       { id: 'ECE', name: 'ECE', icon: FaBolt },
       { id: 'EEE', name: 'EEE', icon: FaBolt },
-      { id: 'MECH', name: 'Mechanical', icon: FaWrench },
-      { id: 'CHEMICAL', name: 'Chemical', icon: FaFlask },
-      { id: 'AI&ML', name: 'AI&ML', icon: FaBrain },
       { id: 'IT', name: 'IT', icon: FaCode },
-      { id: 'MBA', name: 'MBA', icon: FaChartLine },
-      { id: 'MCA', name: 'MCA', icon: FaChartLine },
+      { id: 'MECH', name: 'Mechanical', icon: FaWrench },
       { id: 'CIVIL', name: 'Civil', icon: FaBuilding },
+      { id: 'CHEMICAL', name: 'Chemical', icon: FaFlask },
+      { id: 'MCA', name: 'MCA', icon: FaChartLine },
+      { id: 'MBA', name: 'MBA', icon: FaChartLine },
     ],
     []
   );
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-[#030712] px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
+      {/* Ambient background light */}
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-96 w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(56,189,248,0.1),transparent_70%)] blur-3xl"></div>
+
       <div className="mx-auto max-w-7xl">
-        {/* Header & Active Filter */}
-        <div className="mb-8 flex flex-col justify-between gap-4 sm:flex-row sm:items-center">
+        {/* Header Title Section */}
+        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
           <div>
-            <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Project Showcase
+            <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              DISCOVERY PLATFORM
+            </div>
+            <h1 className="mt-1 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              EXPLORE PROJECTS
             </h1>
-            <p className="mt-1 text-xs text-slate-400">
-              Browse, like, and review academic projects across disciplines.
+            <p className="mt-1 font-sans text-xs text-slate-400 sm:text-sm">
+              Discover, review, and evaluate student capstones across all university departments.
             </p>
           </div>
-          {selectedDepartment && (
-            <div className="flex items-center gap-2">
-              <span className="text-xs text-slate-400">Filtering by:</span>
-              <span className="rounded-full border border-indigo-500/40 bg-indigo-500/20 px-3 py-1 text-xs font-semibold text-indigo-300">
-                {selectedDepartment}
-              </span>
-              <button
-                onClick={() => setSelectedDepartment(null)}
-                className="ml-1 text-xs text-slate-400 underline hover:text-white"
-              >
-                Clear
-              </button>
-            </div>
-          )}
+
+          {/* Quick Action Button */}
+          <button
+            onClick={() => setShowModal(true)}
+            className="inline-flex items-center gap-2 self-start rounded-full border border-cyan-500/40 bg-cyan-500/15 px-5 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-cyan-300 shadow-sm shadow-cyan-500/10 transition-all hover:bg-cyan-500/25 hover:text-white md:self-auto"
+          >
+            <FaPlus className="text-xs" />
+            <span>Submit Project</span>
+          </button>
         </div>
 
-        {/* Departments Scroll / Grid */}
+        {/* Discovery Filter & Search Bar */}
+        <div className="glass-panel mb-8 rounded-2xl p-4 sm:p-5">
+          <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+            {/* Search Input */}
+            <div className="relative flex-grow sm:max-w-md">
+              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-500" />
+              <input
+                type="text"
+                placeholder="Search projects by title, tech, or keywords..."
+                value={searchFilter}
+                onChange={(e) => setSearchFilter(e.target.value)}
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-8 font-sans text-xs text-slate-200 placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-cyan-500/20"
+              />
+              {searchFilter && (
+                <button
+                  onClick={() => setSearchFilter('')}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-white"
+                >
+                  <FaTimes />
+                </button>
+              )}
+            </div>
+
+            {/* Sort & Status */}
+            <div className="flex items-center gap-3">
+              <div className="flex items-center gap-1.5 font-mono text-xs text-slate-400">
+                <FaFilter className="text-[10px] text-cyan-400" />
+                <span>Sort:</span>
+              </div>
+              <select
+                value={sortBy}
+                onChange={(e) => setSortBy(e.target.value)}
+                className="rounded-xl border border-white/10 bg-[#050816] px-3 py-1.5 font-sans text-xs text-slate-300 outline-none transition-colors hover:border-white/20 focus:border-cyan-500/50"
+              >
+                <option value="latest">Recently Added</option>
+                <option value="likes">Most Liked</option>
+                <option value="title">Alphabetical (A-Z)</option>
+              </select>
+
+              {(selectedDepartment || searchEmail || searchFilter) && (
+                <button
+                  onClick={() => {
+                    setSelectedDepartment(null);
+                    setSearchFilter('');
+                    setSearchEmail('');
+                  }}
+                  className="rounded-xl border border-white/10 bg-white/[0.03] px-3 py-1.5 font-mono text-xs text-cyan-300 transition-colors hover:bg-white/[0.08]"
+                >
+                  Clear Filters
+                </button>
+              )}
+            </div>
+          </div>
+        </div>
+
+        {/* Departments Scroll Strip */}
         <div className="scrollbar-none mb-10 overflow-x-auto pb-2">
-          <div className="flex min-w-max gap-3">
+          <div className="flex min-w-max gap-2.5">
+            <button
+              onClick={() => setSelectedDepartment(null)}
+              className={`rounded-full border px-4 py-2 font-mono text-xs font-semibold transition-all ${
+                selectedDepartment === null
+                  ? 'border-cyan-500/60 bg-cyan-500/20 text-cyan-200 shadow-sm'
+                  : 'border-white/10 bg-white/[0.02] text-slate-400 hover:border-white/20 hover:text-slate-200'
+              }`}
+            >
+              All Departments
+            </button>
             {departmentData.map(({ id, name, icon: Icon }) => {
               const isSelected = selectedDepartment === id;
               return (
                 <button
                   key={id}
                   onClick={() => handleDepartmentClick(name)}
-                  className={`flex cursor-pointer items-center gap-2.5 rounded-2xl border px-4 py-3 text-xs font-semibold transition-all duration-200 ${
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 font-sans text-xs font-medium transition-all ${
                     isSelected
-                      ? 'scale-105 border-indigo-500 bg-indigo-600/30 text-indigo-200 shadow-lg shadow-indigo-500/20'
-                      : 'border-slate-800 bg-slate-900/80 text-slate-300 hover:border-slate-700 hover:bg-slate-800/80'
+                      ? 'border-cyan-500/60 bg-cyan-500/20 text-cyan-200 shadow-sm'
+                      : 'border-white/10 bg-white/[0.02] text-slate-400 hover:border-white/20 hover:text-slate-200'
                   }`}
                 >
-                  <Icon
-                    className={`text-base ${isSelected ? 'text-indigo-400' : 'text-slate-400'}`}
-                  />
+                  <Icon className={`text-xs ${isSelected ? 'text-cyan-400' : 'text-slate-500'}`} />
                   <span>{name}</span>
                 </button>
               );
@@ -234,11 +322,11 @@ const MainHome = () => {
 
         {/* Error State */}
         {error && (
-          <div className="mx-auto max-w-md space-y-3 rounded-2xl border border-rose-800 bg-rose-950/40 p-6 text-center">
+          <div className="glass-panel mx-auto max-w-md space-y-3 rounded-2xl border-rose-500/30 p-6 text-center">
             <p className="text-xs font-medium text-rose-300">{error}</p>
             <button
               onClick={fetchProjects}
-              className="inline-flex items-center gap-1.5 rounded-lg bg-rose-600 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-rose-700"
+              className="inline-flex items-center gap-1.5 rounded-lg bg-rose-600/80 px-4 py-2 text-xs font-semibold text-white transition-colors hover:bg-rose-600"
             >
               <FaSync className="text-xs" /> Try Again
             </button>
@@ -251,8 +339,8 @@ const MainHome = () => {
             {filteredProjects.length > 0 ? (
               filteredProjects.map((p) => <ProjectCard key={p._id} project={p} />)
             ) : (
-              <div className="col-span-full space-y-2 rounded-3xl border border-dashed border-slate-800 bg-slate-900/30 p-8 py-20 text-center">
-                <p className="text-sm font-semibold text-slate-300">
+              <div className="col-span-full space-y-2 rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-8 py-20 text-center">
+                <p className="font-sora text-sm font-semibold text-slate-300">
                   No projects found{selectedDepartment ? ` for ${selectedDepartment}` : ''}.
                 </p>
                 <p className="text-xs text-slate-500">
@@ -261,7 +349,7 @@ const MainHome = () => {
                 <div className="pt-2">
                   <button
                     onClick={() => setShowModal(true)}
-                    className="rounded-full bg-indigo-600 px-4 py-2 text-xs font-semibold text-white hover:bg-indigo-700"
+                    className="rounded-full border border-cyan-500/40 bg-cyan-500/20 px-5 py-2 font-mono text-xs font-semibold text-cyan-300 hover:bg-cyan-500/30"
                   >
                     Submit Project
                   </button>
@@ -272,16 +360,16 @@ const MainHome = () => {
         )}
       </div>
 
-      {/* Floating Action Button (Submit Project) */}
+      {/* Floating Action Button */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-6 right-6 z-40 flex h-14 w-14 items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 to-purple-600 text-white shadow-2xl shadow-indigo-500/40 transition-all hover:scale-110 hover:shadow-indigo-500/60 focus:outline-none focus:ring-4 focus:ring-indigo-500/20"
+        className="fixed bottom-6 right-6 z-40 flex h-13 w-13 items-center justify-center rounded-full border border-cyan-400/50 bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-xl shadow-cyan-500/30 transition-all hover:scale-110 hover:shadow-cyan-500/50 focus:outline-none"
         title="Submit New Project"
       >
-        <FaPlus className="text-lg" />
+        <FaPlus className="text-base" />
       </button>
 
-      {/* Modal */}
+      {/* Submit Project Modal */}
       {showModal && (
         <SubmitProjectModal onClose={() => setShowModal(false)} onSubmit={handleAddProject} />
       )}
@@ -290,3 +378,4 @@ const MainHome = () => {
 };
 
 export default MainHome;
+

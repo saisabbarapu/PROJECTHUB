@@ -1,21 +1,17 @@
 import React, { useState, useMemo } from 'react';
 import { useNavigate } from 'react-router-dom';
 import {
-  FaRocket,
-  FaLightbulb,
-  FaUsers,
   FaArrowRight,
   FaHeart,
   FaRegHeart,
   FaSearch,
-  FaStar,
-  FaCode,
-  FaGraduationCap,
-  FaAward,
-  FaCheckCircle,
-  FaFire,
-  FaCompass,
   FaTimes,
+  FaChevronRight,
+  FaGithub,
+  FaExternalLinkAlt,
+  FaCodeBranch,
+  FaShieldAlt,
+  FaLightbulb,
 } from 'react-icons/fa';
 
 const HomePage = () => {
@@ -140,147 +136,133 @@ const HomePage = () => {
   }, [selectedCategory, searchQuery]);
 
   return (
-    <main className="relative min-h-screen bg-slate-950 text-slate-100 selection:bg-indigo-500 selection:text-white">
-      {/* Top Ambient Aurora Glow behind Floating Navbar */}
-      <div className="pointer-events-none absolute -top-20 left-1/2 -z-10 h-80 w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(ellipse_80%_80%_at_50%_0%,rgba(99,102,241,0.35),rgba(168,85,247,0.18),transparent_75%)] blur-3xl"></div>
+    <main className="relative min-h-screen bg-[#030712] text-slate-100 selection:bg-cyan-500/20 selection:text-cyan-200">
+      {/* Background Ambience & Lighting */}
+      <div className="pointer-events-none fixed inset-0 -z-10">
+        <div className="absolute left-1/2 top-0 h-[650px] w-full max-w-7xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),rgba(56,189,248,0.05)_40%,transparent_70%)] blur-3xl"></div>
+        <div className="cinematic-grid absolute inset-0 opacity-40"></div>
+      </div>
 
-      {/* Hero Section */}
-      <section className="relative overflow-hidden px-4 pb-20 pt-10 sm:px-6 sm:pb-28 sm:pt-14 lg:px-8">
-        {/* Ambient Gradient Background & Tech Grid */}
-        <div className="absolute inset-0 -z-10 bg-[radial-gradient(ellipse_80%_60%_at_50%_-20%,rgba(99,102,241,0.25),rgba(2,6,23,0))]"></div>
-        <div className="absolute inset-0 -z-10 bg-[linear-gradient(to_right,#1e293b0f_1px,transparent_1px),linear-gradient(to_bottom,#1e293b0f_1px,transparent_1px)] bg-[size:4rem_4rem]"></div>
-        <div className="pointer-events-none absolute -top-40 left-1/2 -z-10 h-[500px] w-[700px] -translate-x-1/2 rounded-full bg-gradient-to-tr from-indigo-600/20 via-purple-600/20 to-pink-600/10 blur-[130px]"></div>
-
+      {/* Cinematic Hero Section */}
+      <section className="relative px-4 pb-20 pt-12 sm:px-6 sm:pb-28 sm:pt-16 lg:px-8">
         <div className="mx-auto max-w-5xl text-center">
-          {/* Glowing Badge */}
-          <div className="mb-6 inline-flex items-center gap-2 rounded-full border border-indigo-500/30 bg-indigo-950/60 px-4 py-1.5 text-xs font-semibold text-indigo-300 shadow-sm backdrop-blur-md transition-all hover:border-indigo-500/50">
-            <span className="flex h-2 w-2 animate-pulse rounded-full bg-emerald-400"></span>
-            <FaRocket className="text-indigo-400" />
-            <span>Official University Project Showcase Platform</span>
+          {/* Eyebrow Pill */}
+          <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/[0.06] px-4 py-1.5 font-mono text-xs font-semibold tracking-wider text-cyan-300 backdrop-blur-md">
+            <span className="flex h-1.5 w-1.5 animate-pulse rounded-full bg-cyan-400"></span>
+            <span>STUDENT PROJECT SHOWCASE</span>
           </div>
 
-          {/* Hero Heading */}
-          <h1 className="text-4xl font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
-            Inspire, Build & Share{' '}
-            <span className="mt-2 block bg-gradient-to-r from-indigo-400 via-purple-300 to-pink-400 bg-clip-text text-transparent">
-              Student Innovations
+          {/* Large Hero Editorial Headline */}
+          <h1 className="font-sora text-5xl font-extrabold tracking-tight text-white sm:text-7xl lg:text-8xl">
+            BUILD.
+            <span className="block text-slate-400">SHARE.</span>
+            <span className="block bg-gradient-to-r from-cyan-400 via-sky-300 to-blue-400 bg-clip-text text-transparent">
+              DISCOVER.
             </span>
           </h1>
 
-          {/* Subtitle */}
-          <p className="mx-auto mt-6 max-w-2xl text-base leading-relaxed text-slate-300 sm:text-lg">
-            A collaborative hub for undergraduate, postgraduate, and departmental researchers to
-            publish capstone projects, gain peer feedback, and showcase real-world solutions.
-          </p>
+          {/* Supporting Headline & Paragraph */}
+          <div className="mx-auto mt-8 max-w-2xl space-y-3">
+            <p className="font-sora text-lg font-medium text-slate-200 sm:text-xl">
+              Turn your academic projects into something worth showcasing.
+            </p>
+            <p className="font-sans text-sm leading-relaxed text-slate-400 sm:text-base">
+              ProjectHub is a platform where students can submit, discover, and showcase projects while connecting ideas across departments.
+            </p>
+          </div>
 
-          {/* CTA Buttons */}
-          <div className="mt-9 flex flex-wrap items-center justify-center gap-4">
+          {/* Primary & Secondary CTAs */}
+          <div className="mt-10 flex flex-wrap items-center justify-center gap-4">
             <button
               onClick={() => navigate('/mainhome')}
-              className="inline-flex items-center gap-2.5 rounded-full bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 px-7 py-3.5 text-sm font-semibold text-white shadow-xl shadow-indigo-500/30 transition-all hover:scale-105 hover:shadow-indigo-500/50 active:scale-95"
+              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-gradient-to-r from-cyan-500/90 to-blue-600/90 px-8 py-3.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/30 active:scale-95"
             >
-              <FaCompass className="text-sm" />
-              Explore All Projects
-              <FaArrowRight className="text-xs transition-transform group-hover:translate-x-1" />
+              <span>Explore Projects</span>
+              <FaArrowRight className="text-xs" />
             </button>
+
             <button
               onClick={() => navigate('/loginpage')}
-              className="inline-flex items-center gap-2 rounded-full border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-200 backdrop-blur-md transition-all hover:border-indigo-500/50 hover:bg-slate-800 hover:text-white"
+              className="inline-flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-8 py-3.5 font-sans text-xs font-semibold uppercase tracking-wider text-slate-200 backdrop-blur-md transition-all duration-200 hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
             >
-              <FaCode className="text-sm text-indigo-400" />
-              Submit Your Project
-            </button>
-            <button
-              onClick={() => navigate('/top-liked')}
-              className="inline-flex items-center gap-2 rounded-full border border-amber-500/20 bg-amber-500/10 px-5 py-3.5 text-sm font-semibold text-amber-300 backdrop-blur-md transition-all hover:border-amber-500/40 hover:bg-amber-500/20"
-            >
-              <FaAward className="text-sm text-amber-400" />
-              Top Leaderboard
+              <span>Submit Your Project</span>
             </button>
           </div>
 
-          {/* Stats Bar */}
-          <div className="mt-14 grid grid-cols-2 gap-4 rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-md sm:grid-cols-4 sm:p-8">
-            <div className="text-center">
-              <div className="text-2xl font-black text-white sm:text-3xl">500+</div>
-              <div className="mt-1 text-xs font-medium text-slate-400">Published Projects</div>
+          {/* Feature Highlights Strip */}
+          <div className="mt-16 flex flex-wrap items-center justify-center gap-3 border-y border-white/[0.06] py-5 sm:gap-8">
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
+              <FaChevronRight className="text-[10px] text-cyan-400" />
+              <span>Project Showcase</span>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-black text-indigo-400 sm:text-3xl">12+</div>
-              <div className="mt-1 text-xs font-medium text-slate-400">Engineering Disciplines</div>
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
+              <FaChevronRight className="text-[10px] text-cyan-400" />
+              <span>Smart Discovery</span>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-black text-purple-400 sm:text-3xl">15K+</div>
-              <div className="mt-1 text-xs font-medium text-slate-400">Peer Reviews & Likes</div>
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
+              <FaChevronRight className="text-[10px] text-cyan-400" />
+              <span>Student Collaboration</span>
             </div>
-            <div className="text-center">
-              <div className="text-2xl font-black text-emerald-400 sm:text-3xl">100%</div>
-              <div className="mt-1 text-xs font-medium text-slate-400">Verified Creators</div>
+            <div className="flex items-center gap-2 text-xs font-medium text-slate-300">
+              <FaChevronRight className="text-[10px] text-cyan-400" />
+              <span>Department Exploration</span>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Interactive Hero Spotlight Card */}
-      <section className="mx-auto max-w-6xl px-4 pb-16 sm:px-6 lg:px-8">
-        <div className="relative overflow-hidden rounded-3xl border border-indigo-500/30 bg-gradient-to-b from-indigo-950/40 via-slate-900/60 to-slate-900/90 p-6 shadow-2xl backdrop-blur-xl sm:p-8">
-          <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
+      {/* Featured Spotlight Card */}
+      <section className="mx-auto max-w-6xl px-4 pb-20 sm:px-6 lg:px-8">
+        <div className="glass-panel relative overflow-hidden rounded-3xl p-6 sm:p-10">
+          <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             {/* Left Content */}
             <div className="space-y-4 lg:max-w-xl">
-              <div className="inline-flex items-center gap-2 rounded-full border border-amber-500/30 bg-amber-500/10 px-3 py-1 text-xs font-semibold text-amber-300">
-                <FaFire className="text-amber-400" /> Editor's Spotlight Pick of the Week
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-cyan-300">
+                <span>✦ SPOTLIGHT INNOVATION</span>
               </div>
-              <h2 className="text-2xl font-bold tracking-tight text-white sm:text-3xl">
+              <h2 className="font-sora text-2xl font-bold tracking-tight text-white sm:text-3xl">
                 AI-Powered Early Health Diagnosis System
               </h2>
-              <p className="text-sm leading-relaxed text-slate-300">
-                Developed by university computer science researchers, this deep learning framework
-                analyzes diagnostic medical imaging with high-throughput inference, offering a
-                low-cost screening assistant for rural healthcare centers.
+              <p className="font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
+                Developed by university computer science researchers, this deep learning framework analyzes diagnostic medical imaging with high-throughput inference, offering a low-cost screening assistant for rural healthcare centers.
               </p>
-              <div className="flex flex-wrap items-center gap-2 pt-2">
-                <span className="rounded-md border border-indigo-500/30 bg-indigo-500/20 px-2.5 py-1 text-xs font-semibold text-indigo-300">
-                  PyTorch
-                </span>
-                <span className="rounded-md border border-purple-500/30 bg-purple-500/20 px-2.5 py-1 text-xs font-semibold text-purple-300">
-                  FastAPI
-                </span>
-                <span className="rounded-md border border-pink-500/30 bg-pink-500/20 px-2.5 py-1 text-xs font-semibold text-pink-300">
-                  Computer Vision
-                </span>
-                <span className="rounded-md border border-emerald-500/30 bg-emerald-500/20 px-2.5 py-1 text-xs font-semibold text-emerald-300">
-                  Clinical Trial
-                </span>
+              <div className="flex flex-wrap items-center gap-1.5 pt-1">
+                {['PyTorch', 'FastAPI', 'Computer Vision', 'Clinical Trial'].map((tag) => (
+                  <span
+                    key={tag}
+                    className="rounded-md border border-white/10 bg-white/[0.03] px-2.5 py-1 font-mono text-[11px] text-slate-300"
+                  >
+                    {tag}
+                  </span>
+                ))}
               </div>
-              <div className="flex items-center gap-4 pt-2">
+              <div className="flex items-center gap-4 pt-3">
                 <button
                   onClick={() => navigate('/mainhome')}
-                  className="inline-flex items-center gap-2 rounded-xl bg-indigo-600 px-5 py-2.5 text-xs font-semibold text-white shadow-md shadow-indigo-600/30 transition-all hover:bg-indigo-500"
+                  className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/40 bg-cyan-500/15 px-5 py-2.5 text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-500/25 hover:text-white"
                 >
-                  Inspect Project in Showcase <FaArrowRight className="text-[10px]" />
+                  <span>Inspect In Showcase</span>
+                  <FaArrowRight className="text-[10px]" />
                 </button>
-                <div className="flex items-center gap-1.5 text-xs text-slate-400">
-                  <FaStar className="text-amber-400" />
-                  <span className="font-semibold text-white">4.9</span> / 5.0 (68 peer ratings)
-                </div>
+                <span className="font-mono text-xs text-slate-400">Lead: Aarav Sharma (CSE)</span>
               </div>
             </div>
 
-            {/* Right Preview Image with Glow */}
-            <div className="relative overflow-hidden rounded-2xl border border-slate-700/60 bg-slate-800 shadow-xl lg:w-96">
+            {/* Right Thumbnail */}
+            <div className="relative overflow-hidden rounded-2xl border border-white/10 bg-slate-900 shadow-2xl lg:w-96">
               <img
                 src="https://images.unsplash.com/photo-1576091160399-112ba8d25d1d?auto=format&fit=crop&w=1000&q=80"
-                alt="AI Health Diagnosis Preview"
-                className="h-56 w-full object-cover transition-transform duration-700 hover:scale-105 sm:h-64"
+                alt="AI Diagnosis preview"
+                className="h-60 w-full object-cover transition-transform duration-700 hover:scale-105"
                 onError={(e) => {
                   e.target.src = '/image/projectbg.png';
                 }}
               />
-              <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
-              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-slate-200">
-                <span className="font-medium text-white">Lead: Aarav Sharma</span>
-                <span className="rounded-full bg-indigo-500/80 px-2.5 py-0.5 text-[10px] font-bold text-white">
-                  Verified Department Work
+              <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/90 via-transparent to-transparent"></div>
+              <div className="absolute bottom-3 left-3 right-3 flex items-center justify-between text-xs text-slate-300">
+                <span className="font-medium text-white">Verified Project</span>
+                <span className="rounded-full border border-cyan-500/30 bg-cyan-950/80 px-2.5 py-0.5 font-mono text-[10px] text-cyan-300">
+                  98% Accuracy
                 </span>
               </div>
             </div>
@@ -288,35 +270,35 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Explorer / Filterable Innovations Grid */}
+      {/* Featured Projects Grid & Search */}
       <section className="mx-auto max-w-7xl px-4 py-12 sm:px-6 lg:px-8">
         <div className="mb-10 flex flex-col gap-6 md:flex-row md:items-end md:justify-between">
           <div>
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-indigo-400">
-              <FaGraduationCap className="text-sm" /> Department Portfolios
+            <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              EXPLORE INNOVATIONS
             </div>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Featured Innovations
+            <h2 className="mt-1.5 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              FEATURED PROJECTS
             </h2>
-            <p className="mt-2 max-w-xl text-sm text-slate-400">
-              Browse top projects created by students across engineering and science streams.
+            <p className="mt-2 max-w-xl font-sans text-xs text-slate-400 sm:text-sm">
+              Explore projects built by students across different technologies and departments.
             </p>
           </div>
 
-          {/* Search Bar */}
-          <div className="relative w-full md:w-72">
-            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-400" />
+          {/* Search Input */}
+          <div className="relative w-full md:w-80">
+            <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-slate-500" />
             <input
               type="text"
-              placeholder="Search title, tech, or dept..."
+              placeholder="Search projects..."
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-full border border-slate-700/80 bg-slate-900/90 py-2.5 pl-9 pr-8 text-xs text-slate-200 placeholder-slate-500 shadow-inner outline-none transition-all focus:border-indigo-500 focus:ring-1 focus:ring-indigo-500"
+              className="w-full rounded-full border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-8 font-sans text-xs text-slate-200 placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-cyan-500/20"
             />
             {searchQuery && (
               <button
                 onClick={() => setSearchQuery('')}
-                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-400 hover:text-white"
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-xs text-slate-500 hover:text-white"
               >
                 <FaTimes />
               </button>
@@ -332,10 +314,10 @@ const HomePage = () => {
               <button
                 key={cat}
                 onClick={() => setSelectedCategory(cat)}
-                className={`rounded-full px-4 py-1.5 text-xs font-medium transition-all ${
+                className={`rounded-full px-4 py-1.5 font-sans text-xs font-medium transition-all ${
                   isActive
-                    ? 'bg-indigo-600 text-white shadow-md shadow-indigo-600/30'
-                    : 'border border-slate-800 bg-slate-900/60 text-slate-400 hover:border-slate-700 hover:text-slate-200'
+                    ? 'border border-cyan-500/50 bg-cyan-500/20 text-cyan-200 shadow-sm'
+                    : 'border border-white/10 bg-white/[0.02] text-slate-400 hover:border-white/20 hover:text-slate-200'
                 }`}
               >
                 {cat}
@@ -344,20 +326,18 @@ const HomePage = () => {
           })}
         </div>
 
-        {/* Cards Grid */}
+        {/* Editorial Project Cards Grid */}
         {filteredProjects.length === 0 ? (
-          <div className="rounded-2xl border border-slate-800 bg-slate-900/40 py-16 text-center">
-            <FaSearch className="mx-auto text-3xl text-slate-600" />
-            <h3 className="mt-3 text-base font-semibold text-slate-300">No projects found</h3>
-            <p className="mt-1 text-xs text-slate-500">
-              Try adjusting your search query or switching categories.
-            </p>
+          <div className="rounded-3xl border border-dashed border-white/10 bg-white/[0.01] py-16 text-center">
+            <FaSearch className="mx-auto text-2xl text-slate-600" />
+            <h3 className="mt-3 font-sora text-sm font-semibold text-slate-300">No projects found</h3>
+            <p className="mt-1 text-xs text-slate-500">Try adjusting your search query or reset filter.</p>
             <button
               onClick={() => {
                 setSelectedCategory('All');
                 setSearchQuery('');
               }}
-              className="mt-4 rounded-full border border-indigo-500/40 bg-indigo-500/10 px-4 py-1.5 text-xs font-medium text-indigo-300 hover:bg-indigo-500/20"
+              className="mt-4 rounded-full border border-cyan-500/40 bg-cyan-500/10 px-4 py-1.5 text-xs text-cyan-300 hover:bg-cyan-500/20"
             >
               Reset Filters
             </button>
@@ -372,10 +352,10 @@ const HomePage = () => {
                 <div
                   key={project.id}
                   onClick={() => navigate('/mainhome')}
-                  className="group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-slate-800/80 bg-slate-900/60 shadow-lg transition-all duration-300 hover:-translate-y-1.5 hover:border-indigo-500/50 hover:shadow-xl hover:shadow-indigo-500/10"
+                  className="glass-card glass-card-hover group flex cursor-pointer flex-col overflow-hidden rounded-2xl"
                 >
-                  {/* Image Container */}
-                  <div className="relative h-48 w-full overflow-hidden bg-slate-800">
+                  {/* Thumbnail Area with Subtle Overlay */}
+                  <div className="relative h-48 w-full overflow-hidden bg-slate-900">
                     <img
                       src={project.image}
                       alt={project.title}
@@ -384,71 +364,57 @@ const HomePage = () => {
                       }}
                       className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    <div className="absolute inset-0 bg-gradient-to-t from-slate-950/80 via-transparent to-transparent"></div>
+                    <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
 
                     {/* Department Tag */}
-                    <span className="absolute left-3 top-3 rounded-full border border-slate-700 bg-slate-950/80 px-2.5 py-1 text-[11px] font-medium text-indigo-300 backdrop-blur-md">
+                    <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-medium text-cyan-300 backdrop-blur-md">
                       {project.category}
                     </span>
 
-                    {/* Badge if available */}
-                    {project.badge && (
-                      <span className="absolute right-3 top-3 rounded-full border border-amber-500/30 bg-amber-500/80 px-2.5 py-1 text-[10px] font-bold text-white shadow-sm backdrop-blur-md">
-                        {project.badge}
-                      </span>
-                    )}
-
-                    {/* Floating Like Button */}
+                    {/* Like button */}
                     <button
                       onClick={(e) => handleToggleLike(project.id, e)}
-                      className={`absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 text-xs font-semibold backdrop-blur-md transition-all ${
+                      className={`absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-xs backdrop-blur-md transition-all ${
                         isLiked
-                          ? 'border border-pink-500/50 bg-pink-500 text-white shadow-md shadow-pink-500/30'
-                          : 'border border-slate-700 bg-slate-950/70 text-slate-300 hover:text-pink-400'
+                          ? 'border border-pink-500/40 bg-pink-500/20 text-pink-300'
+                          : 'border border-white/10 bg-[#030712]/70 text-slate-300 hover:text-pink-400'
                       }`}
                     >
-                      {isLiked ? (
-                        <FaHeart className="text-xs text-white" />
-                      ) : (
-                        <FaRegHeart className="text-xs" />
-                      )}
+                      {isLiked ? <FaHeart className="text-pink-400" /> : <FaRegHeart />}
                       <span>{totalLikes}</span>
                     </button>
                   </div>
 
                   {/* Body Content */}
                   <div className="flex flex-grow flex-col p-5">
-                    <h3 className="text-base font-bold text-white transition-colors group-hover:text-indigo-400">
+                    <h3 className="font-sora text-base font-bold text-white transition-colors group-hover:text-cyan-300">
                       {project.title}
                     </h3>
                     <p className="mt-2 line-clamp-2 flex-grow text-xs leading-relaxed text-slate-400">
                       {project.description}
                     </p>
 
-                    {/* Tech Badges */}
+                    {/* Technology tags */}
                     <div className="mt-4 flex flex-wrap items-center gap-1.5">
                       {project.tech.map((t, idx) => (
                         <span
                           key={idx}
-                          className="rounded-md border border-slate-800 bg-slate-800/60 px-2 py-0.5 text-[10px] font-medium text-slate-300"
+                          className="rounded border border-white/5 bg-white/[0.02] px-2 py-0.5 font-mono text-[10px] text-slate-400"
                         >
                           {t}
                         </span>
                       ))}
                     </div>
 
-                    {/* Footer Info */}
-                    <div className="mt-4 flex items-center justify-between border-t border-slate-800/80 pt-3 text-xs text-slate-400">
+                    {/* Footer Row */}
+                    <div className="mt-4 flex items-center justify-between border-t border-white/[0.06] pt-3 text-xs text-slate-400">
                       <div className="flex items-center gap-2">
-                        <div className="flex h-6 w-6 items-center justify-center rounded-full bg-gradient-to-tr from-indigo-600 to-purple-600 text-[10px] font-bold text-white">
+                        <div className="flex h-5 w-5 items-center justify-center rounded-full border border-cyan-500/30 bg-cyan-950 font-mono text-[10px] font-bold text-cyan-300">
                           {project.author.charAt(0)}
                         </div>
-                        <div>
-                          <p className="font-medium text-slate-200">{project.author}</p>
-                          <p className="text-[10px] text-slate-500">{project.dept}</p>
-                        </div>
+                        <span className="text-xs text-slate-300">{project.author}</span>
                       </div>
-                      <span className="inline-flex items-center gap-1 text-[11px] font-semibold text-indigo-400 group-hover:underline">
+                      <span className="inline-flex items-center gap-1 font-mono text-[11px] text-cyan-400 transition-transform group-hover:translate-x-0.5">
                         Details <FaArrowRight className="text-[9px]" />
                       </span>
                     </div>
@@ -460,151 +426,73 @@ const HomePage = () => {
         )}
       </section>
 
-      {/* How It Works - 3 Step Roadmap */}
-      <section className="border-t border-slate-800/80 bg-slate-900/30 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
+      {/* 3 Step Workflow */}
+      <section className="border-t border-white/[0.06] px-4 py-20 sm:px-6 lg:px-8">
+        <div className="mx-auto max-w-6xl">
           <div className="text-center">
-            <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-wider text-purple-400">
-              <FaRocket className="text-xs" /> Seamless Workflow
-            </div>
-            <h2 className="mt-2 text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              From Idea to Recognition in 3 Steps
+            <span className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+              WORKFLOW
+            </span>
+            <h2 className="mt-2 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              From Idea to Recognition
             </h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-slate-400">
-              ProjectHub makes it effortless to document your hard work, receive constructive
-              feedback, and stand out.
+            <p className="mx-auto mt-2 max-w-xl text-xs text-slate-400 sm:text-sm">
+              An intuitive process to publish capstones, collect peer reviews, and showcase your innovation portfolio.
             </p>
           </div>
 
-          <div className="mt-12 grid grid-cols-1 gap-8 md:grid-cols-3">
-            {/* Step 1 */}
-            <div className="relative rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-indigo-500/20 text-xl font-bold text-indigo-400">
-                01
-              </div>
-              <h3 className="mt-4 text-lg font-bold text-white">Build & Upload</h3>
+          <div className="mt-12 grid grid-cols-1 gap-6 md:grid-cols-3">
+            <div className="glass-card rounded-2xl p-6">
+              <span className="font-mono text-2xl font-black text-cyan-400">01</span>
+              <h3 className="mt-3 font-sora text-base font-bold text-white">Build & Document</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                Document your semester capstone, thesis research, or hackathon prototype with code
-                links, abstract, and architecture diagrams.
+                Upload your project code, PDF architecture report, and visual media with tags across engineering disciplines.
               </p>
             </div>
 
-            {/* Step 2 */}
-            <div className="relative rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-purple-500/20 text-xl font-bold text-purple-400">
-                02
-              </div>
-              <h3 className="mt-4 text-lg font-bold text-white">Peer Feedback & Upvotes</h3>
+            <div className="glass-card rounded-2xl p-6">
+              <span className="font-mono text-2xl font-black text-sky-400">02</span>
+              <h3 className="mt-3 font-sora text-base font-bold text-white">Peer Feedback</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                Receive ratings and comments from classmates, professors, and alumni to refine your
-                project implementation and validate outcomes.
+                Gather upvotes and constructive feedback from fellow students and departmental mentors in real time.
               </p>
             </div>
 
-            {/* Step 3 */}
-            <div className="relative rounded-2xl border border-slate-800/80 bg-slate-900/60 p-6 backdrop-blur-sm">
-              <div className="flex h-12 w-12 items-center justify-center rounded-xl bg-pink-500/20 text-xl font-bold text-pink-400">
-                03
-              </div>
-              <h3 className="mt-4 text-lg font-bold text-white">Climb the Leaderboard</h3>
+            <div className="glass-card rounded-2xl p-6">
+              <span className="font-mono text-2xl font-black text-blue-400">03</span>
+              <h3 className="mt-3 font-sora text-base font-bold text-white">Top Showcase</h3>
               <p className="mt-2 text-xs leading-relaxed text-slate-400">
-                Top-rated innovations rise to the Heroic Leaderboard, gaining campus recognition and
-                visibility with hiring partners.
+                Standout submissions qualify for the community leaderboard and permanent verified university archives.
               </p>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Key Platform Pillars */}
-      <section className="border-t border-slate-800/80 px-4 py-16 sm:px-6 lg:px-8">
-        <div className="mx-auto max-w-7xl">
-          <div className="mb-12 text-center">
-            <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              Why Colleges Choose ProjectHub
+      {/* Call to Action Section */}
+      <section className="mx-4 my-16 max-w-5xl sm:mx-auto">
+        <div className="glass-panel relative overflow-hidden rounded-3xl p-8 text-center sm:p-14">
+          <div className="mx-auto max-w-2xl space-y-4">
+            <h2 className="font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+              Have a Project Ready for the Spotlight?
             </h2>
-            <p className="mx-auto mt-2 max-w-xl text-sm text-slate-400">
-              Built specifically for academic ecosystems to bridge student ingenuity with
-              institutional pride.
+            <p className="font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
+              Join hundreds of student creators and faculty publishing capstones and research models on ProjectHub.
             </p>
-          </div>
-
-          <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-indigo-500/20 text-indigo-400">
-                <FaLightbulb className="text-lg" />
-              </div>
-              <h3 className="mt-4 text-base font-semibold text-white">Interdisciplinary Sync</h3>
-              <p className="mt-1 text-xs text-slate-400">
-                Connect software developers with electronics and mechanical teams for complex
-                projects.
-              </p>
+            <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
+              <button
+                onClick={() => navigate('/loginpage')}
+                className="rounded-full border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 hover:scale-105"
+              >
+                Get Started
+              </button>
+              <button
+                onClick={() => navigate('/aboutpage')}
+                className="rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:bg-white/[0.08] hover:text-white"
+              >
+                Learn More
+              </button>
             </div>
-
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-purple-500/20 text-purple-400">
-                <FaUsers className="text-lg" />
-              </div>
-              <h3 className="mt-4 text-base font-semibold text-white">Real-Time Engagement</h3>
-              <p className="mt-1 text-xs text-slate-400">
-                Instant notification updates on likes, comments, and reviews via Socket.IO.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-pink-500/20 text-pink-400">
-                <FaAward className="text-lg" />
-              </div>
-              <h3 className="mt-4 text-base font-semibold text-white">Verified Portfolios</h3>
-              <p className="mt-1 text-xs text-slate-400">
-                Every project profile acts as an authentic digital credential for resumes and
-                portfolios.
-              </p>
-            </div>
-
-            <div className="rounded-2xl border border-slate-800 bg-slate-900/50 p-6">
-              <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-emerald-500/20 text-emerald-400">
-                <FaCheckCircle className="text-lg" />
-              </div>
-              <h3 className="mt-4 text-base font-semibold text-white">Department Archives</h3>
-              <p className="mt-1 text-xs text-slate-400">
-                Preserve research continuity so junior batches can learn and expand on past
-                successes.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      {/* Call to Action Banner */}
-      <section className="relative mx-4 my-16 overflow-hidden rounded-3xl border border-indigo-500/30 bg-gradient-to-r from-indigo-950/70 via-purple-950/50 to-slate-950 p-8 text-center sm:mx-8 sm:p-14">
-        <div className="pointer-events-none absolute -bottom-24 -right-24 h-72 w-72 rounded-full bg-indigo-500/20 blur-3xl"></div>
-        <div className="pointer-events-none absolute -left-24 -top-24 h-72 w-72 rounded-full bg-purple-500/20 blur-3xl"></div>
-
-        <div className="relative mx-auto max-w-2xl space-y-4">
-          <div className="inline-flex items-center gap-2 rounded-full border border-indigo-400/30 bg-indigo-500/10 px-3 py-1 text-xs font-semibold text-indigo-300">
-            <FaRocket className="text-xs" /> Take the Spotlight
-          </div>
-          <h2 className="text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-            Have a Project That Deserves Recognition?
-          </h2>
-          <p className="text-sm leading-relaxed text-slate-300">
-            Join hundreds of engineering students and faculty mentors publishing their achievements
-            on ProjectHub today.
-          </p>
-          <div className="flex flex-wrap items-center justify-center gap-4 pt-4">
-            <button
-              onClick={() => navigate('/loginpage')}
-              className="rounded-full bg-gradient-to-r from-indigo-500 via-purple-600 to-pink-500 px-8 py-3.5 text-sm font-semibold text-white shadow-xl shadow-indigo-500/30 transition-all hover:scale-105 hover:from-indigo-600 hover:to-purple-700 active:scale-95"
-            >
-              Get Started Now
-            </button>
-            <button
-              onClick={() => navigate('/aboutpage')}
-              className="rounded-full border border-slate-700 bg-slate-900/80 px-6 py-3.5 text-sm font-semibold text-slate-300 transition-all hover:bg-slate-800 hover:text-white"
-            >
-              Learn More About ProjectHub
-            </button>
           </div>
         </div>
       </section>
@@ -613,3 +501,4 @@ const HomePage = () => {
 };
 
 export default HomePage;
+

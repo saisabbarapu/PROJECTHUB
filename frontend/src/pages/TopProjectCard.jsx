@@ -1,5 +1,5 @@
 import React, { useMemo } from 'react';
-import { FaGithub, FaLink, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
+import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
 
 const TopProjectCard = ({ project, rank }) => {
   const imageUrl = useMemo(() => {
@@ -16,45 +16,30 @@ const TopProjectCard = ({ project, rank }) => {
     return project.pdfUrl || '';
   }, [project.pdfData, project.pdfUrl]);
 
-  const rankColors = {
-    1: {
-      badge: 'bg-gradient-to-r from-amber-400 to-yellow-500 text-slate-950 font-black',
-      border: 'border-amber-500/50 shadow-amber-500/10',
-      glow: 'shadow-lg shadow-amber-500/10',
-    },
-    2: {
-      badge: 'bg-gradient-to-r from-slate-300 to-slate-400 text-slate-950 font-black',
-      border: 'border-slate-500/40 shadow-slate-500/10',
-      glow: 'shadow-lg shadow-slate-500/10',
-    },
-    3: {
-      badge: 'bg-gradient-to-r from-amber-600 to-amber-700 text-white font-black',
-      border: 'border-amber-700/40 shadow-amber-700/10',
-      glow: 'shadow-lg shadow-amber-700/10',
-    },
+  const rankBadgeColors = {
+    1: 'text-amber-300 border-amber-400/30 bg-amber-400/10',
+    2: 'text-slate-200 border-slate-300/30 bg-slate-300/10',
+    3: 'text-amber-500 border-amber-600/30 bg-amber-600/10',
   };
 
-  const style = rankColors[rank] || {
-    badge: 'bg-indigo-600 text-white font-bold',
-    border: 'border-slate-800',
-    glow: 'shadow-md',
-  };
+  const rankNumberFormatted = String(rank).padStart(2, '0');
 
   return (
-    <article
-      className={`group relative flex flex-col overflow-hidden rounded-3xl border bg-slate-900/80 backdrop-blur-md transition-all duration-300 hover:scale-[1.02] ${style.border} ${style.glow}`}
-    >
-      {/* Rank Badge */}
-      <div className="absolute left-4 top-4 z-10 flex items-center gap-1.5 rounded-full px-3.5 py-1 text-xs shadow-md">
-        <span
-          className={`inline-flex items-center gap-1 rounded-full px-3 py-1 text-xs ${style.badge}`}
-        >
-          {rank === 1 && <FaCrown className="text-xs" />} #{rank}
+    <article className="glass-card glass-card-hover group relative flex flex-col overflow-hidden rounded-3xl p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+      {/* Large Editorial Rank Number */}
+      <div className="mb-4 flex items-center justify-between sm:mb-0 sm:flex-col sm:items-center sm:justify-center sm:px-2">
+        <span className="font-mono text-4xl font-black tracking-tighter text-cyan-400 sm:text-5xl">
+          {rankNumberFormatted}
         </span>
+        {rank === 1 && (
+          <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/15 px-2 py-0.5 font-mono text-[10px] font-bold text-amber-300">
+            <FaCrown className="text-[9px]" /> TOP #1
+          </span>
+        )}
       </div>
 
-      {/* Project Image */}
-      <div className="relative h-52 w-full overflow-hidden bg-slate-800">
+      {/* Project Thumbnail */}
+      <div className="relative h-44 w-full flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-slate-900 sm:h-36 sm:w-56">
         <img
           src={imageUrl}
           alt={project.title}
@@ -63,89 +48,78 @@ const TopProjectCard = ({ project, rank }) => {
           }}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
-        <span className="absolute right-4 top-4 rounded-full border border-slate-700 bg-slate-950/80 px-3 py-1 text-[11px] font-semibold uppercase text-indigo-300 backdrop-blur-md">
+        <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
+        <span className="absolute left-2.5 top-2.5 rounded-full border border-white/10 bg-[#030712]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase text-cyan-300 backdrop-blur-md">
           {project.department}
         </span>
       </div>
 
-      {/* Body Content */}
-      <div className="flex flex-grow flex-col space-y-4 p-6">
+      {/* Project Info & Description */}
+      <div className="mt-4 flex flex-grow flex-col justify-between space-y-3 sm:mt-0">
         <div>
-          <h2 className="text-xl font-bold text-white transition-colors group-hover:text-indigo-400">
-            {project.title}
-          </h2>
-          <p className="mt-2 line-clamp-3 text-xs leading-relaxed text-slate-400">
+          <div className="flex flex-wrap items-center justify-between gap-2">
+            <h2 className="font-sora text-lg font-bold text-white transition-colors group-hover:text-cyan-300 sm:text-xl">
+              {project.title}
+            </h2>
+
+            {/* Like Counter Badge */}
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/30 bg-pink-500/15 px-3 py-1 font-mono text-xs font-semibold text-pink-300">
+              <FaHeart className="text-xs text-pink-400" />
+              <span>{project.likes || 0} Upvotes</span>
+            </div>
+          </div>
+
+          <p className="mt-1.5 line-clamp-2 font-sans text-xs leading-relaxed text-slate-400">
             {project.description}
           </p>
         </div>
 
-        {/* Metadata */}
-        <div className="space-y-1.5 rounded-xl border border-slate-800 bg-slate-950/50 p-3 text-xs text-slate-300">
-          <div className="flex justify-between">
-            <span className="text-slate-400">Author:</span>
-            <span className="font-medium text-white">
-              {project.name} ({project.rollno})
-            </span>
+        {/* Tools & Creator Meta */}
+        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.06] pt-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-300">
+            <span className="text-slate-500">By</span>
+            <span className="font-medium text-white">{project.name}</span>
+            {project.rollno && (
+              <span className="font-mono text-[11px] text-slate-400">({project.rollno})</span>
+            )}
           </div>
-          <div className="flex justify-between">
-            <span className="text-slate-400">Email:</span>
-            <span className="max-w-[180px] truncate font-mono text-slate-300">{project.email}</span>
-          </div>
-          <div className="flex items-center justify-between border-t border-slate-800/80 pt-1">
-            <span className="text-slate-400">Total Likes:</span>
-            <span className="inline-flex items-center gap-1 font-bold text-pink-400">
-              <FaHeart className="text-xs" /> {project.likes || 0}
-            </span>
-          </div>
-        </div>
 
-        {/* Tools Chips */}
-        <div className="flex flex-wrap gap-1.5">
-          {(project.toolsUsed?.length ? project.toolsUsed : ['General']).map((tool) => (
-            <span
-              key={tool}
-              className="rounded-md border border-indigo-500/20 bg-indigo-950/60 px-2 py-0.5 text-[10px] font-medium text-indigo-300"
-            >
-              {tool}
-            </span>
-          ))}
-        </div>
-
-        {/* Footer Actions / Links */}
-        <div className="flex items-center justify-end gap-2 border-t border-slate-800/80 pt-2">
-          {project.github && (
-            <a
-              href={project.github}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
-              title="GitHub Repository"
-            >
-              <FaGithub className="text-base" />
-            </a>
-          )}
-          {project.projectUrl && (
-            <a
-              href={project.projectUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-indigo-400"
-              title="Live Demo"
-            >
-              <FaLink className="text-base" />
-            </a>
-          )}
-          {pdfUrl && (
-            <a
-              href={pdfUrl}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="rounded-lg p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-rose-400"
-              title="Project PDF Report"
-            >
-              <FaFilePdf className="text-base" />
-            </a>
-          )}
+          {/* Links */}
+          <div className="flex items-center gap-2">
+            {project.github && (
+              <a
+                href={project.github}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-white/[0.03] px-2.5 py-1 text-xs text-slate-300 transition-colors hover:border-white/20 hover:bg-white/[0.08] hover:text-white"
+                title="GitHub Repo"
+              >
+                <FaGithub className="text-xs" /> <span>Code</span>
+              </a>
+            )}
+            {project.projectUrl && (
+              <a
+                href={project.projectUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-xs text-cyan-300 transition-colors hover:bg-cyan-500/20"
+                title="Live Demo"
+              >
+                <FaExternalLinkAlt className="text-[10px]" /> <span>Demo</span>
+              </a>
+            )}
+            {pdfUrl && (
+              <a
+                href={pdfUrl}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center gap-1 rounded-lg border border-rose-500/30 bg-rose-500/10 px-2.5 py-1 text-xs text-rose-300 transition-colors hover:bg-rose-500/20"
+                title="PDF Documentation"
+              >
+                <FaFilePdf className="text-xs" /> <span>PDF</span>
+              </a>
+            )}
+          </div>
         </div>
       </div>
     </article>
@@ -153,3 +127,4 @@ const TopProjectCard = ({ project, rank }) => {
 };
 
 export default TopProjectCard;
+

@@ -12,7 +12,7 @@ import {
   FaImage,
   FaCheck,
   FaTimes,
-  FaLink,
+  FaExternalLinkAlt,
   FaSpinner,
 } from 'react-icons/fa';
 
@@ -103,7 +103,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
           onSubmit();
         }
         onClose();
-      }, 1200);
+      }, 1000);
     } catch (err) {
       const errorMessage =
         err.response?.data?.details ||
@@ -126,33 +126,36 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
   return (
     <div
       onClick={handleClose}
-      className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/80 p-4 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/85 p-4 backdrop-blur-md"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl border border-slate-800 bg-slate-900 p-6 shadow-2xl sm:p-8"
+        className="glass-panel relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl p-6 shadow-2xl sm:p-8"
       >
-        {/* Header */}
-        <div className="flex items-center justify-between border-b border-slate-800 pb-4">
+        {/* Modal Header */}
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
           <div>
-            <h2 className="text-xl font-extrabold text-white">Submit New Project</h2>
-            <p className="text-xs text-slate-400">
-              Share your innovation with the university showcase
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+              SUBMISSION FORM
+            </div>
+            <h2 className="font-sora text-xl font-bold text-white sm:text-2xl">Submit New Project</h2>
+            <p className="mt-0.5 font-sans text-xs text-slate-400">
+              Share your innovation with the university showcase community
             </p>
           </div>
           <button
             onClick={handleClose}
             disabled={isSubmitting}
-            className="rounded-full p-2 text-slate-400 transition-colors hover:bg-slate-800 hover:text-white"
+            className="rounded-full border border-white/10 bg-white/[0.03] p-2 text-slate-400 transition-colors hover:bg-white/[0.08] hover:text-white"
           >
-            <FaTimes />
+            <FaTimes className="text-xs" />
           </button>
         </div>
 
         {/* Status Message */}
         {submitMessage && (
           <div
-            className={`rounded-xl p-3 text-xs font-medium ${
+            className={`mt-4 rounded-xl p-3 font-sans text-xs font-medium ${
               submitMessage.includes('successfully')
                 ? 'border border-emerald-500/40 bg-emerald-950/60 text-emerald-300'
                 : 'border border-rose-500/40 bg-rose-950/60 text-rose-300'
@@ -162,11 +165,11 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
           </div>
         )}
 
-        <form onSubmit={handleSubmit} className="space-y-4 pt-2">
+        <form onSubmit={handleSubmit} className="space-y-4 pt-4">
           {/* Author Details Row */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">Author Name</label>
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Author Name</label>
               <div className="relative">
                 <input
                   name="name"
@@ -175,14 +178,14 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="Full name"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaUser className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">Email Address</label>
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Email Address</label>
               <div className="relative">
                 <input
                   name="email"
@@ -192,16 +195,16 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="rollno@adityauniversity.in"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaEnvelope className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
           </div>
 
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">Roll Number</label>
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Roll Number</label>
               <div className="relative">
                 <input
                   name="rollno"
@@ -210,14 +213,14 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="e.g. 24M11MC150"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaIdBadge className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaIdBadge className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">Department</label>
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Department</label>
               <div className="relative">
                 <input
                   name="department"
@@ -226,16 +229,16 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="e.g. CSE, EEE, AI&ML"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaBuilding className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaBuilding className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
           </div>
 
           {/* Project Title */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">Project Title</label>
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Project Title</label>
             <div className="relative">
               <input
                 name="title"
@@ -244,15 +247,15 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                 required
                 placeholder="Name of your project"
                 disabled={isSubmitting}
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaProjectDiagram className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaProjectDiagram className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
           </div>
 
           {/* Description */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">Description</label>
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Description</label>
             <div className="relative">
               <textarea
                 name="description"
@@ -260,19 +263,19 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                 value={form.description}
                 onChange={handleChange}
                 required
-                placeholder="Explain the problem, method, and outcome..."
+                placeholder="Explain the problem statement, approach, and outcome..."
                 disabled={isSubmitting}
-                className="w-full resize-none rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaFileAlt className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaFileAlt className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
           </div>
 
           {/* URLs */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">
-                GitHub Repo URL
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
+                GitHub Repository URL
               </label>
               <div className="relative">
                 <input
@@ -283,14 +286,14 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="https://github.com/..."
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaGithub className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaGithub className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
                 Live Demo URL (Optional)
               </label>
               <div className="relative">
@@ -301,16 +304,16 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   onChange={handleChange}
                   placeholder="https://myproject.com"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaLink className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaExternalLinkAlt className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
           </div>
 
-          {/* Tools Used */}
+          {/* Tools & Technologies */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
               Tools & Technologies (Comma-separated)
             </label>
             <div className="relative">
@@ -318,18 +321,18 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                 name="toolsUsed"
                 value={form.toolsUsed}
                 onChange={handleChange}
-                placeholder="React, Node.js, Python, Arduino"
+                placeholder="React, Node.js, PyTorch, LoRaWAN"
                 disabled={isSubmitting}
-                className="w-full rounded-xl border border-slate-700 bg-slate-800 py-2 pl-9 pr-3 text-xs text-white placeholder-slate-500 focus:border-indigo-500 focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaProjectDiagram className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaProjectDiagram className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
           </div>
 
           {/* File Uploads Row */}
           <div className="grid grid-cols-1 gap-4 pt-1 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
                 Documentation PDF (Max 5MB)
               </label>
               <div className="relative">
@@ -340,14 +343,14 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-1.5 pl-9 pr-2 text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-indigo-700"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-2 font-sans text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-cyan-500/20 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-cyan-200 hover:file:bg-cyan-500/30"
                 />
-                <FaFilePdf className="absolute left-3 top-2.5 text-xs text-slate-400" />
+                <FaFilePdf className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
                 Project Image / Poster (Max 5MB)
               </label>
               <div className="relative">
@@ -358,27 +361,27 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800 py-1.5 pl-9 pr-2 text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-indigo-600 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-white hover:file:bg-indigo-700"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-2 font-sans text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-cyan-500/20 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-cyan-200 hover:file:bg-cyan-500/30"
                 />
-                <FaImage className="absolute left-3 top-2.5 text-xs text-slate-400" />
+                <FaImage className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
             </div>
           </div>
 
           {/* Form Actions */}
-          <div className="flex items-center justify-end gap-3 border-t border-slate-800 pt-4">
+          <div className="flex items-center justify-end gap-3 border-t border-white/[0.08] pt-4">
             <button
               type="button"
               onClick={handleClose}
               disabled={isSubmitting}
-              className="rounded-xl border border-slate-700 bg-slate-800 px-4 py-2.5 text-xs font-semibold text-slate-300 transition-colors hover:bg-slate-700 hover:text-white"
+              className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 font-sans text-xs font-semibold text-slate-300 transition-colors hover:bg-white/[0.08] hover:text-white"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 px-6 py-2.5 text-xs font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:from-indigo-600 hover:to-purple-700 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
@@ -398,3 +401,4 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
 };
 
 export default SubmitProjectModal;
+

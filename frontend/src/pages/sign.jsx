@@ -1,7 +1,7 @@
 import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import { ToasterContext } from '../components/ToasterContext';
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserPlus } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Signup = () => {
@@ -97,7 +97,7 @@ const Signup = () => {
         confirmPassword: '',
       });
       setErrors({});
-      setTimeout(() => navigate('/loginpage'), 1500);
+      setTimeout(() => navigate('/loginpage'), 1200);
     } catch (err) {
       addToast(err.response?.data?.error || 'Signup failed', 'error', 4000);
     } finally {
@@ -106,18 +106,28 @@ const Signup = () => {
   };
 
   return (
-    <div className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-slate-950 px-4 py-12 sm:px-6 lg:px-8">
-      <div className="w-full max-w-lg rounded-3xl border border-slate-800 bg-slate-900/80 p-8 shadow-2xl backdrop-blur-xl sm:p-10">
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-[#030712] px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
+      {/* Background Ambience */}
+      <div className="pointer-events-none absolute -left-32 -top-32 h-80 w-80 rounded-full bg-cyan-600/10 blur-[120px]" />
+      <div className="pointer-events-none absolute -bottom-32 -right-32 h-80 w-80 rounded-full bg-blue-600/10 blur-[120px]" />
+
+      <div className="glass-panel relative w-full max-w-lg rounded-3xl p-8 shadow-2xl sm:p-10">
         <div className="mb-6 text-center">
-          <h2 className="text-3xl font-extrabold text-white">Create Account</h2>
-          <p className="mt-1 text-xs text-slate-400">Join the ProjectHub university community</p>
+          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-cyan-300">
+            <FaUserPlus className="text-cyan-400" />
+            <span>CREATE ACCOUNT</span>
+          </div>
+          <h2 className="font-sora text-2xl font-black text-white sm:text-3xl">Join ProjectHub</h2>
+          <p className="mt-1 font-sans text-xs text-slate-400">
+            Showcase your capstone and collaborate with verified peers
+          </p>
         </div>
 
         <form onSubmit={handleSignup} className="space-y-4">
           {/* Name Row */}
           <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">First Name</label>
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">First Name</label>
               <div className="relative">
                 <input
                   type="text"
@@ -126,9 +136,9 @@ const Signup = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800/90 py-2.5 pl-9 pr-3 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaUser className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
               {errors.firstName && (
                 <p className="mt-1 text-[11px] font-medium text-rose-400">{errors.firstName}</p>
@@ -136,7 +146,7 @@ const Signup = () => {
             </div>
 
             <div>
-              <label className="mb-1 block text-xs font-medium text-slate-300">Last Name</label>
+              <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Last Name</label>
               <div className="relative">
                 <input
                   type="text"
@@ -145,9 +155,9 @@ const Signup = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-slate-700 bg-slate-800/90 py-2.5 pl-9 pr-3 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
-                <FaUser className="absolute left-3 top-3 text-xs text-slate-400" />
+                <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
               {errors.lastName && (
                 <p className="mt-1 text-[11px] font-medium text-rose-400">{errors.lastName}</p>
@@ -157,7 +167,7 @@ const Signup = () => {
 
           {/* Email */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
               University Email
             </label>
             <div className="relative">
@@ -168,18 +178,18 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800/90 py-2.5 pl-9 pr-3 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaEnvelope className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
             {errors.email && (
               <p className="mt-1 text-[11px] font-medium text-rose-400">⚠️ {errors.email}</p>
             )}
           </div>
 
-          {/* Create Password */}
+          {/* Password */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">Create Password</label>
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Create Password</label>
             <div className="relative">
               <input
                 type={showPassword ? 'text' : 'password'}
@@ -188,13 +198,13 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800/90 py-2.5 pl-9 pr-9 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaLock className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-200"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -206,7 +216,7 @@ const Signup = () => {
 
           {/* Confirm Password */}
           <div>
-            <label className="mb-1 block text-xs font-medium text-slate-300">
+            <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
               Confirm Password
             </label>
             <div className="relative">
@@ -217,13 +227,13 @@ const Signup = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-slate-700 bg-slate-800/90 py-2.5 pl-9 pr-9 text-xs text-white placeholder-slate-500 transition-all focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
-              <FaLock className="absolute left-3 top-3 text-xs text-slate-400" />
+              <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-3 text-xs text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-200"
               >
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
@@ -239,18 +249,18 @@ const Signup = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="mt-2 w-full rounded-xl bg-gradient-to-r from-indigo-500 to-purple-600 py-3 text-xs font-semibold text-white shadow-lg shadow-indigo-500/25 transition-all hover:from-indigo-600 hover:to-purple-700 disabled:opacity-50"
+            className="mt-2 w-full rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
           >
             {isLoading ? 'Creating Account...' : 'Sign Up'}
           </button>
 
-          <p className="pt-2 text-center text-xs text-slate-400">
+          <p className="pt-2 text-center font-sans text-xs text-slate-400">
             Already have an account?{' '}
             <Link
               to="/loginpage"
-              className="font-semibold text-indigo-400 underline hover:text-indigo-300"
+              className="font-semibold text-cyan-400 underline hover:text-cyan-300"
             >
-              Login
+              Sign In
             </Link>
           </p>
         </form>
@@ -260,3 +270,4 @@ const Signup = () => {
 };
 
 export default Signup;
+

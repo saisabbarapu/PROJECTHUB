@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import api from '../components/api';
 import TopProjectCard from './TopProjectCard';
 import Loader from '../components/Loader';
-import { FaTrophy } from 'react-icons/fa';
+import { FaCrown, FaTrophy, FaFire } from 'react-icons/fa';
 
 const TopLikedPage = () => {
   const [topProjects, setTopProjects] = useState([]);
@@ -26,19 +26,22 @@ const TopLikedPage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen bg-slate-950 px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-7xl">
+    <div className="relative min-h-screen bg-[#030712] px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
+      {/* Ambient background light */}
+      <div className="pointer-events-none absolute left-1/2 top-0 -z-10 h-[500px] w-full max-w-6xl -translate-x-1/2 bg-[radial-gradient(circle_at_50%_0%,rgba(34,211,238,0.12),transparent_70%)] blur-3xl"></div>
+
+      <div className="mx-auto max-w-6xl">
         {/* Header Hero Section */}
-        <section className="mb-16 space-y-4 text-center">
-          <div className="inline-flex h-16 w-16 items-center justify-center rounded-2xl border border-amber-500/30 bg-amber-500/10 text-3xl text-amber-400 shadow-lg shadow-amber-500/10">
-            <FaTrophy />
+        <section className="mb-14 text-center">
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-cyan-300 backdrop-blur-md">
+            <FaCrown className="text-cyan-400" />
+            <span>COMMUNITY LEADERBOARD</span>
           </div>
-          <h1 className="text-3xl font-extrabold tracking-tight text-white sm:text-5xl">
-            Top 3 Most Liked Projects
+          <h1 className="font-sora text-4xl font-black tracking-tight text-white sm:text-5xl">
+            TOP PROJECTS
           </h1>
-          <p className="mx-auto max-w-2xl text-xs leading-relaxed text-slate-400 sm:text-sm">
-            Celebrating the most inspiring and high-impact student innovations voted on by our
-            community!
+          <p className="mx-auto mt-3 max-w-xl font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
+            The projects getting the most attention from the community across departments and disciplines.
           </p>
         </section>
 
@@ -50,21 +53,21 @@ const TopLikedPage = () => {
         )}
 
         {error && (
-          <div className="mx-auto max-w-lg rounded-2xl border border-rose-800 bg-rose-950/40 p-4 text-center text-xs text-rose-300">
+          <div className="glass-panel mx-auto max-w-lg rounded-2xl border-rose-500/30 p-4 text-center text-xs text-rose-300">
             {error}
           </div>
         )}
 
-        {/* Cards Grid */}
+        {/* Ranked Projects List / Cards */}
         {!loading && !error && (
-          <div className="grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3">
+          <div className="space-y-6">
             {topProjects.length > 0 ? (
               topProjects.map((project, index) => (
                 <TopProjectCard key={project._id} project={project} rank={index + 1} />
               ))
             ) : (
-              <div className="col-span-full py-16 text-center text-sm text-slate-500">
-                No projects have been liked yet. Start the epic journey!
+              <div className="rounded-3xl border border-dashed border-white/10 bg-white/[0.01] py-16 text-center text-sm text-slate-500">
+                No projects have been ranked yet. Start exploring and upvoting!
               </div>
             )}
           </div>
@@ -75,3 +78,4 @@ const TopLikedPage = () => {
 };
 
 export default TopLikedPage;
+
