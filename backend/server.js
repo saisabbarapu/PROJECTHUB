@@ -23,11 +23,13 @@ const app = express();
 const httpServer = createServer(app);
 const PORT = process.env.PORT || 4000;
 
-// MongoDB connection configuration with fallback
-const mongoDB_url = process.env.MONGODB_URL || 'mongodb://127.0.0.1:27017/project-showcase';
+// MongoDB connection configuration with Atlas default fallback
+const mongoDB_url =
+  process.env.MONGODB_URL ||
+  'mongodb+srv://admin:EduTrack123@cluster0.gz2pqrs.mongodb.net/projecthub?retryWrites=true&w=majority';
 
-// Fallback to local MongoDB if Atlas fails
-const localMongoDB_url = 'mongodb://127.0.0.1:27017/project-showcase';
+// Local MongoDB fallback
+const localMongoDB_url = 'mongodb://127.0.0.1:27017/projecthub';
 
 let isUsingLocalDB = false;
 
@@ -155,10 +157,10 @@ const io = new Server(httpServer, {
 // Make io available to controllers
 app.set('io', io);
 
-// Start the server only after MongoDB connection is established
+// Start the server immediately so cloud platforms (Render, Railway) can bind to the port
 const startServer = () => {
-  httpServer.listen(PORT, () => {
-    console.log(`🚀 Server running on port ${PORT} at ${new Date().toISOString()}`);
+  httpServer.listen(PORT, '0.0.0.0', () => {
+    console.log(`🚀 Server running on port ${PORT} (0.0.0.0) at ${new Date().toISOString()}`);
     console.log(`🌐 Server URL: http://localhost:${PORT}`);
     console.log(`📊 Health check: http://localhost:${PORT}/health`);
     console.log(`🔍 DB test: http://localhost:${PORT}/test-db`);
@@ -202,8 +204,6 @@ const connectWithRetry = () => {
       mongoose.connection.on('reconnected', () => {
         console.log('🔄 MongoDB reconnected at:', new Date().toISOString());
       });
-
-      startServer();
     })
     .catch((err) => {
       console.error('❌ MongoDB connection failed:', err.message);
@@ -220,6 +220,8 @@ const connectWithRetry = () => {
 };
 
 console.log('🚀 Starting ProjectHub Backend Server...');
+startServer();
 connectWithRetry();
 
 export { transporter };
+
