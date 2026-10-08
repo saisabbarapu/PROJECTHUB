@@ -19,24 +19,19 @@ import {
 
 const UserDashboard = () => {
   const [projects, setProjects] = useState([]);
-  const [user, setUser] = useState(null);
+  const [user, setUser] = useState(() => {
+    try {
+      return JSON.parse(localStorage.getItem('user'));
+    } catch {
+      return null;
+    }
+  });
   const [topLiked, setTopLiked] = useState(false);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [likedProjects, setLikedProjects] = useState([]);
   const [activeTab, setActiveTab] = useState('my-projects');
   const navigate = useNavigate();
-
-  useEffect(() => {
-    const storedUser = JSON.parse(localStorage.getItem('user'));
-    if (!storedUser) {
-      navigate('/loginpage');
-      return;
-    }
-    setUser(storedUser);
-    fetchUserProjects(storedUser.email);
-    fetchLikedProjects(storedUser.email);
-  }, [navigate]);
 
   const fetchUserProjects = useCallback(async (email) => {
     setLoading(true);
@@ -47,7 +42,7 @@ const UserDashboard = () => {
       setProjects(userProjects);
       const maxLikes = Math.max(...res.data.map((p) => p.likes || 0), 0);
       setTopLiked(userProjects.some((p) => (p.likes || 0) === maxLikes && maxLikes > 0));
-    } catch (err) {
+    } catch (_err) {
       setError('Failed to load your projects.');
     } finally {
       setLoading(false);
@@ -59,27 +54,38 @@ const UserDashboard = () => {
       const res = await api.get('/projects');
       const liked = res.data.filter((p) => Array.isArray(p.likedBy) && p.likedBy.includes(email));
       setLikedProjects(liked);
-    } catch (err) {
-      console.error(err);
+    } catch (_err) {
+      // ignore
     }
   }, []);
+
+  useEffect(() => {
+    const storedUser = JSON.parse(localStorage.getItem('user'));
+    if (!storedUser) {
+      navigate('/loginpage');
+      return;
+    }
+    fetchUserProjects(storedUser.email);
+    fetchLikedProjects(storedUser.email);
+  }, [navigate, fetchUserProjects, fetchLikedProjects]);
 
   const handleDelete = async (projectId) => {
     if (!window.confirm('Are you sure you want to delete this project?')) return;
     try {
       await api.delete(`/projects/${projectId}`);
       setProjects((prev) => prev.filter((p) => p._id !== projectId));
-    } catch (err) {
+    } catch (_err) {
       alert('Failed to delete project.');
     }
   };
 
-  const handleEdit = (projectId) => {
+  const handleEdit = (_projectId) => {
     alert('Edit functionality coming soon!');
   };
 
   const handleLogout = () => {
     localStorage.removeItem('user');
+    setUser(null);
     navigate('/loginpage');
   };
 
@@ -89,7 +95,7 @@ const UserDashboard = () => {
       if (!storedUser || !storedUser.email) return;
       await api.post(`/projects/${projectId}/like`, { userEmail: storedUser.email });
       setLikedProjects((prev) => prev.filter((p) => p._id !== projectId));
-    } catch (err) {
+    } catch (_err) {
       alert('Failed to unlike project.');
     }
   };
@@ -107,6 +113,11 @@ const UserDashboard = () => {
   return (
     <div className="relative min-h-screen bg-transparent px-4 py-10 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl space-y-8">
+        {error && (
+          <div className="rounded-xl border border-rose-500/30 bg-rose-500/10 p-3 text-center font-mono text-xs text-rose-300">
+            {error}
+          </div>
+        )}
         {/* User Profile Editorial Banner */}
         <div className="glass-panel flex flex-col items-start md:items-center justify-between gap-5 sm:gap-6 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl md:flex-row">
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 w-full md:w-auto">

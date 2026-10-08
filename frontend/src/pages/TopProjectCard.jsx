@@ -22,12 +22,6 @@ const TopProjectCard = ({ project, rank }) => {
     return project.pdfUrl || '';
   }, [project.pdfData, project.pdfUrl]);
 
-  const rankBadgeColors = {
-    1: 'text-amber-300 border-amber-400/30 bg-amber-400/10',
-    2: 'text-slate-200 border-slate-300/30 bg-slate-300/10',
-    3: 'text-amber-500 border-amber-600/30 bg-amber-600/10',
-  };
-
   const rankNumberFormatted = String(rank).padStart(2, '0');
 
   return (

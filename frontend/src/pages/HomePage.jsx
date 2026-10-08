@@ -15,23 +15,17 @@ import {
   FaLightbulb,
 } from 'react-icons/fa';
 
-const HomePage = () => {
-  const navigate = useNavigate();
-  const [selectedCategory, setSelectedCategory] = useState('All');
-  const [searchQuery, setSearchQuery] = useState('');
-  const [likedProjects, setLikedProjects] = useState({});
+const categories = [
+  'All',
+  'AI / Healthcare',
+  'IoT / Agriculture',
+  'Robotics',
+  'CleanTech',
+  'EdTech',
+  'Emergency Tech',
+];
 
-  const categories = [
-    'All',
-    'AI / Healthcare',
-    'IoT / Agriculture',
-    'Robotics',
-    'CleanTech',
-    'EdTech',
-    'Emergency Tech',
-  ];
-
-  const projectData = [
+const projectData = [
     {
       id: 1,
       title: 'AI-Powered Health Diagnosis',
@@ -114,6 +108,12 @@ const HomePage = () => {
       tech: ['WebRTC', 'Go', 'Bluetooth Mesh', 'PWA'],
     },
   ];
+
+const HomePage = () => {
+  const navigate = useNavigate();
+  const [selectedCategory, setSelectedCategory] = useState('All');
+  const [searchQuery, setSearchQuery] = useState('');
+  const [likedProjects, setLikedProjects] = useState({});
 
   const handleToggleLike = (id, e) => {
     e.stopPropagation();
