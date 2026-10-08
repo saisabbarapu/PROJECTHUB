@@ -83,21 +83,24 @@ const SpectralDrape = ({
 
       ctx.clearRect(0, 0, width, height);
 
-      const cellW = width / (dotCountX - 1);
-      const cellH = height / (dotCountY - 1);
+      const effectiveDotCountX = width < 640 ? Math.min(dotCountX, 55) : dotCountX;
+      const effectiveDotCountY = width < 640 ? Math.min(dotCountY, 36) : dotCountY;
+
+      const cellW = width / (effectiveDotCountX - 1);
+      const cellH = height / (effectiveDotCountY - 1);
       const centerX = width / 2;
       const centerY = height / 2;
 
       // 3D Drape Grid Calculation
-      for (let y = 0; y < dotCountY; y++) {
-        const v = y / (dotCountY - 1);
+      for (let y = 0; y < effectiveDotCountY; y++) {
+        const v = y / (effectiveDotCountY - 1);
         const baseY = y * cellH;
 
         // Smooth edge falloff vertically
         const edgeFadeY = Math.sin(v * Math.PI);
 
-        for (let x = 0; x < dotCountX; x++) {
-          const u = x / (dotCountX - 1);
+        for (let x = 0; x < effectiveDotCountX; x++) {
+          const u = x / (effectiveDotCountX - 1);
           const baseX = x * cellW;
 
           // Smooth edge falloff horizontally

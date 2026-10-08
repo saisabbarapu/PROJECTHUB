@@ -1,4 +1,4 @@
-﻿import React, { useMemo } from 'react';
+import React, { useMemo } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
 import { getFallbackProjectImage } from '../components/ProjectCard';
 
@@ -31,21 +31,23 @@ const TopProjectCard = ({ project, rank }) => {
   const rankNumberFormatted = String(rank).padStart(2, '0');
 
   return (
-    <article className="glass-card glass-card-hover group relative flex flex-col overflow-hidden rounded-3xl p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
+    <article className="glass-card glass-card-hover group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-6 sm:flex-row sm:items-center sm:gap-6">
       {/* Large Editorial Rank Number */}
-      <div className="mb-4 flex items-center justify-between sm:mb-0 sm:flex-col sm:items-center sm:justify-center sm:px-2">
-        <span className="font-mono text-4xl font-black tracking-tighter text-violet-400 sm:text-5xl">
-          {rankNumberFormatted}
-        </span>
-        {rank === 1 && (
-          <span className="mt-1 inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/15 px-2 py-0.5 font-mono text-[10px] font-bold text-amber-300">
-            <FaCrown className="text-[9px]" /> TOP #1
+      <div className="mb-3 flex items-center justify-between sm:mb-0 sm:flex-col sm:items-center sm:justify-center sm:px-2">
+        <div className="flex items-center gap-2 sm:flex-col sm:items-center">
+          <span className="font-mono text-3xl sm:text-5xl font-black tracking-tighter text-violet-400">
+            {rankNumberFormatted}
           </span>
-        )}
+          {rank === 1 && (
+            <span className="inline-flex items-center gap-1 rounded-full border border-amber-500/30 bg-amber-500/15 px-2 py-0.5 font-mono text-[9px] sm:text-[10px] font-bold text-amber-300">
+              <FaCrown className="text-[9px]" /> TOP #1
+            </span>
+          )}
+        </div>
       </div>
 
       {/* Project Thumbnail */}
-      <div className="relative h-44 w-full flex-shrink-0 overflow-hidden rounded-2xl border border-white/10 bg-slate-900 sm:h-36 sm:w-56">
+      <div className="relative h-44 w-full flex-shrink-0 overflow-hidden rounded-xl sm:rounded-2xl border border-white/10 bg-slate-900 sm:h-36 sm:w-56">
         <img
           src={imageUrl}
           alt={project.title}
@@ -61,15 +63,15 @@ const TopProjectCard = ({ project, rank }) => {
       </div>
 
       {/* Project Info & Description */}
-      <div className="mt-4 flex flex-grow flex-col justify-between space-y-3 sm:mt-0">
+      <div className="mt-3.5 flex flex-grow flex-col justify-between space-y-3 sm:mt-0">
         <div>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h2 className="font-sora text-lg font-bold text-white transition-colors group-hover:text-violet-300 sm:text-xl">
+            <h2 className="font-sora text-base sm:text-xl font-bold text-white transition-colors group-hover:text-violet-300">
               {project.title}
             </h2>
 
             {/* Like Counter Badge */}
-            <div className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/30 bg-pink-500/15 px-3 py-1 font-mono text-xs font-semibold text-pink-300">
+            <div className="inline-flex items-center gap-1.5 rounded-full border border-pink-500/30 bg-pink-500/15 px-2.5 sm:px-3 py-1 font-mono text-xs font-semibold text-pink-300">
               <FaHeart className="text-xs text-pink-400" />
               <span>{project.likes || 0} Upvotes</span>
             </div>
@@ -81,17 +83,17 @@ const TopProjectCard = ({ project, rank }) => {
         </div>
 
         {/* Tools & Creator Meta */}
-        <div className="flex flex-wrap items-center justify-between gap-3 border-t border-white/[0.06] pt-3 text-xs">
-          <div className="flex items-center gap-2 text-slate-300">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 sm:gap-3 border-t border-white/[0.06] pt-3 text-xs">
+          <div className="flex items-center gap-2 text-slate-300 flex-wrap">
             <span className="text-slate-500">By</span>
-            <span className="font-medium text-white">{project.name}</span>
+            <span className="font-medium text-white truncate max-w-[150px] sm:max-w-none">{project.name}</span>
             {project.rollno && (
               <span className="font-mono text-[11px] text-slate-400">({project.rollno})</span>
             )}
           </div>
 
           {/* Links */}
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-2 flex-wrap">
             {project.github && (
               <a
                 href={project.github}

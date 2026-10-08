@@ -1,4 +1,4 @@
-﻿import React, { useEffect, useState, useCallback } from 'react';
+import React, { useEffect, useState, useCallback } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
 import Loader from '../components/Loader';
@@ -108,14 +108,14 @@ const UserDashboard = () => {
     <div className="relative min-h-screen bg-transparent px-4 py-10 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl space-y-8">
         {/* User Profile Editorial Banner */}
-        <div className="glass-panel flex flex-col items-center justify-between gap-6 rounded-3xl p-6 shadow-xl sm:flex-row sm:p-8">
-          <div className="flex items-center gap-4 text-center sm:text-left">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/30 bg-violet-950/40 text-2xl text-violet-400">
+        <div className="glass-panel flex flex-col items-start md:items-center justify-between gap-5 sm:gap-6 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl md:flex-row">
+          <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 w-full md:w-auto">
+            <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl border border-violet-500/30 bg-violet-950/40 text-xl sm:text-2xl text-violet-400">
               <FaCrown className={topLiked ? 'text-amber-400' : 'text-violet-400'} />
             </div>
-            <div>
-              <div className="flex items-center gap-2">
-                <h1 className="font-sora text-2xl font-bold text-white sm:text-3xl">
+            <div className="min-w-0 flex-1">
+              <div className="flex flex-wrap items-center gap-2">
+                <h1 className="font-sora text-xl sm:text-2xl md:text-3xl font-bold text-white">
                   {user?.firstName} {user?.lastName}
                 </h1>
                 {topLiked && (
@@ -124,20 +124,20 @@ const UserDashboard = () => {
                   </span>
                 )}
               </div>
-              <p className="mt-1 font-mono text-xs text-slate-400">{user?.email}</p>
+              <p className="mt-1 font-mono text-xs text-slate-400 break-all">{user?.email}</p>
             </div>
           </div>
 
-          <div className="flex items-center gap-3">
+          <div className="flex w-full md:w-auto items-center justify-start sm:justify-end gap-2.5 sm:gap-3 flex-wrap">
             <Link
               to="/mainhome"
-              className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/40 bg-violet-500/15 px-5 py-2 font-sans text-xs font-semibold text-violet-300 transition-colors hover:bg-violet-500/25"
+              className="flex-1 sm:flex-none text-center inline-flex items-center justify-center gap-1.5 rounded-full border border-violet-500/40 bg-violet-500/15 px-4 sm:px-5 py-2 font-sans text-xs font-semibold text-violet-300 transition-colors hover:bg-violet-500/25"
             >
               Browse Catalog
             </Link>
             <button
               onClick={handleLogout}
-              className="inline-flex items-center gap-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 px-4 py-2 font-sans text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-500/20"
+              className="flex-1 sm:flex-none text-center inline-flex items-center justify-center gap-1.5 rounded-full border border-rose-500/30 bg-rose-500/10 px-4 py-2 font-sans text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-500/20"
             >
               <FaSignOutAlt className="text-xs" /> Logout
             </button>
@@ -145,40 +145,40 @@ const UserDashboard = () => {
         </div>
 
         {/* Minimal Glass Stat Cards */}
-        <div className="grid grid-cols-1 gap-4 sm:grid-cols-3">
-          <div className="glass-card rounded-2xl p-5">
+        <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3 sm:gap-4">
+          <div className="glass-card rounded-2xl p-4 sm:p-5">
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Your Submissions</span>
               <FaFolder className="text-violet-400" />
             </div>
-            <div className="mt-3 font-mono text-3xl font-bold text-white">{projects.length}</div>
+            <div className="mt-2 sm:mt-3 font-mono text-2xl sm:text-3xl font-bold text-white">{projects.length}</div>
             <p className="mt-1 text-[11px] text-slate-500">Published across campus showcase</p>
           </div>
 
-          <div className="glass-card rounded-2xl p-5">
+          <div className="glass-card rounded-2xl p-4 sm:p-5">
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Total Likes Received</span>
               <FaHeart className="text-pink-400" />
             </div>
-            <div className="mt-3 font-mono text-3xl font-bold text-white">{totalLikesReceived}</div>
+            <div className="mt-2 sm:mt-3 font-mono text-2xl sm:text-3xl font-bold text-white">{totalLikesReceived}</div>
             <p className="mt-1 text-[11px] text-slate-500">Community validation votes</p>
           </div>
 
-          <div className="glass-card rounded-2xl p-5">
+          <div className="glass-card rounded-2xl p-4 sm:p-5">
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Saved Innovations</span>
               <FaLayerGroup className="text-violet-400" />
             </div>
-            <div className="mt-3 font-mono text-3xl font-bold text-white">{likedProjects.length}</div>
+            <div className="mt-2 sm:mt-3 font-mono text-2xl sm:text-3xl font-bold text-white">{likedProjects.length}</div>
             <p className="mt-1 text-[11px] text-slate-500">Projects you've upvoted</p>
           </div>
         </div>
 
         {/* Navigation Tabs */}
-        <div className="flex gap-4 border-b border-white/[0.08]">
+        <div className="scrollbar-none flex gap-2 sm:gap-4 border-b border-white/[0.08] overflow-x-auto pb-0.5 whitespace-nowrap">
           <button
             onClick={() => setActiveTab('my-projects')}
-            className={`border-b-2 pb-3 font-sans text-xs font-semibold uppercase tracking-wider transition-all ${
+            className={`border-b-2 pb-3 font-sans text-xs font-semibold uppercase tracking-wider transition-all shrink-0 ${
               activeTab === 'my-projects'
                 ? 'border-violet-400 text-violet-300'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
@@ -188,7 +188,7 @@ const UserDashboard = () => {
           </button>
           <button
             onClick={() => setActiveTab('liked-projects')}
-            className={`border-b-2 pb-3 font-sans text-xs font-semibold uppercase tracking-wider transition-all ${
+            className={`border-b-2 pb-3 font-sans text-xs font-semibold uppercase tracking-wider transition-all shrink-0 ${
               activeTab === 'liked-projects'
                 ? 'border-violet-400 text-violet-300'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
@@ -202,7 +202,7 @@ const UserDashboard = () => {
         {activeTab === 'my-projects' && (
           <div>
             {projects.length === 0 ? (
-              <div className="space-y-3 rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-8 py-16 text-center">
+              <div className="space-y-3 rounded-2xl sm:rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-6 sm:p-8 py-12 sm:py-16 text-center">
                 <p className="font-sora text-sm font-semibold text-slate-300">
                   You haven't added any projects yet.
                 </p>
@@ -219,7 +219,7 @@ const UserDashboard = () => {
                 </div>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {projects.map((project) => (
                   <div
                     key={project._id}
@@ -328,7 +328,7 @@ const UserDashboard = () => {
         {activeTab === 'liked-projects' && (
           <div>
             {likedProjects.length === 0 ? (
-              <div className="space-y-2 rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-8 py-16 text-center">
+              <div className="space-y-2 rounded-2xl sm:rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-6 sm:p-8 py-12 sm:py-16 text-center">
                 <p className="font-sora text-sm font-semibold text-slate-300">
                   You haven't liked any projects yet.
                 </p>
@@ -337,7 +337,7 @@ const UserDashboard = () => {
                 </p>
               </div>
             ) : (
-              <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+              <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {likedProjects.map((project) => (
                   <div
                     key={project._id}

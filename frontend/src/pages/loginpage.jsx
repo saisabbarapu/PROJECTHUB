@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import {
   FaEnvelope,
@@ -106,16 +106,16 @@ const LoginPage = () => {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-8 text-slate-100">
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-6 sm:py-8 text-slate-100">
       {/* Centered Glass Card */}
-      <div className="glass-panel relative w-full max-w-md rounded-3xl p-6 shadow-2xl sm:p-8">
+      <div className="glass-panel relative w-full max-w-md rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-2xl">
         {/* Header */}
-        <div className="mb-6 text-center">
-          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-violet-300">
+        <div className="mb-5 sm:mb-6 text-center">
+          <div className="mb-2.5 sm:mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] sm:text-[11px] font-semibold text-violet-300">
             <FaBolt className="text-violet-400" />
             <span>PROJECTHUB AUTHENTICATION</span>
           </div>
-          <h1 className="font-sora text-2xl font-black tracking-tight text-white sm:text-3xl">
+          <h1 className="font-sora text-xl sm:text-2xl md:text-3xl font-black tracking-tight text-white">
             Welcome Back
           </h1>
           <p className="mt-1 font-sans text-xs text-slate-400">
@@ -124,12 +124,12 @@ const LoginPage = () => {
         </div>
 
         {/* Quick Demo Pill Selector */}
-        <div className="mb-5 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-2.5">
+        <div className="mb-4 sm:mb-5 rounded-xl sm:rounded-2xl border border-white/[0.08] bg-white/[0.02] p-2 sm:p-2.5">
           <div className="mb-2 flex items-center justify-between px-1 font-mono text-[10px] text-slate-400">
             <span>⚡ QUICK AUTO-FILL</span>
             <span className="text-violet-400">1-CLICK</span>
           </div>
-          <div className="grid grid-cols-2 gap-2">
+          <div className="grid grid-cols-1 min-[360px]:grid-cols-2 gap-2">
             {DEMO_ACCOUNTS.map((acc) => {
               const Icon = acc.icon;
               const isSelected = activeDemo === acc.title;

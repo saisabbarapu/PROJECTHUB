@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaGraduationCap, FaShieldAlt, FaUsers, FaLayerGroup, FaArrowRight } from 'react-icons/fa';
 
@@ -33,49 +33,49 @@ const About = () => {
   ];
 
   return (
-    <div className="relative min-h-screen bg-transparent px-4 py-16 text-slate-200 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-5xl space-y-12">
+    <div className="relative min-h-screen bg-transparent px-4 py-10 sm:py-16 text-slate-200 sm:px-6 lg:px-8">
+      <div className="mx-auto max-w-5xl space-y-8 sm:space-y-12">
         {/* Header */}
-        <div className="space-y-4 text-center">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-violet-300">
+        <div className="space-y-3 sm:space-y-4 text-center">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 sm:px-4 py-1 sm:py-1.5 font-mono text-[10px] sm:text-xs font-semibold text-violet-300">
             <span>ABOUT PROJECTHUB</span>
           </div>
-          <h1 className="font-sora text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
+          <h1 className="font-sora text-3xl sm:text-4xl md:text-5xl font-extrabold tracking-tight text-white">
             Bridging Student Talent & Technical Opportunity
           </h1>
-          <p className="mx-auto max-w-2xl font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
+          <p className="mx-auto max-w-2xl font-sans text-xs sm:text-sm leading-relaxed text-slate-400">
             ProjectHub is an innovative academic showcase platform designed to discover, celebrate, and collaborate on student projects across all engineering and science departments.
           </p>
         </div>
 
         {/* Feature Cards Grid */}
-        <div className="grid grid-cols-1 gap-6 md:grid-cols-2">
+        <div className="grid grid-cols-1 gap-4 sm:gap-6 md:grid-cols-2">
           {sections.map((sec, idx) => (
             <div
               key={idx}
-              className="glass-card glass-card-hover space-y-3 rounded-2xl p-6"
+              className="glass-card glass-card-hover space-y-3 rounded-2xl p-5 sm:p-6"
             >
-              <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.04] p-3 shadow-inner">
+              <div className="inline-flex rounded-xl border border-white/10 bg-white/[0.04] p-2.5 sm:p-3 shadow-inner">
                 {sec.icon}
               </div>
               <h3 className="font-sora text-base font-bold text-white">{sec.title}</h3>
-              <p className="font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">{sec.description}</p>
+              <p className="font-sans text-xs sm:text-sm leading-relaxed text-slate-400">{sec.description}</p>
             </div>
           ))}
         </div>
 
         {/* Callout & Action */}
-        <div className="glass-panel space-y-4 rounded-3xl p-8 text-center sm:p-10">
-          <h2 className="font-sora text-2xl font-bold text-white sm:text-3xl">
+        <div className="glass-panel space-y-4 rounded-2xl sm:rounded-3xl p-6 sm:p-10 text-center">
+          <h2 className="font-sora text-xl sm:text-2xl md:text-3xl font-bold text-white">
             Ready to explore student innovations?
           </h2>
-          <p className="mx-auto max-w-xl font-sans text-xs text-slate-300 sm:text-sm">
+          <p className="mx-auto max-w-xl font-sans text-xs sm:text-sm text-slate-300">
             Browse live projects from top departments, check out GitHub source code, and review PDF presentations.
           </p>
           <div className="pt-2">
             <button
               onClick={() => navigate('/mainhome')}
-              className="inline-flex items-center gap-2 rounded-full border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-7 py-3 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-7 py-3 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105"
             >
               <span>Explore Projects</span>
               <FaArrowRight className="text-xs" />

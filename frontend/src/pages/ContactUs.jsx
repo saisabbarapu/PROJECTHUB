@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import { FaEnvelope, FaUser, FaPaperPlane } from 'react-icons/fa';
 
 const ContactUs = () => {
@@ -26,14 +26,14 @@ const ContactUs = () => {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
-      <div className="glass-panel relative w-full max-w-xl rounded-3xl p-8 shadow-2xl sm:p-10">
-        <div className="mb-8 text-center">
-          <span className="mb-3 inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-xs font-semibold text-violet-300">
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-10 sm:py-16 text-slate-100 sm:px-6 lg:px-8">
+      <div className="glass-panel relative w-full max-w-xl rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl">
+        <div className="mb-6 sm:mb-8 text-center">
+          <span className="mb-2 sm:mb-3 inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] sm:text-xs font-semibold text-violet-300">
             COMMUNITY & SUPPORT
           </span>
-          <h1 className="font-sora text-3xl font-extrabold text-white">Contact Us</h1>
-          <p className="mt-2 font-sans text-xs text-slate-400">
+          <h1 className="font-sora text-2xl sm:text-3xl font-extrabold text-white">Contact Us</h1>
+          <p className="mt-1 sm:mt-2 font-sans text-xs text-slate-400">
             Have questions, feedback, or department integration requests? Reach out directly.
           </p>
         </div>

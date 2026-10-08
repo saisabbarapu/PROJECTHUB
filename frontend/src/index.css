@@ -98,6 +98,14 @@
   .radial-ambient {
     background: radial-gradient(circle at 50% 0%, rgba(168, 85, 247, 0.18), rgba(3, 7, 18, 0) 70%);
   }
+
+  .scrollbar-none {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .scrollbar-none::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 /* Kinetic Loader Keyframes */

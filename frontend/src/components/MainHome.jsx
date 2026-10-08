@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useCallback, useMemo } from 'react';
+import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import api, { SOCKET_URL } from './api';
 import ProjectCard from './ProjectCard';
 import SubmitProjectModal from './SubmitProjectModal';
@@ -195,30 +195,30 @@ const MainHome = () => {
     <div className="relative min-h-screen bg-transparent px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header Title Section */}
-        <div className="mb-8">
-          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-violet-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]">
+        <div className="mb-6 sm:mb-8">
+          <div className="font-mono text-[10px] sm:text-xs font-semibold uppercase tracking-wider text-violet-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]">
             DISCOVERY PLATFORM
           </div>
-          <h1 className="mt-1 font-sora text-3xl font-black tracking-tight text-white sm:text-4xl">
+          <h1 className="mt-1 font-sora text-2xl sm:text-3xl md:text-4xl font-black tracking-tight text-white">
             EXPLORE <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">PROJECTS</span>
           </h1>
-          <p className="mt-1 font-sans text-xs text-slate-300 sm:text-sm">
+          <p className="mt-1 font-sans text-xs sm:text-sm text-slate-300">
             Discover, review, and evaluate student capstones across all university departments.
           </p>
         </div>
 
         {/* Discovery Filter & Search Bar */}
-        <div className="glass-panel mb-8 rounded-2xl p-4 sm:p-5 border border-violet-500/25 shadow-[0_0_30px_rgba(168,85,247,0.12)]">
+        <div className="glass-panel mb-6 sm:mb-8 rounded-2xl p-3.5 sm:p-5 border border-violet-500/25 shadow-[0_0_30px_rgba(168,85,247,0.12)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             {/* Search Input */}
-            <div className="relative flex-grow sm:max-w-md">
+            <div className="relative w-full sm:max-w-md">
               <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-violet-400/60" />
               <input
                 type="text"
                 placeholder="Search projects by title, tech, or keywords..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full rounded-xl border border-violet-500/20 bg-[#030712]/60 py-2.5 pl-9 pr-8 font-sans text-xs text-slate-100 placeholder-slate-400 transition-all focus:border-violet-400/70 focus:bg-[#030712]/90 focus:outline-none focus:ring-1 focus:ring-violet-500/30"
+                className="w-full rounded-xl border border-violet-500/20 bg-[#030712]/60 py-2 sm:py-2.5 pl-9 pr-8 font-sans text-xs text-slate-100 placeholder-slate-400 transition-all focus:border-violet-400/70 focus:bg-[#030712]/90 focus:outline-none focus:ring-1 focus:ring-violet-500/30"
               />
               {searchFilter && (
                 <button
@@ -231,15 +231,15 @@ const MainHome = () => {
             </div>
 
             {/* Sort & Status */}
-            <div className="flex items-center gap-3">
-              <div className="flex items-center gap-1.5 font-mono text-xs text-slate-300">
+            <div className="flex flex-wrap items-center gap-2 sm:gap-3">
+              <div className="flex items-center gap-1.5 font-mono text-[11px] sm:text-xs text-slate-300">
                 <FaFilter className="text-[10px] text-violet-400" />
                 <span>Sort:</span>
               </div>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="rounded-xl border border-violet-500/25 bg-[#030712]/90 px-3 py-1.5 font-sans text-xs text-slate-200 outline-none transition-colors hover:border-violet-400/50 focus:border-violet-400"
+                className="rounded-xl border border-violet-500/25 bg-[#030712]/90 px-2.5 py-1.5 font-sans text-xs text-slate-200 outline-none transition-colors hover:border-violet-400/50 focus:border-violet-400"
               >
                 <option value="latest">Recently Added</option>
                 <option value="likes">Most Liked</option>
@@ -317,11 +317,11 @@ const MainHome = () => {
 
         {/* Projects Grid */}
         {!isLoading && !error && (
-          <div className="grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
             {filteredProjects.length > 0 ? (
               filteredProjects.map((p) => <ProjectCard key={p._id} project={p} />)
             ) : (
-              <div className="col-span-full space-y-2 rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-8 py-20 text-center">
+              <div className="col-span-full space-y-2 rounded-2xl sm:rounded-3xl border border-dashed border-white/10 bg-white/[0.01] p-6 sm:p-8 py-14 sm:py-20 text-center">
                 <p className="font-sora text-sm font-semibold text-slate-300">
                   No projects found{selectedDepartment ? ` for ${selectedDepartment}` : ''}.
                 </p>
@@ -345,7 +345,7 @@ const MainHome = () => {
       {/* Floating Action Button on Bottom Right */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-5 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-violet-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-violet-500/60 active:scale-95 focus:outline-none"
+        className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-40 flex items-center gap-2 sm:gap-2.5 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-4 py-2.5 sm:px-5 sm:py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-violet-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-violet-500/60 active:scale-95 focus:outline-none"
         title="Submit New Project"
       >
         <FaPlus className="text-xs text-white" />

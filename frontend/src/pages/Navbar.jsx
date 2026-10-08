@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect, useContext, useRef } from 'react';
+import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   FaUserCircle,
   FaSearch,
@@ -323,10 +323,10 @@ const Navbar = () => {
 
         {/* Mobile Navigation Drawer */}
         {isOpen && (
-          <div className="border-t border-white/[0.08] bg-[#030712]/98 px-2 py-4 backdrop-blur-2xl lg:hidden">
+          <div className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/[0.08] bg-[#030712]/98 px-2.5 py-4 backdrop-blur-2xl lg:hidden scrollbar-none">
             <div className="flex flex-col gap-1 font-sans text-xs font-medium text-slate-300">
               {/* Mobile Search */}
-              <form onSubmit={handleSearchSubmit} className="mb-3 px-2">
+              <form onSubmit={handleSearchSubmit} className="mb-3 px-1">
                 <div className="relative">
                   <input
                     type="text"
@@ -424,16 +424,16 @@ const Navbar = () => {
                     Sign In to ProjectHub
                   </button>
                 ) : (
-                  <div className="flex w-full items-center justify-between px-2">
+                  <div className="flex w-full items-center justify-between gap-2 px-1">
                     <button
                       onClick={handleProfileClick}
-                      className="truncate text-xs text-slate-300 hover:text-violet-300 text-left"
+                      className="min-w-0 flex-1 truncate text-xs text-slate-300 hover:text-violet-300 text-left"
                     >
-                      Signed in as <b className="text-white">{user.firstName || user.email}</b>
+                      Signed in as <b className="text-white truncate">{user.firstName || user.email}</b>
                     </button>
                     <button
                       onClick={handleLogout}
-                      className="rounded-lg bg-rose-500/20 px-3 py-1.5 text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-500/30"
+                      className="shrink-0 rounded-lg bg-rose-500/20 px-3 py-1.5 text-xs font-semibold text-rose-300 transition-colors hover:bg-rose-500/30"
                     >
                       Logout
                     </button>

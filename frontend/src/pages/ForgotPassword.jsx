@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
 import { ToasterContext } from '../components/ToasterContext';
@@ -29,12 +29,12 @@ const ForgotPassword = () => {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
-      <div className="glass-panel relative w-full max-w-md rounded-3xl p-8 shadow-2xl sm:p-10">
-        <div className="mb-6">
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-8 sm:py-12 text-slate-100 sm:px-6 lg:px-8">
+      <div className="glass-panel relative w-full max-w-md rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl">
+        <div className="mb-5 sm:mb-6">
           <Link
             to="/loginpage"
-            className="mb-4 inline-flex items-center gap-1.5 font-sans text-xs text-slate-400 transition-colors hover:text-violet-300"
+            className="mb-3 sm:mb-4 inline-flex items-center gap-1.5 font-sans text-xs text-slate-400 transition-colors hover:text-violet-300"
           >
             <FaArrowLeft className="text-xs" /> Back to Sign In
           </Link>
@@ -42,7 +42,7 @@ const ForgotPassword = () => {
             <FaKey className="text-violet-400" />
             <span>ACCOUNT RECOVERY</span>
           </div>
-          <h2 className="font-sora text-2xl font-black text-white">Reset Password</h2>
+          <h2 className="font-sora text-xl sm:text-2xl font-black text-white">Reset Password</h2>
           <p className="mt-1 font-sans text-xs text-slate-400">
             Enter your verified university email to receive recovery instructions.
           </p>

@@ -1,4 +1,4 @@
-﻿import React, { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import { ToasterContext } from '../components/ToasterContext';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserPlus } from 'react-icons/fa';
@@ -106,14 +106,14 @@ const Signup = () => {
   };
 
   return (
-    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
-      <div className="glass-panel relative w-full max-w-lg rounded-3xl p-8 shadow-2xl sm:p-10">
-        <div className="mb-6 text-center">
-          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-violet-300">
+    <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-8 sm:py-12 text-slate-100 sm:px-6 lg:px-8">
+      <div className="glass-panel relative w-full max-w-lg rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl">
+        <div className="mb-5 sm:mb-6 text-center">
+          <div className="mb-2.5 sm:mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] sm:text-[11px] font-semibold text-violet-300">
             <FaUserPlus className="text-violet-400" />
             <span>CREATE ACCOUNT</span>
           </div>
-          <h2 className="font-sora text-2xl font-black text-white sm:text-3xl">Join ProjectHub</h2>
+          <h2 className="font-sora text-xl sm:text-2xl md:text-3xl font-black text-white">Join ProjectHub</h2>
           <p className="mt-1 font-sans text-xs text-slate-400">
             Showcase your capstone and collaborate with verified peers
           </p>

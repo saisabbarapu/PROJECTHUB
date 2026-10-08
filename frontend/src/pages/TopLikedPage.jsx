@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import api from '../components/api';
 import TopProjectCard from './TopProjectCard';
 import Loader from '../components/Loader';
@@ -26,18 +26,18 @@ const TopLikedPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-transparent px-4 py-16 text-slate-100 sm:px-6 lg:px-8">
+    <div className="relative min-h-screen bg-transparent px-4 py-10 sm:py-16 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-6xl">
         {/* Header Hero Section */}
-        <section className="mb-14 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-violet-300 backdrop-blur-md">
+        <section className="mb-10 sm:mb-14 text-center">
+          <div className="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 sm:px-4 py-1 sm:py-1.5 font-mono text-[10px] sm:text-xs font-semibold text-violet-300 backdrop-blur-md">
             <FaCrown className="text-violet-400" />
             <span>COMMUNITY LEADERBOARD</span>
           </div>
-          <h1 className="font-sora text-4xl font-black tracking-tight text-white sm:text-5xl">
+          <h1 className="font-sora text-3xl sm:text-4xl md:text-5xl font-black tracking-tight text-white">
             TOP PROJECTS
           </h1>
-          <p className="mx-auto mt-3 max-w-xl font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
+          <p className="mx-auto mt-2 sm:mt-3 max-w-xl font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
             The projects getting the most attention from the community across departments and disciplines.
           </p>
         </section>

@@ -1,4 +1,4 @@
-﻿import React, { useState } from 'react';
+import React, { useState } from 'react';
 import api from './api';
 import {
   FaUser,
@@ -126,19 +126,19 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
   return (
     <div
       onClick={handleClose}
-      className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/85 p-4 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/85 p-3 sm:p-4 backdrop-blur-md"
     >
       <div
         onClick={(e) => e.stopPropagation()}
-        className="glass-panel relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-3xl p-6 shadow-2xl sm:p-8"
+        className="glass-panel relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl"
       >
         {/* Modal Header */}
-        <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
+        <div className="flex items-center justify-between border-b border-white/[0.08] pb-3 sm:pb-4">
           <div>
             <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
               SUBMISSION FORM
             </div>
-            <h2 className="font-sora text-xl font-bold text-white sm:text-2xl">Submit New Project</h2>
+            <h2 className="font-sora text-lg sm:text-2xl font-bold text-white">Submit New Project</h2>
             <p className="mt-0.5 font-sans text-xs text-slate-400">
               Share your innovation with the university showcase community
             </p>
@@ -369,19 +369,19 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
           </div>
 
           {/* Form Actions */}
-          <div className="flex items-center justify-end gap-3 border-t border-white/[0.08] pt-4">
+          <div className="flex flex-col-reverse sm:flex-row items-center sm:justify-end gap-2.5 sm:gap-3 border-t border-white/[0.08] pt-4">
             <button
               type="button"
               onClick={handleClose}
               disabled={isSubmitting}
-              className="rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 font-sans text-xs font-semibold text-slate-300 transition-colors hover:bg-white/[0.08] hover:text-white"
+              className="w-full sm:w-auto rounded-xl border border-white/10 bg-white/[0.03] px-4 py-2 font-sans text-xs font-semibold text-slate-300 transition-colors hover:bg-white/[0.08] hover:text-white text-center"
             >
               Cancel
             </button>
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-6 py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105 disabled:opacity-50"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-6 py-2.5 sm:py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>

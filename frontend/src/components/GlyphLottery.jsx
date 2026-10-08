@@ -145,7 +145,7 @@ function GlyphLottery({
   return (
     <span
       ref={wrapperRef}
-      className={`inline-block ${className}`}
+      className={`inline-block max-w-full break-words ${className}`}
       onMouseEnter={handleMouseEnter}
       aria-label={text}
     >
