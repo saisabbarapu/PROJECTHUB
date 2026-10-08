@@ -5,20 +5,20 @@ import React, { useEffect, useRef } from 'react';
  * GPU-accelerated canvas component simulating a wavy, folded cloth of radiant particles
  */
 const SpectralDrape = ({
-  color = '#00f0ff',
-  secondaryColor = '#6366f1',
-  accentColor = '#ec4899',
-  dotCountX = 70,
-  dotCountY = 45,
-  waveSpeed = 0.8,
-  waveAmplitude = 38,
+  color = '#06b6d4',
+  secondaryColor = '#0284c7',
+  accentColor = '#1e40af',
+  dotCountX = 85,
+  dotCountY = 52,
+  waveSpeed = 0.7,
+  waveAmplitude = 40,
   waveFrequency = 0.045,
-  foldIntensity = 1.2,
-  dotSize = 1.6,
+  foldIntensity = 1.25,
+  dotSize = 1.5,
   interactive = true,
-  mouseStrength = 40,
-  glow = 0.85,
-  perspective = 800,
+  mouseStrength = 35,
+  glow = 0.8,
+  perspective = 850,
   className = '',
   style = {},
 }) => {
@@ -75,7 +75,7 @@ const SpectralDrape = ({
     const c3 = hexToRgb(accentColor);
 
     const render = () => {
-      time += 0.015 * waveSpeed;
+      time += 0.012 * waveSpeed;
 
       // Mouse easing
       mouse.x += (mouse.targetX - mouse.x) * 0.05;
@@ -93,18 +93,25 @@ const SpectralDrape = ({
         const v = y / (dotCountY - 1);
         const baseY = y * cellH;
 
+        // Smooth edge falloff vertically
+        const edgeFadeY = Math.sin(v * Math.PI);
+
         for (let x = 0; x < dotCountX; x++) {
           const u = x / (dotCountX - 1);
           const baseX = x * cellW;
 
+          // Smooth edge falloff horizontally
+          const edgeFadeX = Math.sin(u * Math.PI);
+          const edgeFade = Math.min(1, edgeFadeX * edgeFadeY * 1.5);
+
           // Multi-frequency sine & cosine draping waves
-          const wave1 = Math.sin(u * Math.PI * 4 + time * 1.5) * Math.cos(v * Math.PI * 3 + time * 0.8);
-          const wave2 = Math.sin((u + v) * Math.PI * 3 - time * 1.2) * 0.5;
-          const wave3 = Math.cos(u * 12 + v * 8 + time * 2) * 0.25;
+          const wave1 = Math.sin(u * Math.PI * 4 + time * 1.4) * Math.cos(v * Math.PI * 3 + time * 0.7);
+          const wave2 = Math.sin((u + v) * Math.PI * 3 - time * 1.1) * 0.5;
+          const wave3 = Math.cos(u * 10 + v * 7 + time * 1.8) * 0.25;
 
           // Main 3D cloth fold distortion
           const drapeFold = (wave1 + wave2 + wave3) * waveAmplitude * foldIntensity;
-          const zDepth = drapeFold * 2.5;
+          const zDepth = drapeFold * 2.2;
 
           // Mouse perturbation
           let mouseDisplacementX = 0;
@@ -113,7 +120,7 @@ const SpectralDrape = ({
             const dx = baseX - mouse.x;
             const dy = baseY - mouse.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            const maxDist = 220;
+            const maxDist = 200;
             if (dist < maxDist) {
               const force = (1 - dist / maxDist) * mouseStrength;
               mouseDisplacementX = (dx / dist) * force;
@@ -133,33 +140,36 @@ const SpectralDrape = ({
           const sizeFactor = Math.max(0.4, scale * dotSize);
           const depthNorm = Math.min(1, Math.max(0, (zDepth + waveAmplitude) / (waveAmplitude * 2)));
 
-          // Gradient color interpolation across the drape
+          // Gradient color interpolation: Cyan (peaks) -> Cerulean (mid) -> Deep Blue (valleys)
           let r, g, b;
-          if (depthNorm < 0.5) {
-            const t = depthNorm * 2;
-            r = Math.round(c1.r + (c2.r - c1.r) * t);
-            g = Math.round(c1.g + (c2.g - c1.g) * t);
-            b = Math.round(c1.b + (c2.b - c1.b) * t);
-          } else {
+          if (depthNorm > 0.5) {
             const t = (depthNorm - 0.5) * 2;
-            r = Math.round(c2.r + (c3.r - c2.r) * t);
-            g = Math.round(c2.g + (c3.g - c2.g) * t);
-            b = Math.round(c2.b + (c3.b - c2.b) * t);
+            r = Math.round(c2.r + (c1.r - c2.r) * t);
+            g = Math.round(c2.g + (c1.g - c2.g) * t);
+            b = Math.round(c2.b + (c1.b - c2.b) * t);
+          } else {
+            const t = depthNorm * 2;
+            r = Math.round(c3.r + (c2.r - c3.r) * t);
+            g = Math.round(c3.g + (c2.g - c3.g) * t);
+            b = Math.round(c3.b + (c2.b - c3.b) * t);
           }
 
-          const alpha = Math.min(0.95, Math.max(0.15, 0.35 + depthNorm * 0.6));
+          const baseAlpha = 0.25 + depthNorm * 0.6;
+          const finalAlpha = Math.min(0.9, baseAlpha * edgeFade);
+
+          if (finalAlpha <= 0.02) continue;
 
           // Draw the glowing dot
           ctx.beginPath();
           ctx.arc(projX, projY, sizeFactor, 0, Math.PI * 2);
-          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${alpha})`;
+          ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${finalAlpha})`;
           ctx.fill();
 
-          // Subtle glow on crests
-          if (glow > 0 && depthNorm > 0.65) {
+          // Subtle neon glow halo on crests
+          if (glow > 0 && depthNorm > 0.6) {
             ctx.beginPath();
             ctx.arc(projX, projY, sizeFactor * 2.2, 0, Math.PI * 2);
-            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(depthNorm - 0.65) * 0.35 * glow})`;
+            ctx.fillStyle = `rgba(${r}, ${g}, ${b}, ${(depthNorm - 0.6) * 0.3 * glow * edgeFade})`;
             ctx.fill();
           }
         }

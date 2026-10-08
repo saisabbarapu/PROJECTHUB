@@ -24,27 +24,28 @@ const App = () => {
         {/* Global Ambient SpectralDrape 3D Background */}
         <div className="pointer-events-none fixed inset-0 z-0 overflow-hidden bg-[#030712]">
           {/* Radiant 3D Folding Drape Canvas */}
-          <div className="absolute inset-0 opacity-80 transition-opacity duration-700">
+          <div className="absolute inset-0 opacity-75 transition-opacity duration-700">
             <SpectralDrape
-              color="#00f0ff"
-              secondaryColor="#3b82f6"
-              accentColor="#8b5cf6"
-              dotCountX={85}
-              dotCountY={52}
-              waveSpeed={0.75}
-              waveAmplitude={44}
-              foldIntensity={1.3}
-              dotSize={1.6}
-              glow={0.95}
+              color="#06b6d4"
+              secondaryColor="#0284c7"
+              accentColor="#1e40af"
+              dotCountX={90}
+              dotCountY={55}
+              waveSpeed={0.7}
+              waveAmplitude={42}
+              foldIntensity={1.25}
+              dotSize={1.5}
+              glow={0.85}
               interactive={false}
-              perspective={850}
+              perspective={900}
             />
           </div>
 
-          {/* Cinematic Grid & Vignette Edge Blending */}
-          <div className="cinematic-grid absolute inset-0 opacity-15 pointer-events-none" />
-          <div className="absolute inset-0 bg-gradient-to-b from-[#030712]/40 via-transparent to-[#030712]/85 pointer-events-none" />
-          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_45%,#030712_100%)] pointer-events-none" />
+          {/* Seamless Radial Vignettes & Edge Blending with Obsidian Theme */}
+          <div className="cinematic-grid absolute inset-0 opacity-10 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-t from-[#030712] via-transparent to-[#030712]/90 pointer-events-none" />
+          <div className="absolute inset-0 bg-gradient-to-r from-[#030712]/80 via-transparent to-[#030712]/80 pointer-events-none" />
+          <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,transparent_35%,#030712_95%)] pointer-events-none" />
         </div>
 
         {/* Foreground Content */}
