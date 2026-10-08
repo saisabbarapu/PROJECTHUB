@@ -75,9 +75,57 @@ const sampleUsers = [
     password: 'DemoUser@123',
   },
   {
+    firstName: 'Sai',
+    lastName: 'Sabbarapu',
+    email: '24m11mc150@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
     firstName: 'Rahul',
     lastName: 'Sharma',
     email: '24m11mc001@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Ananya',
+    lastName: 'Verma',
+    email: 'ananya.v@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Vikram',
+    lastName: 'Patel',
+    email: 'vikram.p@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Pooja',
+    lastName: 'Reddy',
+    email: 'pooja.r@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Karthik',
+    lastName: 'Rao',
+    email: 'karthik.r@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Sneha',
+    lastName: 'Kulkarni',
+    email: 'sneha.k@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Divya',
+    lastName: 'Nambiar',
+    email: 'divya.n@adityauniversity.in',
+    password: 'DemoUser@123',
+  },
+  {
+    firstName: 'Manoj',
+    lastName: 'Kumar',
+    email: 'manoj.k@adityauniversity.in',
     password: 'DemoUser@123',
   },
 ];
