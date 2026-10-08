@@ -1,13 +1,19 @@
 import React, { useMemo } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
+import { getFallbackProjectImage } from '../components/ProjectCard';
 
 const TopProjectCard = ({ project, rank }) => {
+  const fallbackImage = useMemo(() => getFallbackProjectImage(project), [project]);
+
   const imageUrl = useMemo(() => {
     if (project.imageData && project.imageMimeType) {
       return `data:${project.imageMimeType};base64,${project.imageData}`;
     }
-    return project.imageUrl || '/image/projectbg.png';
-  }, [project.imageData, project.imageMimeType, project.imageUrl]);
+    if (project.imageUrl && (project.imageUrl.startsWith('http') || project.imageUrl.startsWith('data:'))) {
+      return project.imageUrl;
+    }
+    return fallbackImage;
+  }, [project.imageData, project.imageMimeType, project.imageUrl, fallbackImage]);
 
   const pdfUrl = useMemo(() => {
     if (project.pdfData) {
@@ -44,7 +50,7 @@ const TopProjectCard = ({ project, rank }) => {
           src={imageUrl}
           alt={project.title}
           onError={(e) => {
-            e.target.src = '/image/projectbg.png';
+            e.target.src = fallbackImage;
           }}
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />

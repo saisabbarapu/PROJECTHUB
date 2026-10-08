@@ -2,6 +2,7 @@ import React, { useEffect, useState, useCallback } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
 import Loader from '../components/Loader';
+import { getFallbackProjectImage } from '../components/ProjectCard';
 import {
   FaCrown,
   FaSignOutAlt,
@@ -226,10 +227,16 @@ const UserDashboard = () => {
                   >
                     <div className="relative h-44 w-full bg-slate-900">
                       <img
-                        src={project.imageUrl || '/image/projectbg.png'}
+                        src={
+                          project.imageData && project.imageMimeType
+                            ? `data:${project.imageMimeType};base64,${project.imageData}`
+                            : project.imageUrl && project.imageUrl.startsWith('http')
+                              ? project.imageUrl
+                              : getFallbackProjectImage(project)
+                        }
                         alt={project.title}
                         onError={(e) => {
-                          e.target.src = '/image/projectbg.png';
+                          e.target.src = getFallbackProjectImage(project);
                         }}
                         className="h-full w-full object-cover"
                       />
@@ -338,10 +345,16 @@ const UserDashboard = () => {
                   >
                     <div className="relative h-44 w-full bg-slate-900">
                       <img
-                        src={project.imageUrl || '/image/projectbg.png'}
+                        src={
+                          project.imageData && project.imageMimeType
+                            ? `data:${project.imageMimeType};base64,${project.imageData}`
+                            : project.imageUrl && project.imageUrl.startsWith('http')
+                              ? project.imageUrl
+                              : getFallbackProjectImage(project)
+                        }
                         alt={project.title}
                         onError={(e) => {
-                          e.target.src = '/image/projectbg.png';
+                          e.target.src = getFallbackProjectImage(project);
                         }}
                         className="h-full w-full object-cover"
                       />

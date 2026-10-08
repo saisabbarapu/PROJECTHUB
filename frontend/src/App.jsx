@@ -27,21 +27,21 @@ const App = () => {
           <div className="absolute inset-0 bg-[radial-gradient(ellipse_80%_80%_at_50%_-20%,rgba(14,165,233,0.18),rgba(255,255,255,0))]" />
           <div className="cinematic-grid absolute inset-0 opacity-20" />
 
-          {/* Centered Ambient Crystal Ball */}
-          <div className="absolute top-[35%] left-1/2 -translate-x-1/2 -translate-y-1/2 w-[750px] h-[750px] sm:w-[950px] sm:h-[950px] lg:w-[1150px] lg:h-[1150px] opacity-90 transition-opacity duration-700">
+          {/* Perfectly Centered Radiant Ambient Crystal Ball */}
+          <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[650px] h-[650px] sm:w-[800px] sm:h-[800px] lg:w-[960px] lg:h-[960px] opacity-85 transition-all duration-700">
             <CrystalizedBall
               preset="plasma"
               color="#0a82e8"
-              size={0.82}
+              size={0.75}
               crackle={0.85}
               fill={0.5}
               interactive={false}
               hoverStrength={0.7}
               strands={6}
               flares={0.65}
-              glow={1.05}
+              glow={1.1}
               sparks={0.6}
-              particleCount={15000}
+              particleCount={16000}
               motion="rise"
               particleShape="square"
               depth={0.65}

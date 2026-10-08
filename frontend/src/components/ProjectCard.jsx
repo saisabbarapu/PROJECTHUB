@@ -14,12 +14,68 @@ import {
 } from 'react-icons/fa';
 import { ToasterContext } from './ToasterContext';
 
+export const getFallbackProjectImage = (project = {}) => {
+  const dept = (project.department || '').toUpperCase();
+  const text = `${project.title || ''} ${project.description || ''} ${Array.isArray(project.toolsUsed) ? project.toolsUsed.join(' ') : ''}`.toLowerCase();
+
+  if (text.includes('health') || text.includes('medic') || text.includes('hospital') || text.includes('disease') || text.includes('doctor') || text.includes('pulmonary') || text.includes('retinal')) {
+    return 'https://images.unsplash.com/photo-1579684385127-1ef15d508118?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('drone') || text.includes('robot') || text.includes('uav') || text.includes('automation') || text.includes('lidar') || dept.includes('ROBOT')) {
+    return 'https://images.unsplash.com/photo-1527977966376-1c8408f9f108?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('solar') || text.includes('farm') || text.includes('agri') || text.includes('plant') || text.includes('crop') || text.includes('water') || text.includes('soil') || text.includes('irrigation')) {
+    return 'https://images.unsplash.com/photo-1586771107445-d3ca888129ff?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('power') || text.includes('energy') || text.includes('grid') || text.includes('clean') || text.includes('meter') || dept.includes('EEE')) {
+    return 'https://images.unsplash.com/photo-1473341304170-971dccb5ac1e?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('circuit') || text.includes('chip') || text.includes('hardware') || text.includes('embedded') || text.includes('esp32') || text.includes('lorawan') || dept.includes('ECE')) {
+    return 'https://images.unsplash.com/photo-1518770660439-4636190af475?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('chemical') || text.includes('synthesis') || text.includes('lab') || text.includes('reaction') || dept.includes('CHEM')) {
+    return 'https://images.unsplash.com/photo-1532187863486-abf9dbad1b69?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('civil') || text.includes('bridge') || text.includes('build') || text.includes('struct') || dept.includes('CIVIL')) {
+    return 'https://images.unsplash.com/photo-1503387762-592deb58ef4e?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('ai') || text.includes('ml') || text.includes('model') || text.includes('vision') || text.includes('neural') || text.includes('deep learning') || dept.includes('AIML')) {
+    return 'https://images.unsplash.com/photo-1677442136019-21780ecad995?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('cloud') || text.includes('server') || text.includes('database') || text.includes('web') || text.includes('network') || dept.includes('IT') || dept.includes('MCA') || dept.includes('CSE')) {
+    return 'https://images.unsplash.com/photo-1558494949-ef010cbdcc31?auto=format&fit=crop&w=800&q=80';
+  }
+  if (text.includes('finance') || text.includes('market') || text.includes('analytics') || text.includes('stock') || dept.includes('MBA')) {
+    return 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?auto=format&fit=crop&w=800&q=80';
+  }
+  if (dept.includes('MECH')) {
+    return 'https://images.unsplash.com/photo-1581092160607-ee22621dd758?auto=format&fit=crop&w=800&q=80';
+  }
+
+  const sampleImages = [
+    'https://images.unsplash.com/photo-1526374965328-7f61d4dc18c5?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1504639725590-34d0984388bd?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1531482615713-2afd69097998?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1550751827-4bd374c3f58b?auto=format&fit=crop&w=800&q=80',
+    'https://images.unsplash.com/photo-1517694712202-14dd9538aa97?auto=format&fit=crop&w=800&q=80',
+  ];
+
+  let hash = 0;
+  const str = project.title || project._id || 'project';
+  for (let i = 0; i < str.length; i++) {
+    hash = (hash + str.charCodeAt(i)) % sampleImages.length;
+  }
+  return sampleImages[hash] || sampleImages[0];
+};
+
 const ProjectCard = React.memo(({ project }) => {
   const [likes, setLikes] = useState(project.likes || 0);
   const [isLiked, setIsLiked] = useState(false);
   const [feedbackText, setFeedbackText] = useState('');
   const [isPopupOpen, setIsPopupOpen] = useState(false);
   const { addToast } = useContext(ToasterContext);
+
+  const fallbackImage = useMemo(() => getFallbackProjectImage(project), [project]);
 
   const handleLike = useCallback(async () => {
     try {
@@ -68,11 +124,20 @@ const ProjectCard = React.memo(({ project }) => {
   }, [project.toolsUsed]);
 
   const imageUrl = useMemo(() => {
-    if (project.imageData && project.imageMimeType) {
+    if (project.imageData && project.imageMimeType && typeof project.imageData === 'string' && project.imageData.length > 50) {
       return `data:${project.imageMimeType};base64,${project.imageData}`;
     }
-    return project.imageUrl || '/image/projectbg.png';
-  }, [project.imageData, project.imageMimeType, project.imageUrl]);
+    if (
+      project.imageUrl &&
+      typeof project.imageUrl === 'string' &&
+      project.imageUrl.startsWith('http') &&
+      !project.imageUrl.includes('placeholder') &&
+      !project.imageUrl.includes('projectbg.png')
+    ) {
+      return project.imageUrl;
+    }
+    return fallbackImage;
+  }, [project.imageData, project.imageMimeType, project.imageUrl, fallbackImage]);
 
   const pdfUrl = useMemo(() => {
     if (project.pdfData) {
@@ -94,7 +159,7 @@ const ProjectCard = React.memo(({ project }) => {
             src={imageUrl}
             alt={project.title}
             onError={(e) => {
-              e.target.src = '/image/projectbg.png';
+              e.target.src = fallbackImage;
             }}
             loading="lazy"
             className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
@@ -199,7 +264,7 @@ const ProjectCard = React.memo(({ project }) => {
                 src={imageUrl}
                 alt={project.title}
                 onError={(e) => {
-                  e.target.src = '/image/projectbg.png';
+                  e.target.src = fallbackImage;
                 }}
                 className="h-full w-full object-cover"
               />

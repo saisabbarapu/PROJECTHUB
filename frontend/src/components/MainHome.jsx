@@ -32,15 +32,45 @@ const MainHome = () => {
   const location = useLocation();
   const [searchEmail, setSearchEmail] = useState('');
 
+  const normalizeDepartmentName = useCallback((deptName) => {
+    if (!deptName) return null;
+    const normalized = deptName.toUpperCase().trim();
+    const departmentMappings = {
+      CSE: ['CSE', 'COMPUTER SCIENCE', 'COMPUTER SCIENCE ENGINEERING', 'CS', 'COMPUTER SCIENCE & ENGINEERING'],
+      AIML: ['AIML', 'AI&ML', 'AI/ML', 'ARTIFICIAL INTELLIGENCE', 'MACHINE LEARNING', 'AI AND ML', 'AI', 'ML', 'CSE (AI/ML)'],
+      ECE: ['ECE', 'ELECTRONICS', 'ELECTRONICS AND COMMUNICATION', 'ELECTRONICS ENGINEERING', 'ECE / AGTECH'],
+      EEE: ['EEE', 'ELECTRICAL', 'ELECTRICAL AND ELECTRONICS', 'ELECTRICAL ENGINEERING', 'EEE / CLEANTECH', 'ELECTRONICS AND ELECTRICAL ENGINEERING'],
+      MECH: ['MECH', 'MECHANICAL', 'MECHANICAL ENGINEERING', 'ROBOTICS', 'MECHANICAL & ROBOTICS'],
+      CHEMICAL: ['CHEMICAL', 'CHEMICAL ENGINEERING'],
+      IT: ['IT', 'INFORMATION TECHNOLOGY', 'INFORMATION TECH'],
+      MBA: ['MBA', 'BUSINESS ADMINISTRATION', 'MANAGEMENT'],
+      CIVIL: ['CIVIL', 'CIVIL ENGINEERING'],
+      MCA: ['MCA', 'MASTER OF COMPUTER APPLICATIONS', 'MANAGEMENT AND COMPUTER APPLICATION'],
+    };
+    for (const [standardName, variations] of Object.entries(departmentMappings)) {
+      if (
+        standardName === normalized ||
+        variations.some(
+          (variation) => normalized === variation || normalized.includes(variation) || variation.includes(normalized)
+        )
+      ) {
+        return standardName;
+      }
+    }
+    return normalized;
+  }, []);
+
   // Read department and email from URL query param
   useEffect(() => {
     const params = new URLSearchParams(location.search);
     const dept = params.get('department');
     if (dept) {
-      setSelectedDepartment(dept.toUpperCase());
+      setSelectedDepartment(normalizeDepartmentName(dept));
+    } else {
+      setSelectedDepartment(null);
     }
     setSearchEmail(params.get('email') || '');
-  }, [location.search]);
+  }, [location.search, normalizeDepartmentName]);
 
   // Setup Socket.IO client for real-time updates
   useEffect(() => {
@@ -99,48 +129,14 @@ const MainHome = () => {
     [fetchProjects]
   );
 
-  const normalizeDepartmentName = useCallback((deptName) => {
-    if (!deptName) return null;
-    const normalized = deptName.toUpperCase().trim();
-    const departmentMappings = {
-      CSE: ['CSE', 'COMPUTER SCIENCE', 'COMPUTER SCIENCE ENGINEERING', 'CS'],
-      ECE: ['ECE', 'ELECTRONICS', 'ELECTRONICS AND COMMUNICATION', 'ELECTRONICS ENGINEERING'],
-      MECH: ['MECH', 'MECHANICAL', 'MECHANICAL ENGINEERING'],
-      CHEMICAL: ['CHEMICAL', 'CHEMICAL ENGINEERING'],
-      'AI&ML': [
-        'AI&ML',
-        'AI/ML',
-        'ARTIFICIAL INTELLIGENCE',
-        'MACHINE LEARNING',
-        'AI AND ML',
-        'AIML',
-      ],
-      IT: ['IT', 'INFORMATION TECHNOLOGY'],
-      MBA: ['MBA', 'BUSINESS ADMINISTRATION', 'MANAGEMENT'],
-      CIVIL: ['CIVIL', 'CIVIL ENGINEERING'],
-      MCA: ['MCA', 'MANAGEMENT', 'MANAGEMENT AND COMPUTER APPLICATION'],
-      EEE: ['EEE', 'ELECTRONICS AND ELECTRICAL ENGINEERING'],
-    };
-    for (const [standardName, variations] of Object.entries(departmentMappings)) {
-      if (
-        variations.some(
-          (variation) => normalized.includes(variation) || variation.includes(normalized)
-        )
-      ) {
-        return standardName;
-      }
-    }
-    return normalized;
-  }, []);
-
   const handleDepartmentClick = useCallback(
     (department) => {
       const normalizedDepartment = normalizeDepartmentName(department);
-      setSelectedDepartment(
-        selectedDepartment === normalizedDepartment ? null : normalizedDepartment
+      setSelectedDepartment((prev) =>
+        prev === normalizedDepartment ? null : normalizedDepartment
       );
     },
-    [selectedDepartment, normalizeDepartmentName]
+    [normalizeDepartmentName]
   );
 
   const filteredProjects = useMemo(() => {
@@ -182,10 +178,10 @@ const MainHome = () => {
   const departmentData = useMemo(
     () => [
       { id: 'CSE', name: 'CSE', icon: FaLaptopCode },
-      { id: 'AI&ML', name: 'AI&ML', icon: FaBrain },
+      { id: 'AIML', name: 'AI & ML', icon: FaBrain },
+      { id: 'IT', name: 'IT', icon: FaCode },
       { id: 'ECE', name: 'ECE', icon: FaBolt },
       { id: 'EEE', name: 'EEE', icon: FaBolt },
-      { id: 'IT', name: 'IT', icon: FaCode },
       { id: 'MECH', name: 'Mechanical', icon: FaWrench },
       { id: 'CIVIL', name: 'Civil', icon: FaBuilding },
       { id: 'CHEMICAL', name: 'Chemical', icon: FaFlask },
@@ -199,27 +195,16 @@ const MainHome = () => {
     <div className="relative min-h-screen bg-transparent px-4 py-8 text-slate-100 sm:px-6 lg:px-8">
       <div className="mx-auto max-w-7xl">
         {/* Header Title Section */}
-        <div className="mb-8 flex flex-col gap-4 md:flex-row md:items-end md:justify-between">
-          <div>
-            <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
-              DISCOVERY PLATFORM
-            </div>
-            <h1 className="mt-1 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
-              EXPLORE PROJECTS
-            </h1>
-            <p className="mt-1 font-sans text-xs text-slate-400 sm:text-sm">
-              Discover, review, and evaluate student capstones across all university departments.
-            </p>
+        <div className="mb-8">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400">
+            DISCOVERY PLATFORM
           </div>
-
-          {/* Quick Action Button */}
-          <button
-            onClick={() => setShowModal(true)}
-            className="inline-flex items-center gap-2 self-start rounded-full border border-cyan-500/40 bg-cyan-500/15 px-5 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-cyan-300 shadow-sm shadow-cyan-500/10 transition-all hover:bg-cyan-500/25 hover:text-white md:self-auto"
-          >
-            <FaPlus className="text-xs" />
-            <span>Submit Project</span>
-          </button>
+          <h1 className="mt-1 font-sora text-3xl font-extrabold tracking-tight text-white sm:text-4xl">
+            EXPLORE PROJECTS
+          </h1>
+          <p className="mt-1 font-sans text-xs text-slate-400 sm:text-sm">
+            Discover, review, and evaluate student capstones across all university departments.
+          </p>
         </div>
 
         {/* Discovery Filter & Search Bar */}
@@ -357,13 +342,13 @@ const MainHome = () => {
         )}
       </div>
 
-      {/* Floating Action Button */}
+      {/* Floating Action Button on Bottom Right */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-6 right-6 z-40 flex h-13 w-13 items-center justify-center rounded-full border border-cyan-400/50 bg-gradient-to-tr from-cyan-500 to-blue-600 text-white shadow-xl shadow-cyan-500/30 transition-all hover:scale-110 hover:shadow-cyan-500/50 focus:outline-none"
+        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-cyan-400/50 bg-gradient-to-r from-cyan-500 to-blue-600 px-5 py-3.5 text-xs font-semibold uppercase tracking-wider text-white shadow-2xl shadow-cyan-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/60 active:scale-95 focus:outline-none"
         title="Submit New Project"
       >
-        <FaPlus className="text-base" />
+        <FaPlus className="text-sm text-cyan-100" />
       </button>
 
       {/* Submit Project Modal */}
