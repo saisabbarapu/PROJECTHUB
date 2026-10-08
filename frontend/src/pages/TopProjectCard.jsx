@@ -57,7 +57,7 @@ const TopProjectCard = ({ project, rank }) => {
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-        <span className="absolute left-2.5 top-2.5 rounded-full border border-white/10 bg-[#030712]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase text-violet-300 backdrop-blur-md">
+        <span className="absolute left-2.5 top-2.5 rounded-full border border-white/10 bg-black/40 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase text-violet-300 backdrop-blur-md">
           {project.department}
         </span>
       </div>

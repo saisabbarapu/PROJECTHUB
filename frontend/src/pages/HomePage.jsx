@@ -392,7 +392,7 @@ const HomePage = () => {
                     <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/90 via-transparent to-transparent"></div>
 
                     {/* Department Tag */}
-                    <span className="absolute left-3 top-3 rounded-full border border-violet-400/30 bg-[#030712]/85 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-violet-300 shadow-[0_0_10px_rgba(168,85,247,0.2)] backdrop-blur-md">
+                    <span className="absolute left-3 top-3 rounded-full border border-violet-400/30 bg-black/40 px-2.5 py-0.5 font-mono text-[10px] font-semibold text-violet-300 shadow-[0_0_10px_rgba(168,85,247,0.2)] backdrop-blur-md">
                       {project.category}
                     </span>
 
@@ -402,7 +402,7 @@ const HomePage = () => {
                       className={`absolute bottom-3 right-3 flex items-center gap-1.5 rounded-full px-3 py-1 font-mono text-xs backdrop-blur-md transition-all ${
                         isLiked
                           ? 'border border-pink-500/50 bg-pink-500/20 text-pink-300 shadow-[0_0_10px_rgba(236,72,153,0.3)]'
-                          : 'border border-white/10 bg-[#030712]/80 text-slate-300 hover:text-pink-400'
+                          : 'border border-white/10 bg-black/40 text-slate-300 hover:text-pink-400'
                       }`}
                     >
                       {isLiked ? <FaHeart className="text-pink-400" /> : <FaRegHeart />}

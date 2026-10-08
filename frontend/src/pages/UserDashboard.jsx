@@ -241,7 +241,7 @@ const UserDashboard = () => {
                         className="h-full w-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-violet-300">
+                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-black/40 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-violet-300 backdrop-blur-md">
                         {project.department}
                       </span>
                     </div>
@@ -359,7 +359,7 @@ const UserDashboard = () => {
                         className="h-full w-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-violet-300">
+                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-black/40 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-violet-300 backdrop-blur-md">
                         {project.department}
                       </span>
                     </div>

@@ -165,7 +165,7 @@ const ProjectCard = React.memo(({ project }) => {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/90 via-transparent to-transparent"></div>
-          <span className="absolute right-3 top-3 rounded-full border border-violet-400/30 bg-[#030712]/85 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-300 shadow-[0_0_12px_rgba(168,85,247,0.2)] backdrop-blur-md">
+          <span className="absolute right-3 top-3 rounded-full border border-violet-400/30 bg-black/40 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-300 shadow-[0_0_12px_rgba(168,85,247,0.2)] backdrop-blur-md">
             {project.department || 'General'}
           </span>
         </div>
@@ -244,7 +244,7 @@ const ProjectCard = React.memo(({ project }) => {
       {isPopupOpen && (
         <div
           onClick={() => setIsPopupOpen(false)}
-          className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/80 p-3 sm:p-4 backdrop-blur-md"
+          className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/50 p-3 sm:p-4 backdrop-blur-md"
         >
           <div
             onClick={(e) => e.stopPropagation()}
@@ -253,7 +253,7 @@ const ProjectCard = React.memo(({ project }) => {
             {/* Close Button */}
             <button
               onClick={() => setIsPopupOpen(false)}
-              className="absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-[#030712]/80 text-slate-400 transition-colors hover:bg-white/[0.08] hover:text-white"
+              className="absolute right-3.5 top-3.5 sm:right-5 sm:top-5 z-10 flex h-8 w-8 items-center justify-center rounded-full border border-white/10 bg-white/10 text-slate-400 transition-colors hover:bg-white/20 hover:text-white"
             >
               <FaTimes className="text-xs" />
             </button>
@@ -269,7 +269,7 @@ const ProjectCard = React.memo(({ project }) => {
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-              <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-[#030712]/85 px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[10px] sm:text-xs font-semibold uppercase text-violet-300">
+              <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-black/40 px-2.5 sm:px-3 py-0.5 sm:py-1 font-mono text-[10px] sm:text-xs font-semibold uppercase text-violet-300 backdrop-blur-md">
                 {project.department}
               </span>
             </div>

@@ -218,7 +218,7 @@ const MainHome = () => {
                 placeholder="Search projects by title, tech, or keywords..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full rounded-xl border border-violet-500/20 bg-[#030712]/60 py-2 sm:py-2.5 pl-9 pr-8 font-sans text-xs text-slate-100 placeholder-slate-400 transition-all focus:border-violet-400/70 focus:bg-[#030712]/90 focus:outline-none focus:ring-1 focus:ring-violet-500/30"
+                className="w-full rounded-xl border border-violet-500/20 bg-white/[0.04] py-2 sm:py-2.5 pl-9 pr-8 font-sans text-xs text-slate-100 placeholder-slate-400 transition-all focus:border-violet-400/70 focus:bg-white/[0.08] focus:outline-none focus:ring-1 focus:ring-violet-500/30"
               />
               {searchFilter && (
                 <button
@@ -239,7 +239,7 @@ const MainHome = () => {
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="rounded-xl border border-violet-500/25 bg-[#030712]/90 px-2.5 py-1.5 font-sans text-xs text-slate-200 outline-none transition-colors hover:border-violet-400/50 focus:border-violet-400"
+                className="rounded-xl border border-violet-500/25 bg-black/40 backdrop-blur-md px-2.5 py-1.5 font-sans text-xs text-slate-200 outline-none transition-colors hover:border-violet-400/50 focus:border-violet-400"
               >
                 <option value="latest">Recently Added</option>
                 <option value="likes">Most Liked</option>
@@ -270,7 +270,7 @@ const MainHome = () => {
               className={`rounded-full border px-4 py-2 font-mono text-xs font-semibold transition-all ${
                 selectedDepartment === null
                   ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/25 to-blue-600/25 text-violet-200 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
-                  : 'border-violet-500/15 bg-[#030712]/60 text-slate-300 hover:border-violet-400/40 hover:text-white'
+                  : 'border-violet-500/15 bg-white/[0.03] text-slate-300 hover:border-violet-400/40 hover:text-white'
               }`}
             >
               All Departments
@@ -284,7 +284,7 @@ const MainHome = () => {
                   className={`flex items-center gap-2 rounded-full border px-4 py-2 font-sans text-xs font-medium transition-all ${
                     isSelected
                       ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/25 to-blue-600/25 text-violet-200 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
-                      : 'border-violet-500/15 bg-[#030712]/60 text-slate-300 hover:border-violet-400/40 hover:text-white'
+                      : 'border-violet-500/15 bg-white/[0.03] text-slate-300 hover:border-violet-400/40 hover:text-white'
                   }`}
                 >
                   <Icon className={`text-xs ${isSelected ? 'text-violet-300' : 'text-slate-400'}`} />

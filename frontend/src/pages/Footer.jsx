@@ -3,7 +3,7 @@ import { Link } from 'react-router-dom';
 
 const Footer = () => {
   return (
-    <footer className="relative border-t border-white/[0.08] bg-[#030712]/60 backdrop-blur-2xl text-slate-400">
+    <footer className="relative border-t border-white/[0.08] bg-transparent backdrop-blur-md text-slate-400">
       {/* Soft Ambient Glow */}
       <div className="pointer-events-none absolute inset-x-0 -top-px h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
 

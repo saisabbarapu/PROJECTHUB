@@ -120,8 +120,8 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'border-b border-violet-500/20 bg-[#030712]/95 shadow-xl shadow-violet-950/20 backdrop-blur-2xl'
-          : 'border-b border-white/[0.08] bg-[#030712]/85 shadow-lg shadow-black/40 backdrop-blur-xl'
+          ? 'border-b border-white/10 bg-black/30 shadow-lg shadow-black/20 backdrop-blur-xl'
+          : 'border-b border-white/5 bg-transparent backdrop-blur-md'
       }`}
     >
       {/* Full-width container with responsive horizontal padding */}
@@ -206,7 +206,7 @@ const Navbar = () => {
 
               {/* Glass Dropdown Menu */}
               {isDepartmentsOpen && (
-                <div className="absolute left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-white/10 bg-[#030712]/95 p-2.5 shadow-2xl ring-1 ring-white/5 backdrop-blur-2xl animate-fade-in">
+                <div className="absolute left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-white/15 bg-black/60 p-2.5 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl animate-fade-in">
                   <div className="mb-2 flex items-center justify-between border-b border-white/[0.08] px-2 pb-1.5">
                     <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                       Engineering Disciplines
@@ -323,7 +323,7 @@ const Navbar = () => {
 
         {/* Mobile Navigation Drawer */}
         {isOpen && (
-          <div className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/[0.08] bg-[#030712]/98 px-2.5 py-4 backdrop-blur-2xl lg:hidden scrollbar-none">
+          <div className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/10 bg-black/65 px-2.5 py-4 backdrop-blur-2xl lg:hidden scrollbar-none">
             <div className="flex flex-col gap-1 font-sans text-xs font-medium text-slate-300">
               {/* Mobile Search */}
               <form onSubmit={handleSearchSubmit} className="mb-3 px-1">
