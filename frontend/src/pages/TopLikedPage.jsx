@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import api from '../components/api';
 import TopProjectCard from './TopProjectCard';
+import Loader from '../components/Loader';
 import { FaTrophy } from 'react-icons/fa';
 
 const TopLikedPage = () => {
@@ -44,10 +45,7 @@ const TopLikedPage = () => {
         {/* Loading / Error States */}
         {loading && (
           <div className="flex justify-center py-20">
-            <div className="flex animate-pulse items-center gap-3 text-sm font-medium text-indigo-400">
-              <div className="h-2 w-2 animate-ping rounded-full bg-indigo-500"></div>
-              Loading leaderboard rankings...
-            </div>
+            <Loader />
           </div>
         )}
 

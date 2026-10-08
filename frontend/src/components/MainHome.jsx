@@ -2,6 +2,7 @@ import React, { useState, useEffect, useCallback, useMemo, useRef } from 'react'
 import api, { SOCKET_URL } from './api';
 import ProjectCard from './ProjectCard';
 import SubmitProjectModal from './SubmitProjectModal';
+import Loader from './Loader';
 import {
   FaLaptopCode,
   FaBolt,
@@ -226,9 +227,8 @@ const MainHome = () => {
 
         {/* Loading State */}
         {isLoading && (
-          <div className="flex flex-col items-center justify-center space-y-4 py-24">
-            <div className="h-10 w-10 animate-spin rounded-full border-4 border-indigo-500/20 border-t-indigo-500"></div>
-            <p className="text-xs font-medium text-slate-400">Loading project catalog...</p>
+          <div className="flex flex-col items-center justify-center py-28">
+            <Loader />
           </div>
         )}
 

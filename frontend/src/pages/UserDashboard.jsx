@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
+import Loader from '../components/Loader';
 import {
   FaCrown,
   FaSignOutAlt,
@@ -93,7 +94,7 @@ const UserDashboard = () => {
   if (loading) {
     return (
       <div className="flex min-h-[calc(100vh-80px)] items-center justify-center bg-slate-950">
-        <div className="h-8 w-8 animate-spin rounded-full border-4 border-indigo-500/20 border-t-indigo-500"></div>
+        <Loader />
       </div>
     );
   }
