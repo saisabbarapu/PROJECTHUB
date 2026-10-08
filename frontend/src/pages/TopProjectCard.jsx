@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
 import { getFallbackProjectImage } from '../components/ProjectCard';
+import { motion } from 'framer-motion';
 
 const TopProjectCard = ({ project, rank }) => {
   const fallbackImage = useMemo(() => getFallbackProjectImage(project), [project]);
@@ -25,7 +26,11 @@ const TopProjectCard = ({ project, rank }) => {
   const rankNumberFormatted = String(rank).padStart(2, '0');
 
   return (
-    <article className="glass-card glass-card-hover group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-6 sm:flex-row sm:items-center sm:gap-6">
+    <motion.article
+      whileHover={{ y: -4, borderColor: 'rgba(168,85,247,0.45)' }}
+      transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+      className="glass-card group relative flex flex-col overflow-hidden rounded-2xl sm:rounded-3xl p-4 sm:p-6 sm:flex-row sm:items-center sm:gap-6 border border-white/10"
+    >
       {/* Large Editorial Rank Number */}
       <div className="mb-3 flex items-center justify-between sm:mb-0 sm:flex-col sm:items-center sm:justify-center sm:px-2">
         <div className="flex items-center gap-2 sm:flex-col sm:items-center">
@@ -124,7 +129,7 @@ const TopProjectCard = ({ project, rank }) => {
           </div>
         </div>
       </div>
-    </article>
+    </motion.article>
   );
 };
 

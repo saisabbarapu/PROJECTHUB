@@ -21,6 +21,7 @@ import {
 } from 'react-icons/fa';
 import { useLocation } from 'react-router-dom';
 import { io } from 'socket.io-client';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const MainHome = () => {
   const [projects, setProjects] = useState([]);
@@ -266,23 +267,27 @@ const MainHome = () => {
         {/* Departments Scroll Strip */}
         <div className="scrollbar-none mb-10 overflow-x-auto pb-2">
           <div className="flex min-w-max gap-2.5">
-            <button
+            <motion.button
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.95 }}
               onClick={() => setSelectedDepartment(null)}
-              className={`rounded-full border px-4 py-2 font-mono text-xs font-semibold transition-all ${
+              className={`rounded-full border px-4 py-2 font-mono text-xs font-semibold transition-colors ${
                 selectedDepartment === null
                   ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/25 to-blue-600/25 text-violet-200 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
                   : 'border-violet-500/15 bg-white/[0.03] text-slate-300 hover:border-violet-400/40 hover:text-white'
               }`}
             >
               All Departments
-            </button>
+            </motion.button>
             {departmentData.map(({ id, name, icon: Icon }) => {
               const isSelected = selectedDepartment === id;
               return (
-                <button
+                <motion.button
                   key={id}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                   onClick={() => handleDepartmentClick(name)}
-                  className={`flex items-center gap-2 rounded-full border px-4 py-2 font-sans text-xs font-medium transition-all ${
+                  className={`flex items-center gap-2 rounded-full border px-4 py-2 font-sans text-xs font-medium transition-colors ${
                     isSelected
                       ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/25 to-blue-600/25 text-violet-200 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
                       : 'border-violet-500/15 bg-white/[0.03] text-slate-300 hover:border-violet-400/40 hover:text-white'
@@ -290,7 +295,7 @@ const MainHome = () => {
                 >
                   <Icon className={`text-xs ${isSelected ? 'text-violet-300' : 'text-slate-400'}`} />
                   <span>{name}</span>
-                </button>
+                </motion.button>
               );
             })}
           </div>
@@ -332,12 +337,14 @@ const MainHome = () => {
                   Be the first to submit a project in this discipline!
                 </p>
                 <div className="pt-2">
-                  <button
+                  <motion.button
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 0.95 }}
                     onClick={() => setShowModal(true)}
                     className="rounded-full border border-violet-500/40 bg-violet-500/20 px-5 py-2 font-mono text-xs font-semibold text-violet-300 hover:bg-violet-500/30"
                   >
                     Submit Project
-                  </button>
+                  </motion.button>
                 </div>
               </div>
             )}
@@ -346,19 +353,26 @@ const MainHome = () => {
       </div>
 
       {/* Floating Action Button on Bottom Right */}
-      <button
+      <motion.button
+        initial={{ scale: 0, opacity: 0 }}
+        animate={{ scale: 1, opacity: 1 }}
+        transition={{ type: 'spring', stiffness: 260, damping: 20 }}
+        whileHover={{ scale: 1.08, y: -2 }}
+        whileTap={{ scale: 0.94 }}
         onClick={() => setShowModal(true)}
-        className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-40 flex items-center gap-2 sm:gap-2.5 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-4 py-2.5 sm:px-5 sm:py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-violet-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-violet-500/60 active:scale-95 focus:outline-none"
+        className="fixed bottom-5 right-5 sm:bottom-7 sm:right-7 z-40 flex items-center gap-2 sm:gap-2.5 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-4 py-2.5 sm:px-5 sm:py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-violet-500/40 hover:border-cyan-300 hover:shadow-violet-500/60 focus:outline-none"
         title="Submit New Project"
       >
         <FaPlus className="text-xs text-white" />
         <span className="tracking-wide">Submit Project</span>
-      </button>
+      </motion.button>
 
       {/* Submit Project Modal */}
-      {showModal && (
-        <SubmitProjectModal onClose={() => setShowModal(false)} onSubmit={handleAddProject} />
-      )}
+      <AnimatePresence>
+        {showModal && (
+          <SubmitProjectModal onClose={() => setShowModal(false)} onSubmit={handleAddProject} />
+        )}
+      </AnimatePresence>
     </div>
   );
 };

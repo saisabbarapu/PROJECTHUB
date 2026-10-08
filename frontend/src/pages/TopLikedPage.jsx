@@ -2,7 +2,8 @@ import React, { useState, useEffect } from 'react';
 import api from '../components/api';
 import TopProjectCard from './TopProjectCard';
 import Loader from '../components/Loader';
-import { FaCrown, FaTrophy, FaFire } from 'react-icons/fa';
+import { FaCrown } from 'react-icons/fa';
+import { motion } from 'framer-motion';
 
 const TopLikedPage = () => {
   const [topProjects, setTopProjects] = useState([]);
@@ -26,10 +27,19 @@ const TopLikedPage = () => {
   }, []);
 
   return (
-    <div className="relative min-h-screen bg-transparent px-4 py-10 sm:py-16 text-slate-100 sm:px-6 lg:px-8">
-      <div className="mx-auto max-w-6xl">
+    <div className="relative min-h-screen bg-transparent px-4 py-10 sm:py-16 text-slate-100 sm:px-6 lg:px-8 overflow-hidden">
+      {/* Ambient background glow */}
+      <div className="pointer-events-none absolute -top-24 right-1/4 h-80 w-80 rounded-full bg-violet-600/15 blur-[120px]" />
+      <div className="pointer-events-none absolute bottom-1/3 left-1/4 h-96 w-96 rounded-full bg-amber-500/10 blur-[140px]" />
+
+      <div className="relative mx-auto max-w-6xl">
         {/* Header Hero Section */}
-        <section className="mb-10 sm:mb-14 text-center">
+        <motion.section
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.6 }}
+          className="mb-10 sm:mb-14 text-center"
+        >
           <div className="mb-3 sm:mb-4 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-3.5 sm:px-4 py-1 sm:py-1.5 font-mono text-[10px] sm:text-xs font-semibold text-violet-300 backdrop-blur-md">
             <FaCrown className="text-violet-400" />
             <span>COMMUNITY LEADERBOARD</span>
@@ -40,7 +50,7 @@ const TopLikedPage = () => {
           <p className="mx-auto mt-2 sm:mt-3 max-w-xl font-sans text-xs leading-relaxed text-slate-400 sm:text-sm">
             The projects getting the most attention from the community across departments and disciplines.
           </p>
-        </section>
+        </motion.section>
 
         {/* Loading / Error States */}
         {loading && (
@@ -60,7 +70,14 @@ const TopLikedPage = () => {
           <div className="space-y-6">
             {topProjects.length > 0 ? (
               topProjects.map((project, index) => (
-                <TopProjectCard key={project._id} project={project} rank={index + 1} />
+                <motion.div
+                  key={project._id}
+                  initial={{ opacity: 0, y: 20 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  transition={{ duration: 0.4, delay: index * 0.08 }}
+                >
+                  <TopProjectCard project={project} rank={index + 1} />
+                </motion.div>
               ))
             ) : (
               <div className="rounded-3xl border border-dashed border-white/10 bg-white/[0.01] py-16 text-center text-sm text-slate-500">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaEnvelope, FaUser, FaPaperPlane } from 'react-icons/fa';
+import { motion, AnimatePresence } from 'framer-motion';
 
 const ContactUs = () => {
   const [formData, setFormData] = useState({ name: '', email: '', message: '' });
@@ -27,7 +28,30 @@ const ContactUs = () => {
 
   return (
     <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-10 sm:py-16 text-slate-100 sm:px-6 lg:px-8">
-      <div className="glass-panel relative w-full max-w-xl rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl">
+      {/* Ambient background glow orbs */}
+      <motion.div
+        animate={{
+          scale: [1, 1.15, 1],
+          opacity: [0.15, 0.25, 0.15],
+        }}
+        transition={{ duration: 7, repeat: Infinity, ease: 'easeInOut' }}
+        className="pointer-events-none absolute -top-20 -left-20 h-96 w-96 rounded-full bg-violet-600/25 blur-[120px]"
+      />
+      <motion.div
+        animate={{
+          scale: [1, 1.2, 1],
+          opacity: [0.1, 0.2, 0.1],
+        }}
+        transition={{ duration: 8, repeat: Infinity, ease: 'easeInOut', delay: 2 }}
+        className="pointer-events-none absolute -bottom-24 -right-20 h-96 w-96 rounded-full bg-blue-600/20 blur-[130px]"
+      />
+
+      <motion.div
+        initial={{ opacity: 0, y: 24, scale: 0.98 }}
+        animate={{ opacity: 1, y: 0, scale: 1 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 280 }}
+        className="glass-panel relative w-full max-w-xl rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl border border-violet-500/25"
+      >
         <div className="mb-6 sm:mb-8 text-center">
           <span className="mb-2 sm:mb-3 inline-block rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] sm:text-xs font-semibold text-violet-300">
             COMMUNITY & SUPPORT
@@ -90,18 +114,29 @@ const ContactUs = () => {
             />
           </div>
 
-          <button
+          <motion.button
+            whileHover={{ scale: 1.02 }}
+            whileTap={{ scale: 0.98 }}
             type="submit"
-            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 py-3 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-[1.01] active:scale-[0.99]"
+            className="inline-flex w-full items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 py-3 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20"
           >
             <FaPaperPlane className="text-xs" /> Send Message
-          </button>
+          </motion.button>
 
-          {status && (
-            <p className="mt-3 text-center font-mono text-xs font-medium text-violet-300">{status}</p>
-          )}
+          <AnimatePresence>
+            {status && (
+              <motion.p
+                initial={{ opacity: 0, y: 5 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0 }}
+                className="mt-3 text-center font-mono text-xs font-medium text-violet-300"
+              >
+                {status}
+              </motion.p>
+            )}
+          </AnimatePresence>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };

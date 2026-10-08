@@ -1,4 +1,5 @@
 import React, { useState, useMemo, useCallback, useContext } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import api from './api';
 import {
   FaHeart,
@@ -148,9 +149,12 @@ const ProjectCard = React.memo(({ project }) => {
 
   return (
     <>
-      {/* Editorial Glass Project Card */}
-      <div
+      {/* Editorial Glass Project Card with Motion */}
+      <motion.div
         onClick={() => setIsPopupOpen(true)}
+        whileHover={{ y: -6, scale: 1.01 }}
+        whileTap={{ scale: 0.99 }}
+        transition={{ type: 'spring', stiffness: 350, damping: 25 }}
         className="glass-card glass-card-hover group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-violet-500/15 hover:border-violet-400/50 transition-all duration-300"
       >
         {/* Project Thumbnail */}
@@ -238,18 +242,26 @@ const ProjectCard = React.memo(({ project }) => {
             </form>
           </div>
         </div>
-      </div>
+      </motion.div>
 
-      {/* Cinematic Detail Modal */}
-      {isPopupOpen && (
-        <div
-          onClick={() => setIsPopupOpen(false)}
-          className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/50 p-3 sm:p-4 backdrop-blur-md"
-        >
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="glass-panel relative max-h-[92vh] w-full max-w-2xl space-y-4 sm:space-y-6 overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl"
+      {/* Cinematic Detail Modal with Motion */}
+      <AnimatePresence>
+        {isPopupOpen && (
+          <motion.div
+            onClick={() => setIsPopupOpen(false)}
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 p-3 sm:p-4 backdrop-blur-md"
           >
+            <motion.div
+              onClick={(e) => e.stopPropagation()}
+              initial={{ opacity: 0, scale: 0.92, y: 25 }}
+              animate={{ opacity: 1, scale: 1, y: 0 }}
+              exit={{ opacity: 0, scale: 0.92, y: 25 }}
+              transition={{ type: 'spring', stiffness: 300, damping: 26 }}
+              className="glass-panel relative max-h-[92vh] w-full max-w-2xl space-y-4 sm:space-y-6 overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl"
+            >
             {/* Close Button */}
             <button
               onClick={() => setIsPopupOpen(false)}
@@ -337,10 +349,11 @@ const ProjectCard = React.memo(({ project }) => {
                 </a>
               )}
             </div>
-          </div>
-        </div>
+          </motion.div>
+        </motion.div>
       )}
-    </>
+    </AnimatePresence>
+  </>
   );
 });
 

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import api from './api';
+import { motion } from 'framer-motion';
 import {
   FaUser,
   FaEnvelope,
@@ -124,11 +125,19 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
   };
 
   return (
-    <div
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+      transition={{ duration: 0.2 }}
       onClick={handleClose}
-      className="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/85 p-3 sm:p-4 backdrop-blur-md"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/85 p-3 sm:p-4 backdrop-blur-md"
     >
-      <div
+      <motion.div
+        initial={{ opacity: 0, scale: 0.95, y: 15 }}
+        animate={{ opacity: 1, scale: 1, y: 0 }}
+        exit={{ opacity: 0, scale: 0.95, y: 15 }}
+        transition={{ type: 'spring', damping: 25, stiffness: 350 }}
         onClick={(e) => e.stopPropagation()}
         className="glass-panel relative max-h-[92vh] w-full max-w-2xl overflow-y-auto rounded-2xl sm:rounded-3xl p-4 sm:p-6 md:p-8 shadow-2xl"
       >
@@ -143,13 +152,15 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
               Share your innovation with the university showcase community
             </p>
           </div>
-          <button
+          <motion.button
+            whileHover={{ scale: 1.1 }}
+            whileTap={{ scale: 0.9 }}
             onClick={handleClose}
             disabled={isSubmitting}
             className="rounded-full border border-white/10 bg-white/[0.03] p-2 text-slate-400 transition-colors hover:bg-white/[0.08] hover:text-white"
           >
             <FaTimes className="text-xs" />
-          </button>
+          </motion.button>
         </div>
 
         {/* Status Message */}
@@ -378,10 +389,12 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
             >
               Cancel
             </button>
-            <button
+            <motion.button
+              whileHover={{ scale: 1.03 }}
+              whileTap={{ scale: 0.97 }}
               type="submit"
               disabled={isSubmitting}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-6 py-2.5 sm:py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105 disabled:opacity-50"
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-6 py-2.5 sm:py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
@@ -392,11 +405,11 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   <FaCheck className="text-xs" /> Submit Project
                 </>
               )}
-            </button>
+            </motion.button>
           </div>
         </form>
-      </div>
-    </div>
+      </motion.div>
+    </motion.div>
   );
 };
 

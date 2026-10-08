@@ -1,4 +1,5 @@
 import React, { useState, useMemo } from 'react';
+import { motion } from 'framer-motion';
 import GlyphLottery from '../components/GlyphLottery';
 import { useNavigate } from 'react-router-dom';
 import {
@@ -196,22 +197,26 @@ const HomePage = () => {
             </p>
           </div>
 
-          {/* Primary & Secondary CTAs */}
+          {/* Primary & Secondary CTAs with Motion */}
           <div className="mt-8 sm:mt-10 flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 px-4 sm:px-0">
-            <button
+            <motion.button
               onClick={() => navigate('/mainhome')}
-              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-6 sm:px-8 py-3 sm:py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-xl shadow-violet-500/25 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-violet-500/50 active:scale-95"
+              whileHover={{ scale: 1.05 }}
+              whileTap={{ scale: 0.96 }}
+              className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-6 sm:px-8 py-3 sm:py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-xl shadow-violet-500/25 transition-all duration-200 hover:border-cyan-300 hover:shadow-violet-500/50"
             >
               <span>Explore Projects</span>
               <FaArrowRight className="text-xs" />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={() => navigate('/loginpage')}
+              whileHover={{ scale: 1.04 }}
+              whileTap={{ scale: 0.96 }}
               className="w-full sm:w-auto inline-flex items-center justify-center gap-2 rounded-full border border-violet-500/30 bg-white/[0.04] px-6 sm:px-8 py-3 sm:py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-slate-200 backdrop-blur-md transition-all duration-200 hover:border-violet-400/50 hover:bg-white/[0.08] hover:text-white hover:shadow-[0_0_20px_rgba(168,85,247,0.2)]"
             >
               <span>Submit Your Project</span>
-            </button>
+            </motion.button>
           </div>
 
           {/* Feature Highlights Strip */}
@@ -236,9 +241,13 @@ const HomePage = () => {
         </div>
       </section>
 
-      {/* Featured Spotlight Card */}
+      {/* Featured Spotlight Card with Motion */}
       <section className="mx-auto max-w-6xl px-4 pb-16 sm:pb-20 sm:px-6 lg:px-8">
-        <div className="glass-panel relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 border border-violet-500/30 shadow-[0_0_40px_rgba(168,85,247,0.15)]">
+        <motion.div
+          whileHover={{ y: -4 }}
+          transition={{ type: 'spring', stiffness: 300, damping: 25 }}
+          className="glass-panel relative overflow-hidden rounded-2xl sm:rounded-3xl p-5 sm:p-8 lg:p-10 border border-violet-500/30 shadow-[0_0_40px_rgba(168,85,247,0.15)]"
+        >
           <div className="flex flex-col gap-6 lg:flex-row lg:items-center lg:justify-between">
             {/* Left Content */}
             <div className="space-y-3 sm:space-y-4 lg:max-w-xl">
@@ -292,7 +301,7 @@ const HomePage = () => {
               </div>
             </div>
           </div>
-        </div>
+        </motion.div>
       </section>
 
       {/* Featured Projects Grid & Search */}
@@ -374,9 +383,12 @@ const HomePage = () => {
               const totalLikes = project.likes + (isLiked ? 1 : 0);
 
               return (
-                <div
+                <motion.div
                   key={project.id}
                   onClick={() => navigate('/mainhome')}
+                  whileHover={{ y: -6, scale: 1.01 }}
+                  whileTap={{ scale: 0.99 }}
+                  transition={{ type: 'spring', stiffness: 350, damping: 25 }}
                   className="glass-card glass-card-hover group flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-violet-500/15 hover:border-violet-400/50 transition-all duration-300"
                 >
                   {/* Thumbnail Area with Subtle Overlay */}
@@ -444,7 +456,7 @@ const HomePage = () => {
                       </span>
                     </div>
                   </div>
-                </div>
+                </motion.div>
               );
             })}
           </div>
@@ -505,18 +517,22 @@ const HomePage = () => {
               Join hundreds of student creators and faculty publishing capstones and research models on ProjectHub.
             </p>
             <div className="flex flex-col sm:flex-row items-center justify-center gap-3 sm:gap-4 pt-3 sm:pt-4">
-              <button
+              <motion.button
                 onClick={() => navigate('/loginpage')}
-                className="w-full sm:w-auto rounded-full border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-7 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 hover:scale-105"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.96 }}
+                className="w-full sm:w-auto rounded-full border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-7 py-3 text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20"
               >
                 Get Started
-              </button>
-              <button
+              </motion.button>
+              <motion.button
                 onClick={() => navigate('/aboutpage')}
+                whileHover={{ scale: 1.04 }}
+                whileTap={{ scale: 0.96 }}
                 className="w-full sm:w-auto rounded-full border border-white/10 bg-white/[0.04] px-6 py-3 text-xs font-semibold uppercase tracking-wider text-slate-300 hover:bg-white/[0.08] hover:text-white"
               >
                 Learn More
-              </button>
+              </motion.button>
             </div>
           </div>
         </div>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useContext, useRef } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import {
   FaUserCircle,
   FaSearch,
@@ -204,9 +205,16 @@ const Navbar = () => {
                 />
               </button>
 
-              {/* Glass Dropdown Menu */}
-              {isDepartmentsOpen && (
-                <div className="absolute left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-white/15 bg-black/60 p-2.5 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl animate-fade-in">
+              {/* Glass Dropdown Menu with Motion */}
+              <AnimatePresence>
+                {isDepartmentsOpen && (
+                  <motion.div
+                    initial={{ opacity: 0, y: -8, scale: 0.95 }}
+                    animate={{ opacity: 1, y: 0, scale: 1 }}
+                    exit={{ opacity: 0, y: -8, scale: 0.95 }}
+                    transition={{ duration: 0.18, ease: 'easeOut' }}
+                    className="absolute left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-white/15 bg-black/60 p-2.5 shadow-2xl ring-1 ring-white/10 backdrop-blur-2xl"
+                  >
                   <div className="mb-2 flex items-center justify-between border-b border-white/[0.08] px-2 pb-1.5">
                     <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                       Engineering Disciplines
@@ -231,9 +239,10 @@ const Navbar = () => {
                       </button>
                     ))}
                   </div>
-                </div>
+                </motion.div>
               )}
-            </div>
+            </AnimatePresence>
+          </div>
 
             {/* Leaderboard / Top Liked */}
             <button
@@ -321,9 +330,16 @@ const Navbar = () => {
           </div>
         </nav>
 
-        {/* Mobile Navigation Drawer */}
-        {isOpen && (
-          <div className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/10 bg-black/65 px-2.5 py-4 backdrop-blur-2xl lg:hidden scrollbar-none">
+        {/* Mobile Navigation Drawer with Motion */}
+        <AnimatePresence>
+          {isOpen && (
+            <motion.div
+              initial={{ opacity: 0, height: 0 }}
+              animate={{ opacity: 1, height: 'auto' }}
+              exit={{ opacity: 0, height: 0 }}
+              transition={{ duration: 0.22, ease: 'easeInOut' }}
+              className="max-h-[calc(100vh-4.5rem)] overflow-y-auto border-t border-white/10 bg-black/65 px-2.5 py-4 backdrop-blur-2xl lg:hidden scrollbar-none"
+            >
             <div className="flex flex-col gap-1 font-sans text-xs font-medium text-slate-300">
               {/* Mobile Search */}
               <form onSubmit={handleSearchSubmit} className="mb-3 px-1">
@@ -441,8 +457,9 @@ const Navbar = () => {
                 )}
               </div>
             </div>
-          </div>
-        )}
+            </motion.div>
+          )}
+        </AnimatePresence>
       </div>
     </header>
   );

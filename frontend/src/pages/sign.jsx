@@ -1,8 +1,47 @@
 import React, { useState, useContext } from 'react';
+import { motion, AnimatePresence } from 'framer-motion';
 import api from '../components/api';
 import { ToasterContext } from '../components/ToasterContext';
-import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserPlus } from 'react-icons/fa';
+import {
+  FaUser,
+  FaEnvelope,
+  FaLock,
+  FaEye,
+  FaEyeSlash,
+  FaUserPlus,
+  FaArrowRight,
+  FaExclamationCircle,
+} from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
+
+const containerVariants = {
+  hidden: { opacity: 0, y: 30, scale: 0.96 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    scale: 1,
+    transition: {
+      type: 'spring',
+      stiffness: 260,
+      damping: 24,
+      staggerChildren: 0.06,
+      delayChildren: 0.1,
+    },
+  },
+};
+
+const itemVariants = {
+  hidden: { opacity: 0, y: 15 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      type: 'spring',
+      stiffness: 300,
+      damping: 25,
+    },
+  },
+};
 
 const Signup = () => {
   const navigate = useNavigate();
@@ -107,21 +146,47 @@ const Signup = () => {
 
   return (
     <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-8 sm:py-12 text-slate-100 sm:px-6 lg:px-8">
-      <div className="glass-panel relative w-full max-w-lg rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl">
-        <div className="mb-5 sm:mb-6 text-center">
-          <div className="mb-2.5 sm:mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] sm:text-[11px] font-semibold text-violet-300">
+      {/* Ambient Floating Motion Glow Orbs */}
+      <motion.div
+        animate={{
+          x: [0, 30, -25, 0],
+          y: [0, -35, 25, 0],
+          scale: [1, 1.15, 0.95, 1],
+        }}
+        transition={{ duration: 18, repeat: Infinity, ease: 'easeInOut' }}
+        className="pointer-events-none absolute -top-20 left-1/4 h-80 w-80 rounded-full bg-violet-600/15 blur-[110px]"
+      />
+      <motion.div
+        animate={{
+          x: [0, -30, 25, 0],
+          y: [0, 30, -20, 0],
+          scale: [1, 1.2, 0.9, 1],
+        }}
+        transition={{ duration: 20, repeat: Infinity, ease: 'easeInOut', delay: 1 }}
+        className="pointer-events-none absolute -bottom-20 right-1/4 h-88 w-88 rounded-full bg-indigo-600/15 blur-[120px]"
+      />
+
+      <motion.div
+        variants={containerVariants}
+        initial="hidden"
+        animate="visible"
+        className="glass-panel relative w-full max-w-lg rounded-2xl sm:rounded-3xl p-5 sm:p-8 md:p-10 shadow-2xl backdrop-blur-2xl"
+      >
+        <motion.div variants={itemVariants} className="mb-6 text-center">
+          <div className="mb-2.5 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[10px] sm:text-[11px] font-semibold text-violet-300 shadow-[0_0_12px_rgba(168,85,247,0.2)] backdrop-blur-md">
+            <span className="flex h-1.5 w-1.5 animate-ping rounded-full bg-cyan-400" />
             <FaUserPlus className="text-violet-400" />
             <span>CREATE ACCOUNT</span>
           </div>
-          <h2 className="font-sora text-xl sm:text-2xl md:text-3xl font-black text-white">Join ProjectHub</h2>
-          <p className="mt-1 font-sans text-xs text-slate-400">
+          <h2 className="font-sora text-2xl sm:text-3xl font-black text-white">Join ProjectHub</h2>
+          <p className="mt-1 font-sans text-xs text-slate-300">
             Showcase your capstone and collaborate with verified peers
           </p>
-        </div>
+        </motion.div>
 
         <form onSubmit={handleSignup} className="space-y-4">
           {/* Name Row */}
-          <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
+          <motion.div variants={itemVariants} className="grid grid-cols-1 gap-4 sm:grid-cols-2">
             <div>
               <label className="mb-1 block font-sans text-xs font-medium text-slate-300">First Name</label>
               <div className="relative">
@@ -132,13 +197,23 @@ const Signup = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-400/70 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-violet-400/30"
                 />
-                <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
+                <FaUser className="absolute left-3 top-3 text-xs text-violet-400/70" />
               </div>
-              {errors.firstName && (
-                <p className="mt-1 text-[11px] font-medium text-rose-400">{errors.firstName}</p>
-              )}
+              <AnimatePresence>
+                {errors.firstName && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -4, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -4, height: 0 }}
+                    className="mt-1 flex items-center gap-1 font-sans text-[11px] font-medium text-rose-400"
+                  >
+                    <FaExclamationCircle className="text-xs shrink-0" />
+                    <span>{errors.firstName}</span>
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
 
             <div>
@@ -151,18 +226,28 @@ const Signup = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-400/70 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-violet-400/30"
                 />
-                <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
+                <FaUser className="absolute left-3 top-3 text-xs text-violet-400/70" />
               </div>
-              {errors.lastName && (
-                <p className="mt-1 text-[11px] font-medium text-rose-400">{errors.lastName}</p>
-              )}
+              <AnimatePresence>
+                {errors.lastName && (
+                  <motion.p
+                    initial={{ opacity: 0, y: -4, height: 0 }}
+                    animate={{ opacity: 1, y: 0, height: 'auto' }}
+                    exit={{ opacity: 0, y: -4, height: 0 }}
+                    className="mt-1 flex items-center gap-1 font-sans text-[11px] font-medium text-rose-400"
+                  >
+                    <FaExclamationCircle className="text-xs shrink-0" />
+                    <span>{errors.lastName}</span>
+                  </motion.p>
+                )}
+              </AnimatePresence>
             </div>
-          </div>
+          </motion.div>
 
           {/* Email */}
-          <div>
+          <motion.div variants={itemVariants}>
             <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
               University Email
             </label>
@@ -174,17 +259,27 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-400/70 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-violet-400/30"
               />
-              <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
+              <FaEnvelope className="absolute left-3 top-3 text-xs text-violet-400/70" />
             </div>
-            {errors.email && (
-              <p className="mt-1 text-[11px] font-medium text-rose-400">⚠️ {errors.email}</p>
-            )}
-          </div>
+            <AnimatePresence>
+              {errors.email && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: 'auto' }}
+                  exit={{ opacity: 0, y: -4, height: 0 }}
+                  className="mt-1 flex items-center gap-1 font-sans text-[11px] font-medium text-rose-400"
+                >
+                  <FaExclamationCircle className="text-xs shrink-0" />
+                  <span>{errors.email}</span>
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Password */}
-          <div>
+          <motion.div variants={itemVariants}>
             <label className="mb-1 block font-sans text-xs font-medium text-slate-300">Create Password</label>
             <div className="relative">
               <input
@@ -194,24 +289,34 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-10 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-400/70 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-violet-400/30"
               />
-              <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
+              <FaLock className="absolute left-3 top-3 text-xs text-violet-400/70" />
               <button
                 type="button"
                 onClick={() => setShowPassword(!showPassword)}
-                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-3 text-xs text-slate-400 transition-colors hover:text-white"
               >
                 {showPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {errors.password && (
-              <p className="mt-1 text-[11px] font-medium text-rose-400">⚠️ {errors.password}</p>
-            )}
-          </div>
+            <AnimatePresence>
+              {errors.password && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: 'auto' }}
+                  exit={{ opacity: 0, y: -4, height: 0 }}
+                  className="mt-1 flex items-center gap-1 font-sans text-[11px] font-medium text-rose-400"
+                >
+                  <FaExclamationCircle className="text-xs shrink-0" />
+                  <span>{errors.password}</span>
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Confirm Password */}
-          <div>
+          <motion.div variants={itemVariants}>
             <label className="mb-1 block font-sans text-xs font-medium text-slate-300">
               Confirm Password
             </label>
@@ -223,47 +328,68 @@ const Signup = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2.5 pl-9 pr-10 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-400/70 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-violet-400/30"
               />
-              <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
+              <FaLock className="absolute left-3 top-3 text-xs text-violet-400/70" />
               <button
                 type="button"
                 onClick={() => setShowConfirmPassword(!showConfirmPassword)}
-                className="absolute right-3 top-2.5 text-xs text-slate-400 hover:text-slate-200"
+                className="absolute right-3 top-3 text-xs text-slate-400 transition-colors hover:text-white"
               >
                 {showConfirmPassword ? <FaEyeSlash /> : <FaEye />}
               </button>
             </div>
-            {errors.confirmPassword && (
-              <p className="mt-1 text-[11px] font-medium text-rose-400">
-                ⚠️ {errors.confirmPassword}
-              </p>
-            )}
-          </div>
+            <AnimatePresence>
+              {errors.confirmPassword && (
+                <motion.p
+                  initial={{ opacity: 0, y: -4, height: 0 }}
+                  animate={{ opacity: 1, y: 0, height: 'auto' }}
+                  exit={{ opacity: 0, y: -4, height: 0 }}
+                  className="mt-1 flex items-center gap-1 font-sans text-[11px] font-medium text-rose-400"
+                >
+                  <FaExclamationCircle className="text-xs shrink-0" />
+                  <span>{errors.confirmPassword}</span>
+                </motion.p>
+              )}
+            </AnimatePresence>
+          </motion.div>
 
           {/* Submit Button */}
-          <button
-            type="submit"
-            disabled={isLoading}
-            className="mt-2 w-full rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
-          >
-            {isLoading ? 'Creating Account...' : 'Sign Up'}
-          </button>
+          <motion.div variants={itemVariants} className="pt-2">
+            <motion.button
+              type="submit"
+              disabled={isLoading}
+              whileHover={{ scale: 1.02 }}
+              whileTap={{ scale: 0.98 }}
+              className="group flex w-full items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-600 via-indigo-600 to-purple-600 py-3 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-violet-600/25 transition-all hover:border-cyan-300 hover:shadow-violet-600/40 disabled:opacity-50"
+            >
+              {isLoading ? (
+                <span className="flex items-center gap-2">
+                  <span className="h-3.5 w-3.5 animate-spin rounded-full border-2 border-white border-t-transparent" />
+                  Creating Account...
+                </span>
+              ) : (
+                <>
+                  <span>Create Account</span>
+                  <FaArrowRight className="text-[10px] transition-transform group-hover:translate-x-1" />
+                </>
+              )}
+            </motion.button>
+          </motion.div>
 
-          <p className="pt-2 text-center font-sans text-xs text-slate-400">
+          <motion.p variants={itemVariants} className="pt-2 text-center font-sans text-xs text-slate-400">
             Already have an account?{' '}
             <Link
               to="/loginpage"
-              className="font-semibold text-violet-400 underline hover:text-violet-300"
+              className="font-semibold text-violet-400 transition-colors hover:text-violet-300 underline"
             >
               Sign In
             </Link>
-          </p>
+          </motion.p>
         </form>
-      </div>
+      </motion.div>
     </div>
   );
 };
 
 export default Signup;
-

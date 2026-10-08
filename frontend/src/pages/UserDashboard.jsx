@@ -1,9 +1,9 @@
 import React, { useEffect, useState, useCallback } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
-import Loader from '../components/Loader';
 import ProjectCardSkeleton from '../components/ProjectCardSkeleton';
 import { getFallbackProjectImage } from '../components/ProjectCard';
+import { motion } from 'framer-motion';
 import {
   FaCrown,
   FaSignOutAlt,
@@ -132,7 +132,12 @@ const UserDashboard = () => {
           </div>
         )}
         {/* User Profile Editorial Banner */}
-        <div className="glass-panel flex flex-col items-start md:items-center justify-between gap-5 sm:gap-6 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl md:flex-row">
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.5 }}
+          className="glass-panel flex flex-col items-start md:items-center justify-between gap-5 sm:gap-6 rounded-2xl sm:rounded-3xl p-5 sm:p-8 shadow-xl md:flex-row border border-violet-500/25"
+        >
           <div className="flex flex-col sm:flex-row items-start sm:items-center gap-3.5 sm:gap-4 w-full md:w-auto">
             <div className="flex h-14 w-14 sm:h-16 sm:w-16 shrink-0 items-center justify-center rounded-2xl border border-violet-500/30 bg-violet-950/40 text-xl sm:text-2xl text-violet-400">
               <FaCrown className={topLiked ? 'text-amber-400' : 'text-violet-400'} />
@@ -166,36 +171,48 @@ const UserDashboard = () => {
               <FaSignOutAlt className="text-xs" /> Logout
             </button>
           </div>
-        </div>
+        </motion.div>
 
         {/* Minimal Glass Stat Cards */}
         <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-3 sm:gap-4">
-          <div className="glass-card rounded-2xl p-4 sm:p-5">
+          <motion.div
+            whileHover={{ y: -4, borderColor: 'rgba(168,85,247,0.35)' }}
+            transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+            className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10"
+          >
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Your Submissions</span>
               <FaFolder className="text-violet-400" />
             </div>
             <div className="mt-2 sm:mt-3 font-mono text-2xl sm:text-3xl font-bold text-white">{projects.length}</div>
             <p className="mt-1 text-[11px] text-slate-500">Published across campus showcase</p>
-          </div>
+          </motion.div>
 
-          <div className="glass-card rounded-2xl p-4 sm:p-5">
+          <motion.div
+            whileHover={{ y: -4, borderColor: 'rgba(236,72,153,0.35)' }}
+            transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+            className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10"
+          >
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Total Likes Received</span>
               <FaHeart className="text-pink-400" />
             </div>
             <div className="mt-2 sm:mt-3 font-mono text-2xl sm:text-3xl font-bold text-white">{totalLikesReceived}</div>
             <p className="mt-1 text-[11px] text-slate-500">Community validation votes</p>
-          </div>
+          </motion.div>
 
-          <div className="glass-card rounded-2xl p-4 sm:p-5">
+          <motion.div
+            whileHover={{ y: -4, borderColor: 'rgba(168,85,247,0.35)' }}
+            transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+            className="glass-card rounded-2xl p-4 sm:p-5 border border-white/10"
+          >
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Saved Innovations</span>
               <FaLayerGroup className="text-violet-400" />
             </div>
             <div className="mt-2 sm:mt-3 font-mono text-2xl sm:text-3xl font-bold text-white">{likedProjects.length}</div>
             <p className="mt-1 text-[11px] text-slate-500">Projects you've upvoted</p>
-          </div>
+          </motion.div>
         </div>
 
         {/* Navigation Tabs */}
@@ -245,9 +262,11 @@ const UserDashboard = () => {
             ) : (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 animate-wipe-reveal">
                 {projects.map((project) => (
-                  <div
+                  <motion.div
                     key={project._id}
-                    className="glass-card flex flex-col overflow-hidden rounded-2xl"
+                    whileHover={{ y: -5, borderColor: 'rgba(168,85,247,0.4)' }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                    className="glass-card flex flex-col overflow-hidden rounded-2xl border border-white/10"
                   >
                     <div className="relative h-44 w-full bg-slate-900">
                       <img
@@ -327,21 +346,25 @@ const UserDashboard = () => {
 
                       {/* Action Buttons */}
                       <div className="mt-auto flex items-center justify-end gap-2 border-t border-white/[0.06] pt-3">
-                        <button
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           onClick={() => handleEdit(project._id)}
                           className="inline-flex items-center gap-1 rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1.5 font-sans text-xs text-slate-300 transition-colors hover:bg-white/[0.08]"
                         >
                           <FaEdit className="text-xs" /> Edit
-                        </button>
-                        <button
+                        </motion.button>
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           onClick={() => handleDelete(project._id)}
                           className="inline-flex items-center gap-1 rounded-lg border border-rose-500/30 bg-rose-500/10 px-3 py-1.5 font-sans text-xs text-rose-300 transition-colors hover:bg-rose-500/20"
                         >
                           <FaTrash className="text-xs" /> Delete
-                        </button>
+                        </motion.button>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}
@@ -363,9 +386,11 @@ const UserDashboard = () => {
             ) : (
               <div className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3">
                 {likedProjects.map((project) => (
-                  <div
+                  <motion.div
                     key={project._id}
-                    className="glass-card flex flex-col overflow-hidden rounded-2xl"
+                    whileHover={{ y: -5, borderColor: 'rgba(168,85,247,0.4)' }}
+                    transition={{ type: 'spring', stiffness: 350, damping: 25 }}
+                    className="glass-card flex flex-col overflow-hidden rounded-2xl border border-white/10"
                   >
                     <div className="relative h-44 w-full bg-slate-900">
                       <img
@@ -407,15 +432,17 @@ const UserDashboard = () => {
                         <span className="inline-flex items-center gap-1 font-mono text-xs font-semibold text-pink-400">
                           <FaHeart /> {project.likes || 0}
                         </span>
-                        <button
+                        <motion.button
+                          whileHover={{ scale: 1.05 }}
+                          whileTap={{ scale: 0.95 }}
                           onClick={() => handleUnlike(project._id)}
                           className="rounded-lg border border-white/10 bg-white/[0.03] px-3 py-1 font-sans text-xs text-slate-400 transition-colors hover:border-rose-500/30 hover:text-rose-400"
                         >
                           Unlike
-                        </button>
+                        </motion.button>
                       </div>
                     </div>
-                  </div>
+                  </motion.div>
                 ))}
               </div>
             )}
