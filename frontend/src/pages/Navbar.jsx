@@ -74,18 +74,14 @@ const Navbar = () => {
 
   return (
     <header
-      className={`sticky top-3 z-50 mx-auto w-[94%] max-w-7xl transition-all duration-300 sm:top-4 ${
-        scrolled ? 'scale-[0.995]' : ''
+      className={`sticky top-0 z-50 w-full transition-all duration-300 ${
+        scrolled
+          ? 'border-b border-indigo-500/30 bg-slate-950/95 shadow-2xl shadow-indigo-950/40 ring-1 ring-indigo-500/20 backdrop-blur-2xl'
+          : 'border-b border-slate-800/80 bg-slate-950/85 shadow-lg shadow-black/40 backdrop-blur-xl'
       }`}
     >
-      <nav
-        className={`relative backdrop-blur-xl transition-all duration-300 ${
-          scrolled
-            ? 'border border-indigo-500/30 bg-slate-950/90 shadow-2xl shadow-indigo-950/30 ring-1 ring-indigo-500/20'
-            : 'border border-slate-800/80 bg-slate-950/80 shadow-xl shadow-black/40 ring-1 ring-white/5'
-        } ${!isOpen ? 'rounded-2xl sm:rounded-full' : 'rounded-2xl'}`}
-      >
-        <div className="flex items-center justify-between px-3.5 py-2 sm:px-6 sm:py-2.5">
+      <nav className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+        <div className="flex items-center justify-between py-2.5 sm:py-3">
           {/* Left: Brand & Search */}
           <div className="flex items-center gap-4 lg:gap-6">
             <Link to="/" className="group flex items-center gap-2.5">
