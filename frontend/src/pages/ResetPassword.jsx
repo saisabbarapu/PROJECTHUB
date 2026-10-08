@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import { useParams, useNavigate, Link } from 'react-router-dom';
 import { ToasterContext } from '../components/ToasterContext';
@@ -31,12 +31,12 @@ const ResetPassword = () => {
         <div className="mb-6">
           <Link
             to="/loginpage"
-            className="mb-4 inline-flex items-center gap-1.5 font-sans text-xs text-slate-400 transition-colors hover:text-cyan-300"
+            className="mb-4 inline-flex items-center gap-1.5 font-sans text-xs text-slate-400 transition-colors hover:text-violet-300"
           >
             <FaArrowLeft className="text-xs" /> Back to Sign In
           </Link>
-          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-0.5 font-mono text-[10px] font-semibold text-cyan-300">
-            <FaKey className="text-cyan-400" />
+          <div className="mb-2 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-0.5 font-mono text-[10px] font-semibold text-violet-300">
+            <FaKey className="text-violet-400" />
             <span>NEW CREDENTIALS</span>
           </div>
           <h2 className="font-sora text-2xl font-black text-white">Create New Password</h2>
@@ -55,7 +55,7 @@ const ResetPassword = () => {
                 value={newPassword}
                 onChange={(e) => setNewPassword(e.target.value)}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
@@ -64,7 +64,7 @@ const ResetPassword = () => {
           <button
             type="submit"
             disabled={loading}
-            className="mt-2 w-full rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+            className="mt-2 w-full rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
           >
             {loading ? 'Updating password...' : 'Update Password'}
           </button>

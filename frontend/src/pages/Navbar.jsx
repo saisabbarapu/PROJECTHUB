@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useContext, useRef } from 'react';
+﻿import React, { useState, useEffect, useContext, useRef } from 'react';
 import {
   FaUserCircle,
   FaSearch,
@@ -120,7 +120,7 @@ const Navbar = () => {
     <header
       className={`sticky top-0 z-50 w-full transition-all duration-300 ${
         scrolled
-          ? 'border-b border-cyan-500/20 bg-[#030712]/95 shadow-xl shadow-cyan-950/20 backdrop-blur-2xl'
+          ? 'border-b border-violet-500/20 bg-[#030712]/95 shadow-xl shadow-violet-950/20 backdrop-blur-2xl'
           : 'border-b border-white/[0.08] bg-[#030712]/85 shadow-lg shadow-black/40 backdrop-blur-xl'
       }`}
     >
@@ -130,13 +130,13 @@ const Navbar = () => {
           {/* LEFT: Brand Logo & Creator Search */}
           <div className="flex items-center gap-4 lg:gap-6">
             <Link to="/" className="group flex items-center gap-3 focus:outline-none">
-              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-cyan-500/40 bg-gradient-to-br from-cyan-500/20 via-blue-600/20 to-indigo-600/20 shadow-glow-cyan transition-all duration-300 group-hover:scale-105 group-hover:border-cyan-400">
-                <span className="font-mono text-xs font-black tracking-tighter text-cyan-300">PH</span>
+              <div className="relative flex h-9 w-9 items-center justify-center rounded-xl border border-violet-500/40 bg-gradient-to-br from-violet-500/20 via-blue-600/20 to-indigo-600/20 shadow-glow-cyan transition-all duration-300 group-hover:scale-105 group-hover:border-violet-400">
+                <span className="font-mono text-xs font-black tracking-tighter text-violet-300">PH</span>
                 <div className="absolute inset-0 rounded-xl bg-cyan-400/10 blur-sm"></div>
               </div>
               <div className="flex flex-col">
-                <span className="font-sora text-base font-extrabold tracking-tight text-white transition-colors group-hover:text-cyan-300 sm:text-lg leading-tight">
-                  PROJECT<span className="text-cyan-400">HUB</span>
+                <span className="font-sora text-base font-extrabold tracking-tight text-white transition-colors group-hover:text-violet-300 sm:text-lg leading-tight">
+                  PROJECT<span className="text-violet-400">HUB</span>
                 </span>
                 <span className="hidden text-[9px] font-mono uppercase tracking-widest text-slate-400 sm:block">
                   Student Innovation Engine
@@ -152,7 +152,7 @@ const Navbar = () => {
                   placeholder="Search creator email..."
                   value={searchEmail}
                   onChange={(e) => setSearchEmail(e.target.value)}
-                  className="w-48 xl:w-56 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-8 pr-3 font-sans text-xs text-slate-200 placeholder-slate-500 transition-all duration-200 focus:w-64 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-cyan-500/20"
+                  className="w-48 xl:w-56 rounded-full border border-white/10 bg-white/[0.03] py-1.5 pl-8 pr-3 font-sans text-xs text-slate-200 placeholder-slate-500 transition-all duration-200 focus:w-64 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none focus:ring-1 focus:ring-violet-500/20"
                 />
                 <FaSearch className="absolute left-3 top-2.5 text-[10px] text-slate-500" />
               </div>
@@ -165,7 +165,7 @@ const Navbar = () => {
               to="/home"
               className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 transition-all duration-200 ${
                 isActive('/home')
-                  ? 'border border-cyan-500/30 bg-cyan-500/10 font-semibold text-cyan-300 shadow-sm shadow-cyan-500/20'
+                  ? 'border border-violet-500/30 bg-violet-500/10 font-semibold text-violet-300 shadow-sm shadow-violet-500/20'
                   : 'hover:bg-white/[0.06] hover:text-white'
               }`}
             >
@@ -177,11 +177,11 @@ const Navbar = () => {
               onClick={() => handleProtectedRouteClick('/mainhome')}
               className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 transition-all duration-200 ${
                 isActive('/mainhome') && !location.search
-                  ? 'border border-cyan-500/30 bg-cyan-500/10 font-semibold text-cyan-300 shadow-sm shadow-cyan-500/20'
+                  ? 'border border-violet-500/30 bg-violet-500/10 font-semibold text-violet-300 shadow-sm shadow-violet-500/20'
                   : 'hover:bg-white/[0.06] hover:text-white'
               }`}
             >
-              <FaCompass className="text-[11px] text-cyan-400" />
+              <FaCompass className="text-[11px] text-violet-400" />
               <span>Explore</span>
             </button>
 
@@ -191,7 +191,7 @@ const Navbar = () => {
                 onClick={() => setIsDepartmentsOpen(!isDepartmentsOpen)}
                 className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 transition-all duration-200 ${
                   location.search.includes('department=')
-                    ? 'border border-cyan-500/30 bg-cyan-500/10 font-semibold text-cyan-300'
+                    ? 'border border-violet-500/30 bg-violet-500/10 font-semibold text-violet-300'
                     : 'hover:bg-white/[0.06] hover:text-white'
                 }`}
               >
@@ -199,7 +199,7 @@ const Navbar = () => {
                 <span>Disciplines</span>
                 <FaChevronDown
                   className={`text-[9px] text-slate-500 transition-transform duration-200 ${
-                    isDepartmentsOpen ? 'rotate-180 text-cyan-400' : ''
+                    isDepartmentsOpen ? 'rotate-180 text-violet-400' : ''
                   }`}
                 />
               </button>
@@ -208,7 +208,7 @@ const Navbar = () => {
               {isDepartmentsOpen && (
                 <div className="absolute left-1/2 z-50 mt-2 w-64 -translate-x-1/2 rounded-2xl border border-white/10 bg-[#030712]/95 p-2.5 shadow-2xl ring-1 ring-white/5 backdrop-blur-2xl animate-fade-in">
                   <div className="mb-2 flex items-center justify-between border-b border-white/[0.08] px-2 pb-1.5">
-                    <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+                    <span className="font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
                       Engineering Disciplines
                     </span>
                     <span className="text-[10px] text-slate-500">{departments.length} Fields</span>
@@ -221,11 +221,11 @@ const Navbar = () => {
                           handleProtectedRouteClick(`/mainhome?department=${dept.code}`);
                           setIsDepartmentsOpen(false);
                         }}
-                        className="flex w-full items-center justify-between rounded-xl px-2.5 py-1.5 text-left text-xs text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-300 group"
+                        className="flex w-full items-center justify-between rounded-xl px-2.5 py-1.5 text-left text-xs text-slate-300 transition-colors hover:bg-violet-500/10 hover:text-violet-300 group"
                       >
                         <div className="flex items-center gap-2">
                           <span className="text-xs">{dept.icon}</span>
-                          <span className="font-semibold text-slate-200 group-hover:text-cyan-300">{dept.code}</span>
+                          <span className="font-semibold text-slate-200 group-hover:text-violet-300">{dept.code}</span>
                         </div>
                         <span className="text-[10px] text-slate-400 truncate max-w-[120px]">{dept.name}</span>
                       </button>
@@ -240,7 +240,7 @@ const Navbar = () => {
               onClick={() => handleProtectedRouteClick('/top-liked')}
               className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 transition-all duration-200 ${
                 isActive('/top-liked')
-                  ? 'border border-cyan-500/30 bg-cyan-500/10 font-semibold text-cyan-300 shadow-sm shadow-cyan-500/20'
+                  ? 'border border-violet-500/30 bg-violet-500/10 font-semibold text-violet-300 shadow-sm shadow-violet-500/20'
                   : 'hover:bg-white/[0.06] hover:text-white'
               }`}
             >
@@ -253,7 +253,7 @@ const Navbar = () => {
               onClick={() => handleProtectedRouteClick('/aboutpage')}
               className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 transition-all duration-200 ${
                 isActive('/aboutpage')
-                  ? 'border border-cyan-500/30 bg-cyan-500/10 font-semibold text-cyan-300 shadow-sm shadow-cyan-500/20'
+                  ? 'border border-violet-500/30 bg-violet-500/10 font-semibold text-violet-300 shadow-sm shadow-violet-500/20'
                   : 'hover:bg-white/[0.06] hover:text-white'
               }`}
             >
@@ -266,7 +266,7 @@ const Navbar = () => {
               onClick={() => handleProtectedRouteClick('/contactus')}
               className={`flex items-center gap-1.5 rounded-full px-3.5 py-1.5 transition-all duration-200 ${
                 isActive('/contactus')
-                  ? 'border border-cyan-500/30 bg-cyan-500/10 font-semibold text-cyan-300 shadow-sm shadow-cyan-500/20'
+                  ? 'border border-violet-500/30 bg-violet-500/10 font-semibold text-violet-300 shadow-sm shadow-violet-500/20'
                   : 'hover:bg-white/[0.06] hover:text-white'
               }`}
             >
@@ -280,7 +280,7 @@ const Navbar = () => {
             {!user ? (
               <button
                 onClick={handleLoginClick}
-                className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/40 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 px-4 py-1.5 text-xs font-semibold text-cyan-300 shadow-md shadow-cyan-500/10 transition-all duration-200 hover:border-cyan-400 hover:from-cyan-500/30 hover:to-blue-600/30 hover:text-white hover:shadow-cyan-500/30"
+                className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/40 bg-gradient-to-r from-violet-500/20 to-blue-600/20 px-4 py-1.5 text-xs font-semibold text-violet-300 shadow-md shadow-violet-500/10 transition-all duration-200 hover:border-violet-400 hover:from-violet-500/30 hover:to-blue-600/30 hover:text-white hover:shadow-violet-500/30"
               >
                 <span>Sign In</span>
               </button>
@@ -288,14 +288,14 @@ const Navbar = () => {
               <div className="flex items-center gap-2">
                 <button
                   onClick={handleProfileClick}
-                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs text-slate-200 transition-all hover:border-cyan-500/40 hover:bg-white/[0.08] hover:text-white"
+                  className="flex items-center gap-2 rounded-full border border-white/10 bg-white/[0.04] px-3.5 py-1.5 text-xs text-slate-200 transition-all hover:border-violet-500/40 hover:bg-white/[0.08] hover:text-white"
                   title="Open Dashboard"
                 >
-                  <FaUserCircle className="text-sm text-cyan-400" />
+                  <FaUserCircle className="text-sm text-violet-400" />
                   <span className="hidden max-w-[120px] truncate font-medium sm:inline">
                     {user.firstName || user.email?.split('@')[0]}
                   </span>
-                  <span className="hidden rounded bg-cyan-500/20 px-1.5 py-0.5 text-[9px] font-mono text-cyan-300 xl:inline">
+                  <span className="hidden rounded bg-violet-500/20 px-1.5 py-0.5 text-[9px] font-mono text-violet-300 xl:inline">
                     {user.role || 'MEMBER'}
                   </span>
                 </button>
@@ -333,7 +333,7 @@ const Navbar = () => {
                     placeholder="Search creator email..."
                     value={searchEmail}
                     onChange={(e) => setSearchEmail(e.target.value)}
-                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 text-xs text-slate-200 placeholder-slate-500 focus:border-cyan-500/50 focus:outline-none"
+                    className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 text-xs text-slate-200 placeholder-slate-500 focus:border-violet-500/50 focus:outline-none"
                   />
                   <FaSearch className="absolute left-3 top-3 text-[11px] text-slate-500" />
                 </div>
@@ -343,7 +343,7 @@ const Navbar = () => {
                 to="/home"
                 onClick={closeMenu}
                 className={`rounded-xl px-3.5 py-2.5 transition-colors ${
-                  isActive('/home') ? 'bg-cyan-500/15 font-semibold text-cyan-300' : 'hover:bg-white/[0.05]'
+                  isActive('/home') ? 'bg-violet-500/15 font-semibold text-violet-300' : 'hover:bg-white/[0.05]'
                 }`}
               >
                 Home
@@ -353,7 +353,7 @@ const Navbar = () => {
                 onClick={() => handleProtectedRouteClick('/mainhome')}
                 className={`rounded-xl px-3.5 py-2.5 text-left transition-colors ${
                   isActive('/mainhome') && !location.search
-                    ? 'bg-cyan-500/15 font-semibold text-cyan-300'
+                    ? 'bg-violet-500/15 font-semibold text-violet-300'
                     : 'hover:bg-white/[0.05]'
                 }`}
               >
@@ -377,7 +377,7 @@ const Navbar = () => {
                       <button
                         key={dept.code}
                         onClick={() => handleProtectedRouteClick(`/mainhome?department=${dept.code}`)}
-                        className="rounded-lg px-2.5 py-2 text-left text-xs text-slate-300 transition-colors hover:bg-cyan-500/10 hover:text-cyan-300 flex items-center gap-1.5"
+                        className="rounded-lg px-2.5 py-2 text-left text-xs text-slate-300 transition-colors hover:bg-violet-500/10 hover:text-violet-300 flex items-center gap-1.5"
                       >
                         <span>{dept.icon}</span>
                         <span className="font-semibold">{dept.code}</span>
@@ -390,7 +390,7 @@ const Navbar = () => {
               <button
                 onClick={() => handleProtectedRouteClick('/top-liked')}
                 className={`rounded-xl px-3.5 py-2.5 text-left transition-colors flex items-center gap-2 ${
-                  isActive('/top-liked') ? 'bg-cyan-500/15 font-semibold text-cyan-300' : 'hover:bg-white/[0.05]'
+                  isActive('/top-liked') ? 'bg-violet-500/15 font-semibold text-violet-300' : 'hover:bg-white/[0.05]'
                 }`}
               >
                 <FaFire className="text-amber-400 text-xs" />
@@ -400,7 +400,7 @@ const Navbar = () => {
               <button
                 onClick={() => handleProtectedRouteClick('/aboutpage')}
                 className={`rounded-xl px-3.5 py-2.5 text-left transition-colors ${
-                  isActive('/aboutpage') ? 'bg-cyan-500/15 font-semibold text-cyan-300' : 'hover:bg-white/[0.05]'
+                  isActive('/aboutpage') ? 'bg-violet-500/15 font-semibold text-violet-300' : 'hover:bg-white/[0.05]'
                 }`}
               >
                 About ProjectHub
@@ -409,7 +409,7 @@ const Navbar = () => {
               <button
                 onClick={() => handleProtectedRouteClick('/contactus')}
                 className={`rounded-xl px-3.5 py-2.5 text-left transition-colors ${
-                  isActive('/contactus') ? 'bg-cyan-500/15 font-semibold text-cyan-300' : 'hover:bg-white/[0.05]'
+                  isActive('/contactus') ? 'bg-violet-500/15 font-semibold text-violet-300' : 'hover:bg-white/[0.05]'
                 }`}
               >
                 Contact & Support
@@ -419,7 +419,7 @@ const Navbar = () => {
                 {!user ? (
                   <button
                     onClick={handleLoginClick}
-                    className="w-full rounded-xl border border-cyan-500/40 bg-gradient-to-r from-cyan-500/25 to-blue-600/25 py-2.5 text-center text-xs font-semibold text-cyan-200 shadow-md hover:from-cyan-500/35 hover:to-blue-600/35"
+                    className="w-full rounded-xl border border-violet-500/40 bg-gradient-to-r from-violet-500/25 to-blue-600/25 py-2.5 text-center text-xs font-semibold text-violet-200 shadow-md hover:from-violet-500/35 hover:to-blue-600/35"
                   >
                     Sign In to ProjectHub
                   </button>
@@ -427,7 +427,7 @@ const Navbar = () => {
                   <div className="flex w-full items-center justify-between px-2">
                     <button
                       onClick={handleProfileClick}
-                      className="truncate text-xs text-slate-300 hover:text-cyan-300 text-left"
+                      className="truncate text-xs text-slate-300 hover:text-violet-300 text-left"
                     >
                       Signed in as <b className="text-white">{user.firstName || user.email}</b>
                     </button>

@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { useNavigate } from 'react-router-dom';
 import { FaGraduationCap, FaShieldAlt, FaUsers, FaLayerGroup, FaArrowRight } from 'react-icons/fa';
 
@@ -7,13 +7,13 @@ const About = () => {
 
   const sections = [
     {
-      icon: <FaGraduationCap className="text-lg text-cyan-400" />,
+      icon: <FaGraduationCap className="text-lg text-violet-400" />,
       title: 'Our Mission & Aim',
       description:
         'To empower students and academic researchers by providing a centralized platform for capstone presentation, peer review, and technical skill development. ProjectHub facilitates transparency and recognition by enabling creators to share verified work.',
     },
     {
-      icon: <FaLayerGroup className="text-lg text-sky-400" />,
+      icon: <FaLayerGroup className="text-lg text-violet-400" />,
       title: 'Discipline-Specific Taxonomy',
       description:
         'Projects are cleanly categorized across academic disciplines including Computer Science, Electrical, Electronics, Civil, Mechanical, AI/ML, and Management. This enables targeted exploration across specialized tech stacks.',
@@ -37,7 +37,7 @@ const About = () => {
       <div className="mx-auto max-w-5xl space-y-12">
         {/* Header */}
         <div className="space-y-4 text-center">
-          <div className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-cyan-300">
+          <div className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-violet-300">
             <span>ABOUT PROJECTHUB</span>
           </div>
           <h1 className="font-sora text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
@@ -75,7 +75,7 @@ const About = () => {
           <div className="pt-2">
             <button
               onClick={() => navigate('/mainhome')}
-              className="inline-flex items-center gap-2 rounded-full border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 px-7 py-3 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-105"
+              className="inline-flex items-center gap-2 rounded-full border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-7 py-3 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105"
             >
               <span>Explore Projects</span>
               <FaArrowRight className="text-xs" />

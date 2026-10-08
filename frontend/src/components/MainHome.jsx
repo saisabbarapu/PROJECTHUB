@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useCallback, useMemo } from 'react';
+﻿import React, { useState, useEffect, useCallback, useMemo } from 'react';
 import api, { SOCKET_URL } from './api';
 import ProjectCard from './ProjectCard';
 import SubmitProjectModal from './SubmitProjectModal';
@@ -196,11 +196,11 @@ const MainHome = () => {
       <div className="mx-auto max-w-7xl">
         {/* Header Title Section */}
         <div className="mb-8">
-          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-cyan-400 drop-shadow-[0_0_8px_rgba(6,182,212,0.4)]">
+          <div className="font-mono text-xs font-semibold uppercase tracking-wider text-violet-400 drop-shadow-[0_0_8px_rgba(168,85,247,0.4)]">
             DISCOVERY PLATFORM
           </div>
           <h1 className="mt-1 font-sora text-3xl font-black tracking-tight text-white sm:text-4xl">
-            EXPLORE <span className="bg-gradient-to-r from-cyan-400 to-blue-400 bg-clip-text text-transparent">PROJECTS</span>
+            EXPLORE <span className="bg-gradient-to-r from-violet-400 to-blue-400 bg-clip-text text-transparent">PROJECTS</span>
           </h1>
           <p className="mt-1 font-sans text-xs text-slate-300 sm:text-sm">
             Discover, review, and evaluate student capstones across all university departments.
@@ -208,17 +208,17 @@ const MainHome = () => {
         </div>
 
         {/* Discovery Filter & Search Bar */}
-        <div className="glass-panel mb-8 rounded-2xl p-4 sm:p-5 border border-cyan-500/25 shadow-[0_0_30px_rgba(6,182,212,0.12)]">
+        <div className="glass-panel mb-8 rounded-2xl p-4 sm:p-5 border border-violet-500/25 shadow-[0_0_30px_rgba(168,85,247,0.12)]">
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
             {/* Search Input */}
             <div className="relative flex-grow sm:max-w-md">
-              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-cyan-400/60" />
+              <FaSearch className="absolute left-3.5 top-1/2 -translate-y-1/2 text-xs text-violet-400/60" />
               <input
                 type="text"
                 placeholder="Search projects by title, tech, or keywords..."
                 value={searchFilter}
                 onChange={(e) => setSearchFilter(e.target.value)}
-                className="w-full rounded-xl border border-cyan-500/20 bg-[#030712]/60 py-2.5 pl-9 pr-8 font-sans text-xs text-slate-100 placeholder-slate-400 transition-all focus:border-cyan-400/70 focus:bg-[#030712]/90 focus:outline-none focus:ring-1 focus:ring-cyan-500/30"
+                className="w-full rounded-xl border border-violet-500/20 bg-[#030712]/60 py-2.5 pl-9 pr-8 font-sans text-xs text-slate-100 placeholder-slate-400 transition-all focus:border-violet-400/70 focus:bg-[#030712]/90 focus:outline-none focus:ring-1 focus:ring-violet-500/30"
               />
               {searchFilter && (
                 <button
@@ -233,13 +233,13 @@ const MainHome = () => {
             {/* Sort & Status */}
             <div className="flex items-center gap-3">
               <div className="flex items-center gap-1.5 font-mono text-xs text-slate-300">
-                <FaFilter className="text-[10px] text-cyan-400" />
+                <FaFilter className="text-[10px] text-violet-400" />
                 <span>Sort:</span>
               </div>
               <select
                 value={sortBy}
                 onChange={(e) => setSortBy(e.target.value)}
-                className="rounded-xl border border-cyan-500/25 bg-[#030712]/90 px-3 py-1.5 font-sans text-xs text-slate-200 outline-none transition-colors hover:border-cyan-400/50 focus:border-cyan-400"
+                className="rounded-xl border border-violet-500/25 bg-[#030712]/90 px-3 py-1.5 font-sans text-xs text-slate-200 outline-none transition-colors hover:border-violet-400/50 focus:border-violet-400"
               >
                 <option value="latest">Recently Added</option>
                 <option value="likes">Most Liked</option>
@@ -253,7 +253,7 @@ const MainHome = () => {
                     setSearchFilter('');
                     setSearchEmail('');
                   }}
-                  className="rounded-xl border border-cyan-500/40 bg-cyan-500/15 px-3 py-1.5 font-mono text-xs font-semibold text-cyan-200 transition-colors hover:bg-cyan-500/25"
+                  className="rounded-xl border border-violet-500/40 bg-violet-500/15 px-3 py-1.5 font-mono text-xs font-semibold text-violet-200 transition-colors hover:bg-violet-500/25"
                 >
                   Clear Filters
                 </button>
@@ -269,8 +269,8 @@ const MainHome = () => {
               onClick={() => setSelectedDepartment(null)}
               className={`rounded-full border px-4 py-2 font-mono text-xs font-semibold transition-all ${
                 selectedDepartment === null
-                  ? 'border-cyan-400/70 bg-gradient-to-r from-cyan-500/25 to-blue-600/25 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                  : 'border-cyan-500/15 bg-[#030712]/60 text-slate-300 hover:border-cyan-400/40 hover:text-white'
+                  ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/25 to-blue-600/25 text-violet-200 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                  : 'border-violet-500/15 bg-[#030712]/60 text-slate-300 hover:border-violet-400/40 hover:text-white'
               }`}
             >
               All Departments
@@ -283,11 +283,11 @@ const MainHome = () => {
                   onClick={() => handleDepartmentClick(name)}
                   className={`flex items-center gap-2 rounded-full border px-4 py-2 font-sans text-xs font-medium transition-all ${
                     isSelected
-                      ? 'border-cyan-400/70 bg-gradient-to-r from-cyan-500/25 to-blue-600/25 text-cyan-200 shadow-[0_0_15px_rgba(6,182,212,0.3)]'
-                      : 'border-cyan-500/15 bg-[#030712]/60 text-slate-300 hover:border-cyan-400/40 hover:text-white'
+                      ? 'border-violet-400/70 bg-gradient-to-r from-violet-500/25 to-blue-600/25 text-violet-200 shadow-[0_0_15px_rgba(168,85,247,0.3)]'
+                      : 'border-violet-500/15 bg-[#030712]/60 text-slate-300 hover:border-violet-400/40 hover:text-white'
                   }`}
                 >
-                  <Icon className={`text-xs ${isSelected ? 'text-cyan-300' : 'text-slate-400'}`} />
+                  <Icon className={`text-xs ${isSelected ? 'text-violet-300' : 'text-slate-400'}`} />
                   <span>{name}</span>
                 </button>
               );
@@ -331,7 +331,7 @@ const MainHome = () => {
                 <div className="pt-2">
                   <button
                     onClick={() => setShowModal(true)}
-                    className="rounded-full border border-cyan-500/40 bg-cyan-500/20 px-5 py-2 font-mono text-xs font-semibold text-cyan-300 hover:bg-cyan-500/30"
+                    className="rounded-full border border-violet-500/40 bg-violet-500/20 px-5 py-2 font-mono text-xs font-semibold text-violet-300 hover:bg-violet-500/30"
                   >
                     Submit Project
                   </button>
@@ -345,7 +345,7 @@ const MainHome = () => {
       {/* Floating Action Button on Bottom Right */}
       <button
         onClick={() => setShowModal(true)}
-        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-cyan-400/50 bg-gradient-to-r from-cyan-500 via-blue-600 to-indigo-600 px-5 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-cyan-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-cyan-500/60 active:scale-95 focus:outline-none"
+        className="fixed bottom-7 right-7 z-50 flex items-center gap-2.5 rounded-full border border-violet-400/50 bg-gradient-to-r from-violet-500 via-blue-600 to-indigo-600 px-5 py-3.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-2xl shadow-violet-500/40 transition-all duration-200 hover:scale-105 hover:border-cyan-300 hover:shadow-violet-500/60 active:scale-95 focus:outline-none"
         title="Submit New Project"
       >
         <FaPlus className="text-xs text-white" />

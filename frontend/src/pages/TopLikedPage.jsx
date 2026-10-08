@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import api from '../components/api';
 import TopProjectCard from './TopProjectCard';
 import Loader from '../components/Loader';
@@ -30,8 +30,8 @@ const TopLikedPage = () => {
       <div className="mx-auto max-w-6xl">
         {/* Header Hero Section */}
         <section className="mb-14 text-center">
-          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-cyan-300 backdrop-blur-md">
-            <FaCrown className="text-cyan-400" />
+          <div className="mb-4 inline-flex items-center gap-2 rounded-full border border-violet-500/30 bg-violet-500/10 px-4 py-1.5 font-mono text-xs font-semibold text-violet-300 backdrop-blur-md">
+            <FaCrown className="text-violet-400" />
             <span>COMMUNITY LEADERBOARD</span>
           </div>
           <h1 className="font-sora text-4xl font-black tracking-tight text-white sm:text-5xl">

@@ -1,4 +1,4 @@
-import React, { useState, useMemo, useCallback, useContext } from 'react';
+﻿import React, { useState, useMemo, useCallback, useContext } from 'react';
 import api from './api';
 import {
   FaHeart,
@@ -151,7 +151,7 @@ const ProjectCard = React.memo(({ project }) => {
       {/* Editorial Glass Project Card */}
       <div
         onClick={() => setIsPopupOpen(true)}
-        className="glass-card glass-card-hover group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-cyan-500/15 hover:border-cyan-400/50 transition-all duration-300"
+        className="glass-card glass-card-hover group relative flex cursor-pointer flex-col overflow-hidden rounded-2xl border border-violet-500/15 hover:border-violet-400/50 transition-all duration-300"
       >
         {/* Project Thumbnail */}
         <div className="relative h-48 w-full overflow-hidden bg-slate-950">
@@ -165,7 +165,7 @@ const ProjectCard = React.memo(({ project }) => {
             className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
           <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/90 via-transparent to-transparent"></div>
-          <span className="absolute right-3 top-3 rounded-full border border-cyan-400/30 bg-[#030712]/85 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-cyan-300 shadow-[0_0_12px_rgba(6,182,212,0.2)] backdrop-blur-md">
+          <span className="absolute right-3 top-3 rounded-full border border-violet-400/30 bg-[#030712]/85 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-300 shadow-[0_0_12px_rgba(168,85,247,0.2)] backdrop-blur-md">
             {project.department || 'General'}
           </span>
         </div>
@@ -173,7 +173,7 @@ const ProjectCard = React.memo(({ project }) => {
         {/* Content Body */}
         <div className="flex flex-grow flex-col space-y-3 p-5">
           <div>
-            <h3 className="line-clamp-1 font-sora text-base font-bold text-white transition-colors group-hover:text-cyan-300">
+            <h3 className="line-clamp-1 font-sora text-base font-bold text-white transition-colors group-hover:text-violet-300">
               {project.title}
             </h3>
             <p className="mt-1 line-clamp-2 font-sans text-xs leading-relaxed text-slate-300">
@@ -188,7 +188,7 @@ const ProjectCard = React.memo(({ project }) => {
               .map((tool) => (
                 <span
                   key={tool}
-                  className="rounded-md border border-cyan-500/20 bg-cyan-950/20 px-2 py-0.5 font-mono text-[10px] text-cyan-200/90"
+                  className="rounded-md border border-violet-500/20 bg-violet-950/20 px-2 py-0.5 font-mono text-[10px] text-violet-200/90"
                 >
                   {tool}
                 </span>
@@ -198,7 +198,7 @@ const ProjectCard = React.memo(({ project }) => {
           {/* Interaction Bar */}
           <div
             onClick={(e) => e.stopPropagation()}
-            className="mt-auto flex items-center justify-between gap-2.5 border-t border-cyan-500/10 pt-3.5"
+            className="mt-auto flex items-center justify-between gap-2.5 border-t border-violet-500/10 pt-3.5"
           >
             {/* Like Button */}
             <button
@@ -225,12 +225,12 @@ const ProjectCard = React.memo(({ project }) => {
                 value={feedbackText}
                 onChange={(e) => setFeedbackText(e.target.value)}
                 placeholder="Give feedback..."
-                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-sans text-[11px] text-slate-200 placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-full border border-white/10 bg-white/[0.03] px-3 py-1 font-sans text-[11px] text-slate-200 placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <button
                 type="submit"
                 disabled={!feedbackText.trim()}
-                className="rounded-full border border-cyan-500/40 bg-gradient-to-r from-cyan-500/20 to-blue-600/20 p-1.5 text-cyan-300 transition-all hover:bg-cyan-500/30 hover:text-white disabled:opacity-20"
+                className="rounded-full border border-violet-500/40 bg-gradient-to-r from-violet-500/20 to-blue-600/20 p-1.5 text-violet-300 transition-all hover:bg-violet-500/30 hover:text-white disabled:opacity-20"
                 title="Send Feedback"
               >
                 <FaPaperPlane className="text-[10px]" />
@@ -269,7 +269,7 @@ const ProjectCard = React.memo(({ project }) => {
                 className="h-full w-full object-cover"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-              <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-[#030712]/85 px-3 py-1 font-mono text-xs font-semibold uppercase text-cyan-300">
+              <span className="absolute left-3 top-3 rounded-full border border-white/10 bg-[#030712]/85 px-3 py-1 font-mono text-xs font-semibold uppercase text-violet-300">
                 {project.department}
               </span>
             </div>
@@ -292,7 +292,7 @@ const ProjectCard = React.memo(({ project }) => {
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-slate-400">Email:</span>
-                <span className="font-mono text-cyan-300">{project.email}</span>
+                <span className="font-mono text-violet-300">{project.email}</span>
               </div>
               <div className="flex items-center gap-2">
                 <span className="text-slate-400">Department:</span>
@@ -331,7 +331,7 @@ const ProjectCard = React.memo(({ project }) => {
                   href={project.projectUrl}
                   target="_blank"
                   rel="noreferrer"
-                  className="inline-flex items-center gap-2 rounded-xl border border-cyan-500/30 bg-cyan-500/15 px-4 py-2 font-sans text-xs font-semibold text-cyan-300 transition-colors hover:bg-cyan-500/25 hover:text-white"
+                  className="inline-flex items-center gap-2 rounded-xl border border-violet-500/30 bg-violet-500/15 px-4 py-2 font-sans text-xs font-semibold text-violet-300 transition-colors hover:bg-violet-500/25 hover:text-white"
                 >
                   <FaExternalLinkAlt className="text-xs" /> Launch Live Demo
                 </a>

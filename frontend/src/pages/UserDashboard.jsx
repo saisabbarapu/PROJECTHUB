@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useCallback } from 'react';
+﻿import React, { useEffect, useState, useCallback } from 'react';
 import api from '../components/api';
 import { useNavigate, Link } from 'react-router-dom';
 import Loader from '../components/Loader';
@@ -110,8 +110,8 @@ const UserDashboard = () => {
         {/* User Profile Editorial Banner */}
         <div className="glass-panel flex flex-col items-center justify-between gap-6 rounded-3xl p-6 shadow-xl sm:flex-row sm:p-8">
           <div className="flex items-center gap-4 text-center sm:text-left">
-            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-cyan-500/30 bg-cyan-950/40 text-2xl text-cyan-400">
-              <FaCrown className={topLiked ? 'text-amber-400' : 'text-cyan-400'} />
+            <div className="flex h-16 w-16 items-center justify-center rounded-2xl border border-violet-500/30 bg-violet-950/40 text-2xl text-violet-400">
+              <FaCrown className={topLiked ? 'text-amber-400' : 'text-violet-400'} />
             </div>
             <div>
               <div className="flex items-center gap-2">
@@ -131,7 +131,7 @@ const UserDashboard = () => {
           <div className="flex items-center gap-3">
             <Link
               to="/mainhome"
-              className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/40 bg-cyan-500/15 px-5 py-2 font-sans text-xs font-semibold text-cyan-300 transition-colors hover:bg-cyan-500/25"
+              className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/40 bg-violet-500/15 px-5 py-2 font-sans text-xs font-semibold text-violet-300 transition-colors hover:bg-violet-500/25"
             >
               Browse Catalog
             </Link>
@@ -149,7 +149,7 @@ const UserDashboard = () => {
           <div className="glass-card rounded-2xl p-5">
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Your Submissions</span>
-              <FaFolder className="text-cyan-400" />
+              <FaFolder className="text-violet-400" />
             </div>
             <div className="mt-3 font-mono text-3xl font-bold text-white">{projects.length}</div>
             <p className="mt-1 text-[11px] text-slate-500">Published across campus showcase</p>
@@ -167,7 +167,7 @@ const UserDashboard = () => {
           <div className="glass-card rounded-2xl p-5">
             <div className="flex items-center justify-between text-slate-400">
               <span className="font-mono text-xs uppercase tracking-wider">Saved Innovations</span>
-              <FaLayerGroup className="text-sky-400" />
+              <FaLayerGroup className="text-violet-400" />
             </div>
             <div className="mt-3 font-mono text-3xl font-bold text-white">{likedProjects.length}</div>
             <p className="mt-1 text-[11px] text-slate-500">Projects you've upvoted</p>
@@ -180,7 +180,7 @@ const UserDashboard = () => {
             onClick={() => setActiveTab('my-projects')}
             className={`border-b-2 pb-3 font-sans text-xs font-semibold uppercase tracking-wider transition-all ${
               activeTab === 'my-projects'
-                ? 'border-cyan-400 text-cyan-300'
+                ? 'border-violet-400 text-violet-300'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -190,7 +190,7 @@ const UserDashboard = () => {
             onClick={() => setActiveTab('liked-projects')}
             className={`border-b-2 pb-3 font-sans text-xs font-semibold uppercase tracking-wider transition-all ${
               activeTab === 'liked-projects'
-                ? 'border-cyan-400 text-cyan-300'
+                ? 'border-violet-400 text-violet-300'
                 : 'border-transparent text-slate-400 hover:text-slate-200'
             }`}
           >
@@ -212,7 +212,7 @@ const UserDashboard = () => {
                 <div className="pt-2">
                   <Link
                     to="/mainhome"
-                    className="inline-flex items-center gap-1.5 rounded-full border border-cyan-500/40 bg-cyan-500/20 px-5 py-2 font-mono text-xs font-semibold text-cyan-300 hover:bg-cyan-500/30"
+                    className="inline-flex items-center gap-1.5 rounded-full border border-violet-500/40 bg-violet-500/20 px-5 py-2 font-mono text-xs font-semibold text-violet-300 hover:bg-violet-500/30"
                   >
                     <FaPlus className="text-[10px]" /> Submit First Project
                   </Link>
@@ -241,7 +241,7 @@ const UserDashboard = () => {
                         className="h-full w-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-cyan-300">
+                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-violet-300">
                         {project.department}
                       </span>
                     </div>
@@ -294,7 +294,7 @@ const UserDashboard = () => {
                             href={project.projectUrl}
                             target="_blank"
                             rel="noopener noreferrer"
-                            className="inline-flex items-center gap-1 text-slate-400 hover:text-cyan-400"
+                            className="inline-flex items-center gap-1 text-slate-400 hover:text-violet-400"
                           >
                             <FaExternalLinkAlt className="text-[10px]" /> Demo
                           </a>
@@ -359,7 +359,7 @@ const UserDashboard = () => {
                         className="h-full w-full object-cover"
                       />
                       <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-cyan-300">
+                      <span className="absolute right-3 top-3 rounded-full border border-white/10 bg-[#030712]/80 px-2.5 py-0.5 font-mono text-[10px] font-semibold uppercase text-violet-300">
                         {project.department}
                       </span>
                     </div>

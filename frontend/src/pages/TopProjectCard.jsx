@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+﻿import React, { useMemo } from 'react';
 import { FaGithub, FaExternalLinkAlt, FaFilePdf, FaHeart, FaCrown } from 'react-icons/fa';
 import { getFallbackProjectImage } from '../components/ProjectCard';
 
@@ -34,7 +34,7 @@ const TopProjectCard = ({ project, rank }) => {
     <article className="glass-card glass-card-hover group relative flex flex-col overflow-hidden rounded-3xl p-5 sm:flex-row sm:items-center sm:gap-6 sm:p-6">
       {/* Large Editorial Rank Number */}
       <div className="mb-4 flex items-center justify-between sm:mb-0 sm:flex-col sm:items-center sm:justify-center sm:px-2">
-        <span className="font-mono text-4xl font-black tracking-tighter text-cyan-400 sm:text-5xl">
+        <span className="font-mono text-4xl font-black tracking-tighter text-violet-400 sm:text-5xl">
           {rankNumberFormatted}
         </span>
         {rank === 1 && (
@@ -55,7 +55,7 @@ const TopProjectCard = ({ project, rank }) => {
           className="h-full w-full object-cover transition-transform duration-500 group-hover:scale-105"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#030712]/80 via-transparent to-transparent"></div>
-        <span className="absolute left-2.5 top-2.5 rounded-full border border-white/10 bg-[#030712]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase text-cyan-300 backdrop-blur-md">
+        <span className="absolute left-2.5 top-2.5 rounded-full border border-white/10 bg-[#030712]/80 px-2 py-0.5 font-mono text-[9px] font-semibold uppercase text-violet-300 backdrop-blur-md">
           {project.department}
         </span>
       </div>
@@ -64,7 +64,7 @@ const TopProjectCard = ({ project, rank }) => {
       <div className="mt-4 flex flex-grow flex-col justify-between space-y-3 sm:mt-0">
         <div>
           <div className="flex flex-wrap items-center justify-between gap-2">
-            <h2 className="font-sora text-lg font-bold text-white transition-colors group-hover:text-cyan-300 sm:text-xl">
+            <h2 className="font-sora text-lg font-bold text-white transition-colors group-hover:text-violet-300 sm:text-xl">
               {project.title}
             </h2>
 
@@ -108,7 +108,7 @@ const TopProjectCard = ({ project, rank }) => {
                 href={project.projectUrl}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="inline-flex items-center gap-1 rounded-lg border border-cyan-500/30 bg-cyan-500/10 px-2.5 py-1 text-xs text-cyan-300 transition-colors hover:bg-cyan-500/20"
+                className="inline-flex items-center gap-1 rounded-lg border border-violet-500/30 bg-violet-500/10 px-2.5 py-1 text-xs text-violet-300 transition-colors hover:bg-violet-500/20"
                 title="Live Demo"
               >
                 <FaExternalLinkAlt className="text-[10px]" /> <span>Demo</span>

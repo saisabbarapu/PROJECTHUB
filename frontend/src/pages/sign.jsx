@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import { ToasterContext } from '../components/ToasterContext';
 import { FaUser, FaEnvelope, FaLock, FaEye, FaEyeSlash, FaUserPlus } from 'react-icons/fa';
@@ -109,8 +109,8 @@ const Signup = () => {
     <div className="relative flex min-h-[calc(100vh-80px)] items-center justify-center overflow-hidden bg-transparent px-4 py-12 text-slate-100 sm:px-6 lg:px-8">
       <div className="glass-panel relative w-full max-w-lg rounded-3xl p-8 shadow-2xl sm:p-10">
         <div className="mb-6 text-center">
-          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-cyan-300">
-            <FaUserPlus className="text-cyan-400" />
+          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-violet-300">
+            <FaUserPlus className="text-violet-400" />
             <span>CREATE ACCOUNT</span>
           </div>
           <h2 className="font-sora text-2xl font-black text-white sm:text-3xl">Join ProjectHub</h2>
@@ -132,7 +132,7 @@ const Signup = () => {
                   value={formData.firstName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -151,7 +151,7 @@ const Signup = () => {
                   value={formData.lastName}
                   onChange={handleChange}
                   required
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -174,7 +174,7 @@ const Signup = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
@@ -194,7 +194,7 @@ const Signup = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
               <button
@@ -223,7 +223,7 @@ const Signup = () => {
                 value={formData.confirmPassword}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
               <button
@@ -245,7 +245,7 @@ const Signup = () => {
           <button
             type="submit"
             disabled={isLoading}
-            className="mt-2 w-full rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+            className="mt-2 w-full rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 py-2.5 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
           >
             {isLoading ? 'Creating Account...' : 'Sign Up'}
           </button>
@@ -254,7 +254,7 @@ const Signup = () => {
             Already have an account?{' '}
             <Link
               to="/loginpage"
-              className="font-semibold text-cyan-400 underline hover:text-cyan-300"
+              className="font-semibold text-violet-400 underline hover:text-violet-300"
             >
               Sign In
             </Link>

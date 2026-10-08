@@ -1,4 +1,4 @@
-import React, { useState, useContext } from 'react';
+﻿import React, { useState, useContext } from 'react';
 import api from '../components/api';
 import {
   FaEnvelope,
@@ -111,8 +111,8 @@ const LoginPage = () => {
       <div className="glass-panel relative w-full max-w-md rounded-3xl p-6 shadow-2xl sm:p-8">
         {/* Header */}
         <div className="mb-6 text-center">
-          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-cyan-500/30 bg-cyan-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-cyan-300">
-            <FaBolt className="text-cyan-400" />
+          <div className="mb-3 inline-flex items-center gap-1.5 rounded-full border border-violet-500/30 bg-violet-500/10 px-3 py-1 font-mono text-[11px] font-semibold text-violet-300">
+            <FaBolt className="text-violet-400" />
             <span>PROJECTHUB AUTHENTICATION</span>
           </div>
           <h1 className="font-sora text-2xl font-black tracking-tight text-white sm:text-3xl">
@@ -127,7 +127,7 @@ const LoginPage = () => {
         <div className="mb-5 rounded-2xl border border-white/[0.08] bg-white/[0.02] p-2.5">
           <div className="mb-2 flex items-center justify-between px-1 font-mono text-[10px] text-slate-400">
             <span>⚡ QUICK AUTO-FILL</span>
-            <span className="text-cyan-400">1-CLICK</span>
+            <span className="text-violet-400">1-CLICK</span>
           </div>
           <div className="grid grid-cols-2 gap-2">
             {DEMO_ACCOUNTS.map((acc) => {
@@ -140,15 +140,15 @@ const LoginPage = () => {
                   onClick={() => handleFillDemo(acc, false)}
                   className={`flex items-center justify-between rounded-xl border px-3 py-2 text-left transition-all ${
                     isSelected
-                      ? 'border-cyan-500/60 bg-cyan-500/20 text-white shadow-sm'
+                      ? 'border-violet-500/60 bg-violet-500/20 text-white shadow-sm'
                       : 'border-white/5 bg-white/[0.02] text-slate-300 hover:border-white/20 hover:bg-white/[0.04]'
                   }`}
                 >
                   <div className="flex items-center gap-2">
-                    <Icon className="text-xs text-cyan-400" />
+                    <Icon className="text-xs text-violet-400" />
                     <span className="font-sans text-xs font-semibold">{acc.role}</span>
                   </div>
-                  {isSelected && <FaCheckCircle className="text-xs text-cyan-400" />}
+                  {isSelected && <FaCheckCircle className="text-xs text-violet-400" />}
                 </button>
               );
             })}
@@ -170,7 +170,7 @@ const LoginPage = () => {
                 value={formData.email}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
@@ -185,7 +185,7 @@ const LoginPage = () => {
               <label className="font-sans text-xs font-medium text-slate-300">Password</label>
               <Link
                 to="/forgot-password"
-                className="font-sans text-[11px] text-cyan-400 transition-colors hover:text-cyan-300"
+                className="font-sans text-[11px] text-violet-400 transition-colors hover:text-violet-300"
               >
                 Forgot?
               </Link>
@@ -198,7 +198,7 @@ const LoginPage = () => {
                 value={formData.password}
                 onChange={handleChange}
                 required
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-9 font-sans text-xs text-white placeholder-slate-500 transition-all focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaLock className="absolute left-3 top-2.5 text-xs text-slate-500" />
               <button
@@ -219,7 +219,7 @@ const LoginPage = () => {
             <button
               type="submit"
               disabled={isLoading}
-              className="group flex w-full items-center justify-center gap-2 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 py-2.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
+              className="group flex w-full items-center justify-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 py-2.5 font-sans text-xs font-bold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-[1.01] active:scale-[0.99] disabled:opacity-50"
             >
               {isLoading ? (
                 <span className="flex items-center gap-2">
@@ -238,9 +238,9 @@ const LoginPage = () => {
               type="button"
               disabled={isLoading}
               onClick={() => handleFillDemo(DEMO_ACCOUNTS[0], true)}
-              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-cyan-500/30 bg-cyan-500/10 py-2 font-sans text-xs font-semibold text-cyan-300 transition-all hover:bg-cyan-500/20 hover:text-white"
+              className="flex w-full items-center justify-center gap-1.5 rounded-xl border border-violet-500/30 bg-violet-500/10 py-2 font-sans text-xs font-semibold text-violet-300 transition-all hover:bg-violet-500/20 hover:text-white"
             >
-              <FaBolt className="text-[11px] text-cyan-400" />
+              <FaBolt className="text-[11px] text-violet-400" />
               <span>1-Click Instant Demo Login</span>
             </button>
           </div>
@@ -250,7 +250,7 @@ const LoginPage = () => {
             Don't have an account?{' '}
             <Link
               to="/signup"
-              className="font-semibold text-cyan-400 underline hover:text-cyan-300"
+              className="font-semibold text-violet-400 underline hover:text-violet-300"
             >
               Sign Up
             </Link>

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import api from './api';
 import {
   FaUser,
@@ -135,7 +135,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
         {/* Modal Header */}
         <div className="flex items-center justify-between border-b border-white/[0.08] pb-4">
           <div>
-            <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-cyan-400">
+            <div className="font-mono text-[10px] font-semibold uppercase tracking-wider text-violet-400">
               SUBMISSION FORM
             </div>
             <h2 className="font-sora text-xl font-bold text-white sm:text-2xl">Submit New Project</h2>
@@ -178,7 +178,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="Full name"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaUser className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -195,7 +195,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="rollno@adityauniversity.in"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaEnvelope className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -213,7 +213,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="e.g. 24M11MC150"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaIdBadge className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -229,7 +229,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="e.g. CSE, EEE, AI&ML"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaBuilding className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -247,7 +247,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                 required
                 placeholder="Name of your project"
                 disabled={isSubmitting}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaProjectDiagram className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
@@ -265,7 +265,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                 required
                 placeholder="Explain the problem statement, approach, and outcome..."
                 disabled={isSubmitting}
-                className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full resize-none rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaFileAlt className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
@@ -286,7 +286,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   required
                   placeholder="https://github.com/..."
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaGithub className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -304,7 +304,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   onChange={handleChange}
                   placeholder="https://myproject.com"
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
                 />
                 <FaExternalLinkAlt className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -323,7 +323,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                 onChange={handleChange}
                 placeholder="React, Node.js, PyTorch, LoRaWAN"
                 disabled={isSubmitting}
-                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-cyan-500/50 focus:bg-white/[0.06] focus:outline-none"
+                className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-2 pl-9 pr-3 font-sans text-xs text-white placeholder-slate-500 focus:border-violet-500/50 focus:bg-white/[0.06] focus:outline-none"
               />
               <FaProjectDiagram className="absolute left-3 top-2.5 text-xs text-slate-500" />
             </div>
@@ -343,7 +343,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-2 font-sans text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-cyan-500/20 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-cyan-200 hover:file:bg-cyan-500/30"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-2 font-sans text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-violet-500/20 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-violet-200 hover:file:bg-violet-500/30"
                 />
                 <FaFilePdf className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -361,7 +361,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
                   onChange={handleChange}
                   required
                   disabled={isSubmitting}
-                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-2 font-sans text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-cyan-500/20 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-cyan-200 hover:file:bg-cyan-500/30"
+                  className="w-full rounded-xl border border-white/10 bg-white/[0.03] py-1.5 pl-9 pr-2 font-sans text-xs text-slate-300 file:mr-2 file:rounded-lg file:border-0 file:bg-violet-500/20 file:px-2.5 file:py-1 file:text-xs file:font-semibold file:text-violet-200 hover:file:bg-violet-500/30"
                 />
                 <FaImage className="absolute left-3 top-2.5 text-xs text-slate-500" />
               </div>
@@ -381,7 +381,7 @@ const SubmitProjectModal = ({ onClose, onSubmit }) => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className="inline-flex items-center gap-2 rounded-xl border border-cyan-400/40 bg-gradient-to-r from-cyan-500 to-blue-600 px-6 py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-cyan-500/20 transition-all hover:scale-105 disabled:opacity-50"
+              className="inline-flex items-center gap-2 rounded-xl border border-violet-400/40 bg-gradient-to-r from-violet-500 to-blue-600 px-6 py-2 font-sans text-xs font-semibold uppercase tracking-wider text-white shadow-lg shadow-violet-500/20 transition-all hover:scale-105 disabled:opacity-50"
             >
               {isSubmitting ? (
                 <>
