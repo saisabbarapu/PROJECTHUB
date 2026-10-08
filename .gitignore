@@ -93,3 +93,7 @@ Thumbs.db
 
 # Uploads (if you want to exclude uploaded files)
 uploads/ 
+
+# AI assistant skills
+.agent/
+.agents/
