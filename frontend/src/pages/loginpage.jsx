@@ -28,9 +28,9 @@ const LoginPage = () => {
     const newErrors = {};
     if (!formData.email.trim()) newErrors.email = 'Please enter your email.';
     if (!formData.password.trim()) newErrors.password = 'Please enter your password.';
-    const emailRegex = /@(?:adityauniversity\.in|aec\.in)$/;
-    if (formData.email && !emailRegex.test(formData.email)) {
-      newErrors.email = 'Email must end with @adityauniversity.in or @aec.in';
+    const emailRegex = /@(?:adityauniversity\.in|acet\.in|aec\.in)$/i;
+    if (formData.email && !emailRegex.test(formData.email.trim())) {
+      newErrors.email = 'Email must end with @adityauniversity.in, @acet.in, or @aec.in';
     }
 
     if (Object.keys(newErrors).length > 0) {
@@ -41,7 +41,10 @@ const LoginPage = () => {
 
     setIsLoading(true);
     try {
-      const response = await api.post('/users/login', formData);
+      const response = await api.post('/users/login', {
+        email: formData.email.trim().toLowerCase(),
+        password: formData.password,
+      });
       if (response.data && response.data.user) {
         localStorage.setItem('user', JSON.stringify(response.data.user));
         addToast('Login successful! Redirecting...', 'success', 2500);

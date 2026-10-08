@@ -14,7 +14,7 @@ const ForgotPassword = () => {
     e.preventDefault();
     setLoading(true);
     try {
-      await api.post('/users/forgot-password', { email });
+      await api.post('/users/forgot-password', { email: email.trim().toLowerCase() });
       addToast(
         'If an account with that email exists, a reset link has been sent.',
         'success',
